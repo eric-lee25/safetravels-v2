@@ -56,17 +56,15 @@ a {
 /* HEADER */
 
 .c-navbar-upgrade {
-  width: 550px;
+  width: 650px;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05);
   border-radius: 5px;
   border: 1px solid rgb(238, 238, 238) !important;
   height: 40px !important;
+  min-height: 40px !important;
   margin: 20px 0 0 10% !important;
 }
 
-.c-navbar-upgrade li {
-  height: 40px !important;
-}
 
 .c-navbar-upgrade .c-up-tier {
   float: left;
