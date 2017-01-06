@@ -1,3 +1,4 @@
+$green-color: #71c055;
 .padding5 {
   padding: 5px;
 }
@@ -5,6 +6,18 @@
 .padding8 {
   padding: 8px;
 }
-.alink{
+
+.alink {
   cursor: pointer;
+}
+
+.panel .panel-heading > .panel-options a {
+  &.active {
+    color: $green-color;
+  }
+}
+.c-trip-grid-container{
+  position: relative;
+  margin-left: -20px;
+  margin-right: -30px;
 }

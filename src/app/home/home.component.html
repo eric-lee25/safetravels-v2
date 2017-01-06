@@ -66,13 +66,14 @@
                 <div class="col-lg-4 col-md-6 col-sm-12 inflex">
                   <label class="lblBetween">between</label>
                   <input name="startdate" id="startdate"
-                         class="input-date inpBetween ng-pristine ng-invalid ng-invalid-required"
+                         class="datepicker input-date inpBetween"
                          placeholder="Start Date" required="" type="text">
+
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12 inflex">
                   <label class="lblAnd">and</label>
                   <input name="enddate" id="enddate"
-                         class="input-date inpAnd ng-pristine ng-invalid ng-invalid-required"
+                         class="datepicker input-date inpAnd"
                          placeholder="End Date" required="" type="text">
                 </div>
               </div>
@@ -103,8 +104,8 @@
           <div class="panel-heading">
             <h3 class="panel-title">Upcoming Trips</h3>
             <div class="panel-options">
-              <a (click)="tripLayout('list')" href="javascript://"><i class="fa fa-th-list"></i></a>
-              <a (click)="tripLayout('grid')" href="javascript://"><i class="fa fa-th-large"></i></a>
+              <a [class.active]="config.tripLayout == 'list'" (click)="tripLayout('list')" href="javascript://"><i class="fa fa-th-list"></i></a>
+              <a [class.active]="config.tripLayout == 'grid'" (click)="tripLayout('grid')" href="javascript://"><i class="fa fa-th-large"></i></a>
             </div>
           </div>
           <div class="panel-body">
