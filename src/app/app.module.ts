@@ -11,13 +11,15 @@ import {AppService} from "./services/app.service";
 import {UserService} from "./services/user.service";
 import { NavigationComponent } from './sidebar/navigation/navigation.component';
 import {DemoService} from "./services/demo.service";
+import { ProgressComponent } from './sidebar/progress/progress.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     HomeComponent,
-    NavigationComponent
+    NavigationComponent,
+    ProgressComponent
   ],
   imports: [
     BrowserModule,

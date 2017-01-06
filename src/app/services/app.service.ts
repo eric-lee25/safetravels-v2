@@ -1,9 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Http, RequestOptionsArgs, Response, Headers} from "@angular/http";
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 
 @Injectable()
 export class AppService {
+
+  sidebarProgressToggle: Subject<boolean> = new Subject<boolean>();
 
   private serverURL: string = "/assets/data"; // change to your api server like http://domain.com/api
 
