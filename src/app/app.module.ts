@@ -10,6 +10,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {AppService} from "./services/app.service";
 import {UserService} from "./services/user.service";
 import { NavigationComponent } from './sidebar/navigation/navigation.component';
+import {DemoService} from "./services/demo.service";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { NavigationComponent } from './sidebar/navigation/navigation.component';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [AppService, UserService],
+  providers: [AppService, UserService, DemoService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
