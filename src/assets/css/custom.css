@@ -475,7 +475,7 @@ a {
 	width: 80px;
 }
 
-.inflex input.inpBetween {
+.inflex input.inpBetween, .inflex span.inpBetween {
 	width: calc(100% - 85px);
 }
 
@@ -483,8 +483,13 @@ a {
 	width: 50px;
 }
 
-.inflex input.inpAnd {
+.inflex input.inpAnd, .inflex span.inpAnd {
 	width: calc(100% - 55px);
+}
+
+.inpAnd .datepicker, .inpBetween .datepicker {
+	display: block;
+
 }
 
 /* TRIP TABLE */

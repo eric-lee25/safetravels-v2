@@ -57,6 +57,9 @@ $green-color: #71c055;
 }
 
 .progress-checklist {
+  .md-checkbox-layout .md-checkbox-label {
+    line-height: normal !important;
+  }
   .md-checkbox-label {
     display: block;
     line-height: normal;
@@ -78,4 +81,11 @@ $green-color: #71c055;
     background: White url(/assets/images/calendar.png) no-repeat right;
     background-position: right 8px center;
   }
+}
+
+.start-location-wrapper {
+  position: relative;
+  display: inline-block;
+  direction: ltr;
+  top: 0 !important;
 }

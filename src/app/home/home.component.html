@@ -64,38 +64,46 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-lg-4 col-md-12 inflex">
+								<div class="col-lg-4 col-md-12 inflex inpTo">
 									<label class="lblTo">To</label>
-									<input name="strart_location_gps" value="Y"
-												 required="" class="ng-pristine ng-invalid ng-invalid-required" type="text">
+									<span class="twitter-typeahead start-location-wrapper">
+										<input name="strart_location_gps" value="" placeholder="Location"
+													 required="" class="ng-pristine ng-invalid ng-invalid-required" type="text">
+
+									</span>
+
 								</div>
 
 								<div class="col-lg-4 col-md-6 col-sm-12 inflex">
 									<label class="lblBetween">between</label>
 
 									<!-- // https://www.npmjs.com/package/angular2-material-datepicker -->
-
-									<material-datepicker
-											[placeholder]="'Start Date'"
-											[(date)]="date1"
-											(onSelect)="onSelectStartDate($event)"
-											dateFormat="YYYY-MM-DD"
-											[rangeEnd]="testRangeDate"
-											[showCalendar]="true"
-									></material-datepicker>
+									<span class="inpBetween">
+										<material-datepicker
+												[placeholder]="'Start Date'"
+												[(date)]="date1"
+												(onSelect)="onSelectStartDate($event)"
+												dateFormat="YYYY-MM-DD"
+												[rangeEnd]="testRangeDate"
+												[showCalendar]="true"
+										></material-datepicker>
+									</span>
 
 
 								</div>
 								<div class="col-lg-4 col-md-6 col-sm-12 inflex">
 									<label class="lblAnd">and</label>
-									<material-datepicker
-											[placeholder]="'End Date'"
-											[(date)]="date2"
-											(onSelect)="onSelectStartDate($event)"
-											dateFormat="YYYY-MM-DD"
-											[rangeEnd]="testRangeDate"
-											[showCalendar]="true"
-									></material-datepicker>
+									<span class="inpAnd">
+										<material-datepicker
+												[placeholder]="'End Date'"
+												[(date)]="date2"
+												(onSelect)="onSelectStartDate($event)"
+												dateFormat="YYYY-MM-DD"
+												[rangeEnd]="testRangeDate"
+												[showCalendar]="true"
+										></material-datepicker>
+									</span>
+
 								</div>
 							</div>
 						</div>
