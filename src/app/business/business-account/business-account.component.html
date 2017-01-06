@@ -1,3 +1,173 @@
-<p>
-  business-account works!
-</p>
+<div class="page-title">
+
+	<div class="title-env">
+		<h1 class="title">Company Account Information</h1>
+		<p class="description">Separated inputs into tabs for better step by step user experience of form filling</p>
+	</div>
+
+	<div class="breadcrumb-env">
+
+		<ol class="breadcrumb bc-1">
+			<li>
+				<a routerLink="/home"><i class="fa-home"></i>Home</a>
+			</li>
+			<li>
+				<a routerLink="/business/account">Business</a>
+			</li>
+			<li class="active">
+				<strong>Account</strong>
+			</li>
+		</ol>
+
+	</div>
+
+</div>
+
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3>Account Details:</h3>
+		<p>Enter your company account information.</p>
+	</div>
+
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="business-logo-wrapper">
+					<img class="business-logo img-responsive"
+							 [src]="'https://safetravels01.s3.eu-central-1.amazonaws.com/91c4cea4a4a227e74ac33d28b27d9937511ad152-1080'">
+					<img class="user-image ng-scope"
+							 [src]="'https://safetravels01.s3.eu-central-1.amazonaws.com/370930a7f8d3dc8fab923416d5549ea29156eda6-300'">
+				</div>
+
+				<div class="logo-upload-actions">
+					<button class="btn btn-purple btn-single btn-sm">Add Logo</button>
+					<button class="btn btn-success btn-single btn-sm">Add Cover Image</button>
+				</div>
+
+			</div>
+			<div class="col-md-4">
+				<p class="upload-right-intro">Upload a business logo and cover photo. This will form a key component of the
+					style of the app for your
+					customers when they use the App. <br> <br>You also have the option to customise the look further by adding a
+					cover image to a particular trip. <br> <br>If you do not add a cover image, our default grey city cover image
+					will be used.<br><br> The cover image and logo on the left provides a guide to how the images will display in
+					the mobile app.</p>
+			</div>
+		</div>
+		<hr/>
+
+		<div class="row">
+
+			<div class="col-md-8">
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Name</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="Name" type="text">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Email</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="Email" type="email">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Phone Number</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="Phone number" type="text">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Website</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="Website" type="text">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Country</label>
+						<div class="col-sm-10">
+							<select class="form-control">
+								<option value="1">Aland Islands</option>
+								<option value="2">Albania</option>
+								<option value="3">Algeria</option>
+								<option value="4">American Samoa</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Address</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="Address" type="text">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label"></label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="Business Address 2" type="text">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">City</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="City" type="text">
+						</div>
+					</div>
+
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">State / Province / Region</label>
+						<div class="col-sm-10">
+							<select class="form-control">
+								<option value=""></option>
+							</select>
+						</div>
+					</div>
+
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Post Code</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="Post Code" type="text">
+						</div>
+					</div>
+
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">About Business</label>
+						<div class="col-sm-10">
+							<textarea class="form-control" cols="5"></textarea>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Average Tour Group per month</label>
+						<div class="col-sm-10">
+							<select class="form-control">
+								<option value="0" selected="selected">0-10</option>
+								<option value="1">11-20</option>
+								<option value="2">21-50</option>
+								<option value="3">51+</option>
+							</select>
+						</div>
+					</div>
+					<hr />
+					<button type="submit" class="btn btn-purple btn-single btn-sm">Save Business Details</button>
+
+				</form>
+			</div>
+			<div class="col-md-4">
+				<img [src]="'/assets/images/SafeTravels/iphoneCompany.jpg'" alt="app screenshot" class="img-responsive">
+			</div>
+		</div>
+
+	</div>
+</div>

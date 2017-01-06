@@ -5,74 +5,94 @@ import {Observable, Subject} from "rxjs";
 @Injectable()
 export class AppService {
 
-  sidebarProgressToggle: Subject<boolean> = new Subject<boolean>();
+	sidebarProgressToggle: Subject<boolean> = new Subject<boolean>();
+	sidebarToggle: Subject<boolean> = new Subject<boolean>();
+	configStorage = {
+		sidebarCollapsed: true
+	};
+	private serverURL: string = "/assets/data"; // change to your api server like http://domain.com/api
 
-  private serverURL: string = "/assets/data"; // change to your api server like http://domain.com/api
+	private headers: Headers = new Headers(
+		{
+			'Content-Type': 'application/json'
+		}
+	);
 
-  private headers: Headers = new Headers(
-    {
-      'Content-Type': 'application/json'
-    }
-  );
+	constructor(private http: Http) {
 
-  constructor(private http: Http) {
+		let config = localStorage.getItem("configStorage");
+		if (config) {
+			this.configStorage = JSON.parse(config);
+		}
+		if (this.configStorage.sidebarCollapsed !== null) {
+			this.sidebarToggle.next(this.configStorage.sidebarCollapsed);
+		}
 
-  }
+		this.sidebarToggle.subscribe(collapsed => {
+			console.log(collapsed);
+
+			this.configStorage.sidebarCollapsed = collapsed;
+			localStorage.setItem('configStorage', JSON.stringify(this.configStorage));
+		});
 
 
-  getUrl(url: string): string {
 
-    return this.serverURL + url;
-  }
+	}
 
-  getOptions(options: RequestOptionsArgs): RequestOptionsArgs {
 
-    let op = {headers: this.headers};
+	getUrl(url: string): string {
 
-    if (options) {
-      return Object.assign(op, options);
-    }
+		return this.serverURL + url;
+	}
 
-    return op;
-  }
+	getOptions(options: RequestOptionsArgs): RequestOptionsArgs {
 
-  get(endpoint: string, options?: RequestOptionsArgs): Observable<Response> {
+		let op = {headers: this.headers};
 
-    let url = this.getUrl(endpoint);
+		if (options) {
+			return Object.assign(op, options);
+		}
 
-    let op = this.getOptions(options);
+		return op;
+	}
 
-    return this.http.get(url, op);
-  }
+	get(endpoint: string, options?: RequestOptionsArgs): Observable<Response> {
 
-  /**
-   * Performs a request with `post` http method.
-   */
-  post(endpoint: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
+		let url = this.getUrl(endpoint);
 
-    let url = this.getUrl(endpoint);
-    let op = this.getOptions(options);
-    return this.http.post(url, body, op);
-  }
+		let op = this.getOptions(options);
 
-  /**
-   * Performs a request with `put` http method.
-   */
-  put(endpoint: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
+		return this.http.get(url, op);
+	}
 
-    let url = this.getUrl(endpoint);
-    let op = this.getOptions(options);
-    return this.http.put(url, body, op);
-  }
+	/**
+	 * Performs a request with `post` http method.
+	 */
+	post(endpoint: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
 
-  /**
-   * Performs a request with `delete` http method.
-   */
-  delete(endpoint: string, options?: RequestOptionsArgs): Observable<Response> {
+		let url = this.getUrl(endpoint);
+		let op = this.getOptions(options);
+		return this.http.post(url, body, op);
+	}
 
-    let url = this.getUrl(endpoint);
-    let op = this.getOptions(options);
-    return this.http.delete(url, op);
-  }
+	/**
+	 * Performs a request with `put` http method.
+	 */
+	put(endpoint: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
+
+		let url = this.getUrl(endpoint);
+		let op = this.getOptions(options);
+		return this.http.put(url, body, op);
+	}
+
+	/**
+	 * Performs a request with `delete` http method.
+	 */
+	delete(endpoint: string, options?: RequestOptionsArgs): Observable<Response> {
+
+		let url = this.getUrl(endpoint);
+		let op = this.getOptions(options);
+		return this.http.delete(url, op);
+	}
 
 }

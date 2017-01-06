@@ -1,4 +1,7 @@
 $green-color: #71c055;
+$col-sm: 768px;
+$col-md: 992px;
+$col-lg: 1200px;
 .padding5 {
   padding: 5px;
 }
@@ -88,4 +91,28 @@ $green-color: #71c055;
   display: inline-block;
   direction: ltr;
   top: 0 !important;
+}
+
+.business-logo-wrapper {
+  position: relative;
+  .business-logo {
+    margin-bottom: 20px;
+    @media (min-width: $col-lg) {
+      max-width: 500px;
+    }
+  }
+  .user-image {
+    position: absolute;
+    top: 36px;
+    left: 38px;
+    width: 150px;
+  }
+
+}
+
+.logo-upload-actions {
+  @media (max-width: $col-md) {
+    margin-bottom: 20px;
+  }
+
 }

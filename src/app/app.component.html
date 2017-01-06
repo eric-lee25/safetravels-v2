@@ -116,7 +116,7 @@
 	<!-- Add "fixed" class to make the sidebar fixed always to the browser viewport. -->
 	<!-- Adding class "toggle-others" will keep only one menu item open at a time. -->
 	<!-- Adding class "collapsed" collapse sidebar root elements and show only icons. -->
-	<div class="sidebar-menu toggle-others collapsed">
+	<div class="sidebar-menu toggle-others" [class.collapsed]="sidebarCollapsed">
 		<div class="sidebar-menu-inner">
 
 			<header class="logo-env">
@@ -182,7 +182,7 @@
 					</ul>
 				</div>
 			</section>
-			<app-navigation></app-navigation>
+			<app-navigation [sidebarCollapsed]="sidebarCollapsed"></app-navigation>
 		</div>
 
 
@@ -193,7 +193,7 @@
 
 			<ul class="user-info-menu left-links list-inline list-unstyled">
 				<li class="hidden-sm hidden-xs">
-					<a href="#" data-toggle="sidebar">
+					<a class="alink" (click)="toggleSidebar(!sidebarCollapsed)">
 						<i class="fa-bars"></i>
 					</a>
 				</li>
@@ -203,8 +203,8 @@
 				<li class="c-navbar-upgrade">
 					<div class="c-up-tier ng-binding">Basic Plan</div>
 					<div class="c-up-note ng-binding">Trial ends in 260 days</div>
-					<a href="" class="btn btn-icon"><i class="fa fa-times"></i></a>
-					<a href="#" class="btn btn-upgrade ">Upgrade</a>
+					<a href="javascript://" class="btn btn-icon"><i class="fa fa-times"></i></a>
+					<a href="javascript://" class="btn btn-upgrade ">Upgrade</a>
 				</li>
 			</ul>
 
