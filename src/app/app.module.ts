@@ -18,6 +18,7 @@ import {CounterComponent} from './elements/counter/counter.component';
 import {ProgressComponent} from './elements/progress/progress.component';
 import {MaterialModule} from "@angular/material";
 import 'hammerjs';
+import { DatepickerModule } from 'angular2-material-datepicker'
 
 @NgModule({
 	declarations: [
@@ -36,7 +37,8 @@ import 'hammerjs';
 		FormsModule,
 		HttpModule,
 		AppRoutingModule,
-		MaterialModule.forRoot()
+		MaterialModule.forRoot(),
+		DatepickerModule
 	],
 	providers: [AppService, UserService, DemoService],
 	bootstrap: [AppComponent]

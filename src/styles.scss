@@ -72,3 +72,10 @@ $green-color: #71c055;
     }
   }
 }
+
+.datepicker {
+  input {
+    background: White url(/assets/images/calendar.png) no-repeat right;
+    background-position: right 8px center;
+  }
+}

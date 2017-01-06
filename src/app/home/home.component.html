@@ -72,16 +72,30 @@
 
 								<div class="col-lg-4 col-md-6 col-sm-12 inflex">
 									<label class="lblBetween">between</label>
-									<input data-start-date="-0d" data-format="yyyy-mm-dd" name="startdate" id="startdate"
-												 class="datepicker input-date inpBetween"
-												 placeholder="Start Date" required="" type="text">
+
+									<!-- // https://www.npmjs.com/package/angular2-material-datepicker -->
+
+									<material-datepicker
+											[placeholder]="'Start Date'"
+											[(date)]="date1"
+											(onSelect)="onSelectStartDate($event)"
+											dateFormat="YYYY-MM-DD"
+											[rangeEnd]="testRangeDate"
+											[showCalendar]="true"
+									></material-datepicker>
+
 
 								</div>
 								<div class="col-lg-4 col-md-6 col-sm-12 inflex">
 									<label class="lblAnd">and</label>
-									<input data-start-date="-0d" data-format="yyyy-mm-dd" name="enddate" id="enddate"
-												 class="datepicker input-date inpAnd"
-												 placeholder="End Date" required="" type="text">
+									<material-datepicker
+											[placeholder]="'End Date'"
+											[(date)]="date2"
+											(onSelect)="onSelectStartDate($event)"
+											dateFormat="YYYY-MM-DD"
+											[rangeEnd]="testRangeDate"
+											[showCalendar]="true"
+									></material-datepicker>
 								</div>
 							</div>
 						</div>
