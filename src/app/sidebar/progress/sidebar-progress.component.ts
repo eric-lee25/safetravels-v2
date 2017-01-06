@@ -2,11 +2,11 @@ import {Component, OnInit, Input} from '@angular/core';
 import {AppService} from "../../services/app.service";
 
 @Component({
-  selector: 'app-progress',
-  templateUrl: './progress.component.html',
-  styleUrls: ['./progress.component.css']
+  selector: 'app-sidebar-progress',
+  templateUrl: './sidebar-progress.component.html',
+  styleUrls: ['./sidebar-progress.component.css']
 })
-export class ProgressComponent implements OnInit {
+export class SidebarProgressComponent implements OnInit {
 
 
   @Input() sidebarProgressToggle: boolean;

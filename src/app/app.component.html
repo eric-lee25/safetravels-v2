@@ -1,317 +1,314 @@
 <div class="settings-pane">
 
-  <a href="#" data-toggle="settings-pane" data-animate="true">
-    &times;
-  </a>
+	<a href="#" data-toggle="settings-pane" data-animate="true">
+		&times;
+	</a>
 
-  <div class="settings-pane-inner">
+	<div class="settings-pane-inner">
 
-    <div class="row">
+		<div class="row">
 
-      <div class="col-md-4">
+			<div class="col-md-4">
 
-        <div class="user-info">
+				<div class="user-info">
 
-          <div class="user-image">
-            <a routerLink="/home">
-              <img [src]="'/assets/images/user-2.png'" class="img-responsive img-circle"/>
-            </a>
-          </div>
+					<div class="user-image">
+						<a routerLink="/home">
+							<img [src]="'/assets/images/user-2.png'" class="img-responsive img-circle"/>
+						</a>
+					</div>
 
-          <div class="user-details">
+					<div class="user-details">
 
-            <h3>
-              <a routerLink="/home">John Smith</a>
+						<h3>
+							<a routerLink="/home">John Smith</a>
 
-              <!-- Available statuses: is-online, is-idle, is-busy and is-offline -->
-              <span class="user-status is-online"></span>
-            </h3>
+							<!-- Available statuses: is-online, is-idle, is-busy and is-offline -->
+							<span class="user-status is-online"></span>
+						</h3>
 
-            <p class="user-title">Web Developer</p>
+						<p class="user-title">Web Developer</p>
 
-            <div class="user-links">
-              <a routerLink="/home" class="btn btn-primary">Edit Profile</a>
-              <a routerLink="/home" class="btn btn-success">Upgrade</a>
-            </div>
+						<div class="user-links">
+							<a routerLink="/home" class="btn btn-primary">Edit Profile</a>
+							<a routerLink="/home" class="btn btn-success">Upgrade</a>
+						</div>
 
-          </div>
+					</div>
 
-        </div>
+				</div>
 
-      </div>
+			</div>
 
-      <div class="col-md-8 link-blocks-env">
+			<div class="col-md-8 link-blocks-env">
 
-        <div class="links-block left-sep">
-          <h4>
-            <span>Notifications</span>
-          </h4>
+				<div class="links-block left-sep">
+					<h4>
+						<span>Notifications</span>
+					</h4>
 
-          <ul class="list-unstyled">
-            <li>
-              <input type="checkbox" class="cbr cbr-primary" checked="checked" id="sp-chk1"/>
-              <label for="sp-chk1">Messages</label>
-            </li>
-            <li>
-              <input type="checkbox" class="cbr cbr-primary" checked="checked" id="sp-chk2"/>
-              <label for="sp-chk2">Events</label>
-            </li>
-            <li>
-              <input type="checkbox" class="cbr cbr-primary" checked="checked" id="sp-chk3"/>
-              <label for="sp-chk3">Updates</label>
-            </li>
-            <li>
-              <input type="checkbox" class="cbr cbr-primary" checked="checked" id="sp-chk4"/>
-              <label for="sp-chk4">Server Uptime</label>
-            </li>
-          </ul>
-        </div>
+					<ul class="list-unstyled">
+						<li>
+							<input type="checkbox" class="cbr cbr-primary" checked="checked" id="sp-chk1"/>
+							<label for="sp-chk1">Messages</label>
+						</li>
+						<li>
+							<input type="checkbox" class="cbr cbr-primary" checked="checked" id="sp-chk2"/>
+							<label for="sp-chk2">Events</label>
+						</li>
+						<li>
+							<input type="checkbox" class="cbr cbr-primary" checked="checked" id="sp-chk3"/>
+							<label for="sp-chk3">Updates</label>
+						</li>
+						<li>
+							<input type="checkbox" class="cbr cbr-primary" checked="checked" id="sp-chk4"/>
+							<label for="sp-chk4">Server Uptime</label>
+						</li>
+					</ul>
+				</div>
 
-        <div class="links-block left-sep">
-          <h4>
-            <a href="#">
-              <span>Help Desk</span>
-            </a>
-          </h4>
+				<div class="links-block left-sep">
+					<h4>
+						<a href="#">
+							<span>Help Desk</span>
+						</a>
+					</h4>
 
-          <ul class="list-unstyled">
-            <li>
-              <a href="#">
-                <i class="fa-angle-right"></i>
-                Support Center
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fa-angle-right"></i>
-                Submit a Ticket
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fa-angle-right"></i>
-                Domains Protocol
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fa-angle-right"></i>
-                Terms of Service
-              </a>
-            </li>
-          </ul>
-        </div>
+					<ul class="list-unstyled">
+						<li>
+							<a href="#">
+								<i class="fa-angle-right"></i>
+								Support Center
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<i class="fa-angle-right"></i>
+								Submit a Ticket
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<i class="fa-angle-right"></i>
+								Domains Protocol
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<i class="fa-angle-right"></i>
+								Terms of Service
+							</a>
+						</li>
+					</ul>
+				</div>
 
-      </div>
+			</div>
 
-    </div>
+		</div>
 
-  </div>
+	</div>
 
 </div>
 
 <div class="page-container">
-  <!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
+	<!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
 
-  <!-- Add "fixed" class to make the sidebar fixed always to the browser viewport. -->
-  <!-- Adding class "toggle-others" will keep only one menu item open at a time. -->
-  <!-- Adding class "collapsed" collapse sidebar root elements and show only icons. -->
-  <div class="sidebar-menu toggle-others collapsed">
-    <div class="sidebar-menu-inner">
+	<!-- Add "fixed" class to make the sidebar fixed always to the browser viewport. -->
+	<!-- Adding class "toggle-others" will keep only one menu item open at a time. -->
+	<!-- Adding class "collapsed" collapse sidebar root elements and show only icons. -->
+	<div class="sidebar-menu toggle-others collapsed">
+		<div class="sidebar-menu-inner">
 
-      <header class="logo-env">
+			<header class="logo-env">
 
-        <!-- logo -->
-        <div class="logo">
-          <a routerLink="/home" class="logo-expanded">
-            <img [src]="'/assets/images/SafeTravels/SafeTravels2.png'" width="150" alt=""/>
-          </a>
+				<!-- logo -->
+				<div class="logo">
+					<a routerLink="/home" class="logo-expanded">
+						<img [src]="'/assets/images/SafeTravels/SafeTravels2.png'" width="150" alt=""/>
+					</a>
 
-          <a routerLink="/home" class="logo-collapsed">
-            <img [src]="'/assets/images/SafeTravels/logonew.png'" width="40" alt=""/>
-          </a>
-        </div>
+					<a routerLink="/home" class="logo-collapsed">
+						<img [src]="'/assets/images/SafeTravels/logonew.png'" width="40" alt=""/>
+					</a>
+				</div>
 
-        <!-- This will toggle the mobile menu and will be visible only on mobile devices -->
-        <div class="mobile-menu-toggle visible-xs">
-          <a href="#" data-toggle="user-info-menu">
-            <i class="fa-bell-o"></i>
-            <span class="badge badge-success">7</span>
-          </a>
+				<!-- This will toggle the mobile menu and will be visible only on mobile devices -->
+				<div class="mobile-menu-toggle visible-xs">
+					<a href="#" data-toggle="user-info-menu">
+						<i class="fa-bell-o"></i>
+						<span class="badge badge-success">7</span>
+					</a>
 
-          <a href="#" data-toggle="mobile-menu">
-            <i class="fa-bars"></i>
-          </a>
-        </div>
+					<a href="#" data-toggle="mobile-menu">
+						<i class="fa-bars"></i>
+					</a>
+				</div>
 
-        <!-- This will open the popup with user profile settings, you can use for any purpose, just be creative -->
-        <div class="settings-icon">
-          <a href="#" data-toggle="settings-pane" data-animate="true">
-            <i class="linecons-cog"></i>
-          </a>
-        </div>
-
-
-      </header>
+				<!-- This will open the popup with user profile settings, you can use for any purpose, just be creative -->
+				<div class="settings-icon">
+					<a href="#" data-toggle="settings-pane" data-animate="true">
+						<i class="linecons-cog"></i>
+					</a>
+				</div>
 
 
-      <!-- Sidebar User Info Bar - Added in 1.3 -->
-      <section class="sidebar-user-info">
-        <div class="sidebar-user-info-inner">
-          <a routerLink="/home" class="user-profile">
-            <img src="/assets/images/user-4.png" width="60" height="60" class="img-circle img-corona" alt="user-pic"/>
+			</header>
 
-            <span>
+
+			<!-- Sidebar User Info Bar - Added in 1.3 -->
+			<section class="sidebar-user-info">
+				<div class="sidebar-user-info-inner">
+					<a routerLink="/home" class="user-profile">
+						<img src="/assets/images/user-4.png" width="60" height="60" class="img-circle img-corona" alt="user-pic"/>
+
+						<span>
 								<strong>John Smith</strong>
 								Page admin
 							</span>
-          </a>
+					</a>
 
-          <ul class="user-links list-unstyled">
-            <li>
-              <a routerLink="/home" title="Edit profile">
-                <i class="linecons-user"></i>
-                Edit profile
-              </a>
-            </li>
-            <li class="logout-link">
-              <a routerLink="/home" title="Log out">
-                <i class="fa-power-off"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-      <app-navigation></app-navigation>
-    </div>
+					<ul class="user-links list-unstyled">
+						<li>
+							<a routerLink="/home" title="Edit profile">
+								<i class="linecons-user"></i>
+								Edit profile
+							</a>
+						</li>
+						<li class="logout-link">
+							<a routerLink="/home" title="Log out">
+								<i class="fa-power-off"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</section>
+			<app-navigation></app-navigation>
+		</div>
 
 
-  </div>
-  <div class="main-content">
+	</div>
+	<div class="main-content">
 
-    <nav class="navbar user-info-navbar" role="navigation"><!-- User Info, Notifications and Menu Bar -->
+		<nav class="navbar user-info-navbar" role="navigation"><!-- User Info, Notifications and Menu Bar -->
 
-      <ul class="user-info-menu left-links list-inline list-unstyled">
-        <li class="hidden-sm hidden-xs">
-          <a href="#" data-toggle="sidebar">
-            <i class="fa-bars"></i>
-          </a>
-        </li>
-      </ul>
+			<ul class="user-info-menu left-links list-inline list-unstyled">
+				<li class="hidden-sm hidden-xs">
+					<a href="#" data-toggle="sidebar">
+						<i class="fa-bars"></i>
+					</a>
+				</li>
+			</ul>
 
-      <ul class="user-info-menu left-links list-inline list-unstyled hide-sm">
-        <li class="c-navbar-upgrade">
-          <div class="c-up-tier ng-binding">Basic Plan</div>
-          <div class="c-up-note ng-binding">Trial ends in 260 days</div>
-          <a href="" class="btn btn-icon"><i class="fa fa-times"></i></a>
-          <a href="#" class="btn btn-upgrade ">Upgrade</a>
-        </li>
-      </ul>
+			<ul class="user-info-menu left-links list-inline list-unstyled hide-sm">
+				<li class="c-navbar-upgrade">
+					<div class="c-up-tier ng-binding">Basic Plan</div>
+					<div class="c-up-note ng-binding">Trial ends in 260 days</div>
+					<a href="" class="btn btn-icon"><i class="fa fa-times"></i></a>
+					<a href="#" class="btn btn-upgrade ">Upgrade</a>
+				</li>
+			</ul>
 
-      <!-- Right links for user info navbar -->
-      <ul class="user-info-menu right-links list-inline list-unstyled">
-        <li class="fullscreen">
-          <a href="#" title="Fullscreen">
-            <i class="fa-expand"></i>
-          </a>
-        </li>
+			<!-- Right links for user info navbar -->
+			<ul class="user-info-menu right-links list-inline list-unstyled">
+				<li class="fullscreen">
+					<a href="#" title="Fullscreen">
+						<i class="fa-expand"></i>
+					</a>
+				</li>
 
-        <li class="dropdown user-profile">
-          <a title="Home" href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img [src]="'/assets/images/user-4.png'" alt="user-image" class="img-circle img-inline userpic-32"
-                 width="28"/>
-            <span>
+				<li class="dropdown user-profile">
+					<a title="Home" href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<img [src]="'/assets/images/user-4.png'" alt="user-image" class="img-circle img-inline userpic-32"
+								 width="28"/>
+						<span>
 								John Smith
 								<i class="fa-angle-down"></i>
 							</span>
-          </a>
+					</a>
 
-          <ul class="dropdown-menu user-profile-menu list-unstyled">
-            <li>
-              <a href="#settings">
-                <i class="fa-wrench"></i>
-                Settings
-              </a>
-            </li>
-            <li>
-              <a href="#profile">
-                <i class="fa-user"></i>
-                Profile
-              </a>
-            </li>
-            <li class="last">
-              <a href="extra-lockscreen.html">
-                <i class="fa-lock"></i>
-                Logout
-              </a>
-            </li>
-          </ul>
-        </li>
+					<ul class="dropdown-menu user-profile-menu list-unstyled">
+						<li>
+							<a href="#settings">
+								<i class="fa-wrench"></i>
+								Settings
+							</a>
+						</li>
+						<li>
+							<a href="#profile">
+								<i class="fa-user"></i>
+								Profile
+							</a>
+						</li>
+						<li class="last">
+							<a href="extra-lockscreen.html">
+								<i class="fa-lock"></i>
+								Logout
+							</a>
+						</li>
+					</ul>
+				</li>
 
-        <li>
-          <a href="#" data-toggle="chat">
-            <i class="fa-comments-o"></i>
-          </a>
-        </li>
+				<li>
+					<a href="#" data-toggle="chat">
+						<i class="fa-comments-o"></i>
+					</a>
+				</li>
 
-      </ul>
+			</ul>
 
-    </nav>
+		</nav>
 
-    <router-outlet></router-outlet>
-
-
-    <!-- Main Footer -->
-    <!-- Choose between footer styles: "footer-type-1" or "footer-type-2" -->
-    <!-- Add class "sticky" to  always stick the footer to the end of page (if page contents is small) -->
-    <!-- Or class "fixed" to  always fix the footer to the end of page -->
-    <footer class="main-footer sticky footer-type-1">
-
-      <div class="footer-inner">
-
-        <!-- Add your copyright text here -->
-        <div class="footer-text">
-          &copy; 2016 <a href="www.safetravels.com" target="_blank"><strong>SafeTravels Pty. Ltd.</strong> </a>- For the
-          best browsing experience, we recommend using the Google Chrome web browser.
-        </div>
+		<router-outlet></router-outlet>
 
 
-        <!-- Go to Top Link, just add rel="go-top" to any link to add this functionality -->
-        <div class="go-up">
+		<!-- Main Footer -->
+		<!-- Choose between footer styles: "footer-type-1" or "footer-type-2" -->
+		<!-- Add class "sticky" to  always stick the footer to the end of page (if page contents is small) -->
+		<!-- Or class "fixed" to  always fix the footer to the end of page -->
+		<footer class="main-footer sticky footer-type-1">
 
-          <a href="#" rel="go-top">
-            <i class="fa-angle-up"></i>
-          </a>
+			<div class="footer-inner">
 
-        </div>
+				<!-- Add your copyright text here -->
+				<div class="footer-text">
+					&copy; 2016 <a href="www.safetravels.com" target="_blank"><strong>SafeTravels Pty. Ltd.</strong> </a>- For the
+					best browsing experience, we recommend using the Google Chrome web browser.
+				</div>
 
-      </div>
 
-    </footer>
-  </div>
-  <div id="progress-sidebar" class="col-md-2 col-sm-12">
+				<!-- Go to Top Link, just add rel="go-top" to any link to add this functionality -->
+				<div class="go-up">
 
-  </div>
-  <app-progress></app-progress>
+					<a href="#" rel="go-top">
+						<i class="fa-angle-up"></i>
+					</a>
 
-  <div id="chat" class="fixed">
-    <div class="chat-inner">
-      <h2 class="chat-header">
-        <a href="#" class="chat-close" data-toggle="chat">
-          <i class="fa-plus-circle rotate-45deg"></i>
-        </a>
-        Chat <span class="badge badge-success is-hidden">0</span>
-      </h2>
-      <p class="padding5">Communicate with your customers. They will be able to send and receive messages through
-        the SafeTravels app. To
-        start a new conversation, go to the Trip Members section of the relevent trip.</p>
-    </div>
-  </div>
+				</div>
+
+			</div>
+
+		</footer>
+	</div>
+	<app-progress></app-progress>
+
+	<div id="chat" class="fixed">
+		<div class="chat-inner">
+			<h2 class="chat-header">
+				<a href="#" class="chat-close" data-toggle="chat">
+					<i class="fa-plus-circle rotate-45deg"></i>
+				</a>
+				Chat <span class="badge badge-success is-hidden">0</span>
+			</h2>
+			<p class="padding5">Communicate with your customers. They will be able to send and receive messages through
+				the SafeTravels app. To
+				start a new conversation, go to the Trip Members section of the relevent trip.</p>
+		</div>
+	</div>
 
 </div>
 
 
 <!-- Page Loading Overlay -->
 <div class="page-loading-overlay">
-  <div class="loader-2"></div>
+	<div class="loader-2"></div>
 </div>

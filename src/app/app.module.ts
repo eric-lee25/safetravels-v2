@@ -9,26 +9,37 @@ import {HomeComponent} from './home/home.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {AppService} from "./services/app.service";
 import {UserService} from "./services/user.service";
-import { NavigationComponent } from './sidebar/navigation/navigation.component';
+import {NavigationComponent} from './sidebar/navigation/navigation.component';
 import {DemoService} from "./services/demo.service";
-import { ProgressComponent } from './sidebar/progress/progress.component';
+import {SidebarProgressComponent} from './sidebar/progress/sidebar-progress.component';
+import {BusinessAccountComponent} from './business/business-account/business-account.component';
+import {BusinessPlanComponent} from './business/business-plan/business-plan.component';
+import {CounterComponent} from './elements/counter/counter.component';
+import {ProgressComponent} from './elements/progress/progress.component';
+import {MaterialModule} from "@angular/material";
+import 'hammerjs';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PageNotFoundComponent,
-    HomeComponent,
-    NavigationComponent,
-    ProgressComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    AppRoutingModule
-  ],
-  providers: [AppService, UserService, DemoService],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		PageNotFoundComponent,
+		HomeComponent,
+		NavigationComponent,
+		SidebarProgressComponent,
+		BusinessAccountComponent,
+		BusinessPlanComponent,
+		CounterComponent,
+		ProgressComponent
+	],
+	imports: [
+		BrowserModule,
+		FormsModule,
+		HttpModule,
+		AppRoutingModule,
+		MaterialModule.forRoot()
+	],
+	providers: [AppService, UserService, DemoService],
+	bootstrap: [AppComponent]
 })
 export class AppModule {
 }
