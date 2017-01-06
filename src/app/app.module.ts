@@ -18,7 +18,8 @@ import {CounterComponent} from './elements/counter/counter.component';
 import {ProgressComponent} from './elements/progress/progress.component';
 import {MaterialModule} from "@angular/material";
 import 'hammerjs';
-import { DatepickerModule } from 'angular2-material-datepicker'
+import { DatepickerModule } from 'angular2-material-datepicker';
+import { BusinessUsersComponent } from './business/business-users/business-users.component'
 
 @NgModule({
 	declarations: [
@@ -30,7 +31,8 @@ import { DatepickerModule } from 'angular2-material-datepicker'
 		BusinessAccountComponent,
 		BusinessPlanComponent,
 		CounterComponent,
-		ProgressComponent
+		ProgressComponent,
+		BusinessUsersComponent
 	],
 	imports: [
 		BrowserModule,

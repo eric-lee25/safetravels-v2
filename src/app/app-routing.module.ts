@@ -4,12 +4,14 @@ import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 import {HomeComponent} from "./home/home.component";
 import {BusinessAccountComponent} from "./business/business-account/business-account.component";
 import {BusinessPlanComponent} from "./business/business-plan/business-plan.component";
+import {BusinessUsersComponent} from "./business/business-users/business-users.component";
 
 
 const appRoutes: Routes = [
 	{path: 'home', component: HomeComponent},
 	{path: 'business/account', component: BusinessAccountComponent},
 	{path: 'business/plan', component: BusinessPlanComponent},
+	{path: 'business/users', component: BusinessUsersComponent},
 	{path: '', redirectTo: '/home', pathMatch: 'full'},
 	{path: '**', component: PageNotFoundComponent}
 ];

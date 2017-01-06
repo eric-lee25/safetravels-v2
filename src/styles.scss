@@ -116,3 +116,15 @@ $col-lg: 1200px;
   }
 
 }
+
+.panel-heading {
+  h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 17px;
+    color: inherit;
+  }
+  p {
+    font-size: 14px;
+  }
+}

@@ -1,3 +1,182 @@
-<p>
-  business-plan works!
-</p>
+<!-- Begin page title -->
+<div class="page-title">
+	<div class="title-env">
+		<h1 class="title">Plan and Billing Management</h1>
+		<p class="description">View and manage your SafeTravels plan and billing details.</p>
+	</div>
+
+	<div class="breadcrumb-env">
+
+		<ol class="breadcrumb bc-1">
+			<li>
+				<a routerLink="/home"><i class="fa-home"></i>Home</a>
+			</li>
+			<li>
+				<a routerLink="/business/plan">Business</a>
+			</li>
+			<li class="active">
+				<strong>Plan</strong>
+			</li>
+		</ol>
+
+	</div>
+</div>
+<!-- // Page title -->
+
+<div class="row draggable-portlets smaller-labels">
+
+
+	<div class="col-md-3">
+
+		<div class="xe-widget xe-counter c-flamepea">
+			<div class="xe-icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
+			<div class="xe-label"><strong class="num ng-binding">Basic Plan</strong><span>Current Plan</span></div>
+		</div>
+	</div>
+
+	<div class="col-md-3">
+		<div class="xe-widget xe-counter  c-pod c-royalblue">
+			<div class="xe-label"><strong class="num">
+				<app-counter [prefix]="" [suffix]="" [step]="30" [countTo]="100" [countFrom]="0"
+										 [duration]="2"></app-counter>
+			</strong><span>Next billing date</span></div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="xe-widget xe-counter c-pod  c-purpleheart">
+			<div class="xe-label"><strong class="num">
+				<app-counter [prefix]="" [suffix]="" [step]="30" [countTo]="2" [countFrom]="0"
+										 [duration]="2"></app-counter>
+			</strong><span>Trips Used</span></div>
+		</div>
+	</div>
+
+	<div class="col-md-3">
+		<div class="xe-widget xe-counter  c-pod c-shamrock">
+			<div class="xe-label"><strong class="num">
+				<app-counter [prefix]="" [suffix]="" [step]="30" [countTo]="262" [countFrom]="0"
+										 [duration]="2"></app-counter>
+			</strong><span>Until Trial End</span></div>
+		</div>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Upgrade Now</h3>
+			</div>
+			<div class="panel-body">
+				<div class="col-md-3">
+					<div id="plan1" class="plan-card">
+
+						<h3 class="plan-title">
+							BASIC
+						</h3>
+						<div class="plan-cost">
+							$30.00
+							<span class="plan-cost-label">per month</span>
+						</div>
+						<hr>
+						<div class="plan-features">
+							<p>
+								<strong>15</strong> trips per month
+							</p>
+							<p>
+								Avg.<strong>$4.30</strong> per trip
+							</p>
+							<p>
+								<strong>FREE</strong> 30 day trial
+							</p>
+							<div class="current-plan">Current Plan</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div id="plan2" class="plan-card">
+
+						<h3 class="plan-title">
+							SMALL
+						</h3>
+						<div class="plan-cost">
+							$65.00
+							<span class="plan-cost-label">per month</span>
+						</div>
+						<hr>
+						<div class="plan-features">
+							<p>
+								<strong>50</strong> trips per month
+							</p>
+							<p>
+								Avg.<strong>$2.60</strong> per trip
+							</p>
+							<p>
+								<strong>FREE</strong> 30 day trial
+							</p>
+							<button class="btn btn-secondary">Upgrade to Small</button>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div id="plan3" class="plan-card">
+
+						<h3 class="plan-title">
+							MEDIUM
+						</h3>
+						<div class="plan-cost">
+							$150.00
+							<span class="plan-cost-label">per month</span>
+						</div>
+						<hr>
+						<div class="plan-features">
+							<p>
+								<strong>250</strong> trips per month
+							</p>
+							<p>
+								Avg.<strong>$1.20</strong> per trip
+							</p>
+							<p>
+								<strong>FREE</strong> 30 day trial
+							</p>
+							<button class="btn btn-secondary">Upgrade to Medium</button>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div id="plan4" class="plan-card">
+
+						<h3 class="plan-title">
+							LARGE
+						</h3>
+						<div class="plan-cost">
+							$300.00
+							<span class="plan-cost-label">per month</span>
+						</div>
+						<hr>
+						<div class="plan-features">
+							<p>
+								<strong>1000</strong> trips per month
+							</p>
+							<p>
+								Avg.<strong>$0.60</strong> per trip
+							</p>
+							<p>
+								<strong>FREE</strong> 30 day trial
+							</p>
+							<button class="btn btn-secondary">Upgrade to Large</button>
+						</div>
+
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+
+</div>

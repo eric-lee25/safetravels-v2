@@ -1,0 +1,89 @@
+<!-- Begin page title -->
+<div class="page-title">
+	<div class="title-env">
+		<h1 class="title">Staff User Management</h1>
+		<p class="description">Add and Manage Staff Users and Permissions</p>
+	</div>
+
+	<div class="breadcrumb-env">
+
+		<ol class="breadcrumb bc-1">
+			<li>
+				<a routerLink="/home"><i class="fa-home"></i>Home</a>
+			</li>
+			<li>
+				<a routerLink="/business/users">Users</a>
+			</li>
+			<li class="active">
+				<strong>Plan</strong>
+			</li>
+		</ol>
+
+	</div>
+</div>
+<!-- // Page title -->
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		Users
+	</div>
+
+	<div class="panel-body">
+
+		<div class="btn-toolbar">
+			<div class="btn-group focus-btn-group">
+				<button class="btn btn-default"><span class="fa-plus"></span> Add new Staff User</button>
+			</div>
+		</div>
+
+		<div class="table-responsive">
+			<table class="table table-hover members-table middle-align">
+				<thead>
+				<tr>
+
+					<th class="hidden-xs hidden-sm"></th>
+					<th>Name</th>
+					<th class="hidden-xs hidden-sm">Role</th>
+					<th>Email</th>
+					<th>Settings</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+
+					<td class="user-image">
+						<a href="javascript://">
+							<img [src]="'assets/images/user-2.png'"
+									 class="img-circle img-inline userpic-32 ng-scope" alt="user-pic"
+									 width="28">
+						</a>
+					</td>
+					<td class="user-name hidden-xs hidden-sm">
+						<p>testerp ewew</p>
+					</td>
+					<td class="hidden-xs hidden-sm">
+						<span class="email ng-binding">Super User</span>
+					</td>
+					<td class="user-id">
+						<p class="ng-binding">safetravels_31aug@mailiantor.com</p>
+					</td>
+					<td class="action-links">
+						<a href="javascript://" class="edit">
+							<i class="linecons-pencil"></i>
+							Edit Profile
+						</a>
+
+						<a href="javascript://" class="delete">
+							<i class="linecons-trash"></i>
+							Delete
+						</a>
+					</td>
+
+				</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+	</div>
+</div>
