@@ -56,7 +56,6 @@ a {
 /* HEADER */
 
 .c-navbar-upgrade {
-	width: 650px;
 	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05);
 	border-radius: 5px;
 	border: 1px solid rgb(238, 238, 238) !important;
@@ -832,11 +831,6 @@ table.recentList td.unread {
 	margin-left: 110px;
 }
 
-.t-hd-title {
-	margin-top: 5px;
-	font-size: 23px;
-	font-weight: 700;
-}
 
 .t-hd-dates {
 	margin-top: 2px;
@@ -1117,7 +1111,6 @@ h3.c-header span {
 	color: #aaa;
 	text-transform: uppercase;
 	font-weight: bold;
-	width: 141px;
 	padding-top: 5px;
 }
 
@@ -1194,11 +1187,11 @@ h3.c-header span {
 }
 
 .list-group-item.active .c-ti-destination {
-	color: White !important;
+
 }
 
 .list-group-item.active .c-ti-data {
-	color: White !important;
+
 }
 
 .c-tripmembers, .c-inactivemembers {

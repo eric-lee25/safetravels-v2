@@ -1,0 +1,447 @@
+<!-- Begin page title -->
+<div class="page-title">
+  <div class="title-env">
+    <h1 class="title">Multi Language activity debug</h1>
+    <p class="description">Tour group management</p>
+  </div>
+
+  <div class="breadcrumb-env">
+
+    <ol class="breadcrumb bc-1">
+      <li>
+        <a routerLink="/home"><i class="fa-home"></i>Home</a>
+      </li>
+      <li>
+        <a routerLink="/trips"><i class="fa-home"></i>Trips</a>
+      </li>
+      <li class="active">
+        <strong>Multi Language activity debug</strong>
+      </li>
+    </ol>
+
+  </div>
+</div>
+<!-- // Page title -->
+
+
+<div class="t-header" [style.background-image]="'url(/assets/data/images/test.jpg)'">
+  <div class="btn-edittrip">
+    <button href="" class="btn btn-success btn-single btn-sm">Add Cover
+      Image
+    </button>
+    <button class="btn btn-purple btn-single btn-sm">Edit
+      Trip
+    </button>
+    <button href="" class="btn btn-icon btn-red">x</button>
+  </div>
+  <div class="t-header-bottom row">
+    <div class="col-md-4">
+      <div class="t-header-thumb">
+        <div class="t-ht-month ng-binding">11th</div>
+        <div class="t-ht-day ng-binding">Jul</div>
+      </div>
+      <div class="t-header-details">
+        <div class="t-hd-title ng-binding">Multi Language activity debug</div>
+        <div class="t-hd-dates ng-binding">Thu, 11 Jul 2019 - Fri, 19 Jul 2019</div>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="t-header-guide">
+        <div class="t-hg-who">Trip Token:</div>
+        <div class="t-hg-name" style="text-transform: uppercase;">yvooj
+          <a (click)="openTripTokenDialog()" class="alink">
+            <span class="fa fa-question-circle-o"></span>
+          </a>
+        </div>
+      </div>
+
+      <div class="t-header-guide">
+        <div class="t-hg-photo" [style.background-image]="'url(/assets/data/images/test.jpg)'"></div>
+        <div class="t-hg-who">Trip Guide:</div>
+        <div class="t-hg-name ng-binding">Harry Hubert</div>
+      </div>
+      <div class="t-header-guide">
+        <div class="t-hg-photo" [style.background-image]="'url(/assets/data/images/test.jpg)'"></div>
+        <div class="t-hg-who">Trip Manager:</div>
+        <div class="t-hg-name ng-binding">Sally Grasperet</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<md-card>
+
+  <md-tab-group>
+    <md-tab>
+      <template md-tab-label>
+        <i class="icon-Tourism-Icons_monument-4"></i>
+        Trip Itinerary
+      </template>
+
+      <div class="col-md-3 c-mt-list">
+
+        <ul class="list-group">
+          <li class="alink list-group-item c-trip-itinerary">
+            <div class="c-ti-date pull-left">
+              <div class="c-tid-dow ng-binding">Thu</div>
+              <div class="c-tid-day ng-binding">17</div>
+              <div class="c-tid-month ng-binding">Nov</div>
+            </div>
+            <div class="c-ti-details pull-right">
+              <div class="c-ti-destination ng-binding">
+                Day 1
+              </div>
+              <div class="c-ti-data ng-binding">
+                5 Activities, 1 Offers
+              </div>
+            </div>
+          </li>
+          <li class="alink list-group-item c-trip-itinerary">
+            <div class="c-ti-date pull-left">
+              <div class="c-tid-dow ng-binding">Thu</div>
+              <div class="c-tid-day ng-binding">17</div>
+              <div class="c-tid-month ng-binding">Nov</div>
+            </div>
+            <div class="c-ti-details pull-right">
+              <div class="c-ti-destination ng-binding">
+                Day 2
+              </div>
+              <div class="c-ti-data ng-binding">
+                5 Activities, 1 Offers
+              </div>
+            </div>
+          </li>
+          <li class="alink list-group-item c-trip-itinerary">
+            <div class="c-ti-date pull-left">
+              <div class="c-tid-dow ng-binding">Thu</div>
+              <div class="c-tid-day ng-binding">17</div>
+              <div class="c-tid-month ng-binding">Nov</div>
+            </div>
+            <div class="c-ti-details pull-right">
+              <div class="c-ti-destination ng-binding">
+                Day 3
+              </div>
+              <div class="c-ti-data ng-binding">
+                5 Activities, 1 Offers
+              </div>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+
+
+      <div class="col-md-9 c-mt-contents">
+        <div class="itineraryMainBox">
+          <div class="panel">
+            <div class="panel-body">
+              <h3 class="c-header"><strong class="pull-left ng-binding">Day 1</strong>
+                <button type="button" class="btnIcon btn-text-blue"><i class="linecons-pencil"></i>
+                </button>
+                <button type="button" class="btnIcon btn-text-red"><i class="linecons-trash"></i></button>
+                <a href="" class="pull-right">
+                  <button class="btn btn-success">
+                    <i class="fa fa-plus"></i> Add Activity to Day
+                  </button>
+                </a>
+
+              </h3>
+
+
+              <table class="table table-hover members-table middle-align">
+                <tbody>
+                <tr class="Activity ng-scope">
+                  <td class="user-image">
+                    <div class="activity-icon type-5"><span class="icon-Tourism-Icons_compass"></span></div>
+                  </td>
+                  <td class="hidden-xs hidden-sm" width="70%">
+                    <h4 class="ng-binding"><strong class="ng-binding">03:00 AM</strong> Multi-language test</h4>
+                    <p class="ng-binding"><em class="ng-binding">Song Phi Nong, Thailand</em></p>
+                    <div class="c-offer-container">
+                      <div class="c-offers">
+                        <span class="c-offer-pill ng-binding">Explore the Reef by Air  &nbsp; <a href="javascript://"><i
+                          class="fa fa-times"></i></a></span>
+                      </div>
+
+                      <a href="javascript://" class="c-offer-pill c-offer-btn"><i class="fa fa-plus"></i> Manage Offers
+                      </a>
+                    </div>
+                  </td>
+                  <td class="action-links">
+                    <div class="c-actionbtn-container">
+                      <a href="javascript://" class="edit"><i class="linecons-pencil"></i> &nbsp;
+                        Edit
+                      </a>
+                      <br>
+                      <a href="javascript://" class="delete">
+                        <i class="linecons-trash"></i> &nbsp;
+                        Delete
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <!-- image -->
+              <div>
+
+                <h3 class="c-header"><span class="pull-left">Trip Album</span>
+                  <a href="javascript://"
+                     class="pull-right ng-scope">
+                    <button class="btn btn-primary ng-scope">Choose Images
+                    </button>
+                  </a>
+
+                </h3>
+
+                <ul class="trip-docs">
+                  <li><a
+                    href="https://safetravels01.s3.eu-central-1.amazonaws.com/22d2bce14462a0e269690a7eb7b62b4c8d269830-1024"><img
+                    src="https://safetravels01.s3.eu-central-1.amazonaws.com/22d2bce14462a0e269690a7eb7b62b4c8d269830-1024"
+                    alt=""></a>
+                    <span class="doc-title"></span>
+                    <a href="javascript://" class="doc-delete">&nbsp;<i
+                      class="fa fa-times"></i></a></li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+    </md-tab>
+
+    <md-tab>
+      <template md-tab-label>
+        <i class="fa fa-users"></i>
+        Trip Passengers
+      </template>
+      <div class="row c-manage-trip">
+        <div class="col-md-3 c-mt-list">
+          <div class="c-tripmembers">
+            <h5 class="pull-left">Trip Members</h5>
+            <button type="button" class="btn btn-sm btn-success pull-right">
+              <i class="fa fa-plus"></i> &nbsp; Add Passenger
+            </button>
+          </div>
+
+          <ul class="list-group">
+            <li class="list-group-item active c-trip-itinerary alink">
+              <div class="c-ti-allmembers pull-left"></div>
+              <div class="c-ti-details pull-right">
+                <div class="c-ti-destination">
+                  Trip Group
+                </div>
+                <div class="c-ti-data">
+                  Add Documents to Trip
+                </div>
+              </div>
+            </li>
+            <li class="alink list-group-item c-trip-itinerary">
+              <div class="c-ti-date pull-left"><img [src]="'/assets/images/user-1.png'" class="img-circle"
+                                                    alt="user-pic">
+              </div>
+              <div class="c-ti-details pull-right">
+                <div class="c-ti-destination ng-binding">
+                  Margot Abbot
+                </div>
+                <div class="c-ti-data ng-binding">
+                  Documents
+                </div>
+              </div>
+            </li>
+
+            <li class="alink list-group-item c-trip-itinerary">
+              <div class="c-ti-date pull-left"><img [src]="'/assets/images/user-1.png'" class="img-circle"
+                                                    alt="user-pic">
+              </div>
+              <div class="c-ti-details pull-right">
+                <div class="c-ti-destination ng-binding">
+                  Margot Abbot
+                </div>
+                <div class="c-ti-data ng-binding">
+                  Documents
+                </div>
+              </div>
+            </li>
+
+          </ul>
+          <div class="c-inactivemembers">
+            <h4 class="pull-left">Inactive</h4>
+            <button type="button" class="btn btn-success pull-right">Activate All
+            </button>
+          </div>
+
+        </div>
+        <div class="col-md-9">
+
+          <!-- Begin trip group -->
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title"> Trip Group</h3>
+
+              <div class="panel-options">
+                <button class="btn btn-small btn-success">Activate All Members</button>
+              </div>
+            </div>
+
+            <div class="panel-body">
+
+              <p>Content for trip group here...</p>
+            </div>
+          </div>
+          <!-- // Trip group -->
+
+
+          <!-- Begin travel document -->
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title"> Travel Documents</h3>
+
+              <div class="panel-options">
+                <button class="btn btn-small btn-info">Upload</button>
+              </div>
+            </div>
+
+            <div class="panel-body">
+
+              <ul class="trip-docs">
+                <li>
+                  <a
+                    href="https://safetravels01.s3.eu-central-1.amazonaws.com/864fdee9613aae26406169c72f52f9e6447a33d5-1024">
+                    <img
+                      [src]="'https://safetravels01.s3.eu-central-1.amazonaws.com/864fdee9613aae26406169c72f52f9e6447a33d5-50'"
+                      alt="">
+                  </a>
+                  <span class="doc-title"></span>
+                  <a class="alink doc-delete">&nbsp;
+                    <i class="fa fa-times"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- // travel document  -->
+
+
+        </div>
+
+      </div>
+
+
+    </md-tab>
+
+    <md-tab>
+      <template md-tab-label>
+        <i class="fa fa-comments"></i>
+        Trip Messages
+      </template>
+
+      <div class="row c-manage-trip">
+        <div class="col-md-3 c-mt-list">
+          <div class="c-tripmembers">
+            <h5 class="pull-left">Trip Group</h5>
+            <button type="button" class="btn btn-sm btn-success pull-right">
+              <i class="fa fa-plus"></i> &nbsp; Add Passenger
+            </button>
+          </div>
+
+          <ul class="list-group">
+            <li class="list-group-item active c-trip-itinerary alink">
+              <div class="c-ti-allmembers pull-left"></div>
+              <div class="c-ti-details pull-right">
+                <div class="c-ti-destination">
+                  Trip Group
+                </div>
+                <div class="c-ti-data">
+                  Send Messages to All
+                </div>
+              </div>
+            </li>
+            <li class="alink list-group-item c-trip-itinerary">
+              <div class="c-ti-date pull-left"><img [src]="'/assets/images/user-1.png'" class="img-circle"
+                                                    alt="user-pic">
+              </div>
+              <div class="c-ti-details pull-right">
+                <div class="c-ti-destination ng-binding">
+                  Margot Abbot
+                </div>
+                <div class="c-ti-data ng-binding">
+                  0 Messages
+                </div>
+              </div>
+            </li>
+
+            <li class="alink list-group-item c-trip-itinerary">
+              <div class="c-ti-date pull-left"><img [src]="'/assets/images/user-1.png'" class="img-circle"
+                                                    alt="user-pic">
+              </div>
+              <div class="c-ti-details pull-right">
+                <div class="c-ti-destination ng-binding">
+                  Margot Abbot
+                </div>
+                <div class="c-ti-data ng-binding">
+                  0 Messages
+                </div>
+              </div>
+            </li>
+
+          </ul>
+
+        </div>
+        <div class="col-md-9">
+
+          <!-- Begin trip group -->
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">New Group Message / Update</h3>
+
+              <div class="panel-options">
+                <md-slide-toggle (change)="onMessageOptionChange($event)" [color]="'primary'">Advanced</md-slide-toggle>
+              </div>
+            </div>
+
+            <div class="panel-body">
+
+              <div id="newMessage">
+                <form role="form">
+                  <div class="simple-message" *ngIf="!messageAdvanced">
+                    <div class="form-group">
+                      <label>Subject</label>
+                      <input class="form-control" placeholder="Subject" type="text">
+                    </div>
+                    <div class="form-group">
+                      <label>Your Message</label>
+                      <textarea cols="5" rows="5" class="form-control" placeholder="Your Message"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                      <button type="button" class="btn btn-info btn-single pull-right">Send</button>
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+
+            </div>
+          </div>
+          <!-- // Trip group -->
+
+
+        </div>
+
+      </div>
+
+
+    </md-tab>
+
+
+  </md-tab-group>
+
+
+</md-card>
+

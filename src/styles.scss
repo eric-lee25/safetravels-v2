@@ -2,6 +2,37 @@ $green-color: #71c055;
 $col-sm: 768px;
 $col-md: 992px;
 $col-lg: 1200px;
+
+@import '~@angular/material/core/theming/all-theme';
+
+@include md-core();
+
+$primary: md-palette($md-light-green);
+$accent: md-palette($md-amber, A200, A100, A400);
+
+$theme: md-light-theme($primary, $accent);
+
+@include angular-material-theme($theme);
+
+.m2app-dark {
+  $dark-primary: md-palette($md-pink, 700, 500, 900);
+  $dark-accent: md-palette($md-blue-grey, A200, A100, A400);
+  $dark-warn: md-palette($md-deep-orange);
+
+  $dark-theme: md-light-theme($dark-primary, $dark-accent, $dark-warn);
+
+  @include angular-material-theme($dark-theme);
+}
+
+@mixin fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .padding5 {
   padding: 5px;
 }
@@ -127,4 +158,57 @@ $col-lg: 1200px;
   p {
     font-size: 14px;
   }
+}
+
+#progress-sidebar .panel {
+  padding: 10px;
+}
+
+.c-navbar-upgrade {
+  width: 550px;
+  @media (min-width: $col-lg) {
+    width: 650px;
+  }
+}
+
+.sidebar-is-open {
+  .c-navbar-upgrade {
+    width: 550px;
+    @media (min-width: $col-lg) {
+      width: 550px;
+    }
+  }
+}
+
+.fa-question-circle-o {
+  @include fa;
+  &:before {
+    content: "\f29c";
+  }
+}
+
+.t-hd-title {
+  margin-top: 5px;
+  font-weight: 700;
+  font-size: 15px;
+  @media (min-width: $col-md) {
+    font-size: 23px;
+  }
+}
+
+.list-group {
+  .list-group-item {
+    &:hover {
+      background-color: #f5f5f5;
+
+    }
+    &.active {
+      background-color: #337ab7;
+      .c-ti-destination, .c-ti-data {
+        color: #FFF;
+      }
+    }
+
+  }
+
 }
