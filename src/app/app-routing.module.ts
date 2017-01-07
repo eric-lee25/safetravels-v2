@@ -7,6 +7,7 @@ import {BusinessPlanComponent} from "./business/business-plan/business-plan.comp
 import {BusinessUsersComponent} from "./business/business-users/business-users.component";
 import {TripsComponent} from "./trips/trips/trips.component";
 import {ManageTripComponent} from "./trips/manage-trip/manage-trip.component";
+import {ProfileComponent} from "./account/profile/profile.component";
 
 
 const appRoutes: Routes = [
@@ -15,6 +16,7 @@ const appRoutes: Routes = [
   {path: 'business/plan', component: BusinessPlanComponent},
   {path: 'business/users', component: BusinessUsersComponent},
   {path: 'trips', component: TripsComponent},
+  {path: 'account/profile', component: ProfileComponent},
   {path: 'trips/manage/:id', component: ManageTripComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}

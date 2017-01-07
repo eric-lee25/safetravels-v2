@@ -22,7 +22,8 @@ import {DatepickerModule} from 'angular2-material-datepicker';
 import {BusinessUsersComponent} from './business/business-users/business-users.component';
 import {TripsComponent} from './trips/trips/trips.component';
 import {ManageTripComponent} from './trips/manage-trip/manage-trip.component';
-import {TripTokenDialogComponent} from './elements/dialog/trip-token-dialog/trip-token-dialog.component'
+import {TripTokenDialogComponent} from './elements/dialog/trip-token-dialog/trip-token-dialog.component';
+import { ProfileComponent } from './account/profile/profile.component'
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {TripTokenDialogComponent} from './elements/dialog/trip-token-dialog/trip
     BusinessUsersComponent,
     TripsComponent,
     ManageTripComponent,
-    TripTokenDialogComponent
+    TripTokenDialogComponent,
+    ProfileComponent
   ],
   entryComponents: [TripTokenDialogComponent],
   imports: [

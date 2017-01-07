@@ -12,6 +12,8 @@ export class ManageTripComponent implements OnInit {
   }
 
   messageAdvanced: boolean = false;
+  tabConversationHistoryOpen: boolean = true;
+  tabConversationScheduleOpen: boolean = false;
 
 
   ngOnInit() {
@@ -27,6 +29,19 @@ export class ManageTripComponent implements OnInit {
   onMessageOptionChange(event) {
 
     this.messageAdvanced = event.checked;
+
+  }
+
+  showTabConverationHistory() {
+    this.tabConversationScheduleOpen = false;
+    this.tabConversationHistoryOpen = true;
+
+  }
+
+  showTabConverationSchedule() {
+
+    this.tabConversationHistoryOpen = false;
+    this.tabConversationScheduleOpen = true;
 
   }
 }

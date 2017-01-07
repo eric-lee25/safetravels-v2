@@ -1,0 +1,85 @@
+<!-- Begin page title -->
+<div class="page-title">
+  <div class="title-env">
+    <h1 class="title">My Profile</h1>
+    <p class="description">Edit your basic profile information and add a profile image.</p>
+  </div>
+
+  <div class="breadcrumb-env">
+
+    <ol class="breadcrumb bc-1">
+      <li>
+        <a routerLink="/home"><i class="fa-home"></i>Home</a>
+      </li>
+      <li class="active">
+        <strong>My Profile</strong>
+      </li>
+    </ol>
+
+  </div>
+</div>
+<!-- // Page title -->
+
+<md-card>
+  <div class="profile-env">
+    <div class="user-info-sidebar">
+      <div ng-controller="profileController" class="ng-scope">
+        <div class="row">
+          <div class="col-md-3">
+            <a href="" class="user-name ng-binding">
+              Sally Grasperet
+              <span class="user-status is-online"></span>
+            </a>
+            <a href="" class="user-img" style="width: 100px; text-align: center;">
+              <img alt="user-img" class="img-cirlce img-responsive img-thumbnail"
+                   [src]="'https://safetravels01.s3.eu-central-1.amazonaws.com/a497ae3571a0076f380357e0704a6dcfa8f4779c-50'">
+            </a>
+            <button class="btn btn-purple btn-sm"> Add / Edit Image</button>
+          </div>
+
+          <div class="col-md-9">
+            <div class="row">
+              <div class="col-md-3">
+                <h6>First Name</h6>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input class="form-control" placeholder="Last Name" type="text">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3">
+                <h6>Last Name</h6>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input class="form-control" placeholder="Last Name" type="text">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3">
+                <h6>Email Address</h6>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input class="form-control" placeholder="Email" type="text">
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-purple btn-sm">Update Profile</button>
+
+          </div>
+        </div>
+
+
+        <hr>
+      </div>
+
+    </div>
+  </div>
+
+</md-card>

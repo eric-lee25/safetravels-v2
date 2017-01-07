@@ -212,3 +212,19 @@ $theme: md-light-theme($primary, $accent);
   }
 
 }
+
+.btns-languages {
+  .btn {
+    border-radius: 4px;
+  }
+}
+
+.chat-messages {
+  margin-top: 30px;
+  &:before, &:after {
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
