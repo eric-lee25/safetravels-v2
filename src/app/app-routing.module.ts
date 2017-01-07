@@ -8,6 +8,8 @@ import {BusinessUsersComponent} from "./business/business-users/business-users.c
 import {TripsComponent} from "./trips/trips/trips.component";
 import {ManageTripComponent} from "./trips/manage-trip/manage-trip.component";
 import {ProfileComponent} from "./account/profile/profile.component";
+import {GalleryComponent} from "./gallery/gallery.component";
+import {ProductOffersComponent} from "./product-offers/product-offers.component";
 
 
 const appRoutes: Routes = [
@@ -16,6 +18,8 @@ const appRoutes: Routes = [
   {path: 'business/plan', component: BusinessPlanComponent},
   {path: 'business/users', component: BusinessUsersComponent},
   {path: 'trips', component: TripsComponent},
+  {path: 'product-offers', component: ProductOffersComponent},
+  {path: 'gallery', component: GalleryComponent},
   {path: 'account/profile', component: ProfileComponent},
   {path: 'trips/manage/:id', component: ManageTripComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},

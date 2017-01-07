@@ -1,0 +1,109 @@
+<!-- Begin page title -->
+<div class="page-title">
+  <div class="title-env">
+    <h1 class="title">Product Offers</h1>
+    <p class="description">Add Product Offers to your Itineraries</p>
+  </div>
+
+  <div class="breadcrumb-env">
+
+    <ol class="breadcrumb bc-1">
+      <li>
+        <a routerLink="/home"><i class="fa-home"></i>Home</a>
+      </li>
+      <li class="active">
+        <strong>Product Offers</strong>
+      </li>
+    </ol>
+
+  </div>
+</div>
+<!-- // Page title -->
+
+
+<div class="row draggable-portlets m-b-20 ng-scope">
+  <div class="col-md-3">
+    <div class="xe-widget c-pod c-shamrock clearfix">
+      <div class="xe-icon"><i class="fa fa-gift"></i></div>
+      <div class="xe-label"><strong class="num">
+        <app-counter [prefix]="" [suffix]="" [step]="100" [countTo]="5" [countFrom]="0"
+                     [duration]="1"></app-counter>
+      </strong><span>Active Offers</span></div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="xe-widget c-pod c-royalblue clearfix">
+      <div class="xe-icon"><i class="fa fa-calendar-check-o"></i></div>
+      <div class="xe-label"><strong class="num">
+        <app-counter [prefix]="" [suffix]="" [step]="100" [countTo]="12" [countFrom]="0"
+                     [duration]="1"></app-counter>
+      </strong><span>Offers Sent Today</span></div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="xe-widget c-pod c-purpleheart clearfix">
+      <div class="xe-icon"><i class="fa fa-mouse-pointer"></i></div>
+      <div class="xe-label"><strong class="num">
+        <app-counter [prefix]="" [suffix]="" [step]="100" [countTo]="32" [countFrom]="0"
+                     [duration]="1"></app-counter>
+      </strong><span>Offers Clicked In-App</span></div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="xe-widget c-pod c-flamepea clearfix">
+      <div class="xe-icon"><i class="fa fa-area-chart"></i></div>
+      <div class="xe-label"><strong class="num">
+        <app-counter [prefix]="" [suffix]="'%'" [step]="100" [countTo]="18" [countFrom]="0"
+                     [duration]="1"></app-counter>
+      </strong><span>Converstion Rate</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default"><!-- Add class "collapsed" to minimize the panel -->
+  <div class="panel-heading">
+    <h3 class="panel-title">Recent Activity </h3>
+    <div class="panel-options">
+      <div class="pull-right" id="reportfilter">
+        <label>Select Date Range:</label>
+        <div id="reportrange"
+             style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width:100%;">
+          <i class="fa fa-calendar"></i>&nbsp;
+          <span>January 1, 2017 - January 31, 2017</span> <b class="caret"></b>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="panel-body">
+
+    <div id="offers-chart">
+      <dx-chart
+        title=""
+        palette="Harmony Light"
+        [dataSource]="OffersInfo">
+        <dxi-series valueField="sent" name="Offer Sent"></dxi-series>
+        <dxi-series valueField="opened" name="Offer Opened"></dxi-series>
+        <dxo-common-series-settings
+          #commonSeries
+          argumentField="date"
+          type="splineArea"></dxo-common-series-settings>
+        <dxo-margin [bottom]="20"></dxo-margin>
+        <dxo-argument-axis [valueMarginsEnabled]="false"></dxo-argument-axis>
+        <dxo-export [enabled]="true"></dxo-export>
+        <dxo-legend
+          verticalAlignment="bottom"
+          horizontalAlignment="center">
+        </dxo-legend>
+      </dx-chart>
+      <div class="center">
+        <div>Series Type</div>
+        <dx-select-box
+          [dataSource]="types"
+          [(value)]="commonSeries.type">
+        </dx-select-box>
+      </div>
+    </div>
+  </div>
+</div>

@@ -47,25 +47,34 @@
     </div>
 
     <div class="col-md-8">
-      <div class="t-header-guide">
-        <div class="t-hg-who">Trip Token:</div>
-        <div class="t-hg-name" style="text-transform: uppercase;">yvooj
-          <a (click)="openTripTokenDialog()" class="alink">
-            <span class="fa fa-question-circle-o"></span>
-          </a>
+      <div class="row">
+        <div class="col-md-4 col-md-push-8">
+          <div class="t-header-guide">
+            <div class="t-hg-who">Trip Token:</div>
+            <div class="t-hg-name" style="text-transform: uppercase;">yvooj
+              <a (click)="openTripTokenDialog()" class="alink">
+                <span class="fa fa-question-circle-o"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="t-header-guide">
+            <div class="t-hg-photo" [style.background-image]="'url(/assets/data/images/test.jpg)'"></div>
+            <div class="t-hg-who">Trip Guide:</div>
+            <div class="t-hg-name ng-binding">Harry Hubert</div>
+          </div>
+        </div>
+        <div class="col-md-4 col-md-pull-8">
+          <div class="t-header-guide">
+            <div class="t-hg-photo" [style.background-image]="'url(/assets/data/images/test.jpg)'"></div>
+            <div class="t-hg-who">Trip Manager:</div>
+            <div class="t-hg-name ng-binding">Sally Grasperet</div>
+          </div>
         </div>
       </div>
 
-      <div class="t-header-guide">
-        <div class="t-hg-photo" [style.background-image]="'url(/assets/data/images/test.jpg)'"></div>
-        <div class="t-hg-who">Trip Guide:</div>
-        <div class="t-hg-name ng-binding">Harry Hubert</div>
-      </div>
-      <div class="t-header-guide">
-        <div class="t-hg-photo" [style.background-image]="'url(/assets/data/images/test.jpg)'"></div>
-        <div class="t-hg-who">Trip Manager:</div>
-        <div class="t-hg-name ng-binding">Sally Grasperet</div>
-      </div>
+
     </div>
   </div>
 </div>

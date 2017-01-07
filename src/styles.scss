@@ -171,6 +171,15 @@ $theme: md-light-theme($primary, $accent);
   }
 }
 
+.t-hd-title {
+  margin-top: 5px;
+  font-weight: 700;
+  font-size: 15px;
+  @media (min-width: $col-md) {
+    font-size: 23px;
+  }
+}
+
 .sidebar-is-open {
   .c-navbar-upgrade {
     width: 550px;
@@ -178,21 +187,20 @@ $theme: md-light-theme($primary, $accent);
       width: 550px;
     }
   }
+  .t-hd-title {
+    @media (min-width: $col-md) {
+      font-size: 15px;
+    }
+  }
+  .c-ti-date {
+    width: 36px;
+  }
 }
 
 .fa-question-circle-o {
   @include fa;
   &:before {
     content: "\f29c";
-  }
-}
-
-.t-hd-title {
-  margin-top: 5px;
-  font-weight: 700;
-  font-size: 15px;
-  @media (min-width: $col-md) {
-    font-size: 23px;
   }
 }
 
@@ -226,5 +234,15 @@ $theme: md-light-theme($primary, $accent);
   }
   &:after {
     clear: both;
+  }
+}
+
+.album-images, .upload-file-wrapper {
+  margin-top: 30px;
+}
+
+.upload-file-wrapper {
+  .btn {
+    margin-top: 20px;
   }
 }

@@ -23,7 +23,21 @@ import {BusinessUsersComponent} from './business/business-users/business-users.c
 import {TripsComponent} from './trips/trips/trips.component';
 import {ManageTripComponent} from './trips/manage-trip/manage-trip.component';
 import {TripTokenDialogComponent} from './elements/dialog/trip-token-dialog/trip-token-dialog.component';
-import { ProfileComponent } from './account/profile/profile.component'
+import { ProfileComponent } from './account/profile/profile.component';
+import { GalleryComponent } from './gallery/gallery.component'
+
+import { DropzoneModule } from 'angular2-dropzone-wrapper';
+import { DropzoneConfigInterface } from 'angular2-dropzone-wrapper';
+import { ProductOffersComponent } from './product-offers/product-offers.component';
+import {DxChartModule, DxSelectBoxModule} from "devextreme-angular";
+
+const DROPZONE_CONFIG: DropzoneConfigInterface = {
+  // Change this to your upload POST address:
+  server: 'https://httpbin.org/post',
+  maxFilesize: 50,
+  acceptedFiles: 'image/*'
+};
+
 
 @NgModule({
   declarations: [
@@ -40,7 +54,9 @@ import { ProfileComponent } from './account/profile/profile.component'
     TripsComponent,
     ManageTripComponent,
     TripTokenDialogComponent,
-    ProfileComponent
+    ProfileComponent,
+    GalleryComponent,
+    ProductOffersComponent
   ],
   entryComponents: [TripTokenDialogComponent],
   imports: [
@@ -49,6 +65,9 @@ import { ProfileComponent } from './account/profile/profile.component'
     HttpModule,
     AppRoutingModule,
     MaterialModule.forRoot(),
+    DropzoneModule.forRoot(DROPZONE_CONFIG),
+    DxSelectBoxModule,
+    DxChartModule,
     DatepickerModule
   ],
   providers: [AppService, UserService, DemoService],
