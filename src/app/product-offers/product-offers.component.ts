@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-
 import {DxChartModule, DxSelectBoxModule} from 'devextreme-angular';
 import {OfferService, OfferInfo} from "../services/offer.service";
 
@@ -14,8 +13,6 @@ export class ProductOffersComponent implements OnInit {
 
 
   OffersInfo: OfferInfo[];
-  types: string[] = ["splineArea", "stackedSplineArea", "fullStackedSplineArea"];
-
 
   constructor(private offerService: OfferService) {
 

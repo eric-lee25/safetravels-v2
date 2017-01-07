@@ -77,33 +77,31 @@
   </div>
 
   <div class="panel-body">
-
-    <div id="offers-chart">
-      <dx-chart
-        title=""
-        palette="Harmony Light"
-        [dataSource]="OffersInfo">
-        <dxi-series valueField="sent" name="Offer Sent"></dxi-series>
-        <dxi-series valueField="opened" name="Offer Opened"></dxi-series>
-        <dxo-common-series-settings
-          #commonSeries
-          argumentField="date"
-          type="splineArea"></dxo-common-series-settings>
-        <dxo-margin [bottom]="20"></dxo-margin>
-        <dxo-argument-axis [valueMarginsEnabled]="false"></dxo-argument-axis>
-        <dxo-export [enabled]="true"></dxo-export>
-        <dxo-legend
-          verticalAlignment="bottom"
-          horizontalAlignment="center">
-        </dxo-legend>
-      </dx-chart>
-      <div class="center">
-        <div>Series Type</div>
-        <dx-select-box
-          [dataSource]="types"
-          [(value)]="commonSeries.type">
-        </dx-select-box>
+    <div class="row">
+      <div class="col-md-9">
+        <div id="offers-chart">
+          <dx-chart
+            title=""
+            palette="Harmony Light"
+            [dataSource]="OffersInfo">
+            <dxi-series color="#68b828" valueField="sent" name="Offer Sent"></dxi-series>
+            <dxi-series color="#4fcdfc" valueField="opened" name="Offer Opened"></dxi-series>
+            <dxo-common-series-settings
+              #commonSeries
+              argumentField="date"
+              type="splineArea"></dxo-common-series-settings>
+            <dxo-margin [bottom]="20"></dxo-margin>
+            <dxo-argument-axis [valueMarginsEnabled]="false"></dxo-argument-axis>
+            <dxo-export [enabled]="false"></dxo-export>
+            <dxo-legend
+              verticalAlignment="bottom"
+              horizontalAlignment="center">
+            </dxo-legend>
+          </dx-chart>
+        </div>
       </div>
     </div>
+
+
   </div>
 </div>
