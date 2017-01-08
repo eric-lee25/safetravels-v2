@@ -18,7 +18,6 @@ import {CounterComponent} from './elements/counter/counter.component';
 import {ProgressComponent} from './elements/progress/progress.component';
 import {MaterialModule} from "@angular/material";
 import 'hammerjs';
-import {DatepickerModule} from 'angular2-material-datepicker';
 import {BusinessUsersComponent} from './business/business-users/business-users.component';
 import {TripsComponent} from './trips/trips/trips.component';
 import {ManageTripComponent} from './trips/manage-trip/manage-trip.component';
@@ -70,7 +69,6 @@ const DROPZONE_CONFIG: DropzoneConfigInterface = {
     DropzoneModule.forRoot(DROPZONE_CONFIG),
     DxSelectBoxModule,
     DxChartModule,
-    DatepickerModule,
     MyDatePickerModule
   ],
   providers: [AppService, UserService, DemoService],

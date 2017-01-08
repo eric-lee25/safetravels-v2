@@ -286,6 +286,7 @@ $theme: md-light-theme($primary, $accent);
 }
 
 .date-picker-control-group {
+  position: relative;
   .mydp {
     border: 0 none;
     background: none;
@@ -293,13 +294,37 @@ $theme: md-light-theme($primary, $accent);
     button.btnpicker {
       background: none;
       border: 0 none;
+      padding-top: 19px;
     }
-    .icon-calendar {
-      @include fa;
-      &:before {
-        content: "\f073";
+    .btnclear {
+      display: none;
+    }
+    .icon {
+      font-family: mydatepicker !important;
+      &.icon-calendar {
+        @include fa;
+        font: normal normal normal 14px/1 FontAwesome !important;
+        &:before {
+          content: "\f073";
+
+        }
       }
     }
-  }
 
+  }
+  md-input-container {
+    width: 100%;
+  }
+  .date-select-picker {
+    position: absolute;
+    right: 0;
+    top: 3px;
+  }
+  .selectiongroup {
+    text-align: right;
+  }
+  .mydp button.btnpicker {
+    padding: 0;
+
+  }
 }

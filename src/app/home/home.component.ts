@@ -16,10 +16,12 @@ export class HomeComponent implements OnInit {
 	trips: any[] = [];
 
 
-
 	sidebarProgressToggle: boolean = true;
 
-  datePickerOptions = {showInputField: false, dateFormat: 'yyyy-mm-dd', componentDisabled: false};
+	datePickerOptions = {showInputField: false, dateFormat: 'yyyy-mm-dd', componentDisabled: false};
+	toDate: string = "";
+	fromDate: string = "";
+
 
 	constructor(private appService: AppService,
 							private demoService: DemoService) {
@@ -47,7 +49,12 @@ export class HomeComponent implements OnInit {
 	}
 
 	onSelectStartDate(event) {
-		console.log("onSelect: ", event);
+
+		this.fromDate = event.formatted;
+	}
+
+	onSelectToDate(event) {
+		this.toDate = event.formatted;
 	}
 
 }
