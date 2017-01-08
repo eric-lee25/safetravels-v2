@@ -285,6 +285,12 @@ $theme: md-light-theme($primary, $accent);
   margin: 5px 0;
 }
 
+.mydp {
+  .icon {
+    font-family: mydatepicker !important;
+  }
+}
+
 .date-picker-control-group {
   position: relative;
   .mydp {
@@ -304,9 +310,13 @@ $theme: md-light-theme($primary, $accent);
       &.icon-calendar {
         @include fa;
         font: normal normal normal 14px/1 FontAwesome !important;
+        color: #bbb;
         &:before {
           content: "\f073";
 
+        }
+        &:hover {
+          color: $green-color;
         }
       }
     }
@@ -326,5 +336,44 @@ $theme: md-light-theme($primary, $accent);
   .mydp button.btnpicker {
     padding: 0;
 
+  }
+}
+
+.add-user-dialog-content {
+  md-input-container, md-select {
+    width: 100%;
+  }
+}
+
+md-dialog-actions {
+  text-align: right;
+}
+
+.panel .panel-heading > .panel-options a.btn-info {
+  color: #FFF;
+}
+
+.card-form {
+  label {
+    text-align: right;
+  }
+}
+
+app-plan-dialog {
+  background: #f3f3f3;
+}
+
+.edit-trip-dialog-content,
+.add-day-to-trip-dialog-content {
+  .mydp input.selection {
+    position: relative;
+    width: 100%;
+    height: 32px;
+    padding: 6px 12px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: #555;
+    font-weight: 300 !important;
+    text-align: left;
   }
 }

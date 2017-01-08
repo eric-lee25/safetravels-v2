@@ -116,7 +116,7 @@
 							<p>
 								<strong>FREE</strong> 30 day trial
 							</p>
-							<button class="btn btn-secondary">Upgrade to Small</button>
+							<button (click)="showPlanDialog('Small')" class="btn btn-secondary">Upgrade to Small</button>
 						</div>
 
 					</div>
@@ -142,7 +142,7 @@
 							<p>
 								<strong>FREE</strong> 30 day trial
 							</p>
-							<button class="btn btn-secondary">Upgrade to Medium</button>
+							<button (click)="showPlanDialog('Medium')" class="btn btn-secondary">Upgrade to Medium</button>
 						</div>
 
 					</div>
@@ -168,7 +168,7 @@
 							<p>
 								<strong>FREE</strong> 30 day trial
 							</p>
-							<button class="btn btn-secondary">Upgrade to Large</button>
+							<button (click)="showPlanDialog('Large')" class="btn btn-secondary">Upgrade to Large</button>
 						</div>
 
 					</div>
@@ -180,3 +180,88 @@
 	</div>
 
 </div>
+
+<md-card>
+	<div class="panel panel-flat">
+		<div class="panel-heading">
+			<h3 class="panel-title">Manage subscription:</h3>
+		</div>
+
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-3 control-label">
+					<p>Change subscription plan</p>
+				</div>
+				<div class="col-sm-4">
+					<button type="button" class="btn btn-info">Update Plan</button>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+
+	<div class="panel panel-flat">
+		<div class="panel-heading">
+			<h3 class="panel-title">Update card details </h3>
+		</div>
+
+		<div class="panel-body card-form">
+			<form class="form-horizontal">
+				<div class="row">
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Card Number</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control">
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Card Details</label>
+						<div class="col-sm-4">
+							<div class="row">
+								<div class="col-xs-4">
+									<input id="card-month" size="2" maxlength="2" class="form-control" placeholder="MM" type="text">
+								</div>
+								<div class="col-xs-4">
+									<input id="card-year" size="2" maxlength="2" class="form-control" placeholder="YY" type="text">
+								</div>
+								<div class="col-xs-4">
+									<input id="card-cvc" size="3" maxlength="3" class="form-control" placeholder="CVC" type="text">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+
+
+	<div class="panel panel-flat">
+		<div class="panel-heading">
+			<h3 class="panel-title">Cancel Subscription </h3>
+		</div>
+
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-3 control-label">
+					<p>Change subscription plan</p>
+				</div>
+				<div class="col-sm-4">
+					<button type="button" class="btn btn-danger">Cancel Subscription </button>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+
+
+</md-card>

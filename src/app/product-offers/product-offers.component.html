@@ -112,7 +112,7 @@
     <h3 class="panel-title">Offer History </h3>
 
     <div class="panel-options">
-      <button class="btn btn-sm btn-info">New Offer</button>
+      <a routerLink="/trips" class="btn btn-sm btn-info">New Offer</a>
     </div>
   </div>
 
@@ -125,13 +125,13 @@
         <li>
           <div class="offerline clearfix">
             <button class="offer-toggle pull-left" (click)="showChildrenOfferTable(0)">
-              <i class="fa" [class.fa-minus-square]="tableCollapsed[0]" [class.fa-plus-square]="!tableCollapsed[0]"></i>
+              <i class="fa" [class.fa-minus-square]="!tableCollapsed[0]" [class.fa-plus-square]="tableCollapsed[0]"></i>
             </button>
             <strong class="pull-left">Free NYC Hotel Transfer</strong>
             <em class="pull-left">Automatic</em>
             <a routerLink="/trips" class="pull-right offerlink">Manage</a>
           </div>
-          <table #childrenOfferTable class="offer-history-table" [hidden]="!tableCollapsed[0]">
+          <table #childrenOfferTable class="offer-history-table" [hidden]="tableCollapsed[0]">
             <thead>
             <tr>
               <th width="10%">Date</th>
@@ -155,13 +155,13 @@
         <li>
           <div class="offerline clearfix">
             <button class="offer-toggle pull-left" (click)="showChildrenOfferTable(1)">
-              <i class="fa" [class.fa-minus-square]="tableCollapsed[1]" [class.fa-plus-square]="!tableCollapsed[1]"></i>
+              <i class="fa" [class.fa-minus-square]="!tableCollapsed[1]" [class.fa-plus-square]="tableCollapsed[1]"></i>
             </button>
             <strong class="pull-left">Free Dinner with the Show</strong>
             <em class="pull-left">Manual</em>
             <a routerLink="/trips" class="pull-right offerlink">Manage</a>
           </div>
-          <table #childrenOfferTable class="offer-history-table" [hidden]="!tableCollapsed[1]">
+          <table #childrenOfferTable class="offer-history-table" [hidden]="tableCollapsed[1]">
             <thead>
             <tr>
               <th width="10%">Date</th>
@@ -217,7 +217,7 @@
   </blockquote>
 
 
-  <button class="btn btn-secondary">Create New Product Offer</button>
+  <button (click)="showAddProductOfferDialog()" class="btn btn-secondary">Create New Product Offer</button>
 
   <table st-table="trips" class="table table-striped">
     <thead>

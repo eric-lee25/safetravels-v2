@@ -5,11 +5,18 @@ import {Observable, Subject} from "rxjs";
 @Injectable()
 export class AppService {
 
-  dialogTitle: string = "";
-
+	dialogTitle: string = "";
 	sidebarProgressToggle: Subject<boolean> = new Subject<boolean>();
 	sidebarToggle: Subject<boolean> = new Subject<boolean>();
-  dialogTitleEvent: Subject<string> = new Subject<string>();
+	dialogTitleEvent: Subject<string> = new Subject<string>();
+
+	confirmationDialogConfig = {
+		title: "",
+		message: "",
+		actionTitle: "OK",
+		buttonClass: "btn-primary"
+	};
+	confirmationDialogConfigEvent: Subject<any> = new Subject<any>();
 	configStorage = {
 		sidebarCollapsed: true
 	};
@@ -41,6 +48,9 @@ export class AppService {
 
 		this.dialogTitleEvent.subscribe(title => this.dialogTitle = title);
 
+		this.confirmationDialogConfigEvent.subscribe(config => {
+			this.confirmationDialogConfig = Object.assign(this.confirmationDialogConfig, config);
+		});
 
 	}
 

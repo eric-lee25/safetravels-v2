@@ -1,0 +1,134 @@
+<h2 md-dialog-title>Multi Language activity debug</h2>
+
+<md-dialog-content>
+
+	<div class="edit-trip-dialog-content">
+
+		<div class="row">
+			<div class="col-md-12">
+
+				<div class="row">
+					<div class="col-md-3">
+						<h6>Trip Name*</h6>
+					</div>
+					<div class="col-md-9">
+
+						<div class="form-group">
+							<input class="form-control" placeholder="Big Tours" name="tripName" type="text" required>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+						<h6>Location*</h6>
+					</div>
+					<div class="col-md-9">
+						<div class="form-group">
+							<div class="input-group">
+								<input name="strart_location_gps" value="Qvareli, Georgia" type="text" class="form-control" required>
+								<span class="input-group-addon"><i class="fa-globe"></i></span>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+						<h6>Trip Dates</h6>
+					</div>
+					<div class="col-md-9">
+						<div class="form-group">
+							<label>Start Date*</label>
+							<div class="input-group">
+								<my-date-picker class="date-select-picker" [options]="dateOptions"
+																(dateChanged)="onSelectDate($event)"></my-date-picker>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-9 col-md-offset-3">
+						<div class="form-group">
+							<label>End Date*</label>
+							<div class="input-group">
+								<my-date-picker class="date-select-picker" [options]="dateOptions"
+																(dateChanged)="onSelectDate($event)"></my-date-picker>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+						<h6>Admin Manager* <span class="ring-container _elevio_underline ctxUnderline" data-elevio-article="26472"
+																		 data-elevio-unique-id="0"></span></h6>
+					</div>
+					<div class="col-md-9">
+						<div class="form-group" name="Admin">
+							<select class="form-control ng-pristine ng-valid ng-valid-required" ng-model="trip.tour_admin_id"
+											ng-options="admin.id as admin.name for admin in adminUsers" required="">
+								<option value="0">Andreatta Hewitt</option>
+								<option value="1" selected="selected">Sally Grasperet</option>
+								<option value="2">testerp ewew</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+						<h6>Trip Guide <span class="small-h4">(optional)</span></h6>
+					</div>
+					<div class="col-md-9">
+						<div class="form-group">
+							<select class="form-control ng-pristine ng-valid" ng-model="trip.tour_guide_id"
+											ng-options="guide.id as guide.name for guide in allUsers">
+								<option value="" class=""></option>
+								<option value="0">Andreatta Hewitt</option>
+								<option value="1" selected="selected">Harry Hubert</option>
+								<option value="2">Sally Grasperet</option>
+								<option value="3">testerp ewew</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<h6>Group Chat</h6>
+						<div class="form-group">
+							<select class="form-control ng-pristine ng-valid" ng-model="trip.group_chat_status">
+								<option value="0">Enable Immediately</option>
+								<option value="1">Enable for Trip period only</option>
+								<option value="2">Disable</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<h6>Admin Messages</h6>
+						<div class="form-group">
+							<select class="form-control ng-pristine ng-valid" ng-model="trip.admin_messages_status">
+								<option value="0">Enable Immediately</option>
+								<option value="1">Enable for Trip period only</option>
+								<option value="2">Disable</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<h6>Tour Guide Messages</h6>
+						<div class="form-group">
+							<select class="form-control ng-pristine ng-valid" ng-model="trip.guide_messages_status">
+								<option value="0">Enable Immediately</option>
+								<option value="1">Enable for Trip period only</option>
+								<option value="2">Disable</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</md-dialog-content>
+<md-dialog-actions>
+	<button class="btn" btn-sm md-dialog-close>Close</button>
+	<button class="btn btn-sm btn-success">Save changes</button>
+</md-dialog-actions>

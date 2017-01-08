@@ -48,7 +48,7 @@
 		<!-- Begin create trip block -->
 		<div class="row">
 			<div class="c-widget c-flamepea">
-				<form class="form-horizontal">
+				<form #f="ngForm" class="form-horizontal" (ngSubmit)="createTrip()">
 					<div class="row w100">
 
 						<div class="col-md-2 wCentered">
@@ -185,7 +185,7 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">Recent Messages</h3>
 						<div class="panel-options">
-							<button class="btn btn-sm btn-info">New message</button>
+							<a routerLink="/trips" class="btn btn-sm btn-info">New message</a>
 						</div>
 					</div>
 					<div class="panel-body">
@@ -228,14 +228,13 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">Recent Offers </h3>
 						<div class="panel-options">
-							<button class="btn btn-sm btn-info">New Offer</button>
+							<a routerLink="/trips" class="btn btn-sm btn-info">New Offer</a>
 						</div>
 					</div>
 					<div class="panel-body">
 						<div class="emptyState">
 							<img [src]="'/assets/images/empty_offers.png'">
-							<div class="emptyCopy">Help your customers discover best local attractions and earn extra income by <a
-									href="#">Creating Offers</a>
+							<div class="emptyCopy">Help your customers discover best local attractions and earn extra income by <a routerLink="/trips">Creating Offers</a>
 							</div>
 						</div>
 					</div>

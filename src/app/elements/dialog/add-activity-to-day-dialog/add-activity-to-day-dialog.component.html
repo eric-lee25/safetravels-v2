@@ -1,0 +1,70 @@
+<h2 md-dialog-title>Edit Activity</h2>
+<form id="activityOverview" class="css-form">
+	<md-dialog-content>
+
+		<div class="row">
+			<div class="col-md-6 col-sm-12 trip-input">
+
+				<label>Activity Name*</label>
+				<input class="form-control" placeholder="Activity" type="text" required>
+			</div>
+
+			<div class="col-md-6 col-sm-12 trip-input">
+
+				<label>Activity Type*</label>
+
+				<select class="form-control" required>
+					<option value="?" selected="selected"></option>
+					<option value="0">Hotel</option>
+					<option value="1">Flight</option>
+					<option value="2">Transfer</option>
+					<option value="3">Activity</option>
+					<option value="4">Day Trip</option>
+					<option value="5">Optional Extra</option>
+					<option value="6">Sporting Event</option>
+					<option value="7">Meal</option>
+					<option value="8">Concert / Theatre</option>
+					<option value="9">Sightseeing</option>
+					<option value="10">Transit</option>
+					<option value="11">Children's Activity</option>
+					<option value="12">Free Time</option>
+					<option value="13">Walking Tour</option>
+					<option value="14">Meet and Greet</option>
+					<option value="15">Conference</option>
+					<option value="16">Drinks</option>
+				</select>
+			</div>
+
+
+		</div>
+
+		<div class="row">
+
+			<div id="datetimepicker2" class="input-append">
+
+				<div class="col-md-3 col-sm-6 trip-input">
+					<label>Date*</label>
+					<input class="form-control datepicker ng-pristine ng-valid ng-valid-required" data-format="D, dd MM yyyy"
+								 ng-model="currentActivity.depart_time_date" required="" type="text">
+				</div>
+
+				<div class="col-md-3 col-sm-6 trip-input">
+					<label>Time</label>
+					<input class="form-control timepicker ng-pristine ng-valid ng-valid-required" data-template="dropdown"
+								 data-show-seconds="false" data-default-time="11:25 AM" data-show-meridian="true" data-minute-step="5"
+								 data-second-step="5" ng-model="currentActivity.depart_time_time" required="" type="text">
+				</div>
+			</div>
+
+
+		</div>
+
+
+	</md-dialog-content>
+
+
+	<md-dialog-actions>
+		<button type="button" class="btn" btn-sm md-dialog-close>Close</button>
+		<button type="submit" class="btn btn-sm btn-success">Save changes</button>
+	</md-dialog-actions>
+</form>

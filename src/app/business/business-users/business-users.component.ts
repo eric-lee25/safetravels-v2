@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {DialogService} from "../../services/dialog.service";
 
 @Component({
-  selector: 'app-business-users',
-  templateUrl: './business-users.component.html',
-  styleUrls: ['./business-users.component.css']
+	selector: 'app-business-users',
+	templateUrl: './business-users.component.html',
+	styleUrls: ['./business-users.component.css']
 })
 export class BusinessUsersComponent implements OnInit {
 
-  constructor() { }
+	constructor(private dialogService: DialogService) {
+	}
 
-  ngOnInit() {
-  }
+	ngOnInit() {
 
+	}
+
+	showAddStaffUserDialog() {
+		this.dialogService.openAddStaffUserDialog();
+
+	}
 }

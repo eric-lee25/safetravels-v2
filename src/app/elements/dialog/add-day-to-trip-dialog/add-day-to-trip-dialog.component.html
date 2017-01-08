@@ -1,0 +1,31 @@
+<h2 md-dialog-title>Add New Day</h2>
+<form class="form-horizontal">
+	<md-dialog-content>
+
+		<div class="add-day-to-trip-dialog-content">
+			<div class="form-group">
+				<label class="col-sm-3 control-label">Day Title*</label>
+				<div class="col-sm-9">
+					<input class="form-control" placeholder="Big Tours" type="text" required>
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label">Start Date*</label>
+				<div class="col-sm-9">
+					<my-date-picker class="date-select-picker" [options]="dateOptions"
+													(dateChanged)="onSelectDate($event)"></my-date-picker>
+				</div>
+			</div>
+
+
+
+		</div>
+	</md-dialog-content>
+	<md-dialog-actions>
+		<button type="button" class="btn" btn-sm md-dialog-close>Close</button>
+		<button type="submit" class="btn btn-sm btn-success">Create Day</button>
+	</md-dialog-actions>
+</form>
+

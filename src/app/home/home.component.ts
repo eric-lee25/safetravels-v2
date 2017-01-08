@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {DemoService} from "../services/demo.service";
 import {AppService} from "../services/app.service";
+import {Router} from "@angular/router";
+import {DialogService} from "../services/dialog.service";
 
 
 @Component({
@@ -24,6 +26,8 @@ export class HomeComponent implements OnInit {
 
 
 	constructor(private appService: AppService,
+							private router: Router,
+							private dialogService: DialogService,
 							private demoService: DemoService) {
 
 		this.appService.sidebarProgressToggle.subscribe(toggle => {
@@ -55,6 +59,22 @@ export class HomeComponent implements OnInit {
 
 	onSelectToDate(event) {
 		this.toDate = event.formatted;
+	}
+
+	createTrip() {
+
+		let tripId = "1";
+
+		this.router.navigate(['/trips/manage', tripId]);
+	}
+
+	showNewMessageDialog() {
+
+
+	}
+
+	showNewOfferDialog() {
+		this.dialogService.openAddProductOfferDialog();
 	}
 
 }
