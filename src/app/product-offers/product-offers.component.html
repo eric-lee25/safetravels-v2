@@ -1,107 +1,243 @@
 <!-- Begin page title -->
 <div class="page-title">
-  <div class="title-env">
-    <h1 class="title">Product Offers</h1>
-    <p class="description">Add Product Offers to your Itineraries</p>
-  </div>
+	<div class="title-env">
+		<h1 class="title">Product Offers</h1>
+		<p class="description">Add Product Offers to your Itineraries</p>
+	</div>
 
-  <div class="breadcrumb-env">
+	<div class="breadcrumb-env">
 
-    <ol class="breadcrumb bc-1">
-      <li>
-        <a routerLink="/home"><i class="fa-home"></i>Home</a>
-      </li>
-      <li class="active">
-        <strong>Product Offers</strong>
-      </li>
-    </ol>
+		<ol class="breadcrumb bc-1">
+			<li>
+				<a routerLink="/home"><i class="fa-home"></i>Home</a>
+			</li>
+			<li class="active">
+				<strong>Product Offers</strong>
+			</li>
+		</ol>
 
-  </div>
+	</div>
 </div>
 <!-- // Page title -->
 
 
 <div class="row draggable-portlets m-b-20 ng-scope">
-  <div class="col-md-3">
-    <div class="xe-widget c-pod c-shamrock clearfix">
-      <div class="xe-icon"><i class="fa fa-gift"></i></div>
-      <div class="xe-label"><strong class="num">
-        <app-counter [prefix]="" [suffix]="" [step]="100" [countTo]="5" [countFrom]="0"
-                     [duration]="1"></app-counter>
-      </strong><span>Active Offers</span></div>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="xe-widget c-pod c-royalblue clearfix">
-      <div class="xe-icon"><i class="fa fa-calendar-check-o"></i></div>
-      <div class="xe-label"><strong class="num">
-        <app-counter [prefix]="" [suffix]="" [step]="100" [countTo]="12" [countFrom]="0"
-                     [duration]="1"></app-counter>
-      </strong><span>Offers Sent Today</span></div>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="xe-widget c-pod c-purpleheart clearfix">
-      <div class="xe-icon"><i class="fa fa-mouse-pointer"></i></div>
-      <div class="xe-label"><strong class="num">
-        <app-counter [prefix]="" [suffix]="" [step]="100" [countTo]="32" [countFrom]="0"
-                     [duration]="1"></app-counter>
-      </strong><span>Offers Clicked In-App</span></div>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="xe-widget c-pod c-flamepea clearfix">
-      <div class="xe-icon"><i class="fa fa-area-chart"></i></div>
-      <div class="xe-label"><strong class="num">
-        <app-counter [prefix]="" [suffix]="'%'" [step]="100" [countTo]="18" [countFrom]="0"
-                     [duration]="1"></app-counter>
-      </strong><span>Converstion Rate</span></div>
-    </div>
-  </div>
+	<div class="col-md-3">
+		<div class="xe-widget c-pod c-shamrock clearfix">
+			<div class="xe-icon"><i class="fa fa-gift"></i></div>
+			<div class="xe-label"><strong class="num">
+				<app-counter [prefix]="" [suffix]="" [step]="100" [countTo]="5" [countFrom]="0"
+										 [duration]="1"></app-counter>
+			</strong><span>Active Offers</span></div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="xe-widget c-pod c-royalblue clearfix">
+			<div class="xe-icon"><i class="fa fa-calendar-check-o"></i></div>
+			<div class="xe-label"><strong class="num">
+				<app-counter [prefix]="" [suffix]="" [step]="100" [countTo]="12" [countFrom]="0"
+										 [duration]="1"></app-counter>
+			</strong><span>Offers Sent Today</span></div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="xe-widget c-pod c-purpleheart clearfix">
+			<div class="xe-icon"><i class="fa fa-mouse-pointer"></i></div>
+			<div class="xe-label"><strong class="num">
+				<app-counter [prefix]="" [suffix]="" [step]="100" [countTo]="32" [countFrom]="0"
+										 [duration]="1"></app-counter>
+			</strong><span>Offers Clicked In-App</span></div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="xe-widget c-pod c-flamepea clearfix">
+			<div class="xe-icon"><i class="fa fa-area-chart"></i></div>
+			<div class="xe-label"><strong class="num">
+				<app-counter [prefix]="" [suffix]="'%'" [step]="100" [countTo]="18" [countFrom]="0"
+										 [duration]="1"></app-counter>
+			</strong><span>Converstion Rate</span></div>
+		</div>
+	</div>
 </div>
 
 <div class="panel panel-default"><!-- Add class "collapsed" to minimize the panel -->
-  <div class="panel-heading">
-    <h3 class="panel-title">Recent Activity </h3>
-    <div class="panel-options">
-      <div class="pull-right" id="reportfilter">
-        <label>Select Date Range:</label>
-        <div id="reportrange"
-             style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width:100%;">
-          <i class="fa fa-calendar"></i>&nbsp;
-          <span>January 1, 2017 - January 31, 2017</span> <b class="caret"></b>
-        </div>
-      </div>
+	<div class="panel-heading">
+		<h3 class="panel-title">Recent Activity </h3>
+		<div class="panel-options">
+			<div class="pull-right" id="reportfilter">
+				<label>Select Date Range:</label>
+				<div id="reportrange"
+						 style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width:100%;">
+					<i class="fa fa-calendar"></i>&nbsp;
+					<span>January 1, 2017 - January 31, 2017</span> <b class="caret"></b>
+				</div>
+			</div>
 
-    </div>
-  </div>
+		</div>
+	</div>
 
-  <div class="panel-body">
-    <div class="row">
-      <div class="col-md-9">
-        <div id="offers-chart">
-          <dx-chart
-            title=""
-            palette="Harmony Light"
-            [dataSource]="OffersInfo">
-            <dxi-series color="#68b828" valueField="sent" name="Offer Sent"></dxi-series>
-            <dxi-series color="#4fcdfc" valueField="opened" name="Offer Opened"></dxi-series>
-            <dxo-common-series-settings
-              #commonSeries
-              argumentField="date"
-              type="splineArea"></dxo-common-series-settings>
-            <dxo-margin [bottom]="20"></dxo-margin>
-            <dxo-argument-axis [valueMarginsEnabled]="false"></dxo-argument-axis>
-            <dxo-export [enabled]="false"></dxo-export>
-            <dxo-legend
-              verticalAlignment="bottom"
-              horizontalAlignment="center">
-            </dxo-legend>
-          </dx-chart>
-        </div>
-      </div>
-    </div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-9">
+				<div id="offers-chart">
+					<dx-chart
+							title=""
+							palette="Harmony Light"
+							[dataSource]="OffersInfo">
+						<dxi-series color="#68b828" valueField="sent" name="Offer Sent"></dxi-series>
+						<dxi-series color="#4fcdfc" valueField="opened" name="Offer Opened"></dxi-series>
+						<dxo-common-series-settings
+								#commonSeries
+								argumentField="date"
+								type="splineArea"></dxo-common-series-settings>
+						<dxo-margin [bottom]="20"></dxo-margin>
+						<dxo-argument-axis [valueMarginsEnabled]="false"></dxo-argument-axis>
+						<dxo-export [enabled]="false"></dxo-export>
+						<dxo-legend
+								verticalAlignment="bottom"
+								horizontalAlignment="center">
+						</dxo-legend>
+					</dx-chart>
+				</div>
+			</div>
+		</div>
 
 
-  </div>
+	</div>
 </div>
+
+
+<div class="panel panel-default"><!-- Add class "collapsed" to minimize the panel -->
+	<div class="panel-heading">
+		<h3 class="panel-title">Offer History </h3>
+
+		<div class="panel-options">
+			<button class="btn btn-sm btn-info">New Offer</button>
+		</div>
+	</div>
+
+	<div class="panel-body">
+
+
+		<div class="fullState">
+
+			<ul id="alloffers">
+				<li>
+					<div class="offerline clearfix">
+						<button class="offer-toggle pull-left" (click)="showChildrenOfferTable(0)">
+							<i class="fa" [class.fa-minus-square]="tableCollapsed[0]" [class.fa-plus-square]="!tableCollapsed[0]"></i>
+						</button>
+						<strong class="pull-left">Free NYC Hotel Transfer</strong>
+						<em class="pull-left">Automatic</em>
+						<a routerLink="/trips" class="pull-right offerlink">Manage</a>
+					</div>
+					<table #childrenOfferTable class="offer-history-table" [hidden]="!tableCollapsed[0]">
+						<thead>
+						<tr>
+							<th width="10%">Date</th>
+							<th width="60%">Trip Name</th>
+							<th width="10%">Served</th>
+							<th width="10%">Clicked</th>
+							<th width="10%">Conversion</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>7/2/2016</td>
+							<td>3 Days in NYC</td>
+							<td>120</td>
+							<td>15</td>
+							<td>13%</td>
+						</tr>
+						</tbody>
+					</table>
+				</li>
+				<li>
+					<div class="offerline clearfix">
+						<button class="offer-toggle pull-left" (click)="showChildrenOfferTable(1)">
+							<i class="fa" [class.fa-minus-square]="tableCollapsed[1]" [class.fa-plus-square]="!tableCollapsed[1]"></i>
+						</button>
+						<strong class="pull-left">Free Dinner with the Show</strong>
+						<em class="pull-left">Manual</em>
+						<a routerLink="/trips" class="pull-right offerlink">Manage</a>
+					</div>
+					<table #childrenOfferTable class="offer-history-table" [hidden]="!tableCollapsed[1]">
+						<thead>
+						<tr>
+							<th width="10%">Date</th>
+							<th width="60%">Trip Name</th>
+							<th width="10%">Served</th>
+							<th width="10%">Clicked</th>
+							<th width="10%">Conversion</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td colspan="5">This offer hasn't been used in any trips yet...</td>
+						</tr>
+						</tbody>
+					</table>
+				</li>
+
+			</ul>
+
+		</div>
+
+
+	</div>
+</div>
+
+
+<md-card>
+
+	<blockquote class="blockquote blockquote-purple">
+		<p>
+			<strong>Product Offers</strong><span class="label label-purple pull-right">BETA</span>
+		</p>
+		<p>
+			<small>Product Offers are a new and exciting feature to the SafeTravels platform, allowing you to present Product
+				Offers to your customers in teh SafeTravels app that are directly related to the activity that they are
+				participating in. This provides you with opportunity to increase sales of products that customers do not
+				typically purchase until while they are travelling.<br>
+
+				The ability to send Product Offers through the SafeTravels app lets you use the two key advantages you have over
+				your customers. 1. Your existing relationship with the customer and their preferences, and 2. The knowledge of
+				where they will be on key dates of your trip.
+
+				This is the first release of the Product Offers feature, and we have plan to expand these features over the next
+				few months to include features such as the sending of Push Notifications to the user, and to set up "triggers"
+				which will automatically send product offers to customers based on them meeting certain criteria. <br>
+				e.g. Trigger a Hotel Transfer product offer to send the day before they fly into a new city. A more complex
+				example could be that a backpacker purchased a Surfing Lesson in Byron Bay, and when they are in Melbourne next
+				week, an offer will be sent to them for a Kite Surfing Lesson in St Kilda.
+
+
+			</small>
+		</p>
+	</blockquote>
+
+
+	<button class="btn btn-secondary">Create New Product Offer</button>
+
+	<table st-table="trips" class="table table-striped">
+		<thead>
+		<tr>
+			<th st-sort="offer_name">Name</th>
+			<th st-sort="offer_description">Description</th>
+			<th st-sort="offer_url">URL</th>
+			<th st-sort="offer_price">Price</th>
+			<th>Trips attached to</th>
+			<th>Edit Offer</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td colspan="6"><p class="center">No product offer created</p></td>
+		</tr>
+
+		</tbody>
+	</table>
+
+
+</md-card>
+

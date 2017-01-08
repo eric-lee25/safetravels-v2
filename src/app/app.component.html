@@ -110,7 +110,7 @@
 
 </div>
 
-<div class="page-container" [class.sidebar-is-open]="!sidebarCollapsed">
+<div class="page-container" [class.sidebar-is-open]="!sidebarCollapsed" [class.sidebar-is-collapsed]="sidebarCollapsed">
 	<!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
 
 	<!-- Add "fixed" class to make the sidebar fixed always to the browser viewport. -->
@@ -159,12 +159,29 @@
 			<section class="sidebar-user-info">
 				<div class="sidebar-user-info-inner">
 					<a routerLink="/account/profile" class="user-profile">
-						<img src="/assets/images/user-4.png" width="60" height="60" class="img-circle img-corona" alt="user-pic"/>
+						<div class="media">
 
-						<span>
+							<div class="media-left">
+								<img src="/assets/images/user-4.png" width="60" height="60" class="img-circle img-corona"
+										 alt="user-pic"/>
+							</div>
+							<div class="media-body">
+								<span>
 								<strong>John Smith</strong>
-								Page admin
+								PROFILE: 90%
 							</span>
+								<md-progress-bar
+										class="profile-completion"
+										[attr.color]="'primary'"
+										[mode]="'determinate'"
+										[value]="90"
+										[bufferValue]="0">
+								</md-progress-bar>
+
+								<p class="small">Next: Succesfully complete the first Trip</p>
+							</div>
+						</div>
+
 					</a>
 
 					<ul class="user-links list-unstyled">

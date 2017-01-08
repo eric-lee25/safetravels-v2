@@ -246,3 +246,38 @@ $theme: md-light-theme($primary, $accent);
     margin-top: 20px;
   }
 }
+
+.user-profile {
+  .media {
+    padding: 10px;
+  }
+  img {
+    width: 80px;
+    height: 80px;
+  }
+  .media-body {
+    .small {
+      margin-top: 5px;
+      font-size: 10px;
+      font-weight: 300;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.sidebar-user-info .user-profile img {
+  margin-right: 10px;
+}
+
+.sidebar-is-collapsed {
+  @media (min-width: $col-sm) {
+    .user-profile .media .media-body {
+      display: none;
+    }
+  }
+
+}
+
+.profile-completion {
+  margin: 5px 0;
+}
