@@ -10,6 +10,7 @@ import {PlanDialogComponent} from "../elements/dialog/plan-dialog/plan-dialog.co
 import {EditTripDialogComponent} from "../elements/dialog/edit-trip-dialog/edit-trip-dialog.component";
 import {AddDayToTripDialogComponent} from "../elements/dialog/add-day-to-trip-dialog/add-day-to-trip-dialog.component";
 import {AddActivityToDayDialogComponent} from "../elements/dialog/add-activity-to-day-dialog/add-activity-to-day-dialog.component";
+import {OffersDialogComponent} from "../elements/dialog/offers-dialog/offers-dialog.component";
 
 @Injectable()
 export class DialogService {
@@ -97,5 +98,11 @@ export class DialogService {
 		dialogConfig.width = '600px';
 		this.dialog.open(AddActivityToDayDialogComponent, dialogConfig);
 
+	}
+
+	openOffersDialog() {
+		let dialogConfig: MdDialogConfig = new MdDialogConfig();
+		dialogConfig.width = '650px';
+		this.dialog.open(OffersDialogComponent, dialogConfig);
 	}
 }

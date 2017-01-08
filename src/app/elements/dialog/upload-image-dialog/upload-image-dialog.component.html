@@ -2,14 +2,15 @@
 
 <md-dialog-content>
 
-  <div class="dialog-upload-image-zone">
-    <dropzone [config]="config" [message]="'Click or drag images here to upload'" (error)="onUploadError($event)"
-              (success)="onUploadSuccess($event)"></dropzone>
-  </div>
+	<div class="dialog-upload-image-zone">
+		<dropzone [config]="config" [message]="'Click or drag images here to upload'" (error)="onUploadError($event)"
+							(success)="onUploadSuccess($event)"></dropzone>
+	</div>
 
 
 </md-dialog-content>
 <md-dialog-actions>
-  <button class="btn btn-sm btn-success">Save</button>
-  <button class="btn" btn-sm md-dialog-close>Close</button>
+
+	<button class="btn btn-sm" md-dialog-close>Close</button>
+	<button class="btn btn-sm btn-success">Save</button>
 </md-dialog-actions>

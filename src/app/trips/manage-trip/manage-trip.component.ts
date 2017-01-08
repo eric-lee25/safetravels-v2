@@ -58,7 +58,7 @@ export class ManageTripComponent implements OnInit {
 		this.dialogService.openConfirmationDialog(title, msg, buttonTitle, buttonClass);
 	}
 
-	openDeleteActivityConfirmation(){
+	openDeleteActivityConfirmation() {
 		let title = "Are you sure you want to delete Day 1?";
 		let msg = "Deleting the Day Item will delete all information that you have added to the Day, including all Activities and associated Product Offers within the Day.";
 		let buttonTitle = "Delete Day";
@@ -78,7 +78,11 @@ export class ManageTripComponent implements OnInit {
 		this.dialogService.openAddDayToTripDialog();
 	}
 
-	openAddActivityToDayDialog(){
+	openAddActivityToDayDialog() {
 		this.dialogService.openAddActivityToDayDialog();
+	}
+
+	openOffersDialog() {
+		this.dialogService.openOffersDialog();
 	}
 }
