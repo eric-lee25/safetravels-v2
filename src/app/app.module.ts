@@ -31,7 +31,7 @@ import { DropzoneConfigInterface } from 'angular2-dropzone-wrapper';
 import { ProductOffersComponent } from './product-offers/product-offers.component';
 import {DxChartModule, DxSelectBoxModule} from "devextreme-angular";
 import { UploadImageDialogComponent } from './elements/dialog/upload-image-dialog/upload-image-dialog.component';
-
+import { MyDatePickerModule } from 'mydatepicker';
 const DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
   server: 'https://httpbin.org/post',
@@ -70,7 +70,8 @@ const DROPZONE_CONFIG: DropzoneConfigInterface = {
     DropzoneModule.forRoot(DROPZONE_CONFIG),
     DxSelectBoxModule,
     DxChartModule,
-    DatepickerModule
+    DatepickerModule,
+    MyDatePickerModule
   ],
   providers: [AppService, UserService, DemoService],
   bootstrap: [AppComponent]

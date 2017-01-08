@@ -284,3 +284,22 @@ $theme: md-light-theme($primary, $accent);
 .profile-completion {
   margin: 5px 0;
 }
+
+.date-picker-control-group {
+  .mydp {
+    border: 0 none;
+    background: none;
+
+    button.btnpicker {
+      background: none;
+      border: 0 none;
+    }
+    .icon-calendar {
+      @include fa;
+      &:before {
+        content: "\f073";
+      }
+    }
+  }
+
+}

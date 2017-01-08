@@ -15,7 +15,11 @@ export class HomeComponent implements OnInit {
 	};
 	trips: any[] = [];
 
+
+
 	sidebarProgressToggle: boolean = true;
+
+  datePickerOptions = {showInputField: false, dateFormat: 'yyyy-mm-dd', componentDisabled: false};
 
 	constructor(private appService: AppService,
 							private demoService: DemoService) {
@@ -28,11 +32,6 @@ export class HomeComponent implements OnInit {
 	}
 
 	ngOnInit() {
-
-
-
-
-
 		// load trips from /assets/data/trips.json
 
 		this.demoService.getTrips().subscribe(res => this.trips = res, err => {
@@ -47,8 +46,8 @@ export class HomeComponent implements OnInit {
 		this.config.tripLayout = style;
 	}
 
-	onSelectStartDate(date: Date) {
-		console.log("onSelect: ", date);
+	onSelectStartDate(event) {
+		console.log("onSelect: ", event);
 	}
 
 }
