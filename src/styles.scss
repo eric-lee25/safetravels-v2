@@ -274,6 +274,9 @@ $theme: md-light-theme($primary, $accent);
     .user-profile .media .media-body {
       display: none;
     }
+    .media-left, .media-right, .media-body {
+      display: block;
+    }
   }
 
 }
