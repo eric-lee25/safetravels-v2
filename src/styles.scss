@@ -364,7 +364,8 @@ app-plan-dialog {
 }
 
 .edit-trip-dialog-content,
-.add-day-to-trip-dialog-content {
+.add-day-to-trip-dialog-content,
+.add-activity-to-date-dialog-content {
   .mydp input.selection {
     position: relative;
     width: 100%;
@@ -375,5 +376,11 @@ app-plan-dialog {
     color: #555;
     font-weight: 300 !important;
     text-align: left;
+  }
+}
+
+.add-activity-to-date-dialog-content {
+  .radio-inline {
+    position: relative;
   }
 }

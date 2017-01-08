@@ -1,59 +1,211 @@
 <h2 md-dialog-title>Edit Activity</h2>
 <form id="activityOverview" class="css-form">
 	<md-dialog-content>
+		<div class="add-activity-to-date-dialog-content">
+			<div class="row">
+				<div class="col-md-6 col-sm-12 trip-input">
 
-		<div class="row">
-			<div class="col-md-6 col-sm-12 trip-input">
-
-				<label>Activity Name*</label>
-				<input class="form-control" placeholder="Activity" type="text" required>
-			</div>
-
-			<div class="col-md-6 col-sm-12 trip-input">
-
-				<label>Activity Type*</label>
-
-				<select class="form-control" required>
-					<option value="?" selected="selected"></option>
-					<option value="0">Hotel</option>
-					<option value="1">Flight</option>
-					<option value="2">Transfer</option>
-					<option value="3">Activity</option>
-					<option value="4">Day Trip</option>
-					<option value="5">Optional Extra</option>
-					<option value="6">Sporting Event</option>
-					<option value="7">Meal</option>
-					<option value="8">Concert / Theatre</option>
-					<option value="9">Sightseeing</option>
-					<option value="10">Transit</option>
-					<option value="11">Children's Activity</option>
-					<option value="12">Free Time</option>
-					<option value="13">Walking Tour</option>
-					<option value="14">Meet and Greet</option>
-					<option value="15">Conference</option>
-					<option value="16">Drinks</option>
-				</select>
-			</div>
-
-
-		</div>
-
-		<div class="row">
-
-			<div id="datetimepicker2" class="input-append">
-
-				<div class="col-md-3 col-sm-6 trip-input">
-					<label>Date*</label>
-					<input class="form-control datepicker ng-pristine ng-valid ng-valid-required" data-format="D, dd MM yyyy"
-								 ng-model="currentActivity.depart_time_date" required="" type="text">
+					<label>Activity Name*</label>
+					<input class="form-control" placeholder="Activity" type="text" required>
 				</div>
 
-				<div class="col-md-3 col-sm-6 trip-input">
-					<label>Time</label>
-					<input class="form-control timepicker ng-pristine ng-valid ng-valid-required" data-template="dropdown"
-								 data-show-seconds="false" data-default-time="11:25 AM" data-show-meridian="true" data-minute-step="5"
-								 data-second-step="5" ng-model="currentActivity.depart_time_time" required="" type="text">
+				<div class="col-md-6 col-sm-12 trip-input">
+
+					<label>Activity Type*</label>
+
+					<select class="form-control" required>
+						<option value="?" selected="selected"></option>
+						<option value="0">Hotel</option>
+						<option value="1">Flight</option>
+						<option value="2">Transfer</option>
+						<option value="3">Activity</option>
+						<option value="4">Day Trip</option>
+						<option value="5">Optional Extra</option>
+						<option value="6">Sporting Event</option>
+						<option value="7">Meal</option>
+						<option value="8">Concert / Theatre</option>
+						<option value="9">Sightseeing</option>
+						<option value="10">Transit</option>
+						<option value="11">Children's Activity</option>
+						<option value="12">Free Time</option>
+						<option value="13">Walking Tour</option>
+						<option value="14">Meet and Greet</option>
+						<option value="15">Conference</option>
+						<option value="16">Drinks</option>
+					</select>
 				</div>
+
+
+			</div>
+
+			<div class="row">
+				<div id="datetimepicker2" class="input-append">
+					<div class="col-md-6 col-sm-6 trip-input">
+						<label>Date*</label>
+						<my-date-picker class="date-select-picker" [options]="dateOptions"
+														(dateChanged)="onSelectDate($event)"></my-date-picker>
+					</div>
+
+					<div class="col-md-6 col-sm-6 trip-input">
+						<label>Time</label>
+						<input class="form-control timepicker" type="text" required>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6 col-sm-12 trip-input">
+					<label>From*</label>
+					<input class="form-control" type="text" placeholder="From" required>
+				</div>
+
+				<div class="col-md-6 col-sm-12 trip-input">
+					<label>To*</label>
+					<input class="form-control" type="text" placeholder="To" required>
+				</div>
+
+			</div>
+
+			<div class="row">
+				<div class="col-md-6 col-sm-12 trip-input">
+					<label>Transport Type</label>
+					<select class="form-control">
+						<option value="?" selected="selected"></option>
+						<option value="0"></option>
+						<option value="1">Plane</option>
+						<option value="2">Car</option>
+						<option value="3">Train</option>
+						<option value="4">Bus</option>
+						<option value="5">Boat</option>
+						<option value="6">Bicycle</option>
+						<option value="7">Motorcycle</option>
+						<option value="8">Walk</option>
+						<option value="9">Helicoptor</option>
+						<option value="10">Other</option>
+					</select>
+				</div>
+
+				<div class="col-md-6 col-sm-12 trip-input">
+					<label>Booking Reference</label>
+					<input class="form-control" type="text">
+				</div>
+			</div>
+
+
+			<div class="row">
+
+				<div class="col-md-6 col-sm-12 trip-input">
+					<div class="m-b-10">
+						<label>Company Name</label>
+						<input class="form-control" type="text">
+					</div>
+
+					<div class="m-b-10">
+						<label>Website</label>
+						<input class="form-control" placeholder="" type="text">
+					</div>
+					<div class="m-b-10">
+						<label>Contact Number</label>
+						<input class="form-control" placeholder="" type="text">
+					</div>
+
+					<div class="m-b-10">
+						<label>Meeting Point</label>
+						<input class="form-control" type="text">
+					</div>
+					<div class="m-b-10">
+						<label>Included?</label>
+						<input class="form-control" ng-model="currentActivity.included" type="text">
+					</div>
+				</div>
+
+
+				<div class="col-md-6 col-sm-12 trip-input">
+					<label>Notes</label>
+					<textarea type="text" class="form-control" rows="12"></textarea>
+				</div>
+			</div>
+
+			<hr/>
+
+			<button type="button" class="btn btn-primary btn-info" (click)="toggleMultiLangContent()">Add Multi-Language Content
+			</button>
+
+			<p>You can now add Activity Content translations in Languages that the SafeTravels app supports. This is great for
+				trips where you might have customers who speak different languages. The Activity content will be displayed to
+				the user in the app based on the language they have selected in the app. Note: If you leave these fields empty,
+				the customer will be shown the English translation by default</p>
+
+
+			<div class="multi-lang-content" [hidden]="multiLangContentCollapsed">
+				<div class="well">
+					<div class="trip-input">
+						<label>Languages</label>
+						<div class="btn-group btns-languages">
+							<button type="button" class="btn  btn-blue" title="English">EN
+							</button>
+							<button type="button" class="btn">FR
+							</button>
+							<button type="button" class="btn">DE
+							</button>
+							<button type="button" class="btn">ES
+							</button>
+							<button type="button" class="btn">IT
+							</button>
+							<button type="button" class="btn">ZH
+							</button>
+							<button type="button" class="btn">JA
+							</button>
+
+						</div>
+						<div ng-switch="" on="language_code">
+							<div>
+								<div class="trip-input">
+									<label>Activity Name*:</label>
+									<input class="form-control" type="text">
+								</div>
+								<div class="trip-input">
+									<label>Notes:</label>
+									<textarea class="form-control autogrow"></textarea>
+								</div>
+								<div class="trip-input">
+									<label>Description:</label>
+									<textarea class="form-control autogrow"></textarea>
+								</div>
+								<div class="trip-input">
+									<label>Meeting Point:</label>
+									<textarea class="form-control autogrow"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="m-b-20 trip-input">
+					<label>Send a Reminder Message</label>
+					<p> <label class="radio-inline"> <input name="radio-2" checked="" type="radio">
+						1 hour prior
+					</label> <label class="radio-inline"> <input name="radio-2" type="radio">
+						3 hours prior
+					</label> <label class="radio-inline"> <input name="radio-2" type="radio">
+						6 hours prior
+					</label>
+						<label class="radio-inline"> <input name="radio-2" type="radio">
+							1 day prior
+						</label>
+					</p>
+				</div>
+
+				<div class="trip-input">
+					<label>Select a Message Template to use</label>
+					<select class="placeholders-container selectMessageTemplate">
+						<option value="?"></option>
+					</select>
+				</div>
+
+
+
+
 			</div>
 
 

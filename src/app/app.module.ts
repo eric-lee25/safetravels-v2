@@ -94,8 +94,7 @@ const DROPZONE_CONFIG: DropzoneConfigInterface = {
 		DropzoneModule.forRoot(DROPZONE_CONFIG),
 		DxSelectBoxModule,
 		DxChartModule,
-		MyDatePickerModule,
-		TimepickerModule.forRoot()
+		MyDatePickerModule
 	],
 	providers: [AppService, UserService, DialogService, DemoService],
 	bootstrap: [AppComponent]
