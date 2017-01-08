@@ -40,6 +40,7 @@ import {EditTripDialogComponent} from './elements/dialog/edit-trip-dialog/edit-t
 import { AddDayToTripDialogComponent } from './elements/dialog/add-day-to-trip-dialog/add-day-to-trip-dialog.component';
 import { AddActivityToDayDialogComponent } from './elements/dialog/add-activity-to-day-dialog/add-activity-to-day-dialog.component';
 import { OffersDialogComponent } from './elements/dialog/offers-dialog/offers-dialog.component';
+import { AddPassengerDialogComponent } from './elements/dialog/add-passenger-dialog/add-passenger-dialog.component';
 const DROPZONE_CONFIG: DropzoneConfigInterface = {
 	// Change this to your upload POST address:
 	server: 'https://httpbin.org/post',
@@ -74,7 +75,8 @@ const DROPZONE_CONFIG: DropzoneConfigInterface = {
 		EditTripDialogComponent,
 		AddDayToTripDialogComponent,
 		AddActivityToDayDialogComponent,
-		OffersDialogComponent
+		OffersDialogComponent,
+		AddPassengerDialogComponent
 	],
 	entryComponents: [
 		TripTokenDialogComponent,
@@ -86,7 +88,8 @@ const DROPZONE_CONFIG: DropzoneConfigInterface = {
 		EditTripDialogComponent,
 		AddDayToTripDialogComponent,
 		AddActivityToDayDialogComponent,
-		OffersDialogComponent
+		OffersDialogComponent,
+		AddPassengerDialogComponent
 	],
 	imports: [
 		BrowserModule,

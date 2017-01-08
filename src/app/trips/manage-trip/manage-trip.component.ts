@@ -58,16 +58,57 @@ export class ManageTripComponent implements OnInit {
 		this.dialogService.openConfirmationDialog(title, msg, buttonTitle, buttonClass);
 	}
 
-	openDeleteActivityConfirmation() {
+	openDeleteDayConfirmation() {
 		let title = "Are you sure you want to delete Day 1?";
 		let msg = "Deleting the Day Item will delete all information that you have added to the Day, including all Activities and associated Product Offers within the Day.";
 		let buttonTitle = "Delete Day";
 		let buttonClass = "btn-danger";
 
-		this.dialogService.openConfirmationDialog(title, msg, buttonTitle, buttonClass);
+		let dialogRef = this.dialogService.openConfirmationDialog(title, msg, buttonTitle, buttonClass);
+
+		dialogRef.afterClosed().subscribe(action => {
+
+			console.log("Action:", action);
+			if (action == "ok") {
+				// let delete the activity here...
+			}
+		});
 
 	}
 
+	openDeleteActivityConfirmation() {
+		let title = "Delete Activity Confirmation";
+		let msg = "Are you sure you want to delete this activity?";
+		let buttonTitle = "Delete Activity";
+		let buttonClass = "btn-danger";
+
+		let dialogRef = this.dialogService.openConfirmationDialog(title, msg, buttonTitle, buttonClass);
+
+		dialogRef.afterClosed().subscribe(action => {
+
+			console.log("Action:", action);
+			if (action == "ok") {
+				// let delete the activity here...
+			}
+		});
+
+	}
+
+	openAddPassengerDialog(){
+		let dialogRef = this.dialogService.openAddPassengerDialog();
+
+
+		dialogRef.afterClosed().subscribe(action => {
+			console.log("Action:", action);
+		});
+
+	}
+
+	showEditActivityOfferDialog(){
+
+		this.dialogService.openAddActivityToDayDialog();
+
+	}
 	showEditTripDialog() {
 
 		this.dialogService.openEditTripDialog();
@@ -83,6 +124,17 @@ export class ManageTripComponent implements OnInit {
 	}
 
 	openOffersDialog() {
-		this.dialogService.openOffersDialog();
+		let dialogRef = this.dialogService.openOffersDialog();
+
+		dialogRef.afterClosed().subscribe(result => {
+
+			console.log("Result:", result);
+
+			if (result == 'openNewOffer') {
+
+				// let open new product offer modal
+				this.dialogService.openAddProductOfferDialog();
+			}
+		});
 	}
 }

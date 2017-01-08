@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {AppService} from "../../../services/app.service";
 
 @Component({
 	selector: 'app-edit-trip-dialog',
@@ -7,13 +8,25 @@ import {Component, OnInit} from '@angular/core';
 })
 export class EditTripDialogComponent implements OnInit {
 
-	constructor() {
+	title: string = "Multi Language activity debug";
+
+
+	constructor(private appService: AppService) {
+
+		this.title = this.appService.dialogTitle;
 	}
 
 	ngOnInit() {
 	}
 
-	dateOptions = {inputValueRequired: true, selectionTxtFontSize: '13px',width: '100%', showInputField: true, dateFormat: 'yyyy-mm-dd', componentDisabled: false};
+	dateOptions = {
+		inputValueRequired: true,
+		selectionTxtFontSize: '13px',
+		width: '100%',
+		showInputField: true,
+		dateFormat: 'yyyy-mm-dd',
+		componentDisabled: false
+	};
 
 
 	onSelectDate(event) {

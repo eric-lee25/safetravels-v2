@@ -126,12 +126,12 @@
 								<button (click)="openAddDayToTripDialog()" type="button" class="btnIcon btn-text-blue"><i
 										class="linecons-pencil"></i>
 								</button>
-								<button (click)="openDeleteActivityConfirmation()" type="button" class="btnIcon btn-text-red"><i
+								<button (click)="openDeleteDayConfirmation()" type="button" class="btnIcon btn-text-red"><i
 										class="linecons-trash"></i></button>
 
-                  <button (click)="openAddActivityToDayDialog()" class="pull-right btn btn-success">
-                    <i class="fa fa-plus"></i> Add Activity to Day
-                  </button>
+								<button (click)="openAddActivityToDayDialog()" class="pull-right btn btn-success">
+									<i class="fa fa-plus"></i> Add Activity to Day
+								</button>
 							</h3>
 
 
@@ -150,17 +150,19 @@
 														class="fa fa-times"></i></a></span>
 											</div>
 
-											<a (click)="openOffersDialog()" class="alink c-offer-pill c-offer-btn"><i class="fa fa-plus"></i> Manage Offers
+											<a (click)="openOffersDialog()" class="alink c-offer-pill c-offer-btn"><i class="fa fa-plus"></i>
+												Manage Offers
 											</a>
 										</div>
 									</td>
 									<td class="action-links">
 										<div class="c-actionbtn-container">
-											<a href="javascript://" class="edit"><i class="linecons-pencil"></i> &nbsp;
+											<a (click)="showEditActivityOfferDialog()" class="alink edit"><i class="linecons-pencil"></i>
+												&nbsp;
 												Edit
 											</a>
 											<br>
-											<a href="javascript://" class="delete">
+											<a (click)="openDeleteActivityConfirmation()" class="alink delete">
 												<i class="linecons-trash"></i> &nbsp;
 												Delete
 											</a>
@@ -183,9 +185,7 @@
 
 								<ul class="trip-docs">
 									<li><a
-											href="https://safetravels01.s3.eu-central-1.amazonaws.com/22d2bce14462a0e269690a7eb7b62b4c8d269830-1024"><img
-											src="https://safetravels01.s3.eu-central-1.amazonaws.com/22d2bce14462a0e269690a7eb7b62b4c8d269830-1024"
-											alt=""></a>
+											href="/assets/data/images/tripdoc.jpg" target="_blank"><img [src]="'/assets/data/images/tripdocthumb.jpg'" alt=""></a>
 										<span class="doc-title"></span>
 										<a href="javascript://" class="doc-delete">&nbsp;<i
 												class="fa fa-times"></i></a></li>
@@ -209,7 +209,7 @@
 				<div class="col-md-3 c-mt-list">
 					<div class="c-tripmembers">
 						<h5 class="pull-left">Trip Members</h5>
-						<button type="button" class="btn btn-sm btn-success pull-right">
+						<button (click)="openAddPassengerDialog()" type="button" class="btn btn-sm btn-success pull-right">
 							<i class="fa fa-plus"></i> &nbsp; Add Passenger
 						</button>
 					</div>
@@ -330,7 +330,7 @@
 				<div class="col-md-3 c-mt-list">
 					<div class="c-tripmembers">
 						<h5 class="pull-left">Trip Group</h5>
-						<button type="button" class="btn btn-sm btn-success pull-right">
+						<button (click)="openAddPassengerDialog()" type="button" class="btn btn-sm btn-success pull-right">
 							<i class="fa fa-plus"></i> &nbsp; Add Passenger
 						</button>
 					</div>

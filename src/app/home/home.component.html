@@ -48,7 +48,7 @@
 		<!-- Begin create trip block -->
 		<div class="row">
 			<div class="c-widget c-flamepea">
-				<form #f="ngForm" class="form-horizontal" (ngSubmit)="createTrip()">
+				<form #f="ngForm" class="form-horizontal create-new-trip-block" (ngSubmit)="createTrip()">
 					<div class="row w100">
 
 						<div class="col-md-2 wCentered">
@@ -158,7 +158,7 @@
 							<div class="c-trip" *ngFor="let trip of trips">
 								<div class="c-trip-thumb" [style.background-image]="'url('+trip.thumbnail+')'">
 									<div class="c-trip-overlay">
-										<a href="javascript://" class="c-trip-link">OPEN TRIP</a>
+										<a routerLink="/trips/manage/1" class="alink c-trip-link">OPEN TRIP</a>
 									</div>
 								</div>
 								<div class="c-trip-details"><strong>{{trip.tour_name}}</strong><em

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AppService} from "../../../services/app.service";
+import {MdDialogRef} from "@angular/material";
 
 @Component({
 	selector: 'app-confirmation-dialog',
@@ -8,7 +9,8 @@ import {AppService} from "../../../services/app.service";
 })
 export class ConfirmationDialogComponent implements OnInit {
 
-	constructor(private appService: AppService) {
+	constructor(private appService: AppService,
+							public dialogRef: MdDialogRef<ConfirmationDialogComponent>) {
 	}
 
 	config = {

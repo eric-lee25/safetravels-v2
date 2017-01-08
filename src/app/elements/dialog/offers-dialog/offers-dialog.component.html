@@ -100,6 +100,12 @@
 </md-dialog-content>
 
 <md-dialog-actions>
-	<button class="btn btn-default btn-sm" md-dialog-close>Close</button>
-	<button class="btn btn-success btn-sm">Save changes</button>
+	<div class="pull-left text-left">
+		<button class="btn btn-info btn-sm" (click)="dialogRef.close('openNewOffer')">New Offer</button>
+	</div>
+	<div class="pull-right">
+		<button class="btn btn-default btn-sm" md-dialog-close>Close</button>
+		<button class="btn btn-success btn-sm" (click)="dialogRef.close('save')">Save changes</button>
+	</div>
+
 </md-dialog-actions>
