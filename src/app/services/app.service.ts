@@ -5,8 +5,11 @@ import {Observable, Subject} from "rxjs";
 @Injectable()
 export class AppService {
 
+  dialogTitle: string = "";
+
 	sidebarProgressToggle: Subject<boolean> = new Subject<boolean>();
 	sidebarToggle: Subject<boolean> = new Subject<boolean>();
+  dialogTitleEvent: Subject<string> = new Subject<string>();
 	configStorage = {
 		sidebarCollapsed: true
 	};
@@ -35,6 +38,8 @@ export class AppService {
 			localStorage.setItem('configStorage', JSON.stringify(this.configStorage));
 		});
 
+
+		this.dialogTitleEvent.subscribe(title => this.dialogTitle = title);
 
 
 	}

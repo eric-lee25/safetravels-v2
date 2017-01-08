@@ -30,6 +30,7 @@ import { DropzoneModule } from 'angular2-dropzone-wrapper';
 import { DropzoneConfigInterface } from 'angular2-dropzone-wrapper';
 import { ProductOffersComponent } from './product-offers/product-offers.component';
 import {DxChartModule, DxSelectBoxModule} from "devextreme-angular";
+import { UploadImageDialogComponent } from './elements/dialog/upload-image-dialog/upload-image-dialog.component';
 
 const DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
@@ -56,9 +57,10 @@ const DROPZONE_CONFIG: DropzoneConfigInterface = {
     TripTokenDialogComponent,
     ProfileComponent,
     GalleryComponent,
-    ProductOffersComponent
+    ProductOffersComponent,
+    UploadImageDialogComponent
   ],
-  entryComponents: [TripTokenDialogComponent],
+  entryComponents: [TripTokenDialogComponent, UploadImageDialogComponent],
   imports: [
     BrowserModule,
     FormsModule,
