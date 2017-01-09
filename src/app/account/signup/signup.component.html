@@ -53,16 +53,17 @@
           <div class="row">
             <div class="col-md-12">
               <md-checkbox [color]="'primary'">I Agree to
-                <button class="btn btn-link" (click)="openTermsDialog()">Terms & Conditions</button> and
+                <button class="btn btn-link" (click)="openTermsDialog()">Terms & Conditions</button>
+                and
                 <button (click)="openPrivacyDialog()" class="btn btn-link">Privacy Policy</button>
               </md-checkbox>
             </div>
           </div>
 
-          <md-card-actions>
+          <div class="form-group">
             <button type="submit" class="btn btn-purple btn-block">Sign Up</button>
             <p>Already a member?? <a routerLink="/login">Sign In</a></p>
-          </md-card-actions>
+          </div>
 
         </md-card-content>
       </form>

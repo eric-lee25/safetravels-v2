@@ -12,6 +12,7 @@ import {GalleryComponent} from "./gallery/gallery.component";
 import {ProductOffersComponent} from "./product-offers/product-offers.component";
 import {LoginComponent} from "./account/login/login.component";
 import {SignupComponent} from "./account/signup/signup.component";
+import {ForgotPasswordComponent} from "./account/forgot-password/forgot-password.component";
 
 
 const appRoutes: Routes = [
@@ -25,6 +26,7 @@ const appRoutes: Routes = [
   {path: 'account/profile', component: ProfileComponent},
   {path: 'login', component: LoginComponent},
   {path: 'sign-up', component: SignupComponent},
+  {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'trips/manage/:id', component: ManageTripComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}

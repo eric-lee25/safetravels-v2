@@ -45,6 +45,7 @@ import { LoginComponent } from './account/login/login.component';
 import { SignupComponent } from './account/signup/signup.component';
 import { TermsDialogComponent } from './elements/dialog/terms-dialog/terms-dialog.component';
 import { PrivacyDialogComponent } from './elements/dialog/privacy-dialog/privacy-dialog.component';
+import { ForgotPasswordComponent } from './account/forgot-password/forgot-password.component';
 const DROPZONE_CONFIG: DropzoneConfigInterface = {
 	// Change this to your upload POST address:
 	server: 'https://httpbin.org/post',
@@ -84,7 +85,8 @@ const DROPZONE_CONFIG: DropzoneConfigInterface = {
 		LoginComponent,
 		SignupComponent,
 		TermsDialogComponent,
-		PrivacyDialogComponent
+		PrivacyDialogComponent,
+		ForgotPasswordComponent
 	],
 	entryComponents: [
 		TripTokenDialogComponent,
@@ -98,7 +100,8 @@ const DROPZONE_CONFIG: DropzoneConfigInterface = {
 		AddActivityToDayDialogComponent,
 		OffersDialogComponent,
 		AddPassengerDialogComponent,
-    TermsDialogComponent
+    TermsDialogComponent,
+    PrivacyDialogComponent
 	],
 	imports: [
 		BrowserModule,
