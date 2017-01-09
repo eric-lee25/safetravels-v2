@@ -12,114 +12,133 @@ import {AddDayToTripDialogComponent} from "../elements/dialog/add-day-to-trip-di
 import {AddActivityToDayDialogComponent} from "../elements/dialog/add-activity-to-day-dialog/add-activity-to-day-dialog.component";
 import {OffersDialogComponent} from "../elements/dialog/offers-dialog/offers-dialog.component";
 import {AddPassengerDialogComponent} from "../elements/dialog/add-passenger-dialog/add-passenger-dialog.component";
+import {TermsDialogComponent} from "../elements/dialog/terms-dialog/terms-dialog.component";
+import {PrivacyDialogComponent} from "../elements/dialog/privacy-dialog/privacy-dialog.component";
 
 @Injectable()
 export class DialogService {
 
-	constructor(private dialog: MdDialog,
-							private appService: AppService) {
-	}
+  constructor(private dialog: MdDialog,
+              private appService: AppService) {
+  }
 
-	openAddProductOfferDialog() {
-		let config: MdDialogConfig = new MdDialogConfig();
-		config.width = '400px';
-		this.dialog.open(AddProductOfferDialogComponent, config);
-	}
+  openAddProductOfferDialog() {
+    let config: MdDialogConfig = new MdDialogConfig();
+    config.width = '400px';
+    this.dialog.open(AddProductOfferDialogComponent, config);
+  }
 
-	openImageUploadDialog(title?: string) {
+  openImageUploadDialog(title?: string) {
 
-		this.appService.dialogTitleEvent.next(title);
-		this.dialog.open(UploadImageDialogComponent);
-	}
+    this.appService.dialogTitleEvent.next(title);
+    this.dialog.open(UploadImageDialogComponent);
+  }
 
-	openAddStaffUserDialog() {
+  openAddStaffUserDialog() {
 
-		let config: MdDialogConfig = new MdDialogConfig();
+    let config: MdDialogConfig = new MdDialogConfig();
 
-		config.width = '400px';
+    config.width = '400px';
 
-		this.dialog.open(AddStaffUserDialogComponent, config);
-	}
+    this.dialog.open(AddStaffUserDialogComponent, config);
+  }
 
-	openTripTokenDialog() {
+  openTripTokenDialog() {
 
-		this.dialog.open(TripTokenDialogComponent);
-	}
+    this.dialog.open(TripTokenDialogComponent);
+  }
 
-	openConfirmationDialog(title: string, message: string, actionTitle: string, buttonClass: string): MdDialogRef<ConfirmationDialogComponent> {
+  openConfirmationDialog(title: string, message: string, actionTitle: string, buttonClass: string): MdDialogRef<ConfirmationDialogComponent> {
 
-		let DialogConfig: MdDialogConfig = new MdDialogConfig();
+    let DialogConfig: MdDialogConfig = new MdDialogConfig();
 
-		DialogConfig.width = '500px';
+    DialogConfig.width = '500px';
 
-		let config = this.appService.confirmationDialogConfig;
-		if (title) {
-			config.title = title;
-		}
-		if (message) {
-			config.message = message;
-		}
-		if (actionTitle) {
-			config.actionTitle = actionTitle;
-		}
+    let config = this.appService.confirmationDialogConfig;
+    if (title) {
+      config.title = title;
+    }
+    if (message) {
+      config.message = message;
+    }
+    if (actionTitle) {
+      config.actionTitle = actionTitle;
+    }
 
-		if (buttonClass) {
-			config.buttonClass = buttonClass;
-		}
-		this.appService.confirmationDialogConfigEvent.next(config);
+    if (buttonClass) {
+      config.buttonClass = buttonClass;
+    }
+    this.appService.confirmationDialogConfigEvent.next(config);
 
-		let dialogRef = this.dialog.open(ConfirmationDialogComponent, DialogConfig);
+    let dialogRef = this.dialog.open(ConfirmationDialogComponent, DialogConfig);
 
-		return dialogRef;
+    return dialogRef;
 
-	}
+  }
 
-	openPlanDialog() {
+  openPlanDialog() {
 
-		let DialogConfig: MdDialogConfig = new MdDialogConfig();
-		DialogConfig.width = '600px';
+    let DialogConfig: MdDialogConfig = new MdDialogConfig();
+    DialogConfig.width = '600px';
 
-		this.dialog.open(PlanDialogComponent, DialogConfig);
-	}
+    this.dialog.open(PlanDialogComponent, DialogConfig);
+  }
 
-	openEditTripDialog() {
-		let dialogConfig: MdDialogConfig = new MdDialogConfig();
-		dialogConfig.width = '600px';
-		this.dialog.open(EditTripDialogComponent, dialogConfig);
-	}
+  openEditTripDialog() {
+    let dialogConfig: MdDialogConfig = new MdDialogConfig();
+    dialogConfig.width = '600px';
+    this.dialog.open(EditTripDialogComponent, dialogConfig);
+  }
 
 
-	openAddDayToTripDialog() {
+  openAddDayToTripDialog() {
 
-		let dialogConfig: MdDialogConfig = new MdDialogConfig();
-		dialogConfig.width = '500px';
-		this.dialog.open(AddDayToTripDialogComponent, dialogConfig);
-	}
+    let dialogConfig: MdDialogConfig = new MdDialogConfig();
+    dialogConfig.width = '500px';
+    this.dialog.open(AddDayToTripDialogComponent, dialogConfig);
+  }
 
-	openAddActivityToDayDialog() {
-		let dialogConfig: MdDialogConfig = new MdDialogConfig();
-		dialogConfig.width = '650px';
-		this.dialog.open(AddActivityToDayDialogComponent, dialogConfig);
+  openAddActivityToDayDialog() {
+    let dialogConfig: MdDialogConfig = new MdDialogConfig();
+    dialogConfig.width = '650px';
+    this.dialog.open(AddActivityToDayDialogComponent, dialogConfig);
 
-	}
+  }
 
-	openOffersDialog(): MdDialogRef<OffersDialogComponent> {
-		let dialogConfig: MdDialogConfig = new MdDialogConfig();
-		dialogConfig.width = '650px';
+  openOffersDialog(): MdDialogRef<OffersDialogComponent> {
+    let dialogConfig: MdDialogConfig = new MdDialogConfig();
+    dialogConfig.width = '650px';
 
-		let dialogRef: MdDialogRef<OffersDialogComponent> = this.dialog.open(OffersDialogComponent, dialogConfig);
+    let dialogRef: MdDialogRef<OffersDialogComponent> = this.dialog.open(OffersDialogComponent, dialogConfig);
 
-		return dialogRef;
-	}
+    return dialogRef;
+  }
 
-	openAddPassengerDialog(): MdDialogRef<AddPassengerDialogComponent> {
+  openAddPassengerDialog(): MdDialogRef<AddPassengerDialogComponent> {
 
-		let dialogConfig: MdDialogConfig = new MdDialogConfig();
-		dialogConfig.width = '650px';
+    let dialogConfig: MdDialogConfig = new MdDialogConfig();
+    dialogConfig.width = '650px';
 
-		let dialogRef: MdDialogRef<AddPassengerDialogComponent> = this.dialog.open(AddPassengerDialogComponent, dialogConfig);
+    let dialogRef: MdDialogRef<AddPassengerDialogComponent> = this.dialog.open(AddPassengerDialogComponent, dialogConfig);
 
-		return dialogRef;
+    return dialogRef;
 
-	}
+  }
+
+  openTermsDialog() {
+
+    let dialogConfig: MdDialogConfig = new MdDialogConfig();
+    dialogConfig.width = '600px';
+    this.dialog.open(TermsDialogComponent, dialogConfig);
+
+  }
+
+  openPrivacyDialog() {
+
+    let dialogConfig: MdDialogConfig = new MdDialogConfig();
+    dialogConfig.width = '600px';
+    this.dialog.open(PrivacyDialogComponent, dialogConfig);
+
+  }
+
 }

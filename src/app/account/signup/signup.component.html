@@ -1,0 +1,71 @@
+<div class="col-md-offset-3 col-md-6">
+  <div class="row login-container">
+    <div class="logo">
+      <img [src]="'assets/images/SafeTravels/SafeTravels2.png'" alt="SafeTravels Logo" width="300">
+    </div>
+
+    <md-card class="login-form-container">
+      <form>
+        <md-card-header>
+          <md-card-title><h3>Travel Company Sign Up</h3></md-card-title>
+        </md-card-header>
+
+        <md-card-content>
+          <div class="form-group">
+            <md-input-container class="w100">
+              <input type="text" md-input placeholder="Travel Company Name" value="" [type]="'text'">
+            </md-input-container>
+          </div>
+
+          <h5>Contact Person</h5>
+
+          <div class="form-group">
+            <md-input-container class="w100">
+              <input type="text" md-input placeholder="First Name" value="" [type]="'text'">
+            </md-input-container>
+          </div>
+
+          <div class="form-group">
+            <md-input-container class="w100">
+              <input type="text" md-input placeholder="Last Name" value="" [type]="'text'">
+            </md-input-container>
+          </div>
+
+          <div class="form-group">
+            <md-input-container class="w100">
+              <input type="email" md-input placeholder="Email address" value="" [type]="'email'">
+            </md-input-container>
+          </div>
+
+          <div class="form-group">
+            <md-input-container class="w100">
+              <input type="password" md-input placeholder="Password" value="" [type]="'password'">
+            </md-input-container>
+          </div>
+
+          <div class="form-group">
+            <md-input-container class="w100">
+              <input type="password" md-input placeholder="Confirm Password" value="" [type]="'password'">
+            </md-input-container>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-12">
+              <md-checkbox [color]="'primary'">I Agree to
+                <button class="btn btn-link" (click)="openTermsDialog()">Terms & Conditions</button> and
+                <button (click)="openPrivacyDialog()" class="btn btn-link">Privacy Policy</button>
+              </md-checkbox>
+            </div>
+          </div>
+
+          <md-card-actions>
+            <button type="submit" class="btn btn-purple btn-block">Sign Up</button>
+            <p>Already a member?? <a routerLink="/login">Sign In</a></p>
+          </md-card-actions>
+
+        </md-card-content>
+      </form>
+    </md-card>
+  </div>
+</div>

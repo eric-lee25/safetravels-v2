@@ -10,6 +10,8 @@ import {ManageTripComponent} from "./trips/manage-trip/manage-trip.component";
 import {ProfileComponent} from "./account/profile/profile.component";
 import {GalleryComponent} from "./gallery/gallery.component";
 import {ProductOffersComponent} from "./product-offers/product-offers.component";
+import {LoginComponent} from "./account/login/login.component";
+import {SignupComponent} from "./account/signup/signup.component";
 
 
 const appRoutes: Routes = [
@@ -21,6 +23,8 @@ const appRoutes: Routes = [
   {path: 'product-offers', component: ProductOffersComponent},
   {path: 'gallery', component: GalleryComponent},
   {path: 'account/profile', component: ProfileComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'sign-up', component: SignupComponent},
   {path: 'trips/manage/:id', component: ManageTripComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}

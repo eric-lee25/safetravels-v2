@@ -5,109 +5,117 @@ import {Observable, Subject} from "rxjs";
 @Injectable()
 export class AppService {
 
-	dialogTitle: string = "";
-	sidebarProgressToggle: Subject<boolean> = new Subject<boolean>();
-	sidebarToggle: Subject<boolean> = new Subject<boolean>();
-	dialogTitleEvent: Subject<string> = new Subject<string>();
+  dialogTitle: string = "";
+  sidebarProgressToggle: Subject<boolean> = new Subject<boolean>();
+  sidebarToggle: Subject<boolean> = new Subject<boolean>();
+  dialogTitleEvent: Subject<string> = new Subject<string>();
 
-	confirmationDialogConfig = {
-		title: "",
-		message: "",
-		actionTitle: "OK",
-		buttonClass: "btn-primary"
-	};
-	confirmationDialogConfigEvent: Subject<any> = new Subject<any>();
-	configStorage = {
-		sidebarCollapsed: true
-	};
-	private serverURL: string = "/assets/data"; // change to your api server like http://domain.com/api
-
-	private headers: Headers = new Headers(
-		{
-			'Content-Type': 'application/json'
-		}
-	);
-
-	constructor(private http: Http) {
-
-		let config = localStorage.getItem("configStorage");
-		if (config) {
-			this.configStorage = JSON.parse(config);
-		}
-		if (this.configStorage.sidebarCollapsed !== null) {
-			this.sidebarToggle.next(this.configStorage.sidebarCollapsed);
-		}
-
-		this.sidebarToggle.subscribe(collapsed => {
-			console.log(collapsed);
-
-			this.configStorage.sidebarCollapsed = collapsed;
-			localStorage.setItem('configStorage', JSON.stringify(this.configStorage));
-		});
+  confirmationDialogConfig = {
+    title: "",
+    message: "",
+    actionTitle: "OK",
+    buttonClass: "btn-primary"
+  };
+  confirmationDialogConfigEvent: Subject<any> = new Subject<any>();
+  configStorage = {
+    sidebarCollapsed: true
+  };
 
 
-		this.dialogTitleEvent.subscribe(title => this.dialogTitle = title);
+  public showLandingPage: boolean = false;
+  showLandingPageEvent: Subject<boolean> = new Subject<boolean>();
 
-		this.confirmationDialogConfigEvent.subscribe(config => {
-			this.confirmationDialogConfig = Object.assign(this.confirmationDialogConfig, config);
-		});
+  private serverURL: string = "/assets/data"; // change to your api server like http://domain.com/api
 
-	}
+  private headers: Headers = new Headers(
+    {
+      'Content-Type': 'application/json'
+    }
+  );
+
+  constructor(private http: Http) {
+
+    let config = localStorage.getItem("configStorage");
+    if (config) {
+      this.configStorage = JSON.parse(config);
+    }
+    if (this.configStorage.sidebarCollapsed !== null) {
+      this.sidebarToggle.next(this.configStorage.sidebarCollapsed);
+    }
+
+    this.sidebarToggle.subscribe(collapsed => {
+      console.log(collapsed);
+
+      this.configStorage.sidebarCollapsed = collapsed;
+      localStorage.setItem('configStorage', JSON.stringify(this.configStorage));
+    });
 
 
-	getUrl(url: string): string {
+    this.dialogTitleEvent.subscribe(title => this.dialogTitle = title);
 
-		return this.serverURL + url;
-	}
+    this.confirmationDialogConfigEvent.subscribe(config => {
+      this.confirmationDialogConfig = Object.assign(this.confirmationDialogConfig, config);
+    });
 
-	getOptions(options: RequestOptionsArgs): RequestOptionsArgs {
 
-		let op = {headers: this.headers};
+    this.showLandingPageEvent.subscribe(value => this.showLandingPage = value);
 
-		if (options) {
-			return Object.assign(op, options);
-		}
+  }
 
-		return op;
-	}
 
-	get(endpoint: string, options?: RequestOptionsArgs): Observable<Response> {
+  getUrl(url: string): string {
 
-		let url = this.getUrl(endpoint);
+    return this.serverURL + url;
+  }
 
-		let op = this.getOptions(options);
+  getOptions(options: RequestOptionsArgs): RequestOptionsArgs {
 
-		return this.http.get(url, op);
-	}
+    let op = {headers: this.headers};
 
-	/**
-	 * Performs a request with `post` http method.
-	 */
-	post(endpoint: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
+    if (options) {
+      return Object.assign(op, options);
+    }
 
-		let url = this.getUrl(endpoint);
-		let op = this.getOptions(options);
-		return this.http.post(url, body, op);
-	}
+    return op;
+  }
 
-	/**
-	 * Performs a request with `put` http method.
-	 */
-	put(endpoint: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
+  get(endpoint: string, options?: RequestOptionsArgs): Observable<Response> {
 
-		let url = this.getUrl(endpoint);
-		let op = this.getOptions(options);
-		return this.http.put(url, body, op);
-	}
+    let url = this.getUrl(endpoint);
 
-	/**
-	 * Performs a request with `delete` http method.
-	 */
-	delete(endpoint: string, options?: RequestOptionsArgs): Observable<Response> {
+    let op = this.getOptions(options);
 
-		let url = this.getUrl(endpoint);
-		let op = this.getOptions(options);
-		return this.http.delete(url, op);
-	}
+    return this.http.get(url, op);
+  }
+
+  /**
+   * Performs a request with `post` http method.
+   */
+  post(endpoint: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
+
+    let url = this.getUrl(endpoint);
+    let op = this.getOptions(options);
+    return this.http.post(url, body, op);
+  }
+
+  /**
+   * Performs a request with `put` http method.
+   */
+  put(endpoint: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
+
+    let url = this.getUrl(endpoint);
+    let op = this.getOptions(options);
+    return this.http.put(url, body, op);
+  }
+
+  /**
+   * Performs a request with `delete` http method.
+   */
+  delete(endpoint: string, options?: RequestOptionsArgs): Observable<Response> {
+
+    let url = this.getUrl(endpoint);
+    let op = this.getOptions(options);
+    return this.http.delete(url, op);
+  }
 
 }

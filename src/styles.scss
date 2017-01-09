@@ -390,3 +390,21 @@ app-plan-dialog {
     width: 100%;
   }
 }
+
+.login-container {
+  .logo img {
+    padding-bottom: 30px;
+    padding-top: 30px;
+  }
+  .md-checkbox-label .btn {
+    margin-bottom: 0;
+  }
+}
+
+.is-landing-page {
+  background: transparent url('/assets/images/loading.jpg') scroll 0 0 no-repeat;
+  background-size: cover;
+  [hidden] {
+    display: none !important;
+  }
+}
