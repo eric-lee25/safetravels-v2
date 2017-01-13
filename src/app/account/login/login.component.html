@@ -5,22 +5,22 @@
     </div>
 
     <md-card class="login-form-container">
-      <form>
-        <md-card-header>
-          <md-card-title><h4>Sign In for Travel Companies</h4></md-card-title>
-        </md-card-header>
 
-        <md-card-content>
+      <md-card-header>
+        <md-card-title><h4>Sign In for Travel Companies</h4></md-card-title>
+      </md-card-header>
 
+      <md-card-content>
+        <form type="post" #f="ngForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
             <md-input-container class="w100">
-              <input type="email" md-input placeholder="Email address" value="" [type]="'email'">
+              <input [(ngModel)]="user.email" name="email" type="email" md-input placeholder="Email address" [type]="'email'">
             </md-input-container>
           </div>
 
           <div class="form-group">
             <md-input-container class="w100">
-              <input type="password" md-input placeholder="Password" value="" [type]="'password'">
+              <input [(ngModel)]="user.password" name="password" type="password" md-input placeholder="Password" [type]="'password'">
             </md-input-container>
           </div>
 
@@ -41,9 +41,9 @@
             <button type="submit" class="btn btn-purple btn-block">Sign In</button>
             <p>Not a member yet? <a routerLink="/sign-up">Sign Up</a></p>
           </div>
+        </form>
+      </md-card-content>
 
-        </md-card-content>
-      </form>
     </md-card>
   </div>
 </div>
