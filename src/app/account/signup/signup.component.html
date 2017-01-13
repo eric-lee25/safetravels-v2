@@ -59,9 +59,9 @@
           <div class="row">
             <div class="col-md-12">
               <md-checkbox name="agreeTermConditions" [(ngModel)]="agreeTermConditions" [color]="'primary'">I Agree to
-                <button class="btn btn-link" (click)="openTermsDialog()">Terms & Conditions</button>
+                <button type="button" class="btn btn-link" (click)="openTermsDialog()">Terms & Conditions</button>
                 and
-                <button (click)="openPrivacyDialog()" class="btn btn-link">Privacy Policy</button>
+                <button type="button" (click)="openPrivacyDialog()" class="btn btn-link">Privacy Policy</button>
               </md-checkbox>
             </div>
           </div>
