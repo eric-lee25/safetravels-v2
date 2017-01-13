@@ -46,6 +46,8 @@ import { SignupComponent } from './account/signup/signup.component';
 import { TermsDialogComponent } from './elements/dialog/terms-dialog/terms-dialog.component';
 import { PrivacyDialogComponent } from './elements/dialog/privacy-dialog/privacy-dialog.component';
 import { ForgotPasswordComponent } from './account/forgot-password/forgot-password.component';
+import {AuthService} from "./services/auth.service";
+import { MessageDialogComponent } from './elements/dialog/message-dialog/message-dialog.component';
 const DROPZONE_CONFIG: DropzoneConfigInterface = {
 	// Change this to your upload POST address:
 	server: 'https://httpbin.org/post',
@@ -86,7 +88,8 @@ const DROPZONE_CONFIG: DropzoneConfigInterface = {
 		SignupComponent,
 		TermsDialogComponent,
 		PrivacyDialogComponent,
-		ForgotPasswordComponent
+		ForgotPasswordComponent,
+		MessageDialogComponent
 	],
 	entryComponents: [
 		TripTokenDialogComponent,
@@ -101,7 +104,8 @@ const DROPZONE_CONFIG: DropzoneConfigInterface = {
 		OffersDialogComponent,
 		AddPassengerDialogComponent,
     TermsDialogComponent,
-    PrivacyDialogComponent
+    PrivacyDialogComponent,
+    MessageDialogComponent
 	],
 	imports: [
 		BrowserModule,
@@ -114,7 +118,7 @@ const DROPZONE_CONFIG: DropzoneConfigInterface = {
 		DxChartModule,
 		MyDatePickerModule
 	],
-	providers: [AppService, UserService, DialogService, DemoService],
+	providers: [AppService, UserService, DialogService, AuthService, DemoService],
 	bootstrap: [AppComponent]
 })
 export class AppModule {

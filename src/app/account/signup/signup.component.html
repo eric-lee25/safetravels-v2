@@ -5,15 +5,17 @@
     </div>
 
     <md-card class="login-form-container">
-      <form>
-        <md-card-header>
-          <md-card-title><h3>Travel Company Sign Up</h3></md-card-title>
-        </md-card-header>
 
-        <md-card-content>
+      <md-card-header>
+        <md-card-title><h3>Travel Company Sign Up</h3></md-card-title>
+      </md-card-header>
+
+      <md-card-content>
+        <form #f="ngForm" method="post" (ngSubmit)="onSubmit()">
           <div class="form-group">
             <md-input-container class="w100">
-              <input type="text" md-input placeholder="Travel Company Name" value="" [type]="'text'">
+              <input name="business_name" [(ngModel)]="user.business_name" type="text" md-input
+                     placeholder="Travel Company Name" [type]="'text'">
             </md-input-container>
           </div>
 
@@ -21,38 +23,42 @@
 
           <div class="form-group">
             <md-input-container class="w100">
-              <input type="text" md-input placeholder="First Name" value="" [type]="'text'">
+              <input name="first_name" [(ngModel)]="user.first_name" type="text" md-input placeholder="First Name"
+                     [type]="'text'">
             </md-input-container>
           </div>
 
           <div class="form-group">
             <md-input-container class="w100">
-              <input type="text" md-input placeholder="Last Name" value="" [type]="'text'">
+              <input name="last_name" [(ngModel)]="user.last_name" type="text" md-input placeholder="Last Name"
+                     [type]="'text'">
             </md-input-container>
           </div>
 
           <div class="form-group">
             <md-input-container class="w100">
-              <input type="email" md-input placeholder="Email address" value="" [type]="'email'">
+              <input name="email" [(ngModel)]="user.email" type="email" md-input placeholder="Email address"
+                     [type]="'email'">
             </md-input-container>
           </div>
 
           <div class="form-group">
             <md-input-container class="w100">
-              <input type="password" md-input placeholder="Password" value="" [type]="'password'">
+              <input name="password" [(ngModel)]="user.password" type="password" md-input placeholder="Password" [type]="'password'">
             </md-input-container>
           </div>
 
           <div class="form-group">
             <md-input-container class="w100">
-              <input type="password" md-input placeholder="Confirm Password" value="" [type]="'password'">
+              <input name="password_confirmation" type="password" [(ngModel)]="user.password_confirmation" md-input
+                     placeholder="Confirm Password" [type]="'password'">
             </md-input-container>
           </div>
 
 
           <div class="row">
             <div class="col-md-12">
-              <md-checkbox [color]="'primary'">I Agree to
+              <md-checkbox name="agreeTermConditions" [(ngModel)]="agreeTermConditions" [color]="'primary'">I Agree to
                 <button class="btn btn-link" (click)="openTermsDialog()">Terms & Conditions</button>
                 and
                 <button (click)="openPrivacyDialog()" class="btn btn-link">Privacy Policy</button>
@@ -64,9 +70,9 @@
             <button type="submit" class="btn btn-purple btn-block">Sign Up</button>
             <p>Already a member?? <a routerLink="/login">Sign In</a></p>
           </div>
+        </form>
+      </md-card-content>
 
-        </md-card-content>
-      </form>
     </md-card>
   </div>
 </div>

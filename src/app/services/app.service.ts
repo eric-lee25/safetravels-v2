@@ -17,6 +17,15 @@ export class AppService {
     buttonClass: "btn-primary"
   };
   confirmationDialogConfigEvent: Subject<any> = new Subject<any>();
+
+
+  messageDialogConfig = {
+    title: "",
+    message: "",
+  };
+
+  messageDialogEvent: Subject<any> = new Subject<any>();
+
   configStorage = {
     sidebarCollapsed: true
   };
@@ -25,7 +34,8 @@ export class AppService {
   public showLandingPage: boolean = false;
   showLandingPageEvent: Subject<boolean> = new Subject<boolean>();
 
-  private serverURL: string = "/assets/data"; // change to your api server like http://domain.com/api
+  private serverURL: string = "http://newapi.safetravels.com"; // change to your api server like http://domain.com/api
+
 
   private headers: Headers = new Headers(
     {
@@ -57,6 +67,11 @@ export class AppService {
       this.confirmationDialogConfig = Object.assign(this.confirmationDialogConfig, config);
     });
 
+
+    this.messageDialogEvent.subscribe(config => {
+      this.messageDialogConfig = Object.assign(this.messageDialogConfig, config);
+
+    });
 
     this.showLandingPageEvent.subscribe(value => this.showLandingPage = value);
 

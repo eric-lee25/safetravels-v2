@@ -14,6 +14,7 @@ import {OffersDialogComponent} from "../elements/dialog/offers-dialog/offers-dia
 import {AddPassengerDialogComponent} from "../elements/dialog/add-passenger-dialog/add-passenger-dialog.component";
 import {TermsDialogComponent} from "../elements/dialog/terms-dialog/terms-dialog.component";
 import {PrivacyDialogComponent} from "../elements/dialog/privacy-dialog/privacy-dialog.component";
+import {MessageDialogComponent} from "../elements/dialog/message-dialog/message-dialog.component";
 
 @Injectable()
 export class DialogService {
@@ -46,6 +47,30 @@ export class DialogService {
   openTripTokenDialog() {
 
     this.dialog.open(TripTokenDialogComponent);
+  }
+
+
+  showMessageDialog(title: string, message: string, width?: string) {
+
+
+    let DialogConfig: MdDialogConfig = new MdDialogConfig();
+
+    if(width){
+      DialogConfig.width = '400px';
+    }
+
+    let config = this.appService.confirmationDialogConfig;
+    if (title) {
+      config.title = title;
+    }
+    if (message) {
+      config.message = message;
+    }
+    this.appService.messageDialogEvent.next(config);
+
+    this.dialog.open(MessageDialogComponent, DialogConfig);
+
+
   }
 
   openConfirmationDialog(title: string, message: string, actionTitle: string, buttonClass: string): MdDialogRef<ConfirmationDialogComponent> {
