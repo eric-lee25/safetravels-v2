@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, RequestOptionsArgs, Response, Headers} from "@angular/http";
 import {Observable, Subject} from "rxjs";
+import {AuthService} from "./auth.service";
 
 @Injectable()
 export class AppService {
@@ -43,7 +44,7 @@ export class AppService {
     }
   );
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private auth: AuthService) {
 
     let config = localStorage.getItem("configStorage");
     if (config) {
@@ -75,6 +76,19 @@ export class AppService {
 
     this.showLandingPageEvent.subscribe(value => this.showLandingPage = value);
 
+    this.auth.onAuthChange$.subscribe(data => {
+
+      let token = data.token;
+
+      if (token) {
+        this.headers.set("Authorization", "bearer " + token);
+      } else {
+        this.headers.delete("Authorization");
+      }
+
+
+    });
+
   }
 
 
@@ -86,6 +100,14 @@ export class AppService {
   getOptions(options: RequestOptionsArgs): RequestOptionsArgs {
 
     let op = {headers: this.headers};
+
+    let token = this.auth.getToken();
+    if (token) {
+      op.headers.set("Authorization", "bearer " + token);
+    } else {
+      op.headers.delete("Authorization");
+    }
+
 
     if (options) {
       return Object.assign(op, options);

@@ -3,6 +3,7 @@ import {AppService} from "../../services/app.service";
 import {User} from "../../models/user.model";
 import {AuthService} from "../../services/auth.service";
 import {DialogService} from "../../services/dialog.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(private appService: AppService,
               private dialogService: DialogService,
+              private router: Router,
               private auth: AuthService) {
 
   }
@@ -46,11 +48,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.auth.login(this.user).subscribe(res => {
 
-      console.log("Login response: ", res);
+      this.auth.setCurrentLoginData(res);
+      this.router.navigate(['/home']);
 
     }, err => {
-
       console.log("login error: ", err);
+      this.dialogService.showMessageDialog("Login Error", err.json().message);
 
     });
 

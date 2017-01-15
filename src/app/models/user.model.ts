@@ -1,5 +1,6 @@
 export class User {
 
+  public id?: string;
   public business_name?: string;
   public first_name?: string;
   public last_name?: string;
@@ -22,4 +23,5 @@ export class User {
   public dietary_requirements: number;
   public medical_notes?: string;
   public hidden_medical_notes?: string;
+  public updated_at?: string;
 }

@@ -48,6 +48,7 @@ import { PrivacyDialogComponent } from './elements/dialog/privacy-dialog/privacy
 import { ForgotPasswordComponent } from './account/forgot-password/forgot-password.component';
 import {AuthService} from "./services/auth.service";
 import { MessageDialogComponent } from './elements/dialog/message-dialog/message-dialog.component';
+import {CookieService} from "angular2-cookie/services/cookies.service";
 const DROPZONE_CONFIG: DropzoneConfigInterface = {
 	// Change this to your upload POST address:
 	server: 'https://httpbin.org/post',
@@ -118,7 +119,7 @@ const DROPZONE_CONFIG: DropzoneConfigInterface = {
 		DxChartModule,
 		MyDatePickerModule
 	],
-	providers: [AppService, UserService, DialogService, AuthService, DemoService],
+	providers: [AppService, UserService, DialogService, AuthService, DemoService, CookieService],
 	bootstrap: [AppComponent]
 })
 export class AppModule {
