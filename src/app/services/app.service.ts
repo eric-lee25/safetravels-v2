@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, RequestOptionsArgs, Response, Headers} from "@angular/http";
 import {Observable, Subject} from "rxjs";
 import {AuthService} from "./auth.service";
+import {User} from "../models/user.model";
 
 @Injectable()
 export class AppService {
@@ -10,6 +11,11 @@ export class AppService {
   sidebarProgressToggle: Subject<boolean> = new Subject<boolean>();
   sidebarToggle: Subject<boolean> = new Subject<boolean>();
   dialogTitleEvent: Subject<string> = new Subject<string>();
+  onAuthChange$: Subject<any> = new Subject<any>();
+
+
+  currentUser: User = null;
+  token: string = "";
 
   confirmationDialogConfig = {
     title: "",
@@ -44,7 +50,7 @@ export class AppService {
     }
   );
 
-  constructor(private http: Http, private auth: AuthService) {
+  constructor(private http: Http) {
 
     let config = localStorage.getItem("configStorage");
     if (config) {
@@ -76,12 +82,16 @@ export class AppService {
 
     this.showLandingPageEvent.subscribe(value => this.showLandingPage = value);
 
-    this.auth.onAuthChange$.subscribe(data => {
+    this.onAuthChange$.subscribe(data => {
 
-      let token = data.token;
+      let tokenKey = data.token;
 
-      if (token) {
-        this.headers.set("Authorization", "bearer " + token);
+      this.token = tokenKey;
+
+      this.currentUser = data.user;
+
+      if (tokenKey) {
+        this.headers.set("Authorization", "bearer " + tokenKey);
       } else {
         this.headers.delete("Authorization");
       }
@@ -101,9 +111,9 @@ export class AppService {
 
     let op = {headers: this.headers};
 
-    let token = this.auth.getToken();
-    if (token) {
-      op.headers.set("Authorization", "bearer " + token);
+
+    if (this.token) {
+      op.headers.set("Authorization", "bearer " + this.token);
     } else {
       op.headers.delete("Authorization");
     }

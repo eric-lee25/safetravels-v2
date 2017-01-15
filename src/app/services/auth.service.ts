@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {User} from "../models/user.model";
 import {AppService} from "./app.service";
-import {Observable, Subject} from "rxjs";
+import {Observable} from "rxjs";
 import {CookieService} from "angular2-cookie/services/cookies.service";
 
 @Injectable()
@@ -9,17 +9,11 @@ import {CookieService} from "angular2-cookie/services/cookies.service";
 export class AuthService {
 
 
-  currentUser: User = null;
-  token: string = "";
-
-  onAuthChange$: Subject<any> = new Subject<any>();
-
-
   constructor(private appService: AppService, private cookieService: CookieService) {
 
-    this.onAuthChange$.subscribe(data => {
-      this.currentUser = data.user;
-      this.token = data.token;
+    this.appService.onAuthChange$.subscribe(data => {
+      this.appService.currentUser = data.user;
+      this.appService.token = data.token;
     });
   }
 
@@ -40,10 +34,10 @@ export class AuthService {
 
   setCurrentLoginData(data) {
 
-    this.currentUser = data.user;
-    this.token = data.token;
+    this.appService.currentUser = data.user;
+    this.appService.token = data.token;
 
-    this.onAuthChange$.next(data);
+    this.appService.onAuthChange$.next(data);
 
     this.cookieService.putObject('currentLoginData', data);
   }
@@ -53,10 +47,10 @@ export class AuthService {
     let data:any = this.cookieService.getObject('currentLoginData');
 
     if(data.user){
-      this.currentUser = data.user;
+      this.appService.currentUser = data.user;
     }else{
 
-      this.currentUser = null;
+      this.appService.currentUser = null;
     }
   }
 
@@ -65,10 +59,10 @@ export class AuthService {
     let data:any = this.cookieService.getObject('currentLoginData');
 
     if(data.token){
-      this.token = data.token;
+      this.appService.token = data.token;
     }else{
 
-      this.token = "";
+      this.appService.token = "";
     }
   }
 
