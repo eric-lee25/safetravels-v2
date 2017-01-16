@@ -408,3 +408,12 @@ app-plan-dialog {
     display: none !important;
   }
 }
+
+.modal-title-wrapper {
+  h2 {
+    display: block;
+  }
+  md-dialog-actions {
+    padding: 0;
+  }
+}
