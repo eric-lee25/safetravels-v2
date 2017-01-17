@@ -26,11 +26,11 @@
       <div ng-controller="profileController" class="ng-scope">
         <div class="row">
           <div class="col-md-3">
-            <a href="" class="user-name ng-binding">
-              Sally Grasperet
+            <a (click)="openImageDialog()" class="alink user-name">
+              {{user.first_name + ' ' + user.last_name}}
               <span class="user-status is-online"></span>
             </a>
-            <a href="" class="user-img" style="width: 100px; text-align: center;">
+            <a (click)="openImageDialog()" class="alink user-img" style="width: 100px; text-align: center;">
               <img *ngIf="user.avatar" alt="user-img" class="img-cirlce img-responsive img-thumbnail"
                    [src]="user.avatar">
               <img *ngIf="!user.avatar" alt="user-img" class="img-cirlce img-responsive img-thumbnail"
