@@ -21,6 +21,11 @@ export class LoginComponent implements OnInit, OnDestroy {
               private router: Router,
               private auth: AuthService) {
 
+
+    let data = {token: "", user: null};
+
+    this.auth.setCurrentLoginData(data);
+
   }
 
   ngOnInit() {

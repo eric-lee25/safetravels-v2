@@ -9,12 +9,18 @@ import {CookieService} from "angular2-cookie/services/cookies.service";
 export class AuthService {
 
 
-  constructor(private appService: AppService, private cookieService: CookieService) {
+  constructor(public appService: AppService, private cookieService: CookieService) {
 
     this.appService.onAuthChange$.subscribe(data => {
       this.appService.currentUser = data.user;
       this.appService.token = data.token;
     });
+
+
+    this.appService.currentUser = this.getCurrentUser();
+    this.appService.token = this.getToken();
+
+
   }
 
   login(user: User): Observable<any> {
@@ -32,6 +38,7 @@ export class AuthService {
 
   }
 
+
   setCurrentLoginData(data) {
 
     this.appService.currentUser = data.user;
@@ -39,31 +46,33 @@ export class AuthService {
 
     this.appService.onAuthChange$.next(data);
 
-    this.cookieService.putObject('currentLoginData', data);
+    let user = data.user;
+    let token = data.token;
+
+    this.cookieService.putObject('currentUser', user);
+    this.cookieService.put('currentUserToken', token);
   }
 
-  getCurrentUser(){
+  getCurrentUser(): User{
 
-    let data:any = this.cookieService.getObject('currentLoginData');
+    let user: any = this.cookieService.getObject('currentUser');
 
-    if(data.user){
-      this.appService.currentUser = data.user;
+
+
+    if(user){
+      this.appService.currentUser = user
     }else{
-
       this.appService.currentUser = null;
     }
+
+    return this.appService.currentUser;
   }
 
-  getToken(){
+  getToken(): string{
 
-    let data:any = this.cookieService.getObject('currentLoginData');
+    let token: string = this.cookieService.get('currentUserToken');
 
-    if(data.token){
-      this.appService.token = data.token;
-    }else{
-
-      this.appService.token = "";
-    }
+    return token;
   }
 
 }

@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AppService} from "./services/app.service";
+import {User} from "./models/user.model";
+import {AuthService} from "./services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -13,7 +16,9 @@ export class AppComponent implements OnInit {
   sidebarCollapsed: boolean = true;
   showLandingPage: boolean = this.appService.showLandingPage;
 
-  constructor(public appService: AppService) {
+  user: User = null;
+
+  constructor(public appService: AppService, private auth: AuthService, private router: Router) {
 
     this.appService.sidebarToggle.subscribe(collapsed => this.sidebarCollapsed = collapsed);
     this.sidebarCollapsed = this.appService.configStorage.sidebarCollapsed;
@@ -21,6 +26,23 @@ export class AppComponent implements OnInit {
     this.appService.showLandingPageEvent.subscribe(value => this.showLandingPage = value);
 
 
+    this.user = auth.getCurrentUser();
+
+    this.appService.userEvent.subscribe(user => this.user = user);
+
+    this.appService.onAuthChange$.subscribe(data => {
+
+      if (!data.user) {
+        this.showLogin();
+      }
+    });
+
+
+
+
+    if (!this.user) {
+      this.showLogin();
+    }
   }
 
   /**
@@ -34,5 +56,10 @@ export class AppComponent implements OnInit {
   ngOnInit() {
 
 
+  }
+
+  showLogin() {
+
+    this.router.navigate(['/login'])
   }
 }

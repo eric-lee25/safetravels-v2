@@ -1,4 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
+import {User} from "../../models/user.model";
 
 @Component({
 	selector: 'app-navigation',
@@ -7,8 +8,10 @@ import {Component, OnInit, Input} from '@angular/core';
 })
 export class NavigationComponent implements OnInit {
 	@Input() sidebarCollapsed: boolean;
+	@Input() user: User;
 
 	constructor() {
+
 	}
 
 	ngOnInit() {

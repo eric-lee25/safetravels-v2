@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AppService} from "../../../services/app.service";
+import {DropzoneConfigInterface} from "angular2-dropzone-wrapper";
+import {MdDialogRef} from "@angular/material";
 
 @Component({
   selector: 'app-upload-image-dialog',
@@ -8,7 +10,16 @@ import {AppService} from "../../../services/app.service";
 })
 export class UploadImageDialogComponent implements OnInit {
 
-  constructor(private appService: AppService) {
+
+  config: DropzoneConfigInterface = this.appService.uploadConfig;
+
+  uploadEvent: any;
+
+
+  constructor(private appService: AppService, public dialogRef: MdDialogRef<UploadImageDialogComponent>) {
+
+    this.appService.uploadConfigEvent.subscribe(config => this.config = config);
+
   }
 
   title: string = "";
@@ -17,6 +28,16 @@ export class UploadImageDialogComponent implements OnInit {
 
     this.title = this.appService.dialogTitle;
 
+    console.log(this.config);
+
+  }
+
+  onUploadSuccess(event) {
+    this.uploadEvent = event;
+  }
+
+  onSave() {
+    this.dialogRef.close(this.uploadEvent);
   }
 
 }

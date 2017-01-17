@@ -21,7 +21,7 @@
           <div class="user-details">
 
             <h3>
-              <a routerLink="/home">Elwood Tours</a>
+              <a *ngIf="user" routerLink="/home">{{user.first_name + " " + user.last_name}}</a>
 
               <!-- Available statuses: is-online, is-idle, is-busy and is-offline -->
               <span class="user-status is-online"></span>
@@ -162,13 +162,16 @@
           <a routerLink="/account/profile" class="user-profile">
             <div class="media">
 
-              <div class="media-left">
-                <img src="/assets/images/user-4.png" width="60" height="60" class="img-circle img-corona"
+              <div class="media-left" *ngIf="user">
+                <img *ngIf="!user.avatar" [src]="'/assets/images/user-4.png'" width="60" height="60"
+                     class="img-circle img-corona"
+                     alt="user-pic"/>
+                <img *ngIf="user.avatar" [src]="user.avatar" width="60" height="60" class="img-circle img-corona"
                      alt="user-pic"/>
               </div>
               <div class="media-body">
 								<span>
-								<strong>John Smith</strong>
+								<strong *ngIf="user">{{user.first_name + " " + user.last_name}}</strong>
 								PROFILE: 90%
 							</span>
                 <md-progress-bar
@@ -200,7 +203,7 @@
           </ul>
         </div>
       </section>
-      <app-navigation [sidebarCollapsed]="sidebarCollapsed"></app-navigation>
+      <app-navigation [user]="user" [sidebarCollapsed]="sidebarCollapsed"></app-navigation>
     </div>
 
 
@@ -235,12 +238,15 @@
           </a>
         </li>
 
-        <li class="dropdown user-profile">
+        <li class="dropdown user-profile" *ngIf="user">
           <a title="Home" routerLink="/account/profile" class="dropdown-toggle" data-toggle="dropdown">
-            <img [src]="'/assets/images/user-4.png'" alt="user-image" class="img-circle img-inline userpic-32"
+            <img *ngIf="!user.avatar" [src]="'/assets/images/user-4.png'" alt="user-image"
+                 class="img-circle img-inline userpic-32"
                  width="28"/>
-            <span>
-								John Smith
+            <img *ngIf="user.avatar" [src]="user.avatar" alt="user-image" class="img-circle img-inline userpic-32"
+                 width="28"/>
+            <span *ngIf="user">
+								{{user.first_name + "" + user.last_name}}
 								<i class="fa-angle-down"></i>
 							</span>
           </a>

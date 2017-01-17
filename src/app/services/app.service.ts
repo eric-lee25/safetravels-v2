@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Http, RequestOptionsArgs, Response, Headers} from "@angular/http";
 import {Observable, Subject} from "rxjs";
-import {AuthService} from "./auth.service";
 import {User} from "../models/user.model";
+import {DropzoneConfigInterface} from "angular2-dropzone-wrapper";
 
 @Injectable()
 export class AppService {
@@ -14,8 +14,10 @@ export class AppService {
   onAuthChange$: Subject<any> = new Subject<any>();
 
 
-  currentUser: User = null;
-  token: string = "";
+  public currentUser: User = null;
+  public token: string = "";
+
+  userEvent: Subject<User> = new Subject<User>();
 
   confirmationDialogConfig = {
     title: "",
@@ -41,7 +43,7 @@ export class AppService {
   public showLandingPage: boolean = false;
   showLandingPageEvent: Subject<boolean> = new Subject<boolean>();
 
-  private serverURL: string = "http://newapi.safetravels.com"; // change to your api server like http://domain.com/api
+  public serverURL: string = "http://newapi.safetravels.com"; // change to your api server like http://domain.com/api
 
 
   private headers: Headers = new Headers(
@@ -49,6 +51,16 @@ export class AppService {
       'Content-Type': 'application/json'
     }
   );
+
+  uploadConfig: DropzoneConfigInterface = {
+    server: this.serverURL + '/me/avatar',
+    maxFilesize: 50,
+    acceptedFiles: 'image/*',
+    headers: {"Authorization": "bearer " + this.token}
+  };
+
+  uploadConfigEvent: Subject<DropzoneConfigInterface> = new Subject<DropzoneConfigInterface>();
+
 
   constructor(private http: Http) {
 
@@ -82,6 +94,7 @@ export class AppService {
 
     this.showLandingPageEvent.subscribe(value => this.showLandingPage = value);
 
+
     this.onAuthChange$.subscribe(data => {
 
       let tokenKey = data.token;
@@ -90,14 +103,30 @@ export class AppService {
 
       this.currentUser = data.user;
 
+      this.userEvent.next(this.currentUser);
+
       if (tokenKey) {
         this.headers.set("Authorization", "bearer " + tokenKey);
+        this.uploadConfig.headers = {"Authorization": "bearer " + tokenKey};
       } else {
         this.headers.delete("Authorization");
       }
 
 
     });
+
+
+    // upload event
+
+    this.uploadConfigEvent.subscribe(config => {
+
+      this.uploadConfig.headers = this.uploadConfig.headers = {"Authorization": "bearer " + this.token};
+
+      this.uploadConfig = Object.assign(this.uploadConfig, config);
+    });
+
+
+    this.userEvent.subscribe(user => this.currentUser = user);
 
   }
 

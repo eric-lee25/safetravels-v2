@@ -31,8 +31,10 @@
               <span class="user-status is-online"></span>
             </a>
             <a href="" class="user-img" style="width: 100px; text-align: center;">
-              <img alt="user-img" class="img-cirlce img-responsive img-thumbnail"
-                   [src]="'https://safetravels01.s3.eu-central-1.amazonaws.com/a497ae3571a0076f380357e0704a6dcfa8f4779c-50'">
+              <img *ngIf="user.avatar" alt="user-img" class="img-cirlce img-responsive img-thumbnail"
+                   [src]="user.avatar">
+              <img *ngIf="!user.avatar" alt="user-img" class="img-cirlce img-responsive img-thumbnail"
+                   [src]="'/assets/images/user-4.png'">
             </a>
             <button (click)="openImageDialog()" class="btn btn-purple btn-sm"> Add / Edit Image</button>
           </div>

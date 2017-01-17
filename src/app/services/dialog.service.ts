@@ -29,10 +29,12 @@ export class DialogService {
     this.dialog.open(AddProductOfferDialogComponent, config);
   }
 
-  openImageUploadDialog(title?: string) {
+  openImageUploadDialog(title?: string): MdDialogRef<UploadImageDialogComponent> {
 
     this.appService.dialogTitleEvent.next(title);
-    this.dialog.open(UploadImageDialogComponent);
+    let dialogRef = this.dialog.open(UploadImageDialogComponent);
+
+    return dialogRef;
   }
 
   openAddStaffUserDialog() {
@@ -42,6 +44,7 @@ export class DialogService {
     config.width = '400px';
 
     this.dialog.open(AddStaffUserDialogComponent, config);
+
   }
 
   openTripTokenDialog() {
@@ -55,7 +58,7 @@ export class DialogService {
 
     let DialogConfig: MdDialogConfig = new MdDialogConfig();
 
-    if(width){
+    if (width) {
       DialogConfig.width = '400px';
     }
 
