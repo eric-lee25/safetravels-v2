@@ -5,61 +5,59 @@ import {AuthService} from "./services/auth.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'app works!';
+	title = 'app works!';
 
 
-  sidebarCollapsed: boolean = true;
-  showLandingPage: boolean = this.appService.showLandingPage;
+	sidebarCollapsed: boolean = true;
+	showLandingPage: boolean = this.appService.showLandingPage;
 
-  user: User = null;
+	user: User = null;
 
-  constructor(public appService: AppService, private auth: AuthService, private router: Router) {
+	constructor(public appService: AppService, private auth: AuthService, private router: Router) {
 
-    this.appService.sidebarToggle.subscribe(collapsed => this.sidebarCollapsed = collapsed);
-    this.sidebarCollapsed = this.appService.configStorage.sidebarCollapsed;
+		this.appService.sidebarToggle.subscribe(collapsed => this.sidebarCollapsed = collapsed);
+		this.sidebarCollapsed = this.appService.configStorage.sidebarCollapsed;
 
-    this.appService.showLandingPageEvent.subscribe(value => this.showLandingPage = value);
-
-
-    this.user = auth.getCurrentUser();
-
-    this.appService.userEvent.subscribe(user => this.user = user);
-
-    this.appService.onAuthChange$.subscribe(data => {
-
-      if (!data.user) {
-        this.showLogin();
-      }
-    });
+		this.appService.showLandingPageEvent.subscribe(value => this.showLandingPage = value);
 
 
+		this.user = auth.getCurrentUser();
+
+		this.appService.userEvent.subscribe(user => this.user = user);
+
+		this.appService.onAuthChange$.subscribe(data => {
+
+			if (data.user == null) {
+				this.showLogin();
+			}
+		});
 
 
-    if (!this.user) {
-      this.showLogin();
-    }
-  }
-
-  /**
-   * Toogle sidebar left
-   * @param toggle
-   */
-  toggleSidebar(toggle: boolean) {
-    this.appService.sidebarToggle.next(toggle);
-  }
-
-  ngOnInit() {
 
 
-  }
+	}
 
-  showLogin() {
+	/**
+	 * Toogle sidebar left
+	 * @param toggle
+	 */
+	toggleSidebar(toggle: boolean) {
+		this.appService.sidebarToggle.next(toggle);
+	}
 
-    this.router.navigate(['/login'])
-  }
+	ngOnInit() {
+
+		if (this.user == null) {
+			this.showLogin();
+		}
+	}
+
+	showLogin() {
+		this.router.navigate(['/login']);
+	}
 }

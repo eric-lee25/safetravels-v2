@@ -7,199 +7,202 @@ import {DropzoneConfigInterface} from "angular2-dropzone-wrapper";
 @Injectable()
 export class AppService {
 
-  dialogTitle: string = "";
-  sidebarProgressToggle: Subject<boolean> = new Subject<boolean>();
-  sidebarToggle: Subject<boolean> = new Subject<boolean>();
-  dialogTitleEvent: Subject<string> = new Subject<string>();
-  onAuthChange$: Subject<any> = new Subject<any>();
+	dialogTitle: string = "";
+	sidebarProgressToggle: Subject<boolean> = new Subject<boolean>();
+	sidebarToggle: Subject<boolean> = new Subject<boolean>();
+	dialogTitleEvent: Subject<string> = new Subject<string>();
+	onAuthChange$: Subject<any> = new Subject<any>();
 
 
-  public currentUser: User = null;
-  public token: string = "";
+	public currentUser: User = null;
+	public token: string = "";
 
-  userEvent: Subject<User> = new Subject<User>();
+	userEvent: Subject<User> = new Subject<User>();
 
-  confirmationDialogConfig = {
-    title: "",
-    message: "",
-    actionTitle: "OK",
-    buttonClass: "btn-primary"
-  };
-  confirmationDialogConfigEvent: Subject<any> = new Subject<any>();
+	confirmationDialogConfig = {
+		title: "",
+		message: "",
+		actionTitle: "OK",
+		buttonClass: "btn-primary"
+	};
+	confirmationDialogConfigEvent: Subject<any> = new Subject<any>();
 
 
-  messageDialogConfig = {
-    title: "",
-    message: "",
-  };
+	messageDialogConfig = {
+		title: "",
+		message: "",
+	};
 
-  messageDialogEvent: Subject<any> = new Subject<any>();
+	messageDialogEvent: Subject<any> = new Subject<any>();
 
-  configStorage = {
-    sidebarCollapsed: true
-  };
+	configStorage = {
+		sidebarCollapsed: true
+	};
 
-  notification: any = {
-    message: '',
-    type: 'success'
-  };
+	notification: any = {
+		message: '',
+		type: 'success'
+	};
 
-  notificationEvent: Subject<any> = new Subject<any>();
+	notificationEvent: Subject<any> = new Subject<any>();
 
-  public showLandingPage: boolean = false;
-  showLandingPageEvent: Subject<boolean> = new Subject<boolean>();
+	public showLandingPage: boolean = false;
+	showLandingPageEvent: Subject<boolean> = new Subject<boolean>();
 
-  public serverURL: string = "http://newapi.safetravels.com"; // change to your api server like http://domain.com/api
+	public serverURL: string = "http://newapi.safetravels.com"; // change to your api server like http://domain.com/api
 
 
-  private headers: Headers = new Headers(
-    {
-      'Content-Type': 'application/json'
-    }
-  );
+	private headers: Headers = new Headers(
+		{
+			'Content-Type': 'application/json'
+		}
+	);
 
-  uploadConfig: DropzoneConfigInterface = {
-    server: this.serverURL + '/me/avatar',
-    maxFilesize: 50,
-    acceptedFiles: 'image/*',
-    headers: {"Authorization": "bearer " + this.token}
-  };
+	uploadConfig: DropzoneConfigInterface = {
+		server: this.serverURL + '/me/avatar',
+		maxFilesize: 50,
+		acceptedFiles: 'image/*',
+		headers: {"Authorization": "bearer " + this.token}
+	};
 
-  uploadConfigEvent: Subject<DropzoneConfigInterface> = new Subject<DropzoneConfigInterface>();
+	uploadConfigEvent: Subject<DropzoneConfigInterface> = new Subject<DropzoneConfigInterface>();
 
 
-  constructor(private http: Http) {
+	constructor(private http: Http) {
 
-    let config = localStorage.getItem("configStorage");
-    if (config) {
-      this.configStorage = JSON.parse(config);
-    }
-    if (this.configStorage.sidebarCollapsed !== null) {
-      this.sidebarToggle.next(this.configStorage.sidebarCollapsed);
-    }
+		let config = localStorage.getItem("configStorage");
+		if (config) {
+			this.configStorage = JSON.parse(config);
+		}
+		if (this.configStorage.sidebarCollapsed !== null) {
+			this.sidebarToggle.next(this.configStorage.sidebarCollapsed);
+		}
 
-    this.sidebarToggle.subscribe(collapsed => {
-      console.log(collapsed);
+		this.sidebarToggle.subscribe(collapsed => {
+			console.log(collapsed);
 
-      this.configStorage.sidebarCollapsed = collapsed;
-      localStorage.setItem('configStorage', JSON.stringify(this.configStorage));
-    });
+			this.configStorage.sidebarCollapsed = collapsed;
+			localStorage.setItem('configStorage', JSON.stringify(this.configStorage));
+		});
 
 
-    this.dialogTitleEvent.subscribe(title => this.dialogTitle = title);
+		this.dialogTitleEvent.subscribe(title => this.dialogTitle = title);
 
-    this.confirmationDialogConfigEvent.subscribe(config => {
-      this.confirmationDialogConfig = Object.assign(this.confirmationDialogConfig, config);
-    });
+		this.confirmationDialogConfigEvent.subscribe(config => {
+			this.confirmationDialogConfig = Object.assign(this.confirmationDialogConfig, config);
+		});
 
 
-    this.messageDialogEvent.subscribe(config => {
-      this.messageDialogConfig = Object.assign(this.messageDialogConfig, config);
+		this.messageDialogEvent.subscribe(config => {
+			this.messageDialogConfig = Object.assign(this.messageDialogConfig, config);
 
-    });
+		});
 
-    this.showLandingPageEvent.subscribe(value => this.showLandingPage = value);
+		this.showLandingPageEvent.subscribe(value => this.showLandingPage = value);
 
 
-    this.onAuthChange$.subscribe(data => {
+		this.onAuthChange$.subscribe(data => {
 
-      let tokenKey = data.token;
+			let tokenKey = data.token;
 
-      this.token = tokenKey;
+			this.token = tokenKey;
 
-      this.currentUser = data.user;
+			this.currentUser = data.user;
 
-      this.userEvent.next(this.currentUser);
+			this.userEvent.next(this.currentUser);
 
-      if (tokenKey) {
-        this.headers.set("Authorization", "bearer " + tokenKey);
-        this.uploadConfig.headers = {"Authorization": "bearer " + tokenKey};
-      } else {
-        this.headers.delete("Authorization");
-      }
+			if (tokenKey) {
+				this.headers.set("Authorization", "bearer " + tokenKey);
+				this.uploadConfig.headers = {"Authorization": "bearer " + tokenKey};
+			} else {
+				this.headers.delete("Authorization");
+			}
 
 
-    });
+		});
 
 
-    // upload event
+		// upload event
 
-    this.uploadConfigEvent.subscribe(config => {
+		this.uploadConfigEvent.subscribe(config => {
 
-      this.uploadConfig.headers = this.uploadConfig.headers = {"Authorization": "bearer " + this.token};
+			this.uploadConfig.headers = this.uploadConfig.headers = {"Authorization": "bearer " + this.token};
 
-      this.uploadConfig = Object.assign(this.uploadConfig, config);
-    });
+			this.uploadConfig = Object.assign(this.uploadConfig, config);
+		});
 
 
-    this.userEvent.subscribe(user => this.currentUser = user);
+		this.userEvent.subscribe(user => {
 
-    this.notificationEvent.subscribe(notification => this.notification = Object.assign(this.notification, notification));
+			this.currentUser = user;
+		});
 
-  }
+		this.notificationEvent.subscribe(notification => this.notification = Object.assign(this.notification, notification));
 
+	}
 
-  getUrl(url: string): string {
 
-    return this.serverURL + url;
-  }
+	getUrl(url: string): string {
 
-  getOptions(options: RequestOptionsArgs): RequestOptionsArgs {
+		return this.serverURL + url;
+	}
 
-    let op = {headers: this.headers};
+	getOptions(options: RequestOptionsArgs): RequestOptionsArgs {
 
+		let op = {headers: this.headers};
 
-    if (this.token) {
-      op.headers.set("Authorization", "bearer " + this.token);
-    } else {
-      op.headers.delete("Authorization");
-    }
 
+		if (this.token) {
+			op.headers.set("Authorization", "bearer " + this.token);
+		} else {
+			op.headers.delete("Authorization");
+		}
 
-    if (options) {
-      return Object.assign(op, options);
-    }
 
-    return op;
-  }
+		if (options) {
+			return Object.assign(op, options);
+		}
 
-  get(endpoint: string, options?: RequestOptionsArgs): Observable<Response> {
+		return op;
+	}
 
-    let url = this.getUrl(endpoint);
+	get(endpoint: string, options?: RequestOptionsArgs): Observable<Response> {
 
-    let op = this.getOptions(options);
+		let url = this.getUrl(endpoint);
 
-    return this.http.get(url, op);
-  }
+		let op = this.getOptions(options);
 
-  /**
-   * Performs a request with `post` http method.
-   */
-  post(endpoint: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
+		return this.http.get(url, op);
+	}
 
-    let url = this.getUrl(endpoint);
-    let op = this.getOptions(options);
-    return this.http.post(url, body, op);
-  }
+	/**
+	 * Performs a request with `post` http method.
+	 */
+	post(endpoint: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
 
-  /**
-   * Performs a request with `put` http method.
-   */
-  put(endpoint: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
+		let url = this.getUrl(endpoint);
+		let op = this.getOptions(options);
+		return this.http.post(url, body, op);
+	}
 
-    let url = this.getUrl(endpoint);
-    let op = this.getOptions(options);
-    return this.http.put(url, body, op);
-  }
+	/**
+	 * Performs a request with `put` http method.
+	 */
+	put(endpoint: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
 
-  /**
-   * Performs a request with `delete` http method.
-   */
-  delete(endpoint: string, options?: RequestOptionsArgs): Observable<Response> {
+		let url = this.getUrl(endpoint);
+		let op = this.getOptions(options);
+		return this.http.put(url, body, op);
+	}
 
-    let url = this.getUrl(endpoint);
-    let op = this.getOptions(options);
-    return this.http.delete(url, op);
-  }
+	/**
+	 * Performs a request with `delete` http method.
+	 */
+	delete(endpoint: string, options?: RequestOptionsArgs): Observable<Response> {
+
+		let url = this.getUrl(endpoint);
+		let op = this.getOptions(options);
+		return this.http.delete(url, op);
+	}
 
 }

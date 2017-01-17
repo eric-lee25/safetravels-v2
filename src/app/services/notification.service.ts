@@ -6,20 +6,24 @@ import {AppService} from "./app.service";
 @Injectable()
 export class NotificationService {
 
-  constructor(public snackBar: MdSnackBar, private appService: AppService) {
+	constructor(public snackBar: MdSnackBar, private appService: AppService) {
 
 
-  }
+	}
 
-  show(message: string, duration?: number) {
+	show(message: string, type?: string, duration?: number) {
 
-    let notify = {message: message};
+		let notify = {message: message, type: 'success'};
 
-    this.appService.notificationEvent.next(notify)
+		if (type == 'error') {
+			notify.type = 'danger';
+		}
 
-    this.snackBar.openFromComponent(NotifyComponent, {
-      duration: duration ? duration : 1000
-    });
-  }
+		this.appService.notificationEvent.next(notify);
+
+		this.snackBar.openFromComponent(NotifyComponent, {
+			duration: duration ? duration : 1000
+		});
+	}
 
 }

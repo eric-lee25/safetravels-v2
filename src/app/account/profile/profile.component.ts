@@ -9,69 +9,71 @@ import {UserService} from "../../services/user.service";
 import {NotificationService} from "../../services/notification.service";
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+	selector: 'app-profile',
+	templateUrl: './profile.component.html',
+	styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
 
-  user: User = this.appService.currentUser;
+	user: User = this.appService.currentUser;
 
-  constructor(private dialog: MdDialog,
-              private userService: UserService,
-              private appService: AppService,
-              private notificationService: NotificationService,
-              private auth: AuthService) {
+	constructor(private dialog: MdDialog,
+							private userService: UserService,
+							private appService: AppService,
+							private notificationService: NotificationService,
+							private auth: AuthService) {
 
-    this.appService.userEvent.subscribe(user => {
-      this.user = user;
-    });
-  }
+		this.appService.userEvent.subscribe(user => {
+			this.user = user;
+		});
+	}
 
-  ngOnInit() {
+	ngOnInit() {
 
-  }
-
-
-  openImageDialog() {
-
-    let config: DropzoneConfigInterface = {
-      server: this.appService.serverURL + '/me/avatar',
-      headers: {"Authorization": "bearer " + this.auth.getToken()},
-      paramName: 'image',
-      uploadMultiple: false
-    };
-
-    this.appService.uploadConfigEvent.next(config);
-
-    this.appService.dialogTitleEvent.next("Upload Profile Image");
-    let dialogRef = this.dialog.open(UploadImageDialogComponent);
-
-    dialogRef.afterClosed().subscribe(event => {
+	}
 
 
-      if (event && typeof event[1] !== "undefined") {
-        this.user.avatar = event[1].data.avatar;
-      }
+	openImageDialog() {
 
-      this.appService.userEvent.next(this.user);
+		let config: DropzoneConfigInterface = {
+			server: this.appService.serverURL + '/me/avatar',
+			headers: {"Authorization": "bearer " + this.auth.getToken()},
+			paramName: 'image',
+			uploadMultiple: false
+		};
+
+		this.appService.uploadConfigEvent.next(config);
+
+		this.appService.dialogTitleEvent.next("Upload Profile Image");
+		let dialogRef = this.dialog.open(UploadImageDialogComponent);
+
+		dialogRef.afterClosed().subscribe(event => {
 
 
-    });
+			if (event && typeof event[1] !== "undefined") {
+				this.user.avatar = event[1].data.avatar;
+			}
 
-  }
+			this.appService.userEvent.next(this.user);
 
-  onProfileSave() {
 
-    this.userService.update(this.user).subscribe(res => {
+		});
 
-      this.notificationService.show("Your profile has been updated");
+	}
 
-    }, err => {
+	onProfileSave() {
 
-      this.notificationService.show(err.json().message);
-    });
-  }
+		this.userService.update(this.user).subscribe(() => {
+
+			this.notificationService.show("Your profile has been updated");
+
+			this.appService.userEvent.next(this.user);
+
+		}, err => {
+
+			this.notificationService.show(err.json().message, 'error');
+		});
+	}
 
 }
 

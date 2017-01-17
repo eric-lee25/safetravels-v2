@@ -139,12 +139,13 @@
 
 								<tbody>
 								<tr *ngFor="let trip of trips">
-									<td>{{trip.tour_name}}</td>
-									<td>{{trip.tour_begin_date}}</td>
-									<td>{{trip.tour_duration}}</td>
+									<td>{{trip.title}}</td>
+									<td>{{trip.start_date}}</td>
+									<td>{{getDuration(trip.start_date, trip.end_date)}}</td>
 									<td>{{trip.tour_manager}}</td>
 									<td>{{trip.tour_guide}}</td>
-									<td><a href="javascript://" class="btn c-btn">Open <i class="fa fa-arrow-right"></i></a></td>
+									<td><a routerLink="/trips/manage/{{trip.id}}" class="btn c-btn">Open <i class="fa fa-arrow-right"></i></a>
+									</td>
 								</tr>
 								</tbody>
 							</table>
@@ -156,13 +157,13 @@
 						<div class="c-trip-grid-container" *ngIf="config.tripLayout == 'grid'">
 
 							<div class="c-trip" *ngFor="let trip of trips">
-								<div class="c-trip-thumb" [style.background-image]="'url('+trip.thumbnail+')'">
+								<div class="c-trip-thumb" [style.background-image]="getBackground(trip.cover_image)">
 									<div class="c-trip-overlay">
-										<a routerLink="/trips/manage/1" class="alink c-trip-link">OPEN TRIP</a>
+										<a routerLink="/trips/manage/{{trip.id}}" class="c-trip-link">OPEN TRIP</a>
 									</div>
 								</div>
-								<div class="c-trip-details"><strong>{{trip.tour_name}}</strong><em
-										class="ng-binding">{{trip.tour_begin_date}} - {{trip.tour_end_date}}</em>
+								<div class="c-trip-details"><strong>{{trip.title}}</strong><em
+										class="ng-binding">{{trip.start_date}} - {{trip.end_date}}</em>
 								</div>
 							</div>
 
@@ -234,7 +235,8 @@
 					<div class="panel-body">
 						<div class="emptyState">
 							<img [src]="'/assets/images/empty_offers.png'">
-							<div class="emptyCopy">Help your customers discover best local attractions and earn extra income by <a routerLink="/trips">Creating Offers</a>
+							<div class="emptyCopy">Help your customers discover best local attractions and earn extra income by <a
+									routerLink="/trips">Creating Offers</a>
 							</div>
 						</div>
 					</div>

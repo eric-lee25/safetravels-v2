@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {DemoService} from "../services/demo.service";
 import {AppService} from "../services/app.service";
 import {Router} from "@angular/router";
 import {DialogService} from "../services/dialog.service";
+import {User} from "../models/user.model";
+import {TripService} from "../services/trip.service";
+import {Trip} from "../models/trip.model";
 
 
 @Component({
@@ -12,10 +14,13 @@ import {DialogService} from "../services/dialog.service";
 })
 export class HomeComponent implements OnInit {
 
+	user: User = this.appService.currentUser;
+
 	config = {
 		tripLayout: "grid"
 	};
-	trips: any[] = [];
+
+	trips: Trip[] = [];
 
 
 	sidebarProgressToggle: boolean = true;
@@ -28,21 +33,32 @@ export class HomeComponent implements OnInit {
 	constructor(private appService: AppService,
 							private router: Router,
 							private dialogService: DialogService,
-							private demoService: DemoService) {
+							private tripService: TripService) {
 
 		this.appService.sidebarProgressToggle.subscribe(toggle => {
 
 			this.sidebarProgressToggle = toggle;
 
 		});
+
+		this.appService.userEvent.subscribe(user => this.user = user);
 	}
 
 	ngOnInit() {
 		// load trips from /assets/data/trips.json
 
-		this.demoService.getTrips().subscribe(res => this.trips = res, err => {
+		this.tripService.listTrips().subscribe(res => {
+			this.trips = res;
+
+			console.log(res);
+
+		}, err => {
 			console.log(err);
 		});
+
+		if (this.user == null) {
+			this.router.navigate(['/login']);
+		}
 
 
 	}
@@ -75,6 +91,26 @@ export class HomeComponent implements OnInit {
 
 	showNewOfferDialog() {
 		this.dialogService.openAddProductOfferDialog();
+	}
+
+	getDuration(from: string, to: string): number {
+
+		let date1 = new Date(from);
+		let date2 = new Date(to);
+		let timeDiff = Math.abs(date2.getTime() - date1.getTime());
+		let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+		return diffDays;
+
+
+	}
+
+	getBackground(url: string): string {
+		if (url && url !== null) {
+			return 'url(' + url + ')'
+		}
+
+		return 'none';
 	}
 
 }
