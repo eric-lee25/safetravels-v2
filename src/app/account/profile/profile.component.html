@@ -40,39 +40,41 @@
           </div>
 
           <div class="col-md-9">
-            <div class="row">
-              <div class="col-md-3">
-                <h6>First Name</h6>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <input class="form-control" placeholder="Last Name" type="text">
+            <form #f="ngForm" (ngSubmit)="onProfileSave()">
+              <div class="row">
+                <div class="col-md-3">
+                  <h6>First Name</h6>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input [(ngModel)]="user.first_name" name="first_name" class="form-control" placeholder="Last Name" type="text">
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="row">
-              <div class="col-md-3">
-                <h6>Last Name</h6>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <input class="form-control" placeholder="Last Name" type="text">
+              <div class="row">
+                <div class="col-md-3">
+                  <h6>Last Name</h6>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input [(ngModel)]="user.last_name" name="last_name" class="form-control" placeholder="Last Name" type="text">
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="row">
-              <div class="col-md-3">
-                <h6>Email Address</h6>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <input class="form-control" placeholder="Email" type="text">
+              <div class="row">
+                <div class="col-md-3">
+                  <h6>Email Address</h6>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input [(ngModel)]="user.email" name="email" class="form-control" placeholder="Email" type="text">
+                  </div>
                 </div>
               </div>
-            </div>
-            <button class="btn btn-purple btn-sm">Update Profile</button>
+              <button type="submit" class="btn btn-purple btn-sm">Update Profile</button>
+            </form>
 
           </div>
         </div>

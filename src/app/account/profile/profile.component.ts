@@ -5,6 +5,8 @@ import {AppService} from "../../services/app.service";
 import {User} from "../../models/user.model";
 import {DropzoneConfigInterface} from "angular2-dropzone-wrapper";
 import {AuthService} from "../../services/auth.service";
+import {UserService} from "../../services/user.service";
+import {NotificationService} from "../../services/notification.service";
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +17,11 @@ export class ProfileComponent implements OnInit {
 
   user: User = this.appService.currentUser;
 
-  constructor(private dialog: MdDialog, private appService: AppService, private auth: AuthService) {
+  constructor(private dialog: MdDialog,
+              private userService: UserService,
+              private appService: AppService,
+              private notificationService: NotificationService,
+              private auth: AuthService) {
 
     this.appService.userEvent.subscribe(user => {
       this.user = user;
@@ -53,6 +59,18 @@ export class ProfileComponent implements OnInit {
 
     });
 
+  }
+
+  onProfileSave() {
+
+    this.userService.update(this.user).subscribe(res => {
+
+      this.notificationService.show("Your profile has been updated");
+
+    }, err => {
+
+      this.notificationService.show(err.json().message);
+    });
   }
 
 }

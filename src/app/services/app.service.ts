@@ -39,6 +39,12 @@ export class AppService {
     sidebarCollapsed: true
   };
 
+  notification: any = {
+    message: '',
+    type: 'success'
+  };
+
+  notificationEvent: Subject<any> = new Subject<any>();
 
   public showLandingPage: boolean = false;
   showLandingPageEvent: Subject<boolean> = new Subject<boolean>();
@@ -127,6 +133,8 @@ export class AppService {
 
 
     this.userEvent.subscribe(user => this.currentUser = user);
+
+    this.notificationEvent.subscribe(notification => this.notification = Object.assign(this.notification, notification));
 
   }
 
