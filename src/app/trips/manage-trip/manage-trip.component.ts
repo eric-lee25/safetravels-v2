@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {DialogService} from "../../services/dialog.service";
+import {Trip} from "../../models/trip.model";
+import {TripService} from "../../services/trip.service";
+import {ActivatedRoute} from "@angular/router";
 @Component({
 	selector: 'app-manage-trip',
 	templateUrl: './manage-trip.component.html',
@@ -7,7 +10,14 @@ import {DialogService} from "../../services/dialog.service";
 })
 export class ManageTripComponent implements OnInit {
 
-	constructor(private dialogService: DialogService) {
+  trip: Trip = new Trip();
+
+
+	constructor(
+	  private route: ActivatedRoute,
+	  private tripService: TripService,
+	  private dialogService: DialogService) {
+
 	}
 
 	messageAdvanced: boolean = false;
@@ -17,7 +27,29 @@ export class ManageTripComponent implements OnInit {
 
 	ngOnInit() {
 
+	  let tripId = this.route.snapshot.params['id'];
+	  this.tripService.get(tripId).subscribe(res => {
+
+	    console.log("trip", res);
+
+	    this.trip = res;
+    }, err => {
+
+	    console.log(err);
+    });
+
+
+
 	}
+
+  getBackground(url: string): string {
+    if (url && url !== null) {
+      return 'url(' + url + ')'
+    }
+
+    return 'none';
+  }
+
 
 
 	openTripTokenDialog() {

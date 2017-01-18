@@ -1,257 +1,262 @@
 <div class="row">
 
-	<div [class.col-md-10]="sidebarProgressToggle" [class.col-md-12]="!sidebarProgressToggle" [class.col-sm-12]="true">
+  <div [class.col-md-10]="sidebarProgressToggle" [class.col-md-12]="!sidebarProgressToggle" [class.col-sm-12]="true">
 
 
-		<!-- statics counter -->
-		<div class="row draggable-portlets">
-			<div class="col-md-4">
-				<div class="xe-widget c-pod xe-counter c-shamrock">
-					<div class="xe-icon"><i class="fa fa-compass" aria-hidden="true"></i>
-					</div>
-					<div class="xe-label"><strong class="num">
-						<app-counter [prefix]="" [suffix]="" [step]="30" [countTo]="100" [countFrom]="0"
-												 [duration]="2"></app-counter>
-					</strong><span>Trips in progress</span>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="xe-widget  c-pod xe-counter c-royalblue">
-					<div class="xe-icon"><i class="fa fa-map-marker" aria-hidden="true"></i>
-					</div>
-					<div class="xe-label">
+    <!-- statics counter -->
+    <div class="row draggable-portlets">
+      <div class="col-md-4">
+        <div class="xe-widget c-pod xe-counter c-shamrock">
+          <div class="xe-icon"><i class="fa fa-compass" aria-hidden="true"></i>
+          </div>
+          <div class="xe-label"><strong class="num">
+            <app-counter [prefix]="" [suffix]="" [step]="30" [countTo]="100" [countFrom]="0"
+                         [duration]="2"></app-counter>
+          </strong><span>Trips in progress</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="xe-widget  c-pod xe-counter c-royalblue">
+          <div class="xe-icon"><i class="fa fa-map-marker" aria-hidden="true"></i>
+          </div>
+          <div class="xe-label">
 
-						<strong class="num ng-binding">
-							<app-counter [prefix]="" [suffix]="" [step]="30" [countTo]="100" [countFrom]="0"
-													 [duration]="2"></app-counter>
-						</strong><span>Trips starting tomorrow</span>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="xe-widget c-pod xe-counter c-purpleheart">
-					<div class="xe-icon"><i class="fa fa-calendar" aria-hidden="true"></i>
-					</div>
-					<div class="xe-label"><strong class="num">
-						<app-counter [prefix]="" [suffix]="" [step]="30" [countTo]="100" [countFrom]="0"
-												 [duration]="2"></app-counter>
-					</strong><span>Trips in next 7 days</span>
-					</div>
-				</div>
-			</div>
-		</div>
+            <strong class="num ng-binding">
+              <app-counter [prefix]="" [suffix]="" [step]="30" [countTo]="100" [countFrom]="0"
+                           [duration]="2"></app-counter>
+            </strong><span>Trips starting tomorrow</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="xe-widget c-pod xe-counter c-purpleheart">
+          <div class="xe-icon"><i class="fa fa-calendar" aria-hidden="true"></i>
+          </div>
+          <div class="xe-label"><strong class="num">
+            <app-counter [prefix]="" [suffix]="" [step]="30" [countTo]="100" [countFrom]="0"
+                         [duration]="2"></app-counter>
+          </strong><span>Trips in next 7 days</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
-		<!-- // Statics counter -->
-
-
-		<!-- Begin create trip block -->
-		<div class="row">
-			<div class="c-widget c-flamepea">
-				<form #f="ngForm" class="form-horizontal create-new-trip-block" (ngSubmit)="createTrip()">
-					<div class="row w100">
-
-						<div class="col-md-2 wCentered">
-							<div class="xe-icon newTripIcon hidden-sm"><i class="fa fa-plane" aria-hidden="true"></i>
-							</div>
-						</div>
-						<div id="" class="col-md-8">
-							<div class="row">
-								<div class="col-lg-4 col-md-12">
-									<md-input-container>
-										<input md-input placeholder="Create a Trip to:" value="" [required]="true">
-									</md-input-container>
+    <!-- // Statics counter -->
 
 
-								</div>
+    <!-- Begin create trip block -->
+    <div class="row">
+      <div class="c-widget c-flamepea">
+        <form #f="ngForm" class="form-horizontal create-new-trip-block" (ngSubmit)="createTrip()">
+          <div class="row w100">
 
-								<div class="col-lg-4 col-md-6 col-sm-12">
-
-									<div class="date-picker-control-group">
-										<md-input-container>
-											<input name="fromDate" md-input placeholder="From Date" type="text" [(ngModel)]="fromDate"
-														 [required]="true">
-										</md-input-container>
-										<my-date-picker class="date-select-picker" [options]="datePickerOptions"
-																		(dateChanged)="onSelectStartDate($event)"></my-date-picker>
-									</div>
-
-
-								</div>
-								<div class="col-lg-4 col-md-6 col-sm-12">
-									<div class="date-picker-control-group">
-										<md-input-container>
-											<input name="toDate" md-input placeholder="To Date" type="text" [(ngModel)]="toDate"
-														 [required]="true">
-										</md-input-container>
-										<my-date-picker class="date-select-picker" [options]="datePickerOptions"
-																		(dateChanged)="onSelectToDate($event)"></my-date-picker>
-									</div>
-
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-2 nf-input wCentered">
-							<button class="btn btn-sm btn-success"> New Trip</button>
-							<div [hidden]="true" name="newTripSpinner"
-									 class="ng-isolate-scope ng-hide"><img
-									src="https://cdnjs.cloudflare.com/ajax/libs/timelinejs/2.25/css/loading.gif">
-							</div>
-						</div>
+            <div class="col-md-2 wCentered">
+              <div class="xe-icon newTripIcon hidden-sm"><i class="fa fa-plane" aria-hidden="true"></i>
+              </div>
+            </div>
+            <div id="" class="col-md-8">
+              <div class="row">
+                <div class="col-lg-4 col-md-12">
+                  <md-input-container>
+                    <input md-input placeholder="Create a Trip to:" value="" [required]="true">
+                  </md-input-container>
 
 
-					</div>
-				</form>
-			</div>
-		</div>
-		<!-- // Create trip block -->
+                </div>
 
-		<!-- Begin trips list -->
-		<div class="row">
-			<div class="col-sm-12 trip-list">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Upcoming Trips</h3>
-						<div class="panel-options">
-							<a [class.active]="config.tripLayout == 'list'" (click)="tripLayout('list')" href="javascript://"><i
-									class="fa fa-th-list"></i></a>
-							<a [class.active]="config.tripLayout == 'grid'" (click)="tripLayout('grid')" href="javascript://"><i
-									class="fa fa-th-large"></i></a>
-						</div>
-					</div>
-					<div class="panel-body">
+                <div class="col-lg-4 col-md-6 col-sm-12">
 
-						<!-- table -->
-						<div class="c-trip-table-container" *ngIf="config.tripLayout == 'list'">
-							<table class="table table-striped c-trip-table">
-								<thead>
-								<tr>
-									<th st-sort="tour_name">Trip Name</th>
-									<!-- <th st-sort="">Destination</th> -->
-									<th st-sort="tour_begin_date">Departure</th>
-									<th st-sort="">Trip Duration</th>
-									<th st-sort="tour_admin.first_name">Manager</th>
-									<th st-sort="">Guide</th>
-									<th st-sort="" width="100px"></th>
-								</tr>
-								</thead>
-
-								<tbody>
-								<tr *ngFor="let trip of trips">
-									<td>{{trip.title}}</td>
-									<td>{{trip.start_date}}</td>
-									<td>{{getDuration(trip.start_date, trip.end_date)}}</td>
-									<td>{{trip.tour_manager}}</td>
-									<td>{{trip.tour_guide}}</td>
-									<td><a routerLink="/trips/manage/{{trip.id}}" class="btn c-btn">Open <i class="fa fa-arrow-right"></i></a>
-									</td>
-								</tr>
-								</tbody>
-							</table>
-
-						</div>
-						<!-- // table -->
-
-						<!-- grid -->
-						<div class="c-trip-grid-container" *ngIf="config.tripLayout == 'grid'">
-
-							<div class="c-trip" *ngFor="let trip of trips">
-								<div class="c-trip-thumb" [style.background-image]="getBackground(trip.cover_image)">
-									<div class="c-trip-overlay">
-										<a routerLink="/trips/manage/{{trip.id}}" class="c-trip-link">OPEN TRIP</a>
-									</div>
-								</div>
-								<div class="c-trip-details"><strong>{{trip.title}}</strong><em
-										class="ng-binding">{{trip.start_date}} - {{trip.end_date}}</em>
-								</div>
-							</div>
+                  <div class="date-picker-control-group">
+                    <md-input-container>
+                      <input name="fromDate" md-input placeholder="From Date" type="text" [(ngModel)]="fromDate"
+                             [required]="true">
+                    </md-input-container>
+                    <my-date-picker class="date-select-picker" [options]="datePickerOptions"
+                                    (dateChanged)="onSelectStartDate($event)"></my-date-picker>
+                  </div>
 
 
-						</div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <div class="date-picker-control-group">
+                    <md-input-container>
+                      <input name="toDate" md-input placeholder="To Date" type="text" [(ngModel)]="toDate"
+                             [required]="true">
+                    </md-input-container>
+                    <my-date-picker class="date-select-picker" [options]="datePickerOptions"
+                                    (dateChanged)="onSelectToDate($event)"></my-date-picker>
+                  </div>
 
-						<!-- // grid -->
+                </div>
+              </div>
+            </div>
 
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- // Trips list -->
-
-		<div class="row">
-			<!-- Begin Recent messages -->
-			<div class="col-sm-12 col-md-6">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Recent Messages</h3>
-						<div class="panel-options">
-							<a routerLink="/trips" class="btn btn-sm btn-info">New message</a>
-						</div>
-					</div>
-					<div class="panel-body">
-						<div class="busyState">
-							<table class="recentList">
-								<tbody>
-								<tr>
-									<td class="unread">Brazil Scuba Week Group</td>
-									<td>Hope everyone is ready to start their adventure in</td>
-									<td>8 min ago</td>
-								</tr>
-								<tr>
-									<td>Brazil Scuba Week Group</td>
-									<td>Hope everyone is ready to start their adventure in</td>
-									<td>8 min ago</td>
-								</tr>
-								<tr>
-									<td>Brazil Scuba Week Group</td>
-									<td>Hope everyone is ready to start their adventure in</td>
-									<td>8 min ago</td>
-								</tr>
-								<tr>
-									<td>Brazil Scuba Week Group</td>
-									<td>Hope everyone is ready to start their adventure in</td>
-									<td>8 min ago</td>
-								</tr>
-								</tbody>
-							</table>
-						</div>
-
-					</div>
-				</div>
-			</div>
-			<!-- // Recent messages -->
+            <div class="col-md-2 nf-input wCentered">
+              <button class="btn btn-sm btn-success"> New Trip</button>
+              <div [hidden]="true" name="newTripSpinner"
+                   class="ng-isolate-scope ng-hide"><img
+                src="https://cdnjs.cloudflare.com/ajax/libs/timelinejs/2.25/css/loading.gif">
+              </div>
+            </div>
 
 
-			<!-- Begin Offers -->
-			<div class="col-sm-12 col-md-6">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Recent Offers </h3>
-						<div class="panel-options">
-							<a routerLink="/trips" class="btn btn-sm btn-info">New Offer</a>
-						</div>
-					</div>
-					<div class="panel-body">
-						<div class="emptyState">
-							<img [src]="'/assets/images/empty_offers.png'">
-							<div class="emptyCopy">Help your customers discover best local attractions and earn extra income by <a
-									routerLink="/trips">Creating Offers</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- // Offers -->
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- // Create trip block -->
+
+    <!-- Begin trips list -->
+    <div class="row">
+      <div class="col-sm-12 trip-list">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Upcoming Trips</h3>
+            <div class="panel-options">
+              <a [class.active]="config.tripLayout == 'list'" (click)="tripLayout('list')" href="javascript://"><i
+                class="fa fa-th-list"></i></a>
+              <a [class.active]="config.tripLayout == 'grid'" (click)="tripLayout('grid')" href="javascript://"><i
+                class="fa fa-th-large"></i></a>
+            </div>
+          </div>
+          <div class="panel-body">
+
+            <!-- table -->
+            <div class="c-trip-table-container" *ngIf="config.tripLayout == 'list'">
+              <table class="table table-striped c-trip-table">
+                <thead>
+                <tr>
+                  <th st-sort="tour_name">Trip Name</th>
+                  <!-- <th st-sort="">Destination</th> -->
+                  <th st-sort="tour_begin_date">Departure</th>
+                  <th st-sort="">Trip Duration</th>
+                  <th st-sort="tour_admin.first_name">Manager</th>
+                  <th st-sort="">Guide</th>
+                  <th st-sort="" width="100px"></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr *ngIf="trips.length == 0">
+                  <td colspan="6">
+                    <p class="empty">There is no trips.</p>
+                  </td>
+                </tr>
+                <tr *ngFor="let trip of trips">
+                  <td>{{trip.title}}</td>
+                  <td>{{trip.start_date}}</td>
+                  <td>{{getDuration(trip.start_date, trip.end_date)}}</td>
+                  <td>{{trip.tour_manager}}</td>
+                  <td>{{trip.tour_guide}}</td>
+                  <td><a routerLink="/trips/manage/{{trip.id}}" class="btn c-btn">Open <i class="fa fa-arrow-right"></i></a>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+
+            </div>
+            <!-- // table -->
+
+            <!-- grid -->
+            <div class="c-trip-grid-container" *ngIf="config.tripLayout == 'grid'">
+              <p class="empty" *ngIf="trips.length == 0">There is no trip.</p>
+              <div class="c-trip" *ngFor="let trip of trips">
+                <div class="c-trip-thumb" [style.background-image]="getBackground(trip.cover_image)">
+                  <div class="c-trip-overlay">
+                    <a routerLink="/trips/manage/{{trip.id}}" class="c-trip-link">OPEN TRIP</a>
+                  </div>
+                </div>
+                <div class="c-trip-details"><strong>{{trip.title}}</strong><em
+                  class="ng-binding">{{trip.start_date}} - {{trip.end_date}}</em>
+                </div>
+              </div>
 
 
-		</div>
-	</div>
+            </div>
 
-	<!-- Begin sidebar progress -->
-	<div id="progress-sidebar" [hidden]="!sidebarProgressToggle" class="col-md-2 col-sm-12">
-		<app-sidebar-progress [sidebarProgressToggle]="sidebarProgressToggle"></app-sidebar-progress>
-	</div>
-	<!-- // End sidebar progress -->
+            <!-- // grid -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- // Trips list -->
+
+    <div class="row">
+      <!-- Begin Recent messages -->
+      <div class="col-sm-12 col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Recent Messages</h3>
+            <div class="panel-options">
+              <a routerLink="/trips" class="btn btn-sm btn-info">New message</a>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="busyState">
+              <table class="recentList">
+                <tbody>
+                <tr>
+                  <td class="unread">Brazil Scuba Week Group</td>
+                  <td>Hope everyone is ready to start their adventure in</td>
+                  <td>8 min ago</td>
+                </tr>
+                <tr>
+                  <td>Brazil Scuba Week Group</td>
+                  <td>Hope everyone is ready to start their adventure in</td>
+                  <td>8 min ago</td>
+                </tr>
+                <tr>
+                  <td>Brazil Scuba Week Group</td>
+                  <td>Hope everyone is ready to start their adventure in</td>
+                  <td>8 min ago</td>
+                </tr>
+                <tr>
+                  <td>Brazil Scuba Week Group</td>
+                  <td>Hope everyone is ready to start their adventure in</td>
+                  <td>8 min ago</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- // Recent messages -->
+
+
+      <!-- Begin Offers -->
+      <div class="col-sm-12 col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Recent Offers </h3>
+            <div class="panel-options">
+              <a routerLink="/trips" class="btn btn-sm btn-info">New Offer</a>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="emptyState">
+              <img [src]="'/assets/images/empty_offers.png'">
+              <div class="emptyCopy">Help your customers discover best local attractions and earn extra income by <a
+                routerLink="/trips">Creating Offers</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- // Offers -->
+
+
+    </div>
+  </div>
+
+  <!-- Begin sidebar progress -->
+  <div id="progress-sidebar" [hidden]="!sidebarProgressToggle" class="col-md-2 col-sm-12">
+    <app-sidebar-progress [sidebarProgressToggle]="sidebarProgressToggle"></app-sidebar-progress>
+  </div>
+  <!-- // End sidebar progress -->
 
 </div>

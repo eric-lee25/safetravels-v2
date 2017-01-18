@@ -177,7 +177,13 @@ $theme: md-light-theme($primary, $accent);
   font-size: 15px;
   @media (min-width: $col-md) {
     font-size: 23px;
+    height: 40px;
+    overflow: hidden;
   }
+}
+
+.t-hd-dates {
+  font-size: 14px;
 }
 
 .sidebar-is-open {
