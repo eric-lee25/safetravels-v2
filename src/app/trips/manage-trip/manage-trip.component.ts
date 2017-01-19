@@ -28,11 +28,18 @@ export class ManageTripComponent implements OnInit {
 	ngOnInit() {
 
 	  let tripId = this.route.snapshot.params['id'];
-	  this.tripService.get(tripId).subscribe(res => {
-
-	    console.log("trip", res);
+	  this.tripService.get(tripId, 'admin,guide').subscribe(res => {
 
 	    this.trip = res;
+	    if(res.admin){
+	    	this.trip.admin = res.admin.data;
+			}
+			if(res.guide){
+				this.trip.guide = res.guide.data;
+			}
+
+
+			console.log("trip", this.trip);
     }, err => {
 
 	    console.log(err);

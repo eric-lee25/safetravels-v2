@@ -6,19 +6,23 @@ import {Trip} from "../models/trip.model";
 @Injectable()
 export class TripService {
 
-  constructor(private appService: AppService) {
+	constructor(private appService: AppService) {
 
-  }
+	}
 
 
-  listTrips(): Observable<Trip[]> {
-    return this.appService.get('/trips?role=user').map(res => res.json().data).catch(err => Observable.throw(err))
+	listTrips(): Observable<Trip[]> {
+		return this.appService.get('/trips?role=user').map(res => res.json().data).catch(err => Observable.throw(err))
 
-  }
+	}
 
-  get(id: number): Observable<Trip> {
+	get(id: number, include?: string): Observable<Trip> {
 
-    return this.appService.get('/trips/' + id).map(res => res.json().data).catch(err => Observable.throw(err));
-  }
+		let endpoint = '/trips/' + id;
+		if (include) {
+			endpoint = '/trips/' + id + '?include=' + include;
+		}
+		return this.appService.get(endpoint).map(res => res.json().data).catch(err => Observable.throw(err));
+	}
 
 }

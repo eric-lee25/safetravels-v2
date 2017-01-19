@@ -1,3 +1,5 @@
+import {TripManager} from "./trip-manager.models";
+import {TripGuide} from "./trip-guide.model";
 export class Trip {
 	public id?: number;
 	public code?: string;
@@ -14,4 +16,7 @@ export class Trip {
 	public start_location?: string;
 	public start_location_lat?: any;
 	public start_location_long?: any;
+	public admin?: any;
+	public guide?: any;
+
 }
