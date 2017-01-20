@@ -122,6 +122,7 @@
           </div>
           <div class="panel-body">
 
+            <md-progress-bar *ngIf="showTripsLoading" mode="indeterminate"></md-progress-bar>
             <!-- table -->
             <div class="c-trip-table-container" *ngIf="config.tripLayout == 'list'">
               <table class="table table-striped c-trip-table">

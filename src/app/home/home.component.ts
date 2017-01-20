@@ -29,6 +29,8 @@ export class HomeComponent implements OnInit {
 	toDate: string = "";
 	fromDate: string = "";
 
+  showTripsLoading: boolean = true;
+
 
 	constructor(private appService: AppService,
 							private router: Router,
@@ -50,9 +52,10 @@ export class HomeComponent implements OnInit {
 		this.tripService.listTrips().subscribe(res => {
 			this.trips = res;
 
-			console.log(res);
+			this.showTripsLoading = false;
 
 		}, err => {
+      this.showTripsLoading = false;
 			console.log(err);
 		});
 
