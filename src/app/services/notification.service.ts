@@ -15,7 +15,7 @@ export class NotificationService {
 
 		let notify = {message: message, type: 'success'};
 
-		if (type == 'error') {
+		if (type == 'error' || type == 'danger') {
 			notify.type = 'danger';
 		}
 

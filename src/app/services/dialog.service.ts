@@ -112,10 +112,10 @@ export class DialogService {
     this.dialog.open(PlanDialogComponent, DialogConfig);
   }
 
-  openEditTripDialog() {
+  openEditTripDialog(): MdDialogRef<EditTripDialogComponent> {
     let dialogConfig: MdDialogConfig = new MdDialogConfig();
     dialogConfig.width = '600px';
-    this.dialog.open(EditTripDialogComponent, dialogConfig);
+    return this.dialog.open(EditTripDialogComponent, dialogConfig);
   }
 
 

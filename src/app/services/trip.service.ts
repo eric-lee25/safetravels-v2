@@ -47,4 +47,9 @@ export class TripService {
 
   }
 
+  update(trip: Trip): Observable<any> {
+    let endpoint = '/trips/' + trip.id;
+    return this.appService.put(endpoint, trip).map(res => res.json().data).catch(err => Observable.throw(err));
+  }
+
 }

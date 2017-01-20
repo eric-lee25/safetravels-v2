@@ -1,7 +1,7 @@
 <h2 md-dialog-title>{{title}}</h2>
 
 <md-dialog-content>
-
+<form #f="ngForm">
 	<div class="edit-trip-dialog-content">
 
 		<div class="row">
@@ -14,7 +14,7 @@
 					<div class="col-md-9">
 
 						<div class="form-group">
-							<input class="form-control" placeholder="Big Tours" name="tripName" type="text" required>
+							<input [(ngModel)]="trip.title" class="form-control" name="title" type="text" required>
 						</div>
 					</div>
 				</div>
@@ -25,7 +25,7 @@
 					<div class="col-md-9">
 						<div class="form-group">
 							<div class="input-group">
-								<input name="strart_location_gps" value="Qvareli, Georgia" type="text" class="form-control" required>
+								<input name="start_location" [(ngModel)]="trip.start_location" type="text" class="form-control" required>
 								<span class="input-group-addon"><i class="fa-globe"></i></span>
 							</div>
 						</div>
@@ -40,8 +40,8 @@
 						<div class="form-group">
 							<label>Start Date*</label>
 							<div class="input-group">
-								<my-date-picker class="date-select-picker" [options]="dateOptions"
-																(dateChanged)="onSelectDate($event)"></my-date-picker>
+								<my-date-picker [selDate]="trip.start_date" class="date-select-picker" [options]="dateOptions"
+																(dateChanged)="onSelectStartDate($event)"></my-date-picker>
 							</div>
 						</div>
 					</div>
@@ -51,8 +51,8 @@
 						<div class="form-group">
 							<label>End Date*</label>
 							<div class="input-group">
-								<my-date-picker class="date-select-picker" [options]="dateOptions"
-																(dateChanged)="onSelectDate($event)"></my-date-picker>
+								<my-date-picker [selDate]="trip.end_date" class="date-select-picker" [options]="dateOptions"
+																(dateChanged)="onSelectEndDate($event)"></my-date-picker>
 							</div>
 						</div>
 					</div>
@@ -126,9 +126,9 @@
 		</div>
 
 	</div>
-
+</form>
 </md-dialog-content>
 <md-dialog-actions>
 	<button class="btn btn-sm" md-dialog-close>Close</button>
-	<button class="btn btn-sm btn-success">Save changes</button>
+	<button class="btn btn-sm btn-success" (click)="onSave()">Save changes</button>
 </md-dialog-actions>
