@@ -3,6 +3,7 @@ import {DialogService} from "../../services/dialog.service";
 import {AppService} from "../../services/app.service";
 import {Trip} from "../../models/trip.model";
 import {TripService} from "../../services/trip.service";
+import {NotificationService} from "../../services/notification.service";
 
 @Component({
   selector: 'app-trips',
@@ -15,6 +16,7 @@ export class TripsComponent implements OnInit {
   showLoading: boolean = true;
 
   constructor(private tripService: TripService,
+              private notificationService: NotificationService,
               private dialogService: DialogService,
               private appService: AppService) {
 
@@ -29,6 +31,7 @@ export class TripsComponent implements OnInit {
     }, err => {
       console.log(err);
       this.showLoading = false;
+      this.notificationService.show(err.json().message, 'error');
     });
   }
 
