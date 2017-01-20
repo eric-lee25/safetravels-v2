@@ -1,63 +1,64 @@
 <!-- Begin page title -->
 <div class="page-title">
-	<div class="title-env">
-		<h1 class="title">Trips Management</h1>
-		<p class="description">Select a Trip to View</p>
-	</div>
+  <div class="title-env">
+    <h1 class="title">Trips Management</h1>
+    <p class="description">Select a Trip to View</p>
+  </div>
 
-	<div class="breadcrumb-env">
+  <div class="breadcrumb-env">
 
-		<ol class="breadcrumb bc-1">
-			<li>
-				<a routerLink="/home"><i class="fa-home"></i>Home</a>
-			</li>
-			<li class="active">
-				<strong>Trips</strong>
-			</li>
-		</ol>
+    <ol class="breadcrumb bc-1">
+      <li>
+        <a routerLink="/home"><i class="fa-home"></i>Home</a>
+      </li>
+      <li class="active">
+        <strong>Trips</strong>
+      </li>
+    </ol>
 
-	</div>
+  </div>
 </div>
 <!-- // Page title -->
 
 <div class="panel panel-default">
-	<div class="panel-heading">
-		Trips
-	</div>
+  <div class="panel-heading">
+    Trips
+  </div>
 
-	<div class="panel-body">
+  <div class="panel-body">
 
-		<div class="btn-toolbar">
-			<div class="btn-group focus-btn-group">
-				<button (click)="openAddTripDialog()" class="btn btn-default"><span class="fa-plus"></span> Create new Trip
-				</button>
-			</div>
-		</div>
+    <div class="btn-toolbar">
+      <div class="btn-group focus-btn-group">
+        <button (click)="openAddTripDialog()" class="btn btn-default"><span class="fa-plus"></span> Create new Trip
+        </button>
+      </div>
+    </div>
 
-		<div class="table-responsive">
-			<table class="table table-striped">
-				<thead>
-				<tr>
-					<th>Trip Name</th>
-					<th>Departure Date</th>
-					<th>Trip Leader</th>
-					<th>Admin Manager</th>
-					<th></th>
-				</tr>
-				</thead>
+    <div class="table-responsive">
+      <md-progress-bar *ngIf="showLoading" mode="indeterminate"></md-progress-bar>
+      <table class="table table-striped" *ngIf="trips.length">
+        <thead>
+        <tr>
+          <th>Trip Name</th>
+          <th>Departure Date</th>
+          <th>Trip Leader</th>
+          <th>Admin Manager</th>
+          <th></th>
+        </tr>
+        </thead>
 
-				<tbody>
-				<tr>
-					<td>Multi Language activity debug</td>
-					<td>Thu, 11 July 2019</td>
-					<td>Harry Hubert</td>
-					<td>Sally Grasperet</td>
-					<td><a routerLink="/trips/manage/1" class="btn btn-secondary">Edit</a></td>
-				</tr>
-				</tbody>
-			</table>
-		</div>
+        <tbody>
+        <tr *ngFor="let trip of trips">
+          <td>{{trip.title}}</td>
+          <td>{{trip.start_date| date: 'EEE, d MMM y'}}</td>
+          <td><span *ngIf="trip.guide">{{trip.guide.first_name}} </span> <span *ngIf="trip.guide">{{trip.guide.last_name}}</span></td>
+          <td><span *ngIf="trip.admin">{{trip.admin.first_name}} </span> <span *ngIf="trip.admin">{{trip.admin.last_name}}</span></td>
+          <td><a routerLink="/trips/manage/{{trip.id}}" class="btn btn-secondary">Edit</a></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
 
 
-	</div>
+  </div>
 </div>
