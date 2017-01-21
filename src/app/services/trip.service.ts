@@ -29,6 +29,12 @@ export class TripService {
     return this.appService.get(endpoint).map(res => res.json().data).catch(err => Observable.throw(err));
   }
 
+  getTripPassengers(id: number):Observable<any>{
+
+    let endpoint = '/trips/'+ id + '/users/undeleted';
+    return this.appService.get(endpoint).map(res => res.json().data).catch(err => Observable.throw(err));
+  }
+
   formatTrips(trips: Trip[]): Trip[] {
 
 

@@ -68,7 +68,7 @@ export class AppService {
 
   uploadConfigEvent: Subject<DropzoneConfigInterface> = new Subject<DropzoneConfigInterface>();
 
-  selectedTrip: Trip = null;
+  selectedTrip: Trip = new Trip();
   selectedTripEvent: Subject<Trip> = new Subject<Trip>();
 
   constructor(private http: Http) {

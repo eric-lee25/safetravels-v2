@@ -5,6 +5,7 @@ import {TripService} from "../../services/trip.service";
 import {ActivatedRoute} from "@angular/router";
 import {AppService} from "../../services/app.service";
 import {NotificationService} from "../../services/notification.service";
+import {TripPassenger} from "../../models/trip-passenger.model";
 @Component({
   selector: 'app-manage-trip',
   templateUrl: './manage-trip.component.html',
@@ -13,6 +14,9 @@ import {NotificationService} from "../../services/notification.service";
 export class ManageTripComponent implements OnInit {
 
   trip: Trip = new Trip();
+  passengers: TripPassenger[] = [];
+
+  selectedPassenger: TripPassenger = null;
 
 
   constructor(private route: ActivatedRoute,
@@ -48,6 +52,24 @@ export class ManageTripComponent implements OnInit {
       console.log(err);
     });
 
+
+    this.tripService.getTripPassengers(tripId).subscribe(res => {
+
+      this.passengers = res as TripPassenger[];
+    }, err => {
+
+      console.log('passengers error', err);
+    });
+
+  }
+
+  onSelectTripPassenger(passenger?: TripPassenger) {
+    if (passenger) {
+      this.selectedPassenger = passenger;
+    } else {
+
+      this.selectedPassenger = null;
+    }
 
   }
 
