@@ -52,6 +52,7 @@ import {CookieService} from "angular2-cookie/services/cookies.service";
 import {NotifyComponent} from './elements/notify/notify.component';
 import {NotificationService} from "./services/notification.service";
 import {TripService} from "./services/trip.service";
+import {BusinessService} from "./services/business.service";
 const DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
   server: 'https://httpbin.org/post',
@@ -124,7 +125,7 @@ const DROPZONE_CONFIG: DropzoneConfigInterface = {
     DxChartModule,
     MyDatePickerModule
   ],
-  providers: [AppService, UserService, DialogService, AuthService, CookieService, NotificationService, TripService, DemoService],
+  providers: [AppService, UserService, DialogService, AuthService, CookieService, NotificationService, TripService, BusinessService,DemoService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
