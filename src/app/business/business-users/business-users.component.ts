@@ -19,7 +19,7 @@ export class BusinessUsersComponent implements OnInit {
 	selectedAccountType: string = 'administrators';
 
 	users: BusinessUser[] = [];
-	loading: boolean = false;
+	loading: boolean = true;
 
 
 	constructor(private dialogService: DialogService, private businessService: BusinessService) {
@@ -34,6 +34,8 @@ export class BusinessUsersComponent implements OnInit {
 			this.businessAccounts = res;
 
 			if (this.businessAccounts.length) {
+				this.loading = false;
+
 				this.selectedAccount = this.businessAccounts[0];
 				this.getUsers(this.selectedAccountType);
 			}
@@ -57,13 +59,9 @@ export class BusinessUsersComponent implements OnInit {
 	}
 
 	getData() {
-
-
 		this.loading = true;
 		this.users = [];
 		if (this.selectedAccount.id) {
-			this.loading = false;
-
 			this.getUsers(this.selectedAccountType);
 		}
 
@@ -77,6 +75,8 @@ export class BusinessUsersComponent implements OnInit {
 			this.businessService.getAdministrators(this.selectedAccount.id).subscribe(res => {
 
 				this.users = res;
+				this.loading = false;
+
 			}, err => {
 
 				console.log(err);
@@ -84,6 +84,7 @@ export class BusinessUsersComponent implements OnInit {
 		} else {
 			this.businessService.getGuides(this.selectedAccount.id).subscribe(res => {
 				this.users = res;
+				this.loading = false;
 			}, err => {
 
 				console.log(err);
