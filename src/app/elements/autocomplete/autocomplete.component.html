@@ -1,6 +1,6 @@
 <div class="autocomplete-element-wrapper">
   <md-input-container>
-    <input #input md-input placeholder="{{_placeholder}}" name="autocomplete_value" [(ngModel)]="_value" [required]="_required" (keyup)="onInputKeyUp(input.value)">
+    <input #input md-input placeholder="{{_placeholder}}" name="autocomplete_value" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" [(ngModel)]="_value" [required]="_required" (keyup)="onInputKeyUp(input.value)">
   </md-input-container>
 
   <div class="autocomplete-dropdown-wrapper">

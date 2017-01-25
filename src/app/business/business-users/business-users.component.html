@@ -25,18 +25,38 @@
 
 <div class="panel panel-default">
 	<div class="panel-heading">
-		Users
+		<h3 class="panel-title">Users</h3>
+		<div class="panel-options">
+			<md-select placeholder="Select Business Account" [(ngModel)]="selectedAccount" name="business-account">
+				<md-option *ngFor="let account of businessAccounts" [value]="account"
+									 (click)="onBusinessAccountChange(account)">
+					{{account.name}}
+				</md-option>
+			</md-select>
+
+			<md-select placeholder="Select Account Type" [(ngModel)]="selectedAccountType" name="business-account-type">
+				<md-option *ngFor="let type of businessAccountTypes" [value]="type" (click)="onBusinessAccountTypeChange(type)">
+					{{type}}
+				</md-option>
+			</md-select>
+
+
+		</div>
 	</div>
 
 	<div class="panel-body">
 
 		<div class="btn-toolbar">
 			<div class="btn-group focus-btn-group">
-				<button (click)="showAddStaffUserDialog()" class="btn btn-default"><span class="fa-plus"></span> Add new Staff User</button>
+				<button (click)="showAddStaffUserDialog()" class="btn btn-default"><span class="fa-plus"></span> Add new Staff
+					User
+				</button>
 			</div>
 		</div>
 
 		<div class="table-responsive">
+
+			<md-progress-bar mode="indeterminate" *ngIf="loading"></md-progress-bar>
 			<table class="table table-hover members-table middle-align">
 				<thead>
 				<tr>
@@ -49,23 +69,27 @@
 				</tr>
 				</thead>
 				<tbody>
-				<tr>
+				<tr *ngFor="let user of users">
 
 					<td class="user-image">
 						<a href="javascript://">
-							<img [src]="'assets/images/user-2.png'"
+							<img *ngIf="!user.avatar" [src]="'assets/images/user-2.png'"
+									 class="img-circle img-inline userpic-32 ng-scope" alt="user-pic"
+									 width="28">
+							<img *ngIf="user.avatar" [src]="user.avatar"
 									 class="img-circle img-inline userpic-32 ng-scope" alt="user-pic"
 									 width="28">
 						</a>
 					</td>
 					<td class="user-name hidden-xs hidden-sm">
-						<p>testerp ewew</p>
+						<p>{{user.first_name + ' ' + user.last_name}}</p>
 					</td>
 					<td class="hidden-xs hidden-sm">
-						<span class="email ng-binding">Super User</span>
+						<span class="email ng-binding" *ngIf="selectedAccountType == 'administrators'">Super User</span>
+						<span class="email ng-binding" *ngIf="selectedAccountType == 'guides'">Tour Guide</span>
 					</td>
 					<td class="user-id">
-						<p class="ng-binding">safetravels_31aug@mailiantor.com</p>
+						<p class="ng-binding">{{user.email}}</p>
 					</td>
 					<td class="action-links">
 						<a href="javascript://" class="edit">

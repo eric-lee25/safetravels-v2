@@ -43,17 +43,13 @@
 		<div class="row">
 			<div class="col-md-8">
 				<div class="business-logo-wrapper">
-					<img class="business-logo img-responsive"
-							 [src]="'https://safetravels01.s3.eu-central-1.amazonaws.com/91c4cea4a4a227e74ac33d28b27d9937511ad152-1080'">
-					<img *ngIf="selectedAccount.logo" class="user-image ng-scope"
+					<img *ngIf="selectedAccount.logo" class="img-responsive ng-scope"
 							 [src]="selectedAccount.logo">
+					<br />
 				</div>
 
 				<div class="logo-upload-actions">
-					<button (click)="showImageDialog('Upload logo image')" class="btn btn-purple btn-single btn-sm">Add Logo
-					</button>
-					<button (click)="showImageDialog('Upload cover image')" class="btn btn-success btn-single btn-sm">Add Cover
-						Image
+					<button (click)="openImageDialog()" class="btn btn-purple btn-single btn-sm">Add Logo
 					</button>
 				</div>
 

@@ -28,7 +28,6 @@ export class UploadImageDialogComponent implements OnInit {
 
     this.title = this.appService.dialogTitle;
 
-    console.log(this.config);
 
   }
 
