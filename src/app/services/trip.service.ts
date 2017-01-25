@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {AppService} from "./app.service";
 import {Observable} from "rxjs";
 import {Trip} from "../models/trip.model";
+import {TripActivity} from "../models/trip-activity.model";
 
 @Injectable()
 export class TripService {
@@ -63,4 +64,9 @@ export class TripService {
 		return this.appService.put(endpoint, trip).map(res => res.json().data).catch(err => Observable.throw(err));
 	}
 
+
+	getActivities(tripId: number): Observable<TripActivity[]> {
+
+		return this.appService.get('/trips/' + tripId + '/activities').map(res => res.json().data).catch(err => Observable.throw(err));
+	}
 }

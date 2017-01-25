@@ -6,216 +6,321 @@ import {ActivatedRoute} from "@angular/router";
 import {AppService} from "../../services/app.service";
 import {NotificationService} from "../../services/notification.service";
 import {TripPassenger} from "../../models/trip-passenger.model";
+import {UploadImageDialogComponent} from "../../elements/dialog/upload-image-dialog/upload-image-dialog.component";
+import {DropzoneConfigInterface} from "angular2-dropzone-wrapper";
+import {MdDialog} from "@angular/material";
+import {AuthService} from "../../services/auth.service";
+import {DatePipe} from "@angular/common";
+import {TripActivityDayGroup} from "../../models/activity-day-group.model";
+import {TripActivity} from "../../models/trip-activity.model";
 @Component({
-  selector: 'app-manage-trip',
-  templateUrl: './manage-trip.component.html',
-  styleUrls: ['./manage-trip.component.css']
+	selector: 'app-manage-trip',
+	templateUrl: './manage-trip.component.html',
+	styleUrls: ['./manage-trip.component.css'],
+	providers: [DatePipe]
 })
 export class ManageTripComponent implements OnInit {
 
-  trip: Trip = new Trip();
-  passengers: TripPassenger[] = [];
+	trip: Trip = new Trip();
+	passengers: TripPassenger[] = [];
 
-  selectedPassenger: TripPassenger = null;
+	selectedPassenger: TripPassenger = null;
+	activityDays: TripActivityDayGroup[] = [];
+	selectedActivityDay: TripActivityDayGroup = new TripActivityDayGroup();
 
 
-  constructor(private route: ActivatedRoute,
-              private tripService: TripService,
-              private notificationService: NotificationService,
-              private appService: AppService,
-              private dialogService: DialogService) {
+	constructor(private route: ActivatedRoute,
+							private datePipe: DatePipe,
+							private tripService: TripService,
+							private notificationService: NotificationService,
+							private appService: AppService,
+							private dialog: MdDialog,
+							private auth: AuthService,
+							private dialogService: DialogService) {
 
-  }
+	}
 
-  messageAdvanced: boolean = false;
-  tabConversationHistoryOpen: boolean = true;
-  tabConversationScheduleOpen: boolean = false;
+	messageAdvanced: boolean = false;
+	tabConversationHistoryOpen: boolean = true;
+	tabConversationScheduleOpen: boolean = false;
 
 
-  ngOnInit() {
+	onSelectActivityDayGroup(value: TripActivityDayGroup) {
+		this.selectedActivityDay = value;
+	}
 
-    let tripId = this.route.snapshot.params['id'];
-    this.tripService.get(tripId, 'admin,guide').subscribe(res => {
+	ngOnInit() {
 
-      this.trip = res;
-      if (res.admin) {
-        this.trip.admin = res.admin.data;
-      }
-      if (res.guide) {
-        this.trip.guide = res.guide.data;
-      }
+		let tripId = this.route.snapshot.params['id'];
+		this.tripService.get(tripId, 'admin,guide').subscribe(res => {
 
+			this.trip = res;
+			if (res.admin) {
+				this.trip.admin = res.admin.data;
+			}
+			if (res.guide) {
+				this.trip.guide = res.guide.data;
+			}
 
-      console.log("trip", this.trip);
-    }, err => {
 
-      console.log(err);
-    });
+			console.log("trip", this.trip);
+		}, err => {
 
+			console.log(err);
+		});
 
-    this.tripService.getTripPassengers(tripId).subscribe(res => {
 
-      this.passengers = res as TripPassenger[];
-    }, err => {
+		this.tripService.getTripPassengers(tripId).subscribe(res => {
 
-      console.log('passengers error', err);
-    });
+			this.passengers = res as TripPassenger[];
+		}, err => {
 
-  }
+			console.log('passengers error', err);
+		});
 
-  onSelectTripPassenger(passenger?: TripPassenger) {
-    if (passenger) {
-      this.selectedPassenger = passenger;
-    } else {
 
-      this.selectedPassenger = null;
-    }
+		// get trips activities
+		this.tripService.getActivities(tripId).subscribe(res => {
 
-  }
+			this.activityDays = this.getDayGroupFromActivities(res);
 
-  getBackground(url: string): string {
-    if (url && url !== null) {
-      return 'url(' + url + ')'
-    }
+			if (this.activityDays.length) {
+				this.selectedActivityDay = this.activityDays[0];
+			}
 
-    return 'none';
-  }
+			console.log(this.activityDays);
 
 
-  openTripTokenDialog() {
+		}, err => {
+			console.log(err);
+		});
 
-    this.dialogService.openTripTokenDialog();
-  }
 
-  onMessageOptionChange(event) {
+	}
 
-    this.messageAdvanced = event.checked;
+	getDayGroupFromActivities(activities: TripActivity[]): TripActivityDayGroup[] {
 
-  }
+		let days: TripActivityDayGroup[] = [];
 
-  showTabConverationHistory() {
-    this.tabConversationScheduleOpen = false;
-    this.tabConversationHistoryOpen = true;
+		activities.forEach(item => {
+			let day = this.datePipe.transform(item.start, 'yyyy-MM-dd');
 
-  }
+			console.log(this.datePipe.transform(item.start, 'yyyy-MM-dd'));
 
-  showTabConverationSchedule() {
+			let indexValue = this.checkDayIsInGroup(day, days);
+			if (indexValue) {
 
-    this.tabConversationHistoryOpen = false;
-    this.tabConversationScheduleOpen = true;
+				// that mean this activity same day with existing day group
+				days[indexValue].activities.push(item);
 
-  }
+			} else {
 
-  showAddCoverDialog() {
-    this.dialogService.openImageUploadDialog("Upload tour cover image");
-  }
+				// let create new group
+				let newDayGroup = new TripActivityDayGroup();
+				newDayGroup.title = 'Day ' + (days.length + 1);
+				newDayGroup.day = day;
+				newDayGroup.date = item.start;
+				newDayGroup.activities = [];
+				newDayGroup.activities.push(item);
 
-  deleteTripConfirmation() {
+				days.push(newDayGroup);
+			}
 
-    let title = "Are you sure you want to delete Multi Language activity debug?";
-    let msg = "Deleting the trip will delete all information that you have added to the Trip. Trip Members that have been added to the trip already will no longer be able to access the trip on the mobile app.";
-    let buttonTitle = "Delete Trip";
-    let buttonClass = "btn-danger";
+		});
 
-    this.dialogService.openConfirmationDialog(title, msg, buttonTitle, buttonClass);
-  }
+		return days;
 
-  openDeleteDayConfirmation() {
-    let title = "Are you sure you want to delete Day 1?";
-    let msg = "Deleting the Day Item will delete all information that you have added to the Day, including all Activities and associated Product Offers within the Day.";
-    let buttonTitle = "Delete Day";
-    let buttonClass = "btn-danger";
+	}
 
-    let dialogRef = this.dialogService.openConfirmationDialog(title, msg, buttonTitle, buttonClass);
+	checkDayIsInGroup(day: string, days: TripActivityDayGroup[]): number {
 
-    dialogRef.afterClosed().subscribe(action => {
+		if (days.length) {
+			for (let i = 0; i < days.length; i++) {
+				if (days[i].day == day) {
 
-      console.log("Action:", action);
-      if (action == "ok") {
-        // let delete the activity here...
-      }
-    });
+					return i;
+				}
+			}
+		}
 
-  }
+		return null;
+	}
 
-  openDeleteActivityConfirmation() {
-    let title = "Delete Activity Confirmation";
-    let msg = "Are you sure you want to delete this activity?";
-    let buttonTitle = "Delete Activity";
-    let buttonClass = "btn-danger";
+	onSelectTripPassenger(passenger?: TripPassenger) {
+		if (passenger) {
+			this.selectedPassenger = passenger;
+		} else {
 
-    let dialogRef = this.dialogService.openConfirmationDialog(title, msg, buttonTitle, buttonClass);
+			this.selectedPassenger = null;
+		}
 
-    dialogRef.afterClosed().subscribe(action => {
+	}
 
-      console.log("Action:", action);
-      if (action == "ok") {
-        // let delete the activity here...
-      }
-    });
+	getBackground(url: string): string {
+		if (url && url !== null) {
+			return 'url(' + url + ')'
+		}
 
-  }
+		return 'none';
+	}
 
-  openAddPassengerDialog() {
-    let dialogRef = this.dialogService.openAddPassengerDialog();
 
+	openTripTokenDialog() {
 
-    dialogRef.afterClosed().subscribe(action => {
-      console.log("Action:", action);
-    });
+		this.dialogService.openTripTokenDialog();
+	}
 
-  }
+	onMessageOptionChange(event) {
 
-  showEditActivityOfferDialog() {
+		this.messageAdvanced = event.checked;
 
-    this.dialogService.openAddActivityToDayDialog();
+	}
 
-  }
+	showTabConverationHistory() {
+		this.tabConversationScheduleOpen = false;
+		this.tabConversationHistoryOpen = true;
 
-  showEditTripDialog() {
+	}
 
-    this.appService.selectedTripEvent.next(this.trip);
+	showTabConverationSchedule() {
 
-    let dialogRef = this.dialogService.openEditTripDialog();
+		this.tabConversationHistoryOpen = false;
+		this.tabConversationScheduleOpen = true;
 
-    dialogRef.afterClosed().subscribe(trip => {
+	}
 
-      console.log('trip after edited:', trip);
 
-      if (trip) {
+	showAddCoverDialog() {
 
-        this.tripService.update(trip).subscribe(() => {
-        }, err => {
-          console.log(err);
+		let config: DropzoneConfigInterface = {
+			server: this.appService.serverURL + '/trips/' + this.trip.id + '/cover',
+			headers: {"Authorization": "bearer " + this.auth.getToken()},
+			paramName: 'image',
+			uploadMultiple: false
+		};
 
-          this.notificationService.show(err.json().message, 'error');
-        });
+		this.appService.uploadConfigEvent.next(config);
 
-      }
-    });
-  }
+		this.appService.dialogTitleEvent.next("Upload Tour Cover Image");
+		let dialogRef = this.dialog.open(UploadImageDialogComponent);
 
-  openAddDayToTripDialog() {
+		dialogRef.afterClosed().subscribe(event => {
 
-    this.dialogService.openAddDayToTripDialog();
-  }
+			if (event && typeof event[1] !== "undefined") {
+				this.trip.cover_image = event[1].data.cover_image;
+			}
 
-  openAddActivityToDayDialog() {
-    this.dialogService.openAddActivityToDayDialog();
-  }
 
-  openOffersDialog() {
-    let dialogRef = this.dialogService.openOffersDialog();
+		});
 
-    dialogRef.afterClosed().subscribe(result => {
+	}
 
-      console.log("Result:", result);
+	deleteTripConfirmation() {
 
-      if (result == 'openNewOffer') {
+		let title = "Are you sure you want to delete Multi Language activity debug?";
+		let msg = "Deleting the trip will delete all information that you have added to the Trip. Trip Members that have been added to the trip already will no longer be able to access the trip on the mobile app.";
+		let buttonTitle = "Delete Trip";
+		let buttonClass = "btn-danger";
 
-        // let open new product offer modal
-        this.dialogService.openAddProductOfferDialog();
-      }
-    });
-  }
+		this.dialogService.openConfirmationDialog(title, msg, buttonTitle, buttonClass);
+	}
+
+	openDeleteDayConfirmation() {
+		let title = "Are you sure you want to delete Day 1?";
+		let msg = "Deleting the Day Item will delete all information that you have added to the Day, including all Activities and associated Product Offers within the Day.";
+		let buttonTitle = "Delete Day";
+		let buttonClass = "btn-danger";
+
+		let dialogRef = this.dialogService.openConfirmationDialog(title, msg, buttonTitle, buttonClass);
+
+		dialogRef.afterClosed().subscribe(action => {
+
+			console.log("Action:", action);
+			if (action == "ok") {
+				// let delete the activity here...
+			}
+		});
+
+	}
+
+	openDeleteActivityConfirmation() {
+		let title = "Delete Activity Confirmation";
+		let msg = "Are you sure you want to delete this activity?";
+		let buttonTitle = "Delete Activity";
+		let buttonClass = "btn-danger";
+
+		let dialogRef = this.dialogService.openConfirmationDialog(title, msg, buttonTitle, buttonClass);
+
+		dialogRef.afterClosed().subscribe(action => {
+
+			console.log("Action:", action);
+			if (action == "ok") {
+				// let delete the activity here...
+			}
+		});
+
+	}
+
+	openAddPassengerDialog() {
+		let dialogRef = this.dialogService.openAddPassengerDialog();
+
+
+		dialogRef.afterClosed().subscribe(action => {
+			console.log("Action:", action);
+		});
+
+	}
+
+	showEditActivityOfferDialog() {
+
+		this.dialogService.openAddActivityToDayDialog();
+
+	}
+
+	showEditTripDialog() {
+
+		this.appService.selectedTripEvent.next(this.trip);
+
+		let dialogRef = this.dialogService.openEditTripDialog();
+
+		dialogRef.afterClosed().subscribe(trip => {
+
+			console.log('trip after edited:', trip);
+
+			if (trip) {
+
+				this.tripService.update(trip).subscribe(() => {
+				}, err => {
+					console.log(err);
+
+					this.notificationService.show(err.json().message, 'error');
+				});
+
+			}
+		});
+	}
+
+	openAddDayToTripDialog() {
+
+		this.dialogService.openAddDayToTripDialog();
+	}
+
+	openAddActivityToDayDialog() {
+		this.dialogService.openAddActivityToDayDialog();
+	}
+
+	openOffersDialog() {
+		let dialogRef = this.dialogService.openOffersDialog();
+
+		dialogRef.afterClosed().subscribe(result => {
+
+			console.log("Result:", result);
+
+			if (result == 'openNewOffer') {
+
+				// let open new product offer modal
+				this.dialogService.openAddProductOfferDialog();
+			}
+		});
+	}
 }
