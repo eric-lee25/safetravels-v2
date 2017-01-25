@@ -172,7 +172,7 @@
 								</thead>
 
 								<tbody>
-								<tr *ngIf="trips.length == 0">
+								<tr *ngIf="trips.length == 0 && showTripsLoading == false">
 									<td colspan="6">
 										<p class="empty">There is no trips.</p>
 									</td>

@@ -76,7 +76,7 @@
 
 			<div class="col-md-3 c-mt-list">
 
-				<ul class="list-group">
+				<ul class="list-group" *ngIf="activityDays.length">
 					<li *ngFor="let day of activityDays; let i = index" class="alink list-group-item c-trip-itinerary"
 							(click)="onSelectActivityDayGroup(day, i)" [class.active]="day.title == selectedActivityDay.title">
 						<div class="c-ti-date pull-left">
@@ -103,7 +103,7 @@
 
 
 			<div class="col-md-9 c-mt-contents">
-				<div class="itineraryMainBox" *ngIf="selectedActivityDay">
+				<div class="itineraryMainBox" *ngIf="selectedActivityDay.title">
 					<div class="panel">
 						<div class="panel-body">
 							<h3 class="c-header"><strong class="pull-left ng-binding">{{selectedActivityDay.title}}</strong>
