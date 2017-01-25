@@ -53,6 +53,8 @@ import {NotifyComponent} from './elements/notify/notify.component';
 import {NotificationService} from "./services/notification.service";
 import {TripService} from "./services/trip.service";
 import {BusinessService} from "./services/business.service";
+import { AutocompleteComponent } from './elements/autocomplete/autocomplete.component';
+import {LocationService} from "./services/location.service";
 const DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
   server: 'https://httpbin.org/post',
@@ -95,7 +97,8 @@ const DROPZONE_CONFIG: DropzoneConfigInterface = {
     PrivacyDialogComponent,
     ForgotPasswordComponent,
     MessageDialogComponent,
-    NotifyComponent
+    NotifyComponent,
+    AutocompleteComponent
   ],
   entryComponents: [
     TripTokenDialogComponent,
@@ -125,7 +128,7 @@ const DROPZONE_CONFIG: DropzoneConfigInterface = {
     DxChartModule,
     MyDatePickerModule
   ],
-  providers: [AppService, UserService, DialogService, AuthService, CookieService, NotificationService, TripService, BusinessService,DemoService],
+  providers: [AppService, UserService, DialogService, AuthService, CookieService, NotificationService, TripService,LocationService, BusinessService,DemoService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

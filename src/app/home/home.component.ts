@@ -5,6 +5,11 @@ import {DialogService} from "../services/dialog.service";
 import {User} from "../models/user.model";
 import {TripService} from "../services/trip.service";
 import {Trip} from "../models/trip.model";
+import {BusinessAccount} from "../models/business-account.model";
+import {BusinessService} from "../services/business.service";
+import {AutocompleteData} from "../models/autocompleteData.model";
+import {LocationService} from "../services/location.service";
+import {NotificationService} from "../services/notification.service";
 
 
 @Component({
@@ -29,13 +34,23 @@ export class HomeComponent implements OnInit {
 	toDate: string = "";
 	fromDate: string = "";
 
-  showTripsLoading: boolean = true;
+	showTripsLoading: boolean = true;
+
+	accounts: BusinessAccount[] = [];
+	selectedAccount: BusinessAccount = new BusinessAccount();
+	newTrip: Trip = new Trip();
+
+	newTriplocations: AutocompleteData[] = [];
+	newTripLocationSelected: AutocompleteData = new AutocompleteData();
 
 
 	constructor(private appService: AppService,
 							private router: Router,
 							private dialogService: DialogService,
-							private tripService: TripService) {
+							private tripService: TripService,
+							private locationService: LocationService,
+							private notification: NotificationService,
+							private businessService: BusinessService) {
 
 		this.appService.sidebarProgressToggle.subscribe(toggle => {
 
@@ -44,6 +59,35 @@ export class HomeComponent implements OnInit {
 		});
 
 		this.appService.userEvent.subscribe(user => this.user = user);
+	}
+
+
+	onLocationKeyUp(text: string) {
+		this.newTriplocations = [];
+		if (text) {
+			this.locationService.search(text).subscribe(res => {
+				if (res) {
+					res.forEach(item => {
+						let data = new AutocompleteData();
+						data.title = item.longName;
+						data.data = item;
+						this.newTriplocations.push(data);
+
+					});
+				}
+			});
+
+		}
+
+
+	}
+
+	onNewTripLocationSelect(data: AutocompleteData) {
+		this.newTripLocationSelected = data;
+		this.newTrip.start_location = data.title;
+		this.newTrip.start_location_lat = data.data.lat;
+		this.newTrip.start_location_long = data.data.lng;
+
 	}
 
 	ngOnInit() {
@@ -55,7 +99,7 @@ export class HomeComponent implements OnInit {
 			this.showTripsLoading = false;
 
 		}, err => {
-      this.showTripsLoading = false;
+			this.showTripsLoading = false;
 			console.log(err);
 		});
 
@@ -63,6 +107,13 @@ export class HomeComponent implements OnInit {
 			this.router.navigate(['/login']);
 		}
 
+
+		this.businessService.getBusinessesOwner().subscribe(res => {
+			this.accounts = res;
+			if (this.accounts.length) {
+				this.selectedAccount = this.accounts[0];
+			}
+		});
 
 	}
 
@@ -74,17 +125,28 @@ export class HomeComponent implements OnInit {
 	onSelectStartDate(event) {
 
 		this.fromDate = event.formatted;
+		this.newTrip.start_date = event.formatted;
 	}
 
 	onSelectToDate(event) {
 		this.toDate = event.formatted;
+		this.newTrip.end_date = event.formatted;
 	}
 
 	createTrip() {
 
-		let tripId = "1";
 
-		this.router.navigate(['/trips/manage', tripId]);
+		this.newTrip.business_id = this.selectedAccount.id;
+
+		this.tripService.create(this.newTrip).subscribe(res => {
+
+			let tripId = res.id;
+			this.router.navigate(['/trips/manage', tripId]);
+		}, err => {
+			this.notification.show(err.json().message, 'error');
+
+		});
+
 	}
 
 	showNewMessageDialog() {

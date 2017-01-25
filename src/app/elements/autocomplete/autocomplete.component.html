@@ -1,0 +1,14 @@
+<div class="autocomplete-element-wrapper">
+  <md-input-container>
+    <input #input md-input placeholder="{{_placeholder}}" name="autocomplete_value" [(ngModel)]="_value" [required]="_required" (keyup)="onInputKeyUp(input.value)">
+  </md-input-container>
+
+  <div class="autocomplete-dropdown-wrapper">
+    <div class="dropdown" [class.open]="_dropdown.length">
+      <ul class="dropdown-menu">
+        <li *ngFor="let item of _dropdown" (click)="select(item)"><a>{{item.title}}</a></li>
+      </ul>
+    </div>
+  </div>
+
+</div>

@@ -392,8 +392,24 @@ app-plan-dialog {
 }
 
 .create-new-trip-block {
+  @media (min-width: $col-lg) {
+    .nf-input {
+      .btn {
+        margin-top: 40px;
+      }
+    }
+  }
   md-input-container {
     width: 100%;
+  }
+  .select-business-account {
+    padding-top: 10px;
+  }
+
+  .select-trip-location {
+    .md-input-wrapper {
+      margin-bottom: 3px;
+    }
   }
 }
 
@@ -423,3 +439,12 @@ app-plan-dialog {
     padding: 0;
   }
 }
+
+.autocomplete-element-wrapper {
+  .dropdown {
+    li {
+      cursor: pointer;
+    }
+  }
+}
+

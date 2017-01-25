@@ -6,56 +6,61 @@ import {Trip} from "../models/trip.model";
 @Injectable()
 export class TripService {
 
-  constructor(private appService: AppService) {
+	constructor(private appService: AppService) {
 
-  }
-
-
-  listTrips(include?: string): Observable<Trip[]> {
-    let endpoint = '/trips?role=user';
-    if (include) {
-      endpoint = '/trips?role=user&include=' + include;
-    }
-    return this.appService.get(endpoint).map(res => this.formatTrips(res.json().data)).catch(err => Observable.throw(err))
-
-  }
-
-  get(id: number, include?: string): Observable<Trip> {
-
-    let endpoint = '/trips/' + id;
-    if (include) {
-      endpoint = '/trips/' + id + '?include=' + include;
-    }
-    return this.appService.get(endpoint).map(res => res.json().data).catch(err => Observable.throw(err));
-  }
-
-  getTripPassengers(id: number):Observable<any>{
-
-    let endpoint = '/trips/'+ id + '/users/undeleted';
-    return this.appService.get(endpoint).map(res => res.json().data).catch(err => Observable.throw(err));
-  }
-
-  formatTrips(trips: Trip[]): Trip[] {
+	}
 
 
-    for (let x = 0; x < trips.length; x++) {
+	create(trip: Trip): Observable<Trip> {
+		return this.appService.post('/businesses/' + trip.business_id + '/trips', trip).map(res => res.json().data).catch(err => Observable.throw(err));
 
-      if (trips[x].admin && trips[x].admin.data) {
-        trips[x].admin = trips[x].admin.data;
-      }
-      if (trips[x].guide && trips[x].guide.data) {
-        trips[x].guide = trips[x].admin.data;
-      }
+	}
 
-    }
+	listTrips(include?: string): Observable<Trip[]> {
+		let endpoint = '/trips?role=user';
+		if (include) {
+			endpoint = '/trips?role=user&include=' + include;
+		}
+		return this.appService.get(endpoint).map(res => this.formatTrips(res.json().data)).catch(err => Observable.throw(err))
 
-    return trips;
+	}
 
-  }
+	get(id: number, include?: string): Observable<Trip> {
 
-  update(trip: Trip): Observable<any> {
-    let endpoint = '/trips/' + trip.id;
-    return this.appService.put(endpoint, trip).map(res => res.json().data).catch(err => Observable.throw(err));
-  }
+		let endpoint = '/trips/' + id;
+		if (include) {
+			endpoint = '/trips/' + id + '?include=' + include;
+		}
+		return this.appService.get(endpoint).map(res => res.json().data).catch(err => Observable.throw(err));
+	}
+
+	getTripPassengers(id: number): Observable<any> {
+
+		let endpoint = '/trips/' + id + '/users/undeleted';
+		return this.appService.get(endpoint).map(res => res.json().data).catch(err => Observable.throw(err));
+	}
+
+	formatTrips(trips: Trip[]): Trip[] {
+
+
+		for (let x = 0; x < trips.length; x++) {
+
+			if (trips[x].admin && trips[x].admin.data) {
+				trips[x].admin = trips[x].admin.data;
+			}
+			if (trips[x].guide && trips[x].guide.data) {
+				trips[x].guide = trips[x].admin.data;
+			}
+
+		}
+
+		return trips;
+
+	}
+
+	update(trip: Trip): Observable<any> {
+		let endpoint = '/trips/' + trip.id;
+		return this.appService.put(endpoint, trip).map(res => res.json().data).catch(err => Observable.throw(err));
+	}
 
 }
