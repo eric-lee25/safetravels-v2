@@ -55,6 +55,7 @@ import {TripService} from "./services/trip.service";
 import {BusinessService} from "./services/business.service";
 import { AutocompleteComponent } from './elements/autocomplete/autocomplete.component';
 import {LocationService} from "./services/location.service";
+import {ProductOfferService} from "./services/product-offer.service";
 const DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
   server: 'https://httpbin.org/post',
@@ -128,7 +129,7 @@ const DROPZONE_CONFIG: DropzoneConfigInterface = {
     DxChartModule,
     MyDatePickerModule
   ],
-  providers: [AppService, UserService, DialogService, AuthService, CookieService, NotificationService, TripService,LocationService, BusinessService,DemoService],
+  providers: [AppService, UserService, DialogService, AuthService, CookieService, NotificationService, TripService,LocationService, BusinessService,ProductOfferService,DemoService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

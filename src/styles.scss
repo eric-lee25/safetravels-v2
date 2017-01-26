@@ -448,3 +448,11 @@ app-plan-dialog {
   }
 }
 
+table.product-offers-table {
+  @media (min-width: $col-md) {
+    tr td {
+      max-width: 200px;
+    }
+  }
+
+}
