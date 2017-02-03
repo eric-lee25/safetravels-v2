@@ -159,7 +159,7 @@ export class ProductOffersComponent implements OnInit {
 
 			this.notification.show(offer.title + ' has been deleted.');
 			let offerIndex = this.findIndexByOffer(offer.id);
-			if (offerIndex) {
+			if (offerIndex !== null) {
 				this.offers.splice(offerIndex, 1);
 			}
 

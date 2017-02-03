@@ -71,8 +71,6 @@ export class GalleryComponent implements OnInit {
 
 			this.images = res;
 
-			console.log(res);
-
 		}, err => {
 			console.log(err);
 		})
@@ -109,7 +107,7 @@ export class GalleryComponent implements OnInit {
 
 
 			let imageIndex = this.findIndexByImage(image);
-			if (imageIndex) {
+			if (imageIndex !== null) {
 				this.images.splice(imageIndex, 1);
 			}
 		}, err => {
