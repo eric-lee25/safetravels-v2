@@ -102,16 +102,13 @@ export class BusinessUsersComponent implements OnInit {
 
 			if (user) {
 
-				console.log("After closed, found user: ", user);
-
 
 				this.businessService.createUser(this.selectedAccount.id, user).subscribe(res => {
 
-					console.log(res);
 					this.users.push(res);
 
 				}, err => {
-					this.notification.show(err.json().message, 'error');
+					this.notification.show("An error delete the file.", 'error');
 				});
 			}
 

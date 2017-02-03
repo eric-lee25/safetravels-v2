@@ -3,6 +3,7 @@ import {Observable} from "rxjs";
 import {BusinessAccount} from "../models/business-account.model";
 import {AppService} from "./app.service";
 import {BusinessUser} from "../models/business-user.model";
+import {GalleryImage} from "../models/gallery-image.model";
 
 @Injectable()
 export class BusinessService {
@@ -40,4 +41,14 @@ export class BusinessService {
 			return this.appService.post('/businesses/' + businessId + '/guides', user).map(res => res.json().data).catch(err => Observable.throw(err));
 		}
 	}
+
+
+	getGallery(businessId: number): Observable<GalleryImage[]> {
+		return this.appService.get('/businesses/' + businessId + '/gallery-images').map(res => res.json().data).catch(err => Observable.throw(err));
+	}
+
+	deleteGalleryImage(image: GalleryImage): Observable<any> {
+		return this.appService.delete('/gallery-images/' + image.id).map(res => res).catch(err => Observable.throw(err));
+	}
+
 }

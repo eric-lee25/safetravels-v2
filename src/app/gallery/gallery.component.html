@@ -1,151 +1,77 @@
 <!-- Begin page title -->
 <div class="page-title">
-  <div class="title-env">
-    <h1 class="title">Gallery</h1>
-    <p class="description">Upload and manage images that you can use for your Itinerary Images and Cover Photos</p>
-  </div>
+	<div class="title-env">
+		<h1 class="title">Gallery</h1>
+		<p class="description">Upload and manage images that you can use for your Itinerary Images and Cover Photos</p>
+	</div>
 
-  <div class="breadcrumb-env">
+	<div class="breadcrumb-env">
 
-    <ol class="breadcrumb bc-1">
-      <li>
-        <a routerLink="/home"><i class="fa-home"></i>Home</a>
-      </li>
-      <li class="active">
-        <strong>Image Gallery</strong>
-      </li>
-    </ol>
+		<ol class="breadcrumb bc-1">
+			<li>
+				<a routerLink="/home"><i class="fa-home"></i>Home</a>
+			</li>
+			<li class="active">
+				<strong>Image Gallery</strong>
+			</li>
+		</ol>
 
-  </div>
+	</div>
 </div>
 <!-- // Page title -->
 
 
 <md-card>
 
-  <md-tab-group>
 
-    <md-tab label="Upload Files">
-      <div class="upload-file-wrapper">
-        <dropzone [config]="config" [message]="'Click or drag images here to upload'" (error)="onUploadError($event)"
-                  (success)="onUploadSuccess($event)"></dropzone>
-        <button class="btn btn-info">Add To Gallery</button>
-      </div>
-    </md-tab>
-    <md-tab label="Image Library">
-      <div class="gallery-env">
-        <div class="album-images">
-          <div class="row">
-            <div class="col-md-3 col-sm-4 col-xs-6">
-              <div class="album-image">
-                <a
-                  href="https://safetravels01.s3.eu-central-1.amazonaws.com/8739041dacfa2f9942d7215bcc78333938d2fdf7-1080"
-                  class="thumb" data-action="edit" target="_blank">
-                  <img
-                    ng-src="https://safetravels01.s3.eu-central-1.amazonaws.com/8739041dacfa2f9942d7215bcc78333938d2fdf7-300"
-                    class="img-responsive"
-                    src="https://safetravels01.s3.eu-central-1.amazonaws.com/8739041dacfa2f9942d7215bcc78333938d2fdf7-300">
-                </a>
-                <a
-                  href="https://safetravels01.s3.eu-central-1.amazonaws.com/8739041dacfa2f9942d7215bcc78333938d2fdf7-1080"
-                  class="name" target="_blank">
-                  <span>dreamworld.jpg</span>
-                </a>
+	<md-card-header>
+		<md-select placeholder="Select Business Account" [(ngModel)]="selectedAccount" name="business-account">
+			<md-option *ngFor="let account of businessAccounts" [value]="account"
+								 (click)="onBusinessAccountChange(account)">
+				{{account.name}}
+			</md-option>
+		</md-select>
 
-                <div class="image-options">
-                  <a href="javascript://" data-action="trash"><i class="fa fa-times"></i></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 col-sm-4 col-xs-6">
-              <div class="album-image">
-                <a
-                  href="https://safetravels01.s3.eu-central-1.amazonaws.com/8739041dacfa2f9942d7215bcc78333938d2fdf7-1080"
-                  class="thumb" data-action="edit" target="_blank">
-                  <img
-                    ng-src="https://safetravels01.s3.eu-central-1.amazonaws.com/8739041dacfa2f9942d7215bcc78333938d2fdf7-300"
-                    class="img-responsive"
-                    src="https://safetravels01.s3.eu-central-1.amazonaws.com/8739041dacfa2f9942d7215bcc78333938d2fdf7-300">
-                </a>
-                <a
-                  href="https://safetravels01.s3.eu-central-1.amazonaws.com/8739041dacfa2f9942d7215bcc78333938d2fdf7-1080"
-                  class="name" target="_blank">
-                  <span>dreamworld.jpg</span>
-                </a>
 
-                <div class="image-options">
-                  <a href="javascript://" data-action="trash"><i class="fa fa-times"></i></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 col-sm-4 col-xs-6">
-              <div class="album-image">
-                <a
-                  href="https://safetravels01.s3.eu-central-1.amazonaws.com/8739041dacfa2f9942d7215bcc78333938d2fdf7-1080"
-                  class="thumb" data-action="edit" target="_blank">
-                  <img
-                    ng-src="https://safetravels01.s3.eu-central-1.amazonaws.com/8739041dacfa2f9942d7215bcc78333938d2fdf7-300"
-                    class="img-responsive"
-                    src="https://safetravels01.s3.eu-central-1.amazonaws.com/8739041dacfa2f9942d7215bcc78333938d2fdf7-300">
-                </a>
-                <a
-                  href="https://safetravels01.s3.eu-central-1.amazonaws.com/8739041dacfa2f9942d7215bcc78333938d2fdf7-1080"
-                  class="name" target="_blank">
-                  <span>dreamworld.jpg</span>
-                </a>
+	</md-card-header>
 
-                <div class="image-options">
-                  <a href="javascript://" data-action="trash"><i class="fa fa-times"></i></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 col-sm-4 col-xs-6">
-              <div class="album-image">
-                <a
-                  href="https://safetravels01.s3.eu-central-1.amazonaws.com/8739041dacfa2f9942d7215bcc78333938d2fdf7-1080"
-                  class="thumb" data-action="edit" target="_blank">
-                  <img
-                    ng-src="https://safetravels01.s3.eu-central-1.amazonaws.com/8739041dacfa2f9942d7215bcc78333938d2fdf7-300"
-                    class="img-responsive"
-                    src="https://safetravels01.s3.eu-central-1.amazonaws.com/8739041dacfa2f9942d7215bcc78333938d2fdf7-300">
-                </a>
-                <a
-                  href="https://safetravels01.s3.eu-central-1.amazonaws.com/8739041dacfa2f9942d7215bcc78333938d2fdf7-1080"
-                  class="name" target="_blank">
-                  <span>dreamworld.jpg</span>
-                </a>
+	<md-tab-group>
 
-                <div class="image-options">
-                  <a href="javascript://" data-action="trash"><i class="fa fa-times"></i></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 col-sm-4 col-xs-6">
-              <div class="album-image">
-                <a
-                  href="https://safetravels01.s3.eu-central-1.amazonaws.com/8739041dacfa2f9942d7215bcc78333938d2fdf7-1080"
-                  class="thumb" data-action="edit" target="_blank">
-                  <img
-                    ng-src="https://safetravels01.s3.eu-central-1.amazonaws.com/8739041dacfa2f9942d7215bcc78333938d2fdf7-300"
-                    class="img-responsive"
-                    src="https://safetravels01.s3.eu-central-1.amazonaws.com/8739041dacfa2f9942d7215bcc78333938d2fdf7-300">
-                </a>
-                <a
-                  href="https://safetravels01.s3.eu-central-1.amazonaws.com/8739041dacfa2f9942d7215bcc78333938d2fdf7-1080"
-                  class="name" target="_blank">
-                  <span>dreamworld.jpg</span>
-                </a>
+		<md-tab label="Upload Files">
+			<div class="upload-file-wrapper">
+				<dropzone [config]="uploadConfig" [message]="'Click or drag images here to upload'"
+									(error)="onUploadError($event)"
+									(success)="onUploadSuccess($event)"></dropzone>
+				<button class="btn btn-info">Add To Gallery</button>
+			</div>
+		</md-tab>
+		<md-tab label="Image Library">
+			<md-progress-bar mode="indeterminate" *ngIf="loading"></md-progress-bar>
+			<div class="gallery-env">
+				<div class="album-images">
+					<div class="row">
+						<div class="col-md-3 col-sm-4 col-xs-6" *ngFor="let image of images">
+							<div class="album-image">
+								<a href="{{image.url}}"
+									 class="thumb" data-action="edit" target="_blank">
+									<img class="img-responsive" [src]="image.url">
+								</a>
+								<a
+										href="{{image.url}}"
+										class="name" target="_blank">
+									<span></span>
+								</a>
+								<div class="image-options">
+									<a href="javascript://" (click)="deleteImage(image)" data-action="trash"><i class="fa fa-times"></i></a>
+								</div>
+							</div>
+						</div>
 
-                <div class="image-options">
-                  <a href="javascript://" data-action="trash"><i class="fa fa-times"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+					</div>
+				</div>
+			</div>
 
-    </md-tab>
-  </md-tab-group>
+		</md-tab>
+	</md-tab-group>
 
 </md-card>
