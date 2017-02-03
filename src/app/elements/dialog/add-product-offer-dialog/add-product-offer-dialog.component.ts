@@ -11,7 +11,7 @@ import {ProductOffer} from "../../../models/product-offer.model";
 export class AddProductOfferDialogComponent implements OnInit {
 
 	offer = new ProductOffer();
-
+	title: string = "Create new Product Offer";
 
 	constructor(private appService: AppService,
 							public dialogRef: MdDialogRef<AddProductOfferDialogComponent>) {
@@ -19,6 +19,11 @@ export class AddProductOfferDialogComponent implements OnInit {
 
 
 	ngOnInit() {
+
+		if (this.appService.productOffer && this.appService.productOffer.id) {
+			this.offer = this.appService.productOffer;
+			this.title = "Edit Offer";
+		}
 
 	}
 

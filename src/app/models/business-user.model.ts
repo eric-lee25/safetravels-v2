@@ -9,4 +9,5 @@ export class BusinessUser {
 	public email?: string;
 	public contact_number?: string;
 	public cover_image?: string;
+	public user_type?: string;
 }

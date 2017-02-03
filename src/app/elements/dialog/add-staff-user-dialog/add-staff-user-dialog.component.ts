@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {MdDialogRef} from "@angular/material";
+import {BusinessUser} from "../../../models/business-user.model";
 
 @Component({
 	selector: 'app-add-staff-user-dialog',
@@ -7,26 +9,30 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AddStaffUserDialogComponent implements OnInit {
 
-	constructor() {
+
+	newUser: BusinessUser = new BusinessUser();
+
+	constructor(public dialogRef: MdDialogRef<AddStaffUserDialogComponent>) {
+
 	}
 
 
 	userTypes = [
 		{
-			value: 0,
+			value: 'administrators',
 			title: 'Super User'
 		},
 		{
-			title: 'Admin User',
-			value: 1
-		},
-		{
 			title: 'Tour Guide',
-			value: 2
+			value: 'guides'
 		},
 	];
 
 	ngOnInit() {
 	}
 
+
+	onSave() {
+		this.dialogRef.close(this.newUser);
+	}
 }

@@ -1,41 +1,42 @@
 <h2 md-dialog-title>Add New Staff User</h2>
 
 <md-dialog-content>
-	<div class="add-user-dialog-content">
-		<div class="form-group">
-			<md-input-container>
-				<input md-input placeholder="First Name" value="" [required]="true">
-			</md-input-container>
+	<form #f="ngForm" (ngSubmit)="onSave()">
+		<div class="add-user-dialog-content">
+			<div class="form-group">
+				<md-input-container>
+					<input md-input placeholder="First Name" [(ngModel)]="newUser.first_name" name="first_name" [required]="true">
+				</md-input-container>
+			</div>
+
+			<div class="form-group">
+				<md-input-container>
+					<input md-input placeholder="Last Name" [(ngModel)]="newUser.last_name" name="last_name" [required]="true">
+				</md-input-container>
+			</div>
+
+			<div class="form-group">
+				<md-input-container>
+					<input md-input placeholder="Email Address" [(ngModel)]="newUser.email" name="first_name" type="email"
+								 [required]="true">
+				</md-input-container>
+			</div>
+
+			<div class="form-group">
+				<md-select placeholder="User type" [(ngModel)]="newUser.user_type" name="user_type" [required]="true">
+					<md-option *ngFor="let userType of userTypes" [value]="userType.value">
+						{{ userType.title }}
+					</md-option>
+				</md-select>
+			</div>
+
 		</div>
+		<md-dialog-actions>
+			<button type="button" class="btn btn-sm" md-dialog-close>Close</button>
+			<button type="submit" class="btn btn-sm btn-success">Save</button>
 
-		<div class="form-group">
-			<md-input-container>
-				<input md-input placeholder="Last Name" value="" [required]="true">
-			</md-input-container>
-		</div>
-
-		<div class="form-group">
-			<md-input-container>
-				<input md-input placeholder="Email Address" value="" type="email" [required]="true">
-			</md-input-container>
-		</div>
-
-		<div class="form-group">
-			<md-select placeholder="User type" [required]="true">
-				<md-option [value]="'?'">
-				</md-option>
-				<md-option *ngFor="let userType of userTypes" [value]="userType.value">
-					{{ userType.title }}
-				</md-option>
-			</md-select>
-		</div>
-
-	</div>
-
+		</md-dialog-actions>
+	</form>
 
 </md-dialog-content>
-<md-dialog-actions>
-	<button class="btn btn-sm" md-dialog-close>Close</button>
-	<button class="btn btn-sm btn-success">Save</button>
 
-</md-dialog-actions>

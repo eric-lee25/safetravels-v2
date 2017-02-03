@@ -39,13 +39,13 @@ export class DialogService {
 		return dialogRef;
 	}
 
-	openAddStaffUserDialog() {
+	openAddStaffUserDialog(): MdDialogRef<AddStaffUserDialogComponent> {
 
 		let config: MdDialogConfig = new MdDialogConfig();
 
 		config.width = '400px';
 
-		this.dialog.open(AddStaffUserDialogComponent, config);
+		return this.dialog.open(AddStaffUserDialogComponent, config);
 
 	}
 

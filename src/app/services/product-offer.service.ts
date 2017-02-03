@@ -21,5 +21,14 @@ export class ProductOfferService {
 		return this.appService.post('/businesses/' + businessId + '/offers', offer).map(res => res.json().data).catch(err => Observable.throw(err));
 	}
 
+	editOffer(offer: ProductOffer): Observable<ProductOffer> {
+
+		return this.appService.put('/offers/' + offer.id, offer).map(res => res.json().data).catch(err => Observable.throw(err));
+	}
+
+	deleteOffer(offer: ProductOffer): Observable<any> {
+
+		return this.appService.delete('/offers/' + offer.id).map(res => res.json()).catch(err => Observable.throw(err));
+	}
 
 }

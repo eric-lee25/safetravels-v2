@@ -3,6 +3,7 @@ import {DialogService} from "../../services/dialog.service";
 import {BusinessAccount} from "../../models/business-account.model";
 import {BusinessService} from "../../services/business.service";
 import {BusinessUser} from "../../models/business-user.model";
+import {NotificationService} from "../../services/notification.service";
 
 @Component({
 	selector: 'app-business-users',
@@ -22,7 +23,9 @@ export class BusinessUsersComponent implements OnInit {
 	loading: boolean = true;
 
 
-	constructor(private dialogService: DialogService, private businessService: BusinessService) {
+	constructor(private dialogService: DialogService,
+							private notification: NotificationService,
+							private businessService: BusinessService) {
 
 	}
 
@@ -86,7 +89,6 @@ export class BusinessUsersComponent implements OnInit {
 				this.users = res;
 				this.loading = false;
 			}, err => {
-
 				console.log(err);
 			});
 
@@ -94,7 +96,26 @@ export class BusinessUsersComponent implements OnInit {
 	}
 
 	showAddStaffUserDialog() {
-		this.dialogService.openAddStaffUserDialog();
+		let ref = this.dialogService.openAddStaffUserDialog();
+
+		ref.afterClosed().subscribe(user => {
+
+			if (user) {
+
+				console.log("After closed, found user: ", user);
+
+
+				this.businessService.createUser(this.selectedAccount.id, user).subscribe(res => {
+
+					console.log(res);
+					this.users.push(res);
+
+				}, err => {
+					this.notification.show(err.json().message, 'error');
+				});
+			}
+
+		});
 
 	}
 }

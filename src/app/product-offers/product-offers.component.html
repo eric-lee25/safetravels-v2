@@ -250,7 +250,23 @@
 				<td>{{offer.description}}</td>
 				<td>{{offer.url}}</td>
 				<td>{{offer.price}}</td>
-				<td></td>
+				<td>
+					<button md-icon-button [mdMenuTriggerFor]="menu">
+						<md-icon>more_vert</md-icon>
+					</button>
+					<md-menu #menu="mdMenu">
+						<button md-menu-item (click)="editOffer(offer)">
+							<md-icon>mode_edit</md-icon>
+							<span>Edit</span>
+						</button>
+						<button md-menu-item (click)="deleteOffer(offer)">
+							<md-icon>delete</md-icon>
+							<span>Delete</span>
+						</button>
+					</md-menu>
+
+
+				</td>
 			</tr>
 
 			</tbody>

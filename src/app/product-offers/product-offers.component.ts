@@ -6,6 +6,7 @@ import {BusinessService} from "../services/business.service";
 import {ProductOfferService} from "../services/product-offer.service";
 import {ProductOffer} from "../models/product-offer.model";
 import {NotificationService} from "../services/notification.service";
+import {AppService} from "../services/app.service";
 
 
 @Component({
@@ -31,7 +32,8 @@ export class ProductOffersComponent implements OnInit {
 	tableCollapsed: boolean[] = [true, true];
 
 
-	constructor(private offerService: OfferService,
+	constructor(private appService: AppService,
+							private offerService: OfferService,
 							private businessService: BusinessService,
 							private productOfferService: ProductOfferService,
 							private notification: NotificationService,
@@ -94,16 +96,75 @@ export class ProductOffersComponent implements OnInit {
 
 		dialogRef.afterClosed().subscribe(offer => {
 
-			this.productOfferService.createOffer(this.selectedAccount.id, offer).subscribe(res => {
+			if (offer) {
+				this.productOfferService.createOffer(this.selectedAccount.id, offer).subscribe(res => {
 
-				this.notification.show("Offer has been created");
-				this.offers.push(res);
+					this.notification.show("Offer has been created");
+					this.offers.push(res);
 
-			}, err => {
-				this.notification.show(err.json().message, 'error');
+				}, err => {
+					this.notification.show(err.json().message, 'error');
 
-			});
+				});
+			}
 
+
+		});
+	}
+
+	editOffer(offer: ProductOffer) {
+
+
+		let editOffer = JSON.parse(JSON.stringify(offer));
+		this.appService.productOfferEvent.next(editOffer);
+
+		let dialogRef = this.dialogService.openAddProductOfferDialog();
+
+		dialogRef.afterClosed().subscribe(offer => {
+			if (offer) {
+				this.appService.productOfferEvent.next(null);
+				this.productOfferService.editOffer(offer).subscribe(res => {
+
+					this.notification.show(res.title + ' has been updated.');
+					let offerIndex = this.findIndexByOffer(offer);
+
+					if (offerIndex) {
+						this.offers[offerIndex] = res;
+					}
+
+				}, err => {
+					this.notification.show(err.json().message, 'error');
+				});
+			}
+
+
+		});
+
+
+	}
+
+	findIndexByOffer(offer: ProductOffer): number {
+
+		for (let i = 0; i < this.offers.length; i++) {
+			if (this.offers[i].id == offer.id) {
+				return i;
+			}
+		}
+		return null;
+	}
+
+	deleteOffer(offer: ProductOffer) {
+
+		this.productOfferService.deleteOffer(offer).subscribe(res => {
+
+			this.notification.show(offer.title + ' has been deleted.');
+			let offerIndex = this.findIndexByOffer(offer.id);
+			if (offerIndex) {
+				this.offers.splice(offerIndex, 1);
+			}
+
+		}, err => {
+			this.notification.show(err.json().message, 'error');
 		});
 	}
 
