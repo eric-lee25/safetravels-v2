@@ -1,6 +1,6 @@
 <h2 md-dialog-title>{{config.title}}</h2>
 <md-dialog-content>
-  <p>{{config.message}}</p>
+  <p [innerHTML]="config.message"></p>
 </md-dialog-content>
 
 <md-dialog-actions>

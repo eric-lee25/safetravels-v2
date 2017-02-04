@@ -43,6 +43,12 @@ export class AuthService {
 
 	}
 
+	forgotPassword(email: string): Observable<any> {
+
+		let data = {email: email};
+		return this.appService.post('/password/forgot', data).map(res => res).catch(err => Observable.throw(err));
+	}
+
 
 	setCurrentLoginData(data) {
 
