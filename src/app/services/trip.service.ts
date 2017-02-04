@@ -17,6 +17,11 @@ export class TripService {
 
 	}
 
+	upcomingTrips(): Observable<Trip[]> {
+
+		return this.appService.get('/trips/upcoming').map(res => this.formatTrips(res.json().data)).catch(err => Observable.throw(err))
+	}
+
 	listTrips(include?: string): Observable<Trip[]> {
 		let endpoint = '/trips?role=user';
 		if (include) {

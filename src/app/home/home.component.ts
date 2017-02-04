@@ -93,8 +93,15 @@ export class HomeComponent implements OnInit {
 	ngOnInit() {
 		// load trips from /assets/data/trips.json
 
-		this.tripService.listTrips().subscribe(res => {
+		this.tripService.upcomingTrips().subscribe(res => {
 			this.trips = res;
+			if (res.length) {
+				for (let i = 0; i < res.length; i++) {
+					if (res[i].coverImages && res[i].coverImages.data && res[i].coverImages.data.length) {
+						res[i].cover_image = res[i].coverImages.data[0].url;
+					}
+				}
+			}
 
 			this.showTripsLoading = false;
 

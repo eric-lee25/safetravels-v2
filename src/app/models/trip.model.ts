@@ -4,6 +4,7 @@ export class Trip {
 	public id?: number;
 	public code?: string;
 	public cover_image?: string;
+	public coverImages?: any;
 	public title?: string;
 	public description?: string;
 	public admin_id?: number;

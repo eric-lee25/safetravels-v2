@@ -61,6 +61,9 @@ export class ManageTripComponent implements OnInit {
 			if (res.guide) {
 				this.trip.guide = res.guide.data;
 			}
+			if (res.coverImages.data && res.coverImages.data.length) {
+				this.trip.cover_image = res.coverImages.data[0].url;
+			}
 
 
 			console.log("trip", this.trip);
@@ -206,8 +209,9 @@ export class ManageTripComponent implements OnInit {
 
 		dialogRef.afterClosed().subscribe(event => {
 
+
 			if (event && typeof event[1] !== "undefined") {
-				this.trip.cover_image = event[1].data.cover_image;
+				this.trip.cover_image = event[1].data.url;
 			}
 
 
