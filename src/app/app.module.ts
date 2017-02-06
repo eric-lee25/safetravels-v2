@@ -56,6 +56,7 @@ import {BusinessService} from "./services/business.service";
 import { AutocompleteComponent } from './elements/autocomplete/autocomplete.component';
 import {LocationService} from "./services/location.service";
 import {ProductOfferService} from "./services/product-offer.service";
+import {TimepickerModule} from "ng2-bootstrap";
 const DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
   server: 'https://httpbin.org/post',
@@ -125,6 +126,7 @@ const DROPZONE_CONFIG: DropzoneConfigInterface = {
     AppRoutingModule,
     MaterialModule.forRoot(),
     DropzoneModule.forRoot(DROPZONE_CONFIG),
+    TimepickerModule.forRoot(),
     DxSelectBoxModule,
     DxChartModule,
     MyDatePickerModule

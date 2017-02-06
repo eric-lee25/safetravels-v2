@@ -389,14 +389,18 @@
 							<div class="panel-body">
 
 								<ul class="trip-docs">
-									<li>
-										<a
-												href="https://safetravels01.s3.eu-central-1.amazonaws.com/864fdee9613aae26406169c72f52f9e6447a33d5-1024">
-											<img
-													[src]="'https://safetravels01.s3.eu-central-1.amazonaws.com/864fdee9613aae26406169c72f52f9e6447a33d5-50'"
-													alt="">
+									<li *ngFor="let doc of selectedUserDocuments">
+										<a href="{{doc.url}}" target="_blank">
+											<span class="document-type" [ngSwitch]="doc.type">
+												<i *ngSwitchCase="'pdf'" class="fa fa-file-pdf-o"></i>
+												<i *ngSwitchCase="'txt'" class="fa fa-file-o"></i>
+												<i *ngSwitchCase="'doc'" class="fa fa-file-text-o"></i>
+												<i *ngSwitchCase="'xls'" class="fa fa-file-text-o"></i>
+												<i *ngSwitchDefault class="fa fa-file-o"></i>
+											</span>
+											<span class="document-name">{{doc.title}} ({{doc.doc_name}})</span>
 										</a>
-										<span class="doc-title"></span>
+
 										<a class="alink doc-delete">&nbsp;
 											<i class="fa fa-times"></i>
 										</a>

@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Trip} from "../models/trip.model";
 import {TripActivity} from "../models/trip-activity.model";
 import {TripDocument} from "../models/trip-document.model";
+import {ActivityType} from "../models/activity-type.model";
 
 @Injectable()
 export class TripService {
@@ -48,11 +49,12 @@ export class TripService {
 	}
 
 
-	getTripGroupDocuments(id: number): Observable<TripDocument[]>{
+	getTripGroupDocuments(id: number): Observable<TripDocument[]> {
 
 		let endpoint = '/trips/' + id + '/documents';
 		return this.appService.get(endpoint).map(res => res.json().data).catch(err => Observable.throw(err));
 	}
+
 	formatTrips(trips: Trip[]): Trip[] {
 
 
@@ -80,5 +82,12 @@ export class TripService {
 	getActivities(tripId: number): Observable<TripActivity[]> {
 
 		return this.appService.get('/trips/' + tripId + '/activities').map(res => res.json().data).catch(err => Observable.throw(err));
+	}
+	createActivity(tripId: number, activity: TripActivity): Observable<TripActivity>{
+		return this.appService.post('/trips/' + tripId + '/activities', activity).map(res => res.json().data).catch(err => Observable.throw(err));
+	}
+
+	getActivityTypes(): Observable<ActivityType[]> {
+		return this.appService.get('/activities/types').map(res => res.json().data).catch(err => Observable.throw(err));
 	}
 }

@@ -26,7 +26,9 @@ export class ManageTripComponent implements OnInit {
 	passengers: TripPassenger[] = [];
 	groupDocuments: TripDocument[] = [];
 
+	selectedUserDocuments: TripDocument[] = [];
 	selectedPassenger: TripPassenger = null;
+	activities: TripActivity[] = [];
 	activityDays: TripActivityDayGroup[] = [];
 	selectedActivityDay: TripActivityDayGroup = new TripActivityDayGroup();
 
@@ -85,12 +87,8 @@ export class ManageTripComponent implements OnInit {
 
 		// get trips activities
 		this.tripService.getActivities(tripId).subscribe(res => {
-
-			this.activityDays = this.getDayGroupFromActivities(res);
-
-			if (this.activityDays.length) {
-				this.selectedActivityDay = this.activityDays[0];
-			}
+			this.activities = res;
+			this.formatActivities();
 
 			console.log(this.activityDays);
 
@@ -106,6 +104,15 @@ export class ManageTripComponent implements OnInit {
 			console.log(err);
 		});
 
+	}
+
+	formatActivities() {
+
+		this.activityDays = this.getDayGroupFromActivities(this.activities);
+
+		if (this.activityDays.length) {
+			this.selectedActivityDay = this.activityDays[0];
+		}
 	}
 
 	getDayGroupFromActivities(activities: TripActivity[]): TripActivityDayGroup[] {
@@ -341,7 +348,18 @@ export class ManageTripComponent implements OnInit {
 	}
 
 	openAddActivityToDayDialog() {
-		this.dialogService.openAddActivityToDayDialog();
+		this.appService.selectedTripEvent.next(this.trip);
+
+		let ref = this.dialogService.openAddActivityToDayDialog();
+		ref.afterClosed().subscribe(activity => {
+			if (activity) {
+				this.activities.push(activity);
+				this.formatActivities();
+
+				console.log("Activity:", activity);
+
+			}
+		});
 	}
 
 	openOffersDialog() {

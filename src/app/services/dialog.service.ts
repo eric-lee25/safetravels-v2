@@ -128,10 +128,10 @@ export class DialogService {
 		this.dialog.open(AddDayToTripDialogComponent, dialogConfig);
 	}
 
-	openAddActivityToDayDialog() {
+	openAddActivityToDayDialog():MdDialogRef<AddActivityToDayDialogComponent> {
 		let dialogConfig: MdDialogConfig = new MdDialogConfig();
 		dialogConfig.width = '650px';
-		this.dialog.open(AddActivityToDayDialogComponent, dialogConfig);
+		return this.dialog.open(AddActivityToDayDialogComponent, dialogConfig);
 
 	}
 
