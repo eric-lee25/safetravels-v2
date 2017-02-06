@@ -3,6 +3,7 @@ export class TripActivity {
 	public type?: number;
 	public trip_id?: number;
 	public cover_image?: string;
+	public coverImages?: any;
 	public start?: string;
 	public end?: string;
 	public from?: string;
@@ -15,7 +16,12 @@ export class TripActivity {
 	public provider?: any;
 	public website?: string;
 	public contact_number?: string;
-	public en?: any;
-	public de_DE?: any;
+	public lang_code?: string;
 	public offers?: any;
+	public en?: any;
+	public es?: any;
+	public de?: any;
+	public zh?: any;
+	public it?: any;
+	public ja?: any;
 }

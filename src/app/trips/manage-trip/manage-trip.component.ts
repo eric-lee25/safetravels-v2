@@ -13,6 +13,7 @@ import {AuthService} from "../../services/auth.service";
 import {DatePipe} from "@angular/common";
 import {TripActivityDayGroup} from "../../models/activity-day-group.model";
 import {TripActivity} from "../../models/trip-activity.model";
+import {TripDocument} from "../../models/trip-document.model";
 @Component({
 	selector: 'app-manage-trip',
 	templateUrl: './manage-trip.component.html',
@@ -23,6 +24,7 @@ export class ManageTripComponent implements OnInit {
 
 	trip: Trip = new Trip();
 	passengers: TripPassenger[] = [];
+	groupDocuments: TripDocument[] = [];
 
 	selectedPassenger: TripPassenger = null;
 	activityDays: TripActivityDayGroup[] = [];
@@ -77,7 +79,6 @@ export class ManageTripComponent implements OnInit {
 
 			this.passengers = res as TripPassenger[];
 		}, err => {
-
 			console.log('passengers error', err);
 		});
 
@@ -98,6 +99,12 @@ export class ManageTripComponent implements OnInit {
 			console.log(err);
 		});
 
+		this.tripService.getTripGroupDocuments(tripId).subscribe(res => {
+
+			this.groupDocuments = res;
+		}, err => {
+			console.log(err);
+		});
 
 	}
 
@@ -108,11 +115,10 @@ export class ManageTripComponent implements OnInit {
 		activities.forEach(item => {
 			let day = this.datePipe.transform(item.start, 'yyyy-MM-dd');
 
-			console.log(this.datePipe.transform(item.start, 'yyyy-MM-dd'));
+			//console.log(this.datePipe.transform(item.start, 'yyyy-MM-dd'));
 
 			let indexValue = this.checkDayIsInGroup(day, days);
-			if (indexValue) {
-
+			if (indexValue !== null) {
 				// that mean this activity same day with existing day group
 				days[indexValue].activities.push(item);
 
@@ -217,6 +223,31 @@ export class ManageTripComponent implements OnInit {
 
 		});
 
+	}
+
+	showUploadDocumentDialog(user: TripPassenger) {
+		let config: DropzoneConfigInterface = {
+			server: this.appService.serverURL + '/trips/' + this.trip.id + '/documents',
+			headers: {"Authorization": "bearer " + this.auth.getToken()},
+			paramName: 'file',
+			uploadMultiple: false,
+			acceptedFiles: 'image/*,application/pdf,.txt,.doc,.docx'
+		};
+
+		this.appService.uploadConfigEvent.next(config);
+
+		this.appService.dialogTitleEvent.next("Upload document");
+		let dialogRef = this.dialog.open(UploadImageDialogComponent);
+
+		dialogRef.afterClosed().subscribe(event => {
+
+
+			if (event && typeof event[1] !== "undefined") {
+				this.trip.cover_image = event[1].data.url;
+			}
+
+
+		});
 	}
 
 	deleteTripConfirmation() {

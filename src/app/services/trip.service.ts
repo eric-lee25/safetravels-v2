@@ -3,6 +3,7 @@ import {AppService} from "./app.service";
 import {Observable} from "rxjs";
 import {Trip} from "../models/trip.model";
 import {TripActivity} from "../models/trip-activity.model";
+import {TripDocument} from "../models/trip-document.model";
 
 @Injectable()
 export class TripService {
@@ -46,6 +47,12 @@ export class TripService {
 		return this.appService.get(endpoint).map(res => res.json().data).catch(err => Observable.throw(err));
 	}
 
+
+	getTripGroupDocuments(id: number): Observable<TripDocument[]>{
+
+		let endpoint = '/trips/' + id + '/documents';
+		return this.appService.get(endpoint).map(res => res.json().data).catch(err => Observable.throw(err));
+	}
 	formatTrips(trips: Trip[]): Trip[] {
 
 

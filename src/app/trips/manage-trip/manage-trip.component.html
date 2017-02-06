@@ -70,7 +70,7 @@
 	<md-tab-group>
 		<md-tab>
 			<template md-tab-label>
-				<i class="icon-Tourism-Icons_monument-4"></i>
+				<i class="fa fa-plane"></i>
 				Trip Itinerary
 			</template>
 
@@ -106,15 +106,17 @@
 				<div class="itineraryMainBox" *ngIf="selectedActivityDay.title">
 					<div class="panel">
 						<div class="panel-body">
-							<h3 class="c-header"><strong class="pull-left ng-binding">{{selectedActivityDay.title}}</strong>
-							<!--	<button (click)="openAddDayToTripDialog()" type="button" class="btnIcon btn-text-blue"><i
-										class="linecons-pencil"></i>
-								</button> -->
-								<button (click)="openDeleteDayConfirmation()" type="button" class="btnIcon btn-text-red"><i
-										class="linecons-trash"></i></button>
+							<h3 class="c-header"><strong class="pull-left ng-binding">{{selectedActivityDay.title}}
+								<small>: {{selectedActivityDay.date | date: 'yMMMMd'}}</small>
+							</strong>
+								<!--	<button (click)="openAddDayToTripDialog()" type="button" class="btnIcon btn-text-blue"><i
+											class="linecons-pencil"></i>
+									</button> -->
+								<!--<button (click)="openDeleteDayConfirmation()" type="button" class="btnIcon btn-text-red"><i
+										class="linecons-trash"></i></button> -->
 
 								<button (click)="openAddActivityToDayDialog()" class="pull-right btn btn-success">
-									<i class="fa fa-plus"></i> Add Activity to Day
+									<i class="fa fa-plus"></i> Add Activity
 								</button>
 							</h3>
 
@@ -220,9 +222,9 @@
 			<div class="row c-manage-trip">
 				<div class="col-md-3 c-mt-list">
 					<div class="c-tripmembers">
-						<h5 class="pull-left">Trip Members</h5>
+						<h5 class="pull-left">{{passengers.length}} Members</h5>
 						<button (click)="openAddPassengerDialog()" type="button" class="btn btn-sm btn-success pull-right">
-							<i class="fa fa-plus"></i> &nbsp; Add Passenger
+							<i class="fa fa-plus"></i> &nbsp; Add
 						</button>
 					</div>
 
@@ -242,8 +244,10 @@
 						<li *ngFor="let passenger of passengers" (click)="onSelectTripPassenger(passenger)"
 								class="alink list-group-item c-trip-itinerary"
 								[class.active]="selectedPassenger && selectedPassenger.id == passenger.id">
-							<div class="c-ti-date pull-left"><img [src]="passenger.avatar" class="img-circle"
-																										alt="user-pic">
+							<div class="c-ti-date pull-left">
+								<img *ngIf="!passenger.avatar" [src]="'/assets/images/user-4.png'" class="img-circle" alt="user-pic" />
+								<img *ngIf="passenger.avatar" [src]="passenger.avatar" class="img-circle"
+																										alt="user-pic" />
 							</div>
 							<div class="c-ti-details pull-right">
 								<div class="c-ti-destination ng-binding">
@@ -257,11 +261,6 @@
 
 
 					</ul>
-					<div class="c-inactivemembers">
-						<h4 class="pull-left">Inactive</h4>
-						<button type="button" class="btn btn-success pull-right">Activate All
-						</button>
-					</div>
 
 				</div>
 				<div class="col-md-9">
@@ -297,14 +296,18 @@
 							<div class="panel-body">
 
 								<ul class="trip-docs">
-									<li>
-										<a
-												href="https://safetravels01.s3.eu-central-1.amazonaws.com/864fdee9613aae26406169c72f52f9e6447a33d5-1024">
-											<img
-													[src]="'https://safetravels01.s3.eu-central-1.amazonaws.com/864fdee9613aae26406169c72f52f9e6447a33d5-50'"
-													alt="">
+									<li *ngFor="let doc of groupDocuments">
+										<a href="{{doc.url}}" target="_blank">
+											<span class="document-type" [ngSwitch]="doc.type">
+												<i *ngSwitchCase="'pdf'" class="fa fa-file-pdf-o"></i>
+												<i *ngSwitchCase="'txt'" class="fa fa-file-o"></i>
+												<i *ngSwitchCase="'doc'" class="fa fa-file-text-o"></i>
+												<i *ngSwitchCase="'xls'" class="fa fa-file-text-o"></i>
+												<i *ngSwitchDefault class="fa fa-file-o"></i>
+											</span>
+											<span class="document-name">{{doc.title}} ({{doc.doc_name}})</span>
 										</a>
-										<span class="doc-title"></span>
+
 										<a class="alink doc-delete">&nbsp;
 											<i class="fa fa-times"></i>
 										</a>
@@ -329,16 +332,44 @@
 							<div class="panel-body">
 
 								<div class="c-member-details">
-									<img *ngIf="!selectedPassenger.avatar" [src]="'/assets/images/user-4.png'" class="img-circle ng-scope"
-											 alt="user-pic">
-									<img *ngIf="selectedPassenger.avatar" [src]="selectedPassenger.avatar"
-											 class="img-circle ng-scope" alt="user-pic">
 
-									<div class="c-md-main ng-binding">{{selectedPassenger.first_name + ' '+
-										selectedPassenger.last_name}}
+									<div class="media">
+										<div class="media-left">
+											<img *ngIf="!selectedPassenger.avatar" [src]="'/assets/images/user-4.png'"
+													 class="img-circle ng-scope"
+													 alt="user-pic">
+											<img *ngIf="selectedPassenger.avatar" [src]="selectedPassenger.avatar"
+													 class="img-circle ng-scope" alt="user-pic">
+										</div>
+										<div class="media-body">
+											<div class="row">
+												<div class="col-sm-12">
+													<div class="pull-left">
+														<div class="c-md-main ng-binding">{{selectedPassenger.first_name + ' '+
+															selectedPassenger.last_name}}
+														</div>
+													</div>
+													<div class="pull-left">
+														<md-slide-toggle
+																class="passenger-activate"
+																[color]="'primary'"
+																[checked]="selectedPassenger.emergency_activated"
+																[disabled]="true">
+															<span *ngIf="selectedPassenger.emergency_activated">Active</span>
+															<span *ngIf="!selectedPassenger.emergency_activated">Inactive</span>
+														</md-slide-toggle>
+
+													</div>
+												</div>
+											</div>
+											<div class="c-md-secondary ng-binding">{{selectedPassenger.email}}</div>
+										</div>
 									</div>
-									<div class="c-md-secondary ng-binding">Need field for email@me.com</div>
+
+
 								</div>
+
+
 							</div>
 						</div>
 						<!-- // Trip group -->
@@ -350,7 +381,8 @@
 								<h3 class="panel-title"> Travel Documents</h3>
 
 								<div class="panel-options">
-									<button class="btn btn-small btn-info">Upload</button>
+									<button class="btn btn-small btn-info" (click)="showUploadDocumentDialog(selectedPassenger)">Upload
+									</button>
 								</div>
 							</div>
 
