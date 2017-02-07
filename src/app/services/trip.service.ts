@@ -83,8 +83,13 @@ export class TripService {
 
 		return this.appService.get('/trips/' + tripId + '/activities').map(res => res.json().data).catch(err => Observable.throw(err));
 	}
-	createActivity(tripId: number, activity: TripActivity): Observable<TripActivity>{
+
+	createActivity(tripId: number, activity: TripActivity): Observable<TripActivity> {
 		return this.appService.post('/trips/' + tripId + '/activities', activity).map(res => res.json().data).catch(err => Observable.throw(err));
+	}
+
+	updateActivity(activity: TripActivity): Observable<TripActivity> {
+		return this.appService.put('/activities/' + activity.id, activity).map(res => res.json().data).catch(err => Observable.throw(err));
 	}
 
 	getActivityTypes(): Observable<ActivityType[]> {

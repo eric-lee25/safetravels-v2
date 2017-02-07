@@ -5,6 +5,8 @@ import {User} from "../models/user.model";
 import {DropzoneConfigInterface} from "angular2-dropzone-wrapper";
 import {Trip} from "../models/trip.model";
 import {ProductOffer} from "../models/product-offer.model";
+import {TripActivity} from "../models/trip-activity.model";
+import {ActivityType} from "../models/activity-type.model";
 
 @Injectable()
 export class AppService {
@@ -71,9 +73,16 @@ export class AppService {
 
 	selectedTrip: Trip = new Trip();
 	selectedTripEvent: Subject<Trip> = new Subject<Trip>();
+	selectedTripActivity: TripActivity = new TripActivity();
+	selectedTripActivityEvent: Subject<TripActivity> = new Subject<TripActivity>();
 
 	productOffer: ProductOffer = new ProductOffer();
 	productOfferEvent: Subject<ProductOffer> = new Subject<ProductOffer>();
+
+	activityTypes: ActivityType[] = [];
+	activityTypesEvent: Subject<ActivityType[]> = new Subject<ActivityType[]>();
+
+
 
 	constructor(private http: Http) {
 
@@ -150,6 +159,9 @@ export class AppService {
 
 		this.selectedTripEvent.subscribe(trip => this.selectedTrip = trip);
 		this.productOfferEvent.subscribe(offer => this.productOffer = offer);
+		this.selectedTripActivityEvent.subscribe(activity => this.selectedTripActivity = activity);
+
+		this.activityTypesEvent.subscribe(types => this.activityTypes = types);
 
 	}
 

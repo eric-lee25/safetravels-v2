@@ -40,26 +40,80 @@ export class AddActivityToDayDialogComponent implements OnInit {
 	startTime: Date = new Date();
 	endTime: Date = new Date();
 
+	model: Object = { date: { year: 2018, month: 10, day: 9 } };
+
 	constructor(private appService: AppService,
 							private tripService: TripService,
 							private locationService: LocationService,
 							private datePipe: DatePipe,
 							public dialogRef: MdDialogRef<AddActivityToDayDialogComponent>) {
 
+
+	}
+
+	ngOnInit() {
+		this.trip = this.appService.selectedTrip;
+		this.activityTypes = this.appService.activityTypes;
+		let activity = this.appService.selectedTripActivity;
+		console.log(activity);
+
+		if (activity && activity.id) {
+			this.activity = activity;
+			this.activity.title = this.activity.en.title;
+			this.activity.description = this.activity.en.description;
+			this.activity.meeting_point = this.activity.en.meeting_point;
+			this.activity.notes = this.activity.en.notes;
+			this.getActivityTypeSlug();
+
+			if(this.activity.end){
+				this.endTime = new Date(this.activity.end);
+			}
+			if(this.startTime){
+				this.startTime = new Date(this.activity.start);
+			}
+
+
+		}
+
+
 		if (this.activityTypes.length == 0) {
 
 			this.tripService.getActivityTypes().subscribe(res => {
 					this.activityTypes = res;
+
+					this.appService.activityTypesEvent.next(res);
+
+					this.getActivityTypeSlug();
+
+
 				}, err => {
 					console.log(err);
 				}
 			);
 		}
+
+
 	}
 
-	ngOnInit() {
-		this.trip = this.appService.selectedTrip;
+	getActivityTypeSlug() {
+		if (this.activityTypes.length && this.activity.id && this.activity.type !== null) {
 
+			let typeSlug = this.getTypeSlugFromId(this.activity.type);
+
+			if (typeSlug !== null) {
+				this.activity.type_slug = typeSlug;
+			}
+		}
+	}
+
+	getTypeSlugFromId(id: number): string {
+
+		for (let i = 0; i < this.activityTypes.length; i++) {
+			if (this.activityTypes[i].id == id) {
+				return this.activityTypes[i].slug;
+			}
+		}
+		return null;
 	}
 
 
@@ -142,18 +196,32 @@ export class AddActivityToDayDialogComponent implements OnInit {
 
 	onSubmit() {
 
-		this.activity.extras = '{}';
-		this.activity.start = (new Date(this.startDate + ' ' + this.getTime(this.startTime)).getTime() / 1000);
-		this.activity.end = (new Date(this.endDate + ' ' + this.getTime(this.endTime)).getTime() / 1000);
+		if (this.activity.id) {
 
-		this.tripService.createActivity(this.trip.id, this.activity).subscribe(res => {
+			//save activity
 
-			console.log(res);
-			this.dialogRef.close(res);
+			this.tripService.updateActivity(this.activity).subscribe(res => {
 
-		}, err => {
-			console.log(err);
-		});
+				this.dialogRef.close(res);
+			}, err => {
+				console.log(err);
+			});
+
+		} else {
+			// create new
+			this.activity.extras = '{}';
+			this.activity.start = (new Date(this.startDate + ' ' + this.getTime(this.startTime)).getTime() / 1000);
+			this.activity.end = (new Date(this.endDate + ' ' + this.getTime(this.endTime)).getTime() / 1000);
+
+			this.tripService.createActivity(this.trip.id, this.activity).subscribe(res => {
+
+				console.log(res);
+				this.dialogRef.close(res);
+
+			}, err => {
+				console.log(err);
+			});
+		}
 
 
 	}

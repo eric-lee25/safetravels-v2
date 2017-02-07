@@ -28,8 +28,7 @@
 				<div id="datetimepicker2" class="input-append">
 					<div class="col-md-6 col-sm-6 trip-input">
 						<label>Start</label>
-						<my-date-picker class="date-select-picker" [options]="dateOptions"
-														(dateChanged)="onSelectStartDate($event)"></my-date-picker>
+						<my-date-picker class="date-select-picker" [options]="dateOptions" (dateChanged)="onSelectStartDate($event)" [selDate]="activity.start | date: 'y-MM-dd'"></my-date-picker>
 						<div class="form-group">
 							<label>Time</label>
 							<timepicker [(ngModel)]="startTime" [ngModelOptions]="{standalone: true}"></timepicker>
@@ -39,12 +38,13 @@
 					<div class="col-md-6 col-sm-6 trip-input">
 						<label>End</label>
 						<my-date-picker class="date-select-picker" [options]="dateOptions"
-														(dateChanged)="onSelectEndDate($event)"></my-date-picker>
+														(dateChanged)="onSelectEndDate($event)" [selDate]="activity.end | date: 'y-MM-dd'"></my-date-picker>
 						<div class="form-group">
 							<label>Time</label>
 							<timepicker [(ngModel)]="endTime" [ngModelOptions]="{standalone: true}"></timepicker>
 						</div>
 					</div>
+
 				</div>
 			</div>
 
@@ -52,13 +52,13 @@
 				<div class="col-md-6 col-sm-12 trip-input">
 					<app-autocomplete (onKeyup)="onFromLocationKeyUp($event)" (onSelect)="onSelectFromLocation($event)"
 														[placeholder]="'From'"
-														[dropdown]="fromLocations"></app-autocomplete>
+														[dropdown]="fromLocations" [value]="activity.from"></app-autocomplete>
 				</div>
 
 				<div class="col-md-6 col-sm-12 trip-input">
 					<app-autocomplete (onKeyup)="onEndLocationKeyUp($event)" (onSelect)="onSelectEndLocation($event)"
 														[placeholder]="'To'"
-														[dropdown]="endLocations"></app-autocomplete>
+														[dropdown]="endLocations" [value]="activity.to"></app-autocomplete>
 				</div>
 
 			</div>

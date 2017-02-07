@@ -470,6 +470,10 @@ md-slide-toggle.passenger-activate {
   width: 100%;
 }
 
-.activityOverview .trip-input md-input-container {
+#activityOverview .trip-input md-input-container {
   width: 100%;
+}
+
+timepicker .btn {
+  margin-bottom: 0;
 }

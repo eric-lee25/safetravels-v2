@@ -187,15 +187,19 @@
 									</td>
 									<td class="action-links">
 										<div class="c-actionbtn-container">
-											<a (click)="showEditActivityOfferDialog()" class="alink edit"><i class="linecons-pencil"></i>
-												&nbsp;
-												Edit
-											</a>
-											<br>
-											<a (click)="openDeleteActivityConfirmation()" class="alink delete">
-												<i class="linecons-trash"></i> &nbsp;
-												Delete
-											</a>
+											<button md-icon-button [mdMenuTriggerFor]="menu">
+												<md-icon>more_vert</md-icon>
+											</button>
+											<md-menu #menu="mdMenu">
+												<button md-menu-item (click)="showEditActivityDialog(activity)">
+													<md-icon>mode_edit</md-icon>
+													<span>Edit</span>
+												</button>
+												<button md-menu-item (click)="openDeleteActivityConfirmation(activity)">
+													<md-icon>delete</md-icon>
+													<span>Delete</span>
+												</button>
+											</md-menu>
 										</div>
 									</td>
 								</tr>

@@ -14,8 +14,8 @@ export class TripActivity {
 	public trip_id?: number;
 	public cover_image?: string;
 	public coverImages?: any;
-	public start?: number;
-	public end?: number;
+	public start?: any;
+	public end?: any;
 	public from?: string;
 	public from_lat?: any;
 	public from_long?: any;

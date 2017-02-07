@@ -285,7 +285,10 @@ export class ManageTripComponent implements OnInit {
 
 	}
 
-	openDeleteActivityConfirmation() {
+	openDeleteActivityConfirmation(activity: TripActivity) {
+
+		this.appService.selectedTripActivityEvent.next(activity);
+
 		let title = "Delete Activity Confirmation";
 		let msg = "Are you sure you want to delete this activity?";
 		let buttonTitle = "Delete Activity";
@@ -313,9 +316,15 @@ export class ManageTripComponent implements OnInit {
 
 	}
 
-	showEditActivityOfferDialog() {
+	showEditActivityDialog(activity: TripActivity) {
 
-		this.dialogService.openAddActivityToDayDialog();
+		this.appService.selectedTripActivityEvent.next(activity);
+		let ref = this.dialogService.openAddActivityToDayDialog();
+
+		ref.afterClosed().subscribe(activity => {
+			console.log("After edit", activity);
+			this.appService.selectedTripActivityEvent.next(null);
+		});
 
 	}
 
