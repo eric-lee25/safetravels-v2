@@ -1,132 +1,75 @@
 <h2 md-dialog-title>{{title}}</h2>
 
 <md-dialog-content>
-<form #f="ngForm">
-	<div class="edit-trip-dialog-content">
+	<form #f="ngForm">
+		<div class="edit-trip-dialog-content">
 
-		<div class="row">
-			<div class="col-md-12">
+			<div class="form-group-control">
+				<md-input-container class="input-full-width">
+					<input md-input placeholder="Trip Title" [(ngModel)]="trip.title" name="title" type="text"
+								 [required]="true">
+				</md-input-container>
+			</div>
+			<div class="form-group-control">
+				<app-autocomplete (onKeyup)="onLocationKeyUp($event)" (onSelect)="onTripLocationSelect($event)"
+													[placeholder]="'Location'"
+													[dropdown]="locations" [value]="trip.start_location"></app-autocomplete>
+			</div>
+			<div class="form-group-control">
+				<div class="row">
+					<div class="col-md-12">
+						<label>Start Date*</label>
+					</div>
+					<div class="col-md-12">
+						<my-date-picker [selDate]="trip.start_date" class="date-select-picker" [options]="dateOptions"
+														(dateChanged)="onSelectStartDate($event)"></my-date-picker>
+					</div>
+				</div>
 
+			</div>
+			<div class="form-group-control">
 				<div class="row">
-					<div class="col-md-3">
-						<h6>Trip Name*</h6>
+					<div class="col-md-12">
+						<label>End Date*</label>
 					</div>
-					<div class="col-md-9">
-
-						<div class="form-group">
-							<input [(ngModel)]="trip.title" class="form-control" name="title" type="text" required>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-3">
-						<h6>Location*</h6>
-					</div>
-					<div class="col-md-9">
-						<div class="form-group">
-							<div class="input-group">
-								<input name="start_location" [(ngModel)]="trip.start_location" type="text" class="form-control" required>
-								<span class="input-group-addon"><i class="fa-globe"></i></span>
-							</div>
-						</div>
-
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-3">
-						<h6>Trip Dates</h6>
-					</div>
-					<div class="col-md-9">
-						<div class="form-group">
-							<label>Start Date*</label>
-							<div class="input-group">
-								<my-date-picker [selDate]="trip.start_date" class="date-select-picker" [options]="dateOptions"
-																(dateChanged)="onSelectStartDate($event)"></my-date-picker>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-9 col-md-offset-3">
-						<div class="form-group">
-							<label>End Date*</label>
-							<div class="input-group">
-								<my-date-picker [selDate]="trip.end_date" class="date-select-picker" [options]="dateOptions"
-																(dateChanged)="onSelectEndDate($event)"></my-date-picker>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-3">
-						<h6>Admin Manager* <span class="ring-container _elevio_underline ctxUnderline" data-elevio-article="26472"
-																		 data-elevio-unique-id="0"></span></h6>
-					</div>
-					<div class="col-md-9">
-						<div class="form-group" name="Admin">
-							<select class="form-control ng-pristine ng-valid ng-valid-required" ng-model="trip.tour_admin_id"
-											ng-options="admin.id as admin.name for admin in adminUsers" required="">
-								<option value="0">Andreatta Hewitt</option>
-								<option value="1" selected="selected">Sally Grasperet</option>
-								<option value="2">testerp ewew</option>
-							</select>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-3">
-						<h6>Trip Guide <span class="small-h4">(optional)</span></h6>
-					</div>
-					<div class="col-md-9">
-						<div class="form-group">
-							<select class="form-control ng-pristine ng-valid" ng-model="trip.tour_guide_id"
-											ng-options="guide.id as guide.name for guide in allUsers">
-								<option value="" class=""></option>
-								<option value="0">Andreatta Hewitt</option>
-								<option value="1" selected="selected">Harry Hubert</option>
-								<option value="2">Sally Grasperet</option>
-								<option value="3">testerp ewew</option>
-							</select>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-4">
-						<h6>Group Chat</h6>
-						<div class="form-group">
-							<select class="form-control ng-pristine ng-valid" ng-model="trip.group_chat_status">
-								<option value="0">Enable Immediately</option>
-								<option value="1">Enable for Trip period only</option>
-								<option value="2">Disable</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<h6>Admin Messages</h6>
-						<div class="form-group">
-							<select class="form-control ng-pristine ng-valid" ng-model="trip.admin_messages_status">
-								<option value="0">Enable Immediately</option>
-								<option value="1">Enable for Trip period only</option>
-								<option value="2">Disable</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<h6>Tour Guide Messages</h6>
-						<div class="form-group">
-							<select class="form-control ng-pristine ng-valid" ng-model="trip.guide_messages_status">
-								<option value="0">Enable Immediately</option>
-								<option value="1">Enable for Trip period only</option>
-								<option value="2">Disable</option>
-							</select>
-						</div>
+					<div class="col-md-12">
+						<my-date-picker [selDate]="trip.end_date" class="date-select-picker" [options]="dateOptions"
+														(dateChanged)="onSelectEndDate($event)"></my-date-picker>
 					</div>
 				</div>
 			</div>
-		</div>
+			<div class="form-group-control">
+				<div class="row">
+					<div class="col-md-4">
+						<md-slide-toggle
+								class="example-margin"
+								[color]="'primary'"
+								[checked]="trip.admin_chat_enabled" (change)="admin_chat_enabled($event)">
+							Enable admin chat
+						</md-slide-toggle>
+					</div>
+					<div class="col-md-4">
+						<md-slide-toggle
+								class="example-margin"
+								[color]="'primary'"
+								[checked]="trip.guide_chat_enabled" (change)="guide_chat_enabled($event)">
+							Enable admin chat
+						</md-slide-toggle>
 
-	</div>
-</form>
+					</div>
+					<div class="col-md-4">
+						<md-slide-toggle
+								class="example-margin"
+								[color]="'primary'"
+								[checked]="trip.group_chat_enabled" (change)="group_chat_enabled($event)">
+							Enable admin chat
+						</md-slide-toggle>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</form>
 </md-dialog-content>
 <md-dialog-actions>
 	<button class="btn btn-sm" md-dialog-close>Close</button>

@@ -83,7 +83,7 @@ export class OffersDialogComponent implements OnInit {
 	openAddOffer() {
 
 		this.dialogResult.type = "openNewOffer";
-		this.dialogResult.type = null;
+		this.dialogResult.data = null;
 		this.dialogRef.close(this.dialogResult);
 	}
 

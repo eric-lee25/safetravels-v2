@@ -416,7 +416,7 @@ export class ManageTripComponent implements OnInit {
 
 			console.log("Result:", result);
 
-			if ((result) && result.type == 'openNewOffer') {
+			if (result && result.type == 'openNewOffer') {
 				// let open new product offer modal
 				this.dialogService.openAddProductOfferDialog();
 			}
@@ -491,6 +491,26 @@ export class ManageTripComponent implements OnInit {
 			}
 		}
 		return false;
+	}
+
+	removeOfferFromActivity(activity: TripActivity, offer: ProductOffer) {
+
+		for (let i = 0; i < activity.offers.data.length; i++) {
+			if (offer.id == activity.offers.data[i].id) {
+				activity.offers.data.splice(i, 1);
+
+			}
+		}
+
+
+		this.tripService.removeOfferFromActivity(activity.id, [offer.id]).subscribe(res => {
+
+//
+		}, err => {
+
+			console.log(err);
+		});
+
 	}
 
 }

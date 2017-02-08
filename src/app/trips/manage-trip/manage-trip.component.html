@@ -177,12 +177,14 @@
 										<div class="c-offer-container">
 											<div class="active-offers" *ngIf="activity.offers">
 												<div class="c-offers" *ngFor="let offer of activity.offers.data">
-                        <span class="c-offer-pill">{{offer.title}}  &nbsp; <a href="javascript://"><i
-														class="fa fa-times"></i></a></span>
+                        <span class="c-offer-pill">{{offer.title}}  &nbsp; <button class="btn-link"
+																																									 (click)="removeOfferFromActivity(activity, offer)"><i
+														class="fa fa-times"></i></button></span>
 												</div>
 											</div>
 
-											<a (click)="openOffersDialog(activity)" class="alink c-offer-pill c-offer-btn"><i class="fa fa-plus"></i>
+											<a (click)="openOffersDialog(activity)" class="alink c-offer-pill c-offer-btn"><i
+													class="fa fa-plus"></i>
 												Add Offer
 											</a>
 										</div>

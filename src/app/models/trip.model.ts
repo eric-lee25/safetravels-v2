@@ -20,5 +20,8 @@ export class Trip {
 	public start_location_long?: any;
 	public admin?: any;
 	public guide?: any;
+	public admin_chat_enabled?: boolean;
+	public guide_chat_enabled?: boolean;
+	public group_chat_enabled?: boolean;
 
 }
