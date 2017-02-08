@@ -7,6 +7,7 @@ import {Trip} from "../models/trip.model";
 import {ProductOffer} from "../models/product-offer.model";
 import {TripActivity} from "../models/trip-activity.model";
 import {ActivityType} from "../models/activity-type.model";
+import {Country} from "../models/country.model";
 
 @Injectable()
 export class AppService {
@@ -75,13 +76,16 @@ export class AppService {
 	selectedTripEvent: Subject<Trip> = new Subject<Trip>();
 	selectedTripActivity: TripActivity = new TripActivity();
 	selectedTripActivityEvent: Subject<TripActivity> = new Subject<TripActivity>();
+	offers: ProductOffer[] = [];
+	offersEvent: Subject<ProductOffer[]> = new Subject<ProductOffer[]>();
 
 	productOffer: ProductOffer = new ProductOffer();
 	productOfferEvent: Subject<ProductOffer> = new Subject<ProductOffer>();
 
 	activityTypes: ActivityType[] = [];
 	activityTypesEvent: Subject<ActivityType[]> = new Subject<ActivityType[]>();
-
+	countries: Country[] = [];
+	countriesEvent: Subject<Country[]> = new Subject<Country[]>();
 
 
 	constructor(private http: Http) {
@@ -162,6 +166,9 @@ export class AppService {
 		this.selectedTripActivityEvent.subscribe(activity => this.selectedTripActivity = activity);
 
 		this.activityTypesEvent.subscribe(types => this.activityTypes = types);
+		this.countriesEvent.subscribe(countries => this.countries = countries);
+
+		this.offersEvent.subscribe(offers => this.offers = offers);
 
 	}
 

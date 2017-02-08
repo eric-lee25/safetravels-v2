@@ -4,6 +4,7 @@ import {BusinessAccount} from "../models/business-account.model";
 import {AppService} from "./app.service";
 import {BusinessUser} from "../models/business-user.model";
 import {GalleryImage} from "../models/gallery-image.model";
+import {Country} from "../models/country.model";
 
 @Injectable()
 export class BusinessService {
@@ -49,6 +50,10 @@ export class BusinessService {
 
 	deleteGalleryImage(image: GalleryImage): Observable<any> {
 		return this.appService.delete('/gallery-images/' + image.id).map(res => res).catch(err => Observable.throw(err));
+	}
+
+	getCountries(): Observable<Country[]> {
+		return this.appService.get('/countries').map(res => res.json()).catch(err => Observable.throw(err));
 	}
 
 }

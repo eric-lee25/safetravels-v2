@@ -8,6 +8,7 @@ import {AuthService} from "../../services/auth.service";
 import {UploadImageDialogComponent} from "../../elements/dialog/upload-image-dialog/upload-image-dialog.component";
 import {AppService} from "../../services/app.service";
 import {MdDialog} from "@angular/material";
+import {Country} from "../../models/country.model";
 
 @Component({
 	selector: 'app-business-account',
@@ -19,6 +20,7 @@ export class BusinessAccountComponent implements OnInit {
 	accounts: BusinessAccount[] = [];
 
 	selectedAccount: BusinessAccount = new BusinessAccount();
+	countries: Country[] = [];
 
 
 	constructor(private dialog: MdDialog,
@@ -31,6 +33,15 @@ export class BusinessAccountComponent implements OnInit {
 
 	ngOnInit() {
 
+		this.countries = this.appService.countries;
+		if (this.countries.length == 0) {
+			this.businessService.getCountries().subscribe(countries => {
+				this.countries = countries;
+				this.appService.countriesEvent.next(countries);
+			}, err => {
+				console.log(err);
+			});
+		}
 
 		this.businessService.getBusinessesOwner().subscribe(res => {
 			this.accounts = res;
@@ -40,6 +51,8 @@ export class BusinessAccountComponent implements OnInit {
 		}, err => {
 			console.log(err);
 		});
+
+
 	}
 
 

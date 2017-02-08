@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {TripActivity} from "../../../models/trip-activity.model";
+import {TripActivity, TripActivityDetail} from "../../../models/trip-activity.model";
 import {ActivityType} from "../../../models/activity-type.model";
 import {TripService} from "../../../services/trip.service";
 import {AutocompleteData} from "../../../models/autocompleteData.model";
@@ -40,8 +40,6 @@ export class AddActivityToDayDialogComponent implements OnInit {
 	startTime: Date = new Date();
 	endTime: Date = new Date();
 
-	model: Object = { date: { year: 2018, month: 10, day: 9 } };
-
 	constructor(private appService: AppService,
 							private tripService: TripService,
 							private locationService: LocationService,
@@ -65,12 +63,13 @@ export class AddActivityToDayDialogComponent implements OnInit {
 			this.activity.notes = this.activity.en.notes;
 			this.getActivityTypeSlug();
 
-			if(this.activity.end){
+			if (this.activity.end) {
 				this.endTime = new Date(this.activity.end);
 			}
-			if(this.startTime){
+			if (this.startTime) {
 				this.startTime = new Date(this.activity.start);
 			}
+
 
 
 		}
@@ -224,5 +223,12 @@ export class AddActivityToDayDialogComponent implements OnInit {
 		}
 
 
+	}
+
+	onLanguageChange(event) {
+		let langCode = event.value;
+		if (!this.activity[langCode]) {
+			this.activity[langCode] = new TripActivityDetail();
+		}
 	}
 }

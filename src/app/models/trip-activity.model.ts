@@ -38,4 +38,29 @@ export class TripActivity {
 	public it?: TripActivityDetail;
 	public fr?: TripActivityDetail;
 	public ja?: TripActivityDetail;
+
+	constructor() {
+
+		if (!this.en) {
+			this.en = new TripActivityDetail();
+		}
+		if (!this.es) {
+			this.es = new TripActivityDetail();
+		}
+		if (!this.de) {
+			this.de = new TripActivityDetail();
+		}
+		if (!this.zh) {
+			this.zh = new TripActivityDetail();
+		}
+		if (!this.it) {
+			this.it = new TripActivityDetail();
+		}
+		if (!this.fr) {
+			this.fr = new TripActivityDetail();
+		}
+		if (!this.ja) {
+			this.ja = new TripActivityDetail();
+		}
+	}
 }

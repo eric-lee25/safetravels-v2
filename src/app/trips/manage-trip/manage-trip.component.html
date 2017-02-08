@@ -174,14 +174,16 @@
 										<h4 class="ng-binding"><strong>{{activity.start| date: 'hh:mm a'}}</strong> {{activity.en.title}}
 										</h4>
 										<p class="ng-binding"><em>{{activity.to}}</em></p>
-										<div class="c-offer-container" *ngIf="activity.offers">
-											<div class="c-offers" *ngFor="let offer of activity.offers.data">
+										<div class="c-offer-container">
+											<div class="active-offers" *ngIf="activity.offers">
+												<div class="c-offers" *ngFor="let offer of activity.offers.data">
                         <span class="c-offer-pill">{{offer.title}}  &nbsp; <a href="javascript://"><i
 														class="fa fa-times"></i></a></span>
+												</div>
 											</div>
 
-											<a (click)="openOffersDialog()" class="alink c-offer-pill c-offer-btn"><i class="fa fa-plus"></i>
-												Manage Offers
+											<a (click)="openOffersDialog(activity)" class="alink c-offer-pill c-offer-btn"><i class="fa fa-plus"></i>
+												Add Offer
 											</a>
 										</div>
 									</td>
@@ -249,9 +251,9 @@
 								class="alink list-group-item c-trip-itinerary"
 								[class.active]="selectedPassenger && selectedPassenger.id == passenger.id">
 							<div class="c-ti-date pull-left">
-								<img *ngIf="!passenger.avatar" [src]="'/assets/images/user-4.png'" class="img-circle" alt="user-pic" />
+								<img *ngIf="!passenger.avatar" [src]="'/assets/images/user-4.png'" class="img-circle" alt="user-pic"/>
 								<img *ngIf="passenger.avatar" [src]="passenger.avatar" class="img-circle"
-																										alt="user-pic" />
+										 alt="user-pic"/>
 							</div>
 							<div class="c-ti-details pull-right">
 								<div class="c-ti-destination ng-binding">

@@ -14,6 +14,9 @@ import {DatePipe} from "@angular/common";
 import {TripActivityDayGroup} from "../../models/activity-day-group.model";
 import {TripActivity} from "../../models/trip-activity.model";
 import {TripDocument} from "../../models/trip-document.model";
+import {ProductOffer} from "../../models/product-offer.model";
+import {ProductOfferService} from "../../services/product-offer.service";
+
 @Component({
 	selector: 'app-manage-trip',
 	templateUrl: './manage-trip.component.html',
@@ -31,7 +34,7 @@ export class ManageTripComponent implements OnInit {
 	activities: TripActivity[] = [];
 	activityDays: TripActivityDayGroup[] = [];
 	selectedActivityDay: TripActivityDayGroup = new TripActivityDayGroup();
-
+	offers: ProductOffer[] = [];
 
 	constructor(private route: ActivatedRoute,
 							private datePipe: DatePipe,
@@ -40,7 +43,8 @@ export class ManageTripComponent implements OnInit {
 							private appService: AppService,
 							private dialog: MdDialog,
 							private auth: AuthService,
-							private dialogService: DialogService) {
+							private dialogService: DialogService,
+							private productOfferService: ProductOfferService) {
 
 	}
 
@@ -58,7 +62,12 @@ export class ManageTripComponent implements OnInit {
 		let tripId = this.route.snapshot.params['id'];
 		this.tripService.get(tripId, 'admin,guide').subscribe(res => {
 
+
 			this.trip = res;
+			this.productOfferService.getOffers(this.trip.business_id).subscribe(offers => this.offers = offers, err => {
+					console.log(err);
+				}
+			);
 			if (res.admin) {
 				this.trip.admin = res.admin.data;
 			}
@@ -88,7 +97,7 @@ export class ManageTripComponent implements OnInit {
 		// get trips activities
 		this.tripService.getActivities(tripId).subscribe(res => {
 			this.activities = res;
-			this.formatActivities();
+			this.formatActivities(true);
 
 			console.log(this.activityDays);
 
@@ -106,11 +115,11 @@ export class ManageTripComponent implements OnInit {
 
 	}
 
-	formatActivities() {
+	formatActivities(reselect?: boolean) {
 
 		this.activityDays = this.getDayGroupFromActivities(this.activities);
 
-		if (this.activityDays.length) {
+		if (this.activityDays.length && reselect) {
 			this.selectedActivityDay = this.activityDays[0];
 		}
 	}
@@ -285,6 +294,18 @@ export class ManageTripComponent implements OnInit {
 
 	}
 
+	findActivityIndex(activity: TripActivity): number {
+
+		if (this.activities.length) {
+			for (let i = 0; i < this.activities.length; i++) {
+				if (this.activities[i].id == activity.id) {
+					return i;
+				}
+			}
+		}
+		return null;
+	}
+
 	openDeleteActivityConfirmation(activity: TripActivity) {
 
 		this.appService.selectedTripActivityEvent.next(activity);
@@ -301,6 +322,17 @@ export class ManageTripComponent implements OnInit {
 			console.log("Action:", action);
 			if (action == "ok") {
 				// let delete the activity here...
+				this.tripService.deleteActivity(activity).subscribe(res => {
+
+					let activityIndex = this.findActivityIndex(activity);
+					if (activityIndex !== null) {
+						this.activities.splice(activityIndex, 1);
+						this.formatActivities();
+					}
+				}, err => {
+
+					this.notificationService.show(err.json().message);
+				});
 			}
 		});
 
@@ -371,15 +403,20 @@ export class ManageTripComponent implements OnInit {
 		});
 	}
 
-	openOffersDialog() {
+	openOffersDialog(activity: TripActivity) {
+
+		this.appService.selectedTripActivityEvent.next(activity);
+		this.appService.offersEvent.next(this.offers);
+
 		let dialogRef = this.dialogService.openOffersDialog();
 
 		dialogRef.afterClosed().subscribe(result => {
 
+			this.appService.selectedTripActivityEvent.next(null);
+
 			console.log("Result:", result);
 
 			if (result == 'openNewOffer') {
-
 				// let open new product offer modal
 				this.dialogService.openAddProductOfferDialog();
 			}

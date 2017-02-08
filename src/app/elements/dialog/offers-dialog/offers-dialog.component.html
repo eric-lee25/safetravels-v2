@@ -5,24 +5,14 @@
 		<div class="col-md-6 col-sm-12">
 			<h4>Active Offers</h4>
 			<ul class="offers-list">
-				<li class="clearfix">
+				<li class="clearfix" *ngFor="let offer of activatedOffers">
 					<div class="offer-left pull-left">
-						<a href="javascript://">Explore the Reef by Air</a>
-						<p>A once in a lifetime flight chance to explore the Great Barrier Reef by Helicoptor
-						</p>
+						<button class="btn btn-link" (click)="removeOffer(offer)">{{offer.title}}</button>
+						<p>{{offer.description}}</p>
 					</div>
 					<div class="offer-right pull-right">
-						<span class="btn icnOfferRemove"><i class="fa fa-times"></i></span>
-					</div>
-				</li>
-				<li class="clearfix">
-					<div class="offer-left pull-left">
-						<a href="javascript://">Don't forget your Travel Insurance</a>
-						<p>Left this travel essential to the last minute? Book it with us.
-						</p>
-					</div>
-					<div class="offer-right pull-right">
-						<span class="btn icnOfferRemove"><i class="fa fa-times"></i></span>
+						<button (click)="removeOffer(offer)" class="btn btn-link icnOfferRemove"><i class="fa fa-times"></i>
+						</button>
 					</div>
 				</li>
 			</ul>
@@ -30,69 +20,15 @@
 		<div class="col-md-6 col-sm-12 allOffers">
 
 			<ul>
-				<li class="clearfix">
+				<li class="clearfix" *ngFor="let offer of offers">
 					<div class="offer-left pull-left">
-						<a href="javascript://" class="ng-binding">Don't forget your Travel Insurance</a>
-						<p>Left this travel essential to the last minute? Book it with us.</p>
+						<button class="btn-link" (click)="addOffer(offer)">{{offer.title}}</button>
+						<p>{{offer.description}}</p>
 					</div>
 					<div class="offer-right pull-right">
-						<span class="btn icnOfferAdd"><i class="fa fa-plus"></i></span>
+						<button (click)="addOffer(offer)" class="btn btn-link icnOfferAdd"><i class="fa fa-plus"></i></button>
 					</div>
 				</li>
-
-				<li class="clearfix">
-					<div class="offer-left pull-left">
-						<a href="javascript://" class="ng-binding">Don't forget your Travel Insurance</a>
-						<p>Left this travel essential to the last minute? Book it with us.</p>
-					</div>
-					<div class="offer-right pull-right">
-						<span class="btn icnOfferAdd"><i class="fa fa-plus"></i></span>
-					</div>
-				</li>
-
-
-				<li class="clearfix">
-					<div class="offer-left pull-left">
-						<a href="javascript://" class="ng-binding">Don't forget your Travel Insurance</a>
-						<p>Left this travel essential to the last minute? Book it with us.</p>
-					</div>
-					<div class="offer-right pull-right">
-						<span class="btn icnOfferAdd"><i class="fa fa-plus"></i></span>
-					</div>
-				</li>
-
-
-				<li class="clearfix">
-					<div class="offer-left pull-left">
-						<a href="javascript://" class="ng-binding">Don't forget your Travel Insurance</a>
-						<p>Left this travel essential to the last minute? Book it with us.</p>
-					</div>
-					<div class="offer-right pull-right">
-						<span class="btn icnOfferAdd"><i class="fa fa-plus"></i></span>
-					</div>
-				</li>
-
-
-				<li class="clearfix">
-					<div class="offer-left pull-left">
-						<a href="javascript://" class="ng-binding">Don't forget your Travel Insurance</a>
-						<p>Left this travel essential to the last minute? Book it with us.</p>
-					</div>
-					<div class="offer-right pull-right">
-						<span class="btn icnOfferAdd"><i class="fa fa-plus"></i></span>
-					</div>
-				</li>
-
-				<li class="clearfix">
-					<div class="offer-left pull-left">
-						<a href="javascript://" class="ng-binding">Don't forget your Travel Insurance</a>
-						<p>Left this travel essential to the last minute? Book it with us.</p>
-					</div>
-					<div class="offer-right pull-right">
-						<span class="btn icnOfferAdd"><i class="fa fa-plus"></i></span>
-					</div>
-				</li>
-
 			</ul>
 		</div>
 	</div>
