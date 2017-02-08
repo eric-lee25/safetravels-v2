@@ -99,4 +99,13 @@ export class TripService {
 	getActivityTypes(): Observable<ActivityType[]> {
 		return this.appService.get('/activities/types').map(res => res.json().data).catch(err => Observable.throw(err));
 	}
+
+	attachOfferToActivity(activityId: number, offerId: number): Observable<any> {
+		return this.appService.post('/activities/' + activityId + '/offers/' + offerId, {}).map(res => res).catch(err => Observable.throw(err));
+	}
+
+	removeOfferFromActivity(activityId: number, offerIds: number[]): Observable<any> {
+		let data = {offer_ids: offerIds};
+		return this.appService.delete('/activities/' + activityId + '/offers', data).map(res => res).catch(err => Observable.throw(err));
+	}
 }

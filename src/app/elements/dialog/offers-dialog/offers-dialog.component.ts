@@ -16,6 +16,8 @@ export class OffersDialogComponent implements OnInit {
 	offers: ProductOffer[] = [];
 	activatedOffers: ProductOffer[] = [];
 
+	dialogResult = {type: 'openNewOffer', data: []};
+
 	constructor(private appService: AppService,
 							public dialogRef: MdDialogRef<OffersDialogComponent>) {
 
@@ -78,4 +80,17 @@ export class OffersDialogComponent implements OnInit {
 		return null;
 	}
 
+	openAddOffer() {
+
+		this.dialogResult.type = "openNewOffer";
+		this.dialogResult.type = null;
+		this.dialogRef.close(this.dialogResult);
+	}
+
+	onSave() {
+		this.dialogResult.type = "save";
+		this.dialogResult.data = this.activatedOffers;
+
+		this.dialogRef.close(this.dialogResult);
+	}
 }

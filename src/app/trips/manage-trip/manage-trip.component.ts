@@ -416,10 +416,81 @@ export class ManageTripComponent implements OnInit {
 
 			console.log("Result:", result);
 
-			if (result == 'openNewOffer') {
+			if ((result) && result.type == 'openNewOffer') {
 				// let open new product offer modal
 				this.dialogService.openAddProductOfferDialog();
 			}
+			if (result && result.type == 'save') {
+
+				// do insert
+				if (result.data && result.data.length) {
+					for (let i = 0; i < result.data.length; i++) {
+						let offer = result.data[i];
+						this.tripService.attachOfferToActivity(activity.id, offer.id).subscribe(res => {
+
+							//
+							console.log(res);
+
+						}, err => {
+							console.log(err);
+						});
+					}
+				}
+				// do remove
+
+				let offersNeedRemove = this.findOfferItemsNeedRemove(activity, result.data);
+
+				let offerIds = [];
+				if (offersNeedRemove.length) {
+					for (let i = 0; i < offersNeedRemove.length; i++) {
+						offerIds.push(offersNeedRemove[i].id);
+					}
+				}
+				if (offerIds) {
+					this.tripService.removeOfferFromActivity(activity.id, offerIds).subscribe(res => {
+					}, err => {
+						console.log(err);
+					})
+				}
+				activity.offers.data = result.data;
+
+			}
+
 		});
 	}
+
+	findOfferItemsNeedRemove(activity: TripActivity, activatedOffers: ProductOffer[]): ProductOffer[] {
+
+		let offers: ProductOffer[] = [];
+
+		if (activity.offers && activity.offers.data) {
+			let oldOffers = activity.offers.data;
+			if (activatedOffers.length == 0) {
+				return oldOffers;
+			} else {
+
+				for (let i = 0; i < oldOffers.length; i++) {
+					let checkOffer = this.findOfferIsExist(oldOffers[i], activatedOffers);
+					if (checkOffer) {
+						// offer is exist. so we dont need remove
+					} else {
+						offers.push(oldOffers[i]);
+					}
+				}
+			}
+		}
+		return offers;
+	}
+
+
+	findOfferIsExist(offer: ProductOffer, offers: ProductOffer[]): boolean {
+
+		for (let i = 0; i < offers.length; i++) {
+			if (offers[i].id == offer.id) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

@@ -37,11 +37,11 @@
 
 <md-dialog-actions>
 	<div class="pull-left text-left">
-		<button class="btn btn-info btn-sm" (click)="dialogRef.close('openNewOffer')">New Offer</button>
+		<button class="btn btn-info btn-sm" (click)="openAddOffer()">New Offer</button>
 	</div>
 	<div class="pull-right">
 		<button class="btn btn-default btn-sm" md-dialog-close>Close</button>
-		<button class="btn btn-success btn-sm" (click)="dialogRef.close('save')">Save changes</button>
+		<button class="btn btn-success btn-sm" (click)="onSave()">Save changes</button>
 	</div>
 
 </md-dialog-actions>
