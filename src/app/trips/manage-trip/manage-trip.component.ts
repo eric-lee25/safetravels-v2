@@ -342,6 +342,9 @@ export class ManageTripComponent implements OnInit {
 	}
 
 	openAddPassengerDialog() {
+
+		this.appService.selectedTripEvent.next(this.trip);
+
 		let dialogRef = this.dialogService.openAddPassengerDialog();
 
 

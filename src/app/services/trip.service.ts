@@ -5,6 +5,7 @@ import {Trip} from "../models/trip.model";
 import {TripActivity} from "../models/trip-activity.model";
 import {TripDocument} from "../models/trip-document.model";
 import {ActivityType} from "../models/activity-type.model";
+import {TripInvite} from "../models/trip-invite.model";
 
 @Injectable()
 export class TripService {
@@ -107,5 +108,10 @@ export class TripService {
 	removeOfferFromActivity(activityId: number, offerIds: number[]): Observable<any> {
 		let data = {offer_ids: offerIds};
 		return this.appService.delete('/activities/' + activityId + '/offers', data).map(res => res).catch(err => Observable.throw(err));
+	}
+
+	getTripInvites(tripId: number):Observable<TripInvite[]>{
+		return this.appService.get('/trips/' + tripId + '/invites').map(res => res.json().data).catch(err => Observable.throw(err));
+
 	}
 }
