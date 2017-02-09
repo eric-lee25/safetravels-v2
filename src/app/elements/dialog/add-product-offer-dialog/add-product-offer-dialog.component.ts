@@ -27,9 +27,7 @@ export class AddProductOfferDialogComponent implements OnInit {
 
 	}
 
-
 	onSave() {
-
 		this.dialogRef.close(this.offer);
 
 	}

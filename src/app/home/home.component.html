@@ -181,8 +181,8 @@
 									<td>{{trip.title}}</td>
 									<td>{{trip.start_date}}</td>
 									<td>{{getDuration(trip.start_date, trip.end_date)}}</td>
-									<td>{{trip.tour_manager}}</td>
-									<td>{{trip.tour_guide}}</td>
+									<td><span *ngIf="trip.admin">{{trip.admin.first_name + ' ' + trip.admin.last_name}}</span></td>
+									<td><span *ngIf="trip.guide">{{trip.guide.first_name + ' ' + trip.guide.last_name}}</span></td>
 									<td><a routerLink="/trips/manage/{{trip.id}}" class="btn c-btn">Open <i class="fa fa-arrow-right"></i></a>
 									</td>
 								</tr>

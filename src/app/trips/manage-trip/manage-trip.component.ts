@@ -16,6 +16,7 @@ import {TripActivity} from "../../models/trip-activity.model";
 import {TripDocument} from "../../models/trip-document.model";
 import {ProductOffer} from "../../models/product-offer.model";
 import {ProductOfferService} from "../../services/product-offer.service";
+import {TripMessage} from "../../models/trip-message.model";
 
 @Component({
 	selector: 'app-manage-trip',
@@ -35,6 +36,8 @@ export class ManageTripComponent implements OnInit {
 	activityDays: TripActivityDayGroup[] = [];
 	selectedActivityDay: TripActivityDayGroup = new TripActivityDayGroup();
 	offers: ProductOffer[] = [];
+	messageTemplates: TripMessage[] = [];
+
 
 	constructor(private route: ActivatedRoute,
 							private datePipe: DatePipe,
@@ -418,7 +421,19 @@ export class ManageTripComponent implements OnInit {
 
 			if (result && result.type == 'openNewOffer') {
 				// let open new product offer modal
-				this.dialogService.openAddProductOfferDialog();
+				let ref = this.dialogService.openAddProductOfferDialog();
+
+				let that = this;
+				ref.afterClosed().subscribe(offer => {
+					this.productOfferService.createOffer(this.trip.business_id, offer).subscribe(res => {
+						that.offers.push(res);
+						that.openOffersDialog(activity);
+					}, err => {
+						this.notificationService.show("An error adding offer", 'error');
+						console.log(err);
+					});
+
+				});
 			}
 			if (result && result.type == 'save') {
 

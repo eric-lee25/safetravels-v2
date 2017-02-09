@@ -12,7 +12,7 @@ import {LocationService} from "../../../services/location.service";
 })
 export class EditTripDialogComponent implements OnInit {
 
-	title: string = "Multi Language activity debug";
+	title: string = "Edit Trip";
 
 	trip: Trip = new Trip();
 
@@ -28,6 +28,9 @@ export class EditTripDialogComponent implements OnInit {
 	ngOnInit() {
 
 		this.trip = this.appService.selectedTrip;
+		if (this.trip.id) {
+			this.title = "Edit Trip";
+		}
 
 	}
 

@@ -21,13 +21,13 @@ export class TripService {
 
 	upcomingTrips(): Observable<Trip[]> {
 
-		return this.appService.get('/trips/upcoming').map(res => this.formatTrips(res.json().data)).catch(err => Observable.throw(err))
+		return this.appService.get('/trips/upcoming?include=admin,guide').map(res => this.formatTrips(res.json().data)).catch(err => Observable.throw(err))
 	}
 
 	listTrips(include?: string): Observable<Trip[]> {
-		let endpoint = '/trips?role=user';
+		let endpoint = '/trips';
 		if (include) {
-			endpoint = '/trips?role=user&include=' + include;
+			endpoint = '/trips?include=' + include;
 		}
 		return this.appService.get(endpoint).map(res => this.formatTrips(res.json().data)).catch(err => Observable.throw(err))
 
@@ -64,7 +64,7 @@ export class TripService {
 				trips[x].admin = trips[x].admin.data;
 			}
 			if (trips[x].guide && trips[x].guide.data) {
-				trips[x].guide = trips[x].admin.data;
+				trips[x].guide = trips[x].guide.data;
 			}
 
 		}

@@ -40,29 +40,29 @@
 			</div>
 			<div class="form-group-control">
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-12">
 						<md-slide-toggle
 								class="example-margin"
 								[color]="'primary'"
 								[checked]="trip.admin_chat_enabled" (change)="admin_chat_enabled($event)">
-							Enable admin chat
+							Enable chat with admin
 						</md-slide-toggle>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-12">
 						<md-slide-toggle
 								class="example-margin"
 								[color]="'primary'"
 								[checked]="trip.guide_chat_enabled" (change)="guide_chat_enabled($event)">
-							Enable admin chat
+							Enable chat with tour guide
 						</md-slide-toggle>
 
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-12">
 						<md-slide-toggle
 								class="example-margin"
 								[color]="'primary'"
 								[checked]="trip.group_chat_enabled" (change)="group_chat_enabled($event)">
-							Enable admin chat
+							Enable group chat
 						</md-slide-toggle>
 					</div>
 				</div>

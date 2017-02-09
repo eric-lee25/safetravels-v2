@@ -6,39 +6,41 @@ import {TripService} from "../../services/trip.service";
 import {NotificationService} from "../../services/notification.service";
 
 @Component({
-  selector: 'app-trips',
-  templateUrl: './trips.component.html',
-  styleUrls: ['./trips.component.css']
+	selector: 'app-trips',
+	templateUrl: './trips.component.html',
+	styleUrls: ['./trips.component.css']
 })
 export class TripsComponent implements OnInit {
 
-  trips: Trip[] = [];
-  showLoading: boolean = true;
+	trips: Trip[] = [];
+	showLoading: boolean = true;
 
-  constructor(private tripService: TripService,
-              private notificationService: NotificationService,
-              private dialogService: DialogService,
-              private appService: AppService) {
+	constructor(private tripService: TripService,
+							private notificationService: NotificationService,
+							private dialogService: DialogService,
+							private appService: AppService) {
 
-  }
+	}
 
-  ngOnInit() {
+	ngOnInit() {
 
-    this.tripService.listTrips('admin,guide').subscribe(res => {
-      this.trips = res;
-      this.showLoading = false;
+		this.tripService.listTrips('admin,guide').subscribe(res => {
 
-    }, err => {
-      console.log(err);
-      this.showLoading = false;
-      this.notificationService.show(err.json().message, 'error');
-    });
-  }
+			this.trips = res;
+
+			this.showLoading = false;
+
+		}, err => {
+			console.log(err);
+			this.showLoading = false;
+			this.notificationService.show(err.json().message, 'error');
+		});
+	}
 
 
-  openAddTripDialog() {
-    this.appService.dialogTitleEvent.next("Create new Trip");
-    this.dialogService.openEditTripDialog();
-  }
+	openAddTripDialog() {
+		this.appService.dialogTitleEvent.next("Create new Trip");
+		this.dialogService.openEditTripDialog();
+	}
 
 }

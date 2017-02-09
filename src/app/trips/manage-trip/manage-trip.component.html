@@ -106,7 +106,7 @@
 				<div class="itineraryMainBox" *ngIf="selectedActivityDay.title">
 					<div class="panel">
 						<div class="panel-body">
-							<h3 class="c-header"><strong class="pull-left ng-binding">{{selectedActivityDay.title}}
+							<h3 class="c-header"><strong class="pull-left">{{selectedActivityDay.title}}
 								<small>: {{selectedActivityDay.date | date: 'yMMMMd'}}</small>
 							</strong>
 								<!--	<button (click)="openAddDayToTripDialog()" type="button" class="btnIcon btn-text-blue"><i
@@ -442,7 +442,8 @@
 					</div>
 
 					<ul class="list-group">
-						<li class="list-group-item active c-trip-itinerary alink">
+						<li class="list-group-item c-trip-itinerary alink" (click)="onSelectTripPassenger()"
+								[class.active]="!selectedPassenger">
 							<div class="c-ti-allmembers pull-left"></div>
 							<div class="c-ti-details pull-right">
 								<div class="c-ti-destination">
@@ -453,13 +454,18 @@
 								</div>
 							</div>
 						</li>
-						<li class="alink list-group-item c-trip-itinerary">
-							<div class="c-ti-date pull-left"><img [src]="'/assets/images/user-1.png'" class="img-circle"
-																										alt="user-pic">
+
+						<li *ngFor="let passenger of passengers" (click)="onSelectTripPassenger(passenger)"
+								class="alink list-group-item c-trip-itinerary"
+								[class.active]="selectedPassenger && selectedPassenger.id == passenger.id">
+							<div class="c-ti-date pull-left">
+								<img *ngIf="!passenger.avatar" [src]="'/assets/images/user-4.png'" class="img-circle" alt="user-pic"/>
+								<img *ngIf="passenger.avatar" [src]="passenger.avatar" class="img-circle"
+										 alt="user-pic"/>
 							</div>
 							<div class="c-ti-details pull-right">
 								<div class="c-ti-destination ng-binding">
-									Margot Abbot
+									{{passenger.first_name + ' ' + passenger.last_name}}
 								</div>
 								<div class="c-ti-data ng-binding">
 									0 Messages
@@ -467,19 +473,6 @@
 							</div>
 						</li>
 
-						<li class="alink list-group-item c-trip-itinerary">
-							<div class="c-ti-date pull-left"><img [src]="'/assets/images/user-1.png'" class="img-circle"
-																										alt="user-pic">
-							</div>
-							<div class="c-ti-details pull-right">
-								<div class="c-ti-destination ng-binding">
-									Margot Abbot
-								</div>
-								<div class="c-ti-data ng-binding">
-									0 Messages
-								</div>
-							</div>
-						</li>
 
 					</ul>
 
@@ -487,185 +480,15 @@
 				<div class="col-md-9">
 
 					<!-- Begin trip group -->
+
 					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">New Group Message / Update</h3>
-
-							<div class="panel-options">
-								<md-slide-toggle (change)="onMessageOptionChange($event)" [color]="'primary'">Advanced</md-slide-toggle>
-							</div>
-						</div>
-
 						<div class="panel-body">
-
-							<div id="newMessage">
-								<form role="form">
-									<div class="simple-message" *ngIf="!messageAdvanced">
-										<div class="form-group">
-											<label>Subject</label>
-											<input class="form-control" placeholder="Subject" type="text">
-										</div>
-										<div class="form-group">
-											<label>Your Message</label>
-											<textarea cols="5" rows="5" class="form-control" placeholder="Your Message"></textarea>
-										</div>
-
-										<div class="form-group">
-											<button type="button" class="btn btn-info btn-single pull-right">Send</button>
-										</div>
-									</div>
-
-									<div class="advance-message" *ngIf="messageAdvanced">
-
-
-										<div class="col-md-9">
-											<div class="form-group trip-input">
-												<label>Languages</label>
-												<div class="btn-group btns-languages">
-													<button type="button" class="btn btn-blue" title="English">EN</button>
-													<button type="button" class="btn" title="French">FR</button>
-													<button type="button" class="btn" title="German">DE</button>
-													<button type="button" class="btn" title="Spanish">ES</button>
-													<button type="button" class="btn" title="Italian">IT</button>
-													<button type="button" class="btn" title="Chinese">ZH</button>
-													<button type="button" class="btn" title="Japaness">JA</button>
-												</div>
-											</div>
-											<div class="form-group">
-												<label>Subject</label>
-												<input class="form-control" placeholder="Subject" type="text">
-											</div>
-											<div class="form-group">
-												<label>Your Message</label>
-												<textarea cols="5" rows="5" class="form-control" placeholder="Your Message"></textarea>
-											</div>
-
-											<div class="form-group">
-												<button type="button" class="btn btn-gray btn-single"><i class="fa fa-arrow-circle-o-down"></i>
-													&nbsp;Save
-													as template
-												</button>
-												<button type="button" class="btn btn-success btn-single pull-right">Send Group Message</button>
-											</div>
-										</div>
-
-										<div class="col-md-3">
-											<div class="trip-input">
-												<label>Select a Message Template to use</label>
-												<div class="scrollable ps-container" data-max-height="200" style="max-height: 200px;">
-													<select ng-model="groupMessageTemplate"
-																	class="placeholders-container selectMessageTemplate">
-														<option value="? undefined:undefined ?"></option>
-														<!-- ngRepeat: template in messageTemplates -->
-														<option ng-repeat="template in messageTemplates" value="1" class="ng-binding ng-scope">New
-														</option><!-- end ngRepeat: template in messageTemplates -->
-														<option ng-repeat="template in messageTemplates" value="2" class="ng-binding ng-scope">
-															ChrisTest1
-														</option><!-- end ngRepeat: template in messageTemplates -->
-														<option ng-repeat="template in messageTemplates" value="11" class="ng-binding ng-scope">All
-															Languag
-														</option><!-- end ngRepeat: template in messageTemplates -->
-														<option ng-repeat="template in messageTemplates" value="12" class="ng-binding ng-scope">All
-															Languages 4
-														</option><!-- end ngRepeat: template in messageTemplates -->
-														<option ng-repeat="template in messageTemplates" value="13" class="ng-binding ng-scope">
-															dashtest
-														</option><!-- end ngRepeat: template in messageTemplates -->
-														<option ng-repeat="template in messageTemplates" value="14" class="ng-binding ng-scope">
-															dashboard test34
-														</option><!-- end ngRepeat: template in messageTemplates -->
-														<option ng-repeat="template in messageTemplates" value="15" class="ng-binding ng-scope">
-															solo
-														</option><!-- end ngRepeat: template in messageTemplates -->
-														<option ng-repeat="template in messageTemplates" value="16" class="ng-binding ng-scope">ss
-														</option><!-- end ngRepeat: template in messageTemplates -->
-														<option ng-repeat="template in messageTemplates" value="17" class="ng-binding ng-scope">
-															Placeholder Demo
-														</option><!-- end ngRepeat: template in messageTemplates -->
-														<option ng-repeat="template in messageTemplates" value="18" class="ng-binding ng-scope">
-															Placeholder Demo(new)
-														</option><!-- end ngRepeat: template in messageTemplates -->
-														<option ng-repeat="template in messageTemplates" value="19" class="ng-binding ng-scope">
-															single
-														</option><!-- end ngRepeat: template in messageTemplates -->
-														<option ng-repeat="template in messageTemplates" value="20" class="ng-binding ng-scope">
-															Placeholder ITB
-														</option><!-- end ngRepeat: template in messageTemplates -->
-														<option ng-repeat="template in messageTemplates" value="3" class="ng-binding ng-scope">
-															ChrisTest2
-														</option><!-- end ngRepeat: template in messageTemplates -->
-														<option ng-repeat="template in messageTemplates" value="23" class="ng-binding ng-scope">Full
-															Placeholders
-														</option><!-- end ngRepeat: template in messageTemplates -->
-														<option ng-repeat="template in messageTemplates" value="24" class="ng-binding ng-scope">
-															Multi-language TEST (EN,FR,ZH)
-														</option>
-														<option ng-repeat="template in messageTemplates" value="25" class="ng-binding ng-scope">
-															Working Multi-Language TEST (EN,FR,ZH)
-														</option>
-														<option ng-repeat="template in messageTemplates" value="4" class="ng-binding ng-scope">
-															ChrisTest2e
-														</option><!-- end ngRepeat: template in messageTemplates -->
-														<option ng-repeat="template in messageTemplates" value="5" class="ng-binding ng-scope">
-															nolang
-														</option><!-- end ngRepeat: template in messageTemplates -->
-														<option ng-repeat="template in messageTemplates" value="6" class="ng-binding ng-scope">
-															ChrisTest3
-														</option><!-- end ngRepeat: template in messageTemplates -->
-														<option ng-repeat="template in messageTemplates" value="7" class="ng-binding ng-scope">
-															ChrisTest4
-														</option><!-- end ngRepeat: template in messageTemplates -->
-														<option ng-repeat="template in messageTemplates" value="8" class="ng-binding ng-scope">
-															ChrisTest9
-														</option><!-- end ngRepeat: template in messageTemplates -->
-														<option ng-repeat="template in messageTemplates" value="9" class="ng-binding ng-scope">
-															ChrisTest123213
-														</option><!-- end ngRepeat: template in messageTemplates -->
-														<option ng-repeat="template in messageTemplates" value="10" class="ng-binding ng-scope">All
-															Languages1
-														</option><!-- end ngRepeat: template in messageTemplates -->
-													</select>
-													<div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px;">
-														<div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div>
-													</div>
-													<div class="ps-scrollbar-y-rail" style="top: 0px; right: 2px;">
-														<div class="ps-scrollbar-y" style="top: 0px; height: 0px;"></div>
-													</div>
-												</div>
-											</div>
-											<div class="trip-input">
-												<br>
-												<label>Placeholders for Group Message</label>
-												<ul class="placeholders-container">
-													<li class="clearfix">
-														<div class="offer-left pull-left"> %%Trip_Name%%</div>
-													</li>
-													<li class="clearfix">
-														<div class="offer-left pull-left"> %%Guide_Name%%</div>
-													</li>
-													<li class="clearfix">
-														<div class="offer-left pull-left"> %%Admin_Name%%</div>
-													</li>
-													<li class="clearfix">
-														<div class="offer-left pull-left"> %%Trip_Start%%</div>
-													</li>
-												</ul>
-											</div>
-										</div>
-
-									</div>
-
-
-								</form>
-							</div>
-
-
 							<div class="row">
 								<div class="col-md-12">
 									<div id="allMessages" class="chat-messages">
 										<ul class="nav nav-tabs">
 											<li [class.active]="tabConversationHistoryOpen">
-												<a class="alink" (click)="showTabConverationHistory()"><span>Conversation History</span></a>
+												<a class="alink" (click)="showTabConverationHistory()"><span>Conversation</span></a>
 											</li>
 											<li [class.active]="tabConversationScheduleOpen">
 												<a class="alink" (click)="showTabConverationSchedule()"><span>Scheduled Messages</span></a>
@@ -745,6 +568,109 @@
 									</div>
 								</div>
 							</div>
+						</div>
+					</div>
+
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">New Group Message</h3>
+
+							<div class="panel-options">
+								<md-slide-toggle (change)="onMessageOptionChange($event)" [color]="'primary'">Advanced</md-slide-toggle>
+							</div>
+						</div>
+
+						<div class="panel-body">
+							<!-- message -->
+							<div class="newMessage">
+								<form #f="ngForm">
+
+									<div class="languages-toogle-button" *ngIf="messageAdvanced">
+										<div class="form-group">
+											<md-button-toggle-group #language="mdButtonToggleGroup">
+												<md-button-toggle value="en" [checked]="true">
+													En
+												</md-button-toggle>
+												<md-button-toggle value="fr">
+													FR
+												</md-button-toggle>
+												<md-button-toggle value="de">
+													DE
+												</md-button-toggle>
+												<md-button-toggle value="es">
+													ES
+												</md-button-toggle>
+												<md-button-toggle value="it">
+													IT
+												</md-button-toggle>
+												<md-button-toggle value="zh">
+													ZH
+												</md-button-toggle>
+												<md-button-toggle value="ja">
+													JA
+												</md-button-toggle>
+											</md-button-toggle-group>
+										</div>
+									</div>
+
+									<div class="row">
+
+										<div [class.col-md-9]="messageAdvanced" [class.col-md-12]="!messageAdvanced">
+											<div class="form-group">
+												<md-input-container class="input-full-width">
+													<input md-input name="subject" placeholder="Subject" [required]="true">
+												</md-input-container>
+											</div>
+
+											<div class="form-group">
+												<md-input-container class="input-full-width">
+													<textarea md-input name="message" placeholder="Message" [required]="true"></textarea>
+												</md-input-container>
+											</div>
+
+											<div class="form-group">
+												<button *ngIf="messageAdvanced" type="button" class="btn btn-gray btn-single"><i
+														class="fa fa-arrow-circle-o-down"></i>
+													&nbsp;Save
+													as template
+												</button>
+												<button type="button" class="btn btn-success btn-single pull-right">Send</button>
+											</div>
+										</div>
+
+										<div class="col-md-3" *ngIf="messageAdvanced">
+
+											<div class="form-group">
+												<md-select placeholder="Templates">
+													<md-option *ngFor="let messageTemplete of messageTemplates" [value]="messageTemplete.id">
+														{{ messageTemplete.title }}
+													</md-option>
+												</md-select>
+											</div>
+											<div class="form-group">
+												<label>Placeholders for Group Message</label>
+												<ul class="placeholders-container">
+													<li class="clearfix">
+														<div class="offer-left pull-left"> %%Trip_Name%%</div>
+													</li>
+													<li class="clearfix">
+														<div class="offer-left pull-left"> %%Guide_Name%%</div>
+													</li>
+													<li class="clearfix">
+														<div class="offer-left pull-left"> %%Admin_Name%%</div>
+													</li>
+													<li class="clearfix">
+														<div class="offer-left pull-left"> %%Trip_Start%%</div>
+													</li>
+												</ul>
+											</div>
+
+										</div>
+									</div>
+
+								</form>
+							</div>
+							<!-- // Message -->
 
 
 						</div>

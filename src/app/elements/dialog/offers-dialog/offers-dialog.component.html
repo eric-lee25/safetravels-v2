@@ -7,7 +7,7 @@
 			<ul class="offers-list">
 				<li class="clearfix" *ngFor="let offer of activatedOffers">
 					<div class="offer-left pull-left">
-						<button class="btn btn-link" (click)="removeOffer(offer)">{{offer.title}}</button>
+						<a class="alink" (click)="removeOffer(offer)">{{offer.title}}</a>
 						<p>{{offer.description}}</p>
 					</div>
 					<div class="offer-right pull-right">
@@ -22,7 +22,7 @@
 			<ul>
 				<li class="clearfix" *ngFor="let offer of offers">
 					<div class="offer-left pull-left">
-						<button class="btn-link" (click)="addOffer(offer)">{{offer.title}}</button>
+						<a class="alink" (click)="addOffer(offer)">{{offer.title}}</a>
 						<p>{{offer.description}}</p>
 					</div>
 					<div class="offer-right pull-right">
