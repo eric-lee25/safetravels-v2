@@ -39,6 +39,7 @@ export class TripsComponent implements OnInit {
 
 
 	openAddTripDialog() {
+		this.appService.selectedTripEvent.next(null);
 		this.appService.dialogTitleEvent.next("Create new Trip");
 		this.dialogService.openEditTripDialog();
 	}

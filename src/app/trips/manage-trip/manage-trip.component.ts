@@ -17,6 +17,8 @@ import {TripDocument} from "../../models/trip-document.model";
 import {ProductOffer} from "../../models/product-offer.model";
 import {ProductOfferService} from "../../services/product-offer.service";
 import {TripMessage} from "../../models/trip-message.model";
+import {MessageTemplate} from "../../services/message-template.model";
+import {MessageService} from "../../services/message.service";
 
 @Component({
 	selector: 'app-manage-trip',
@@ -36,12 +38,13 @@ export class ManageTripComponent implements OnInit {
 	activityDays: TripActivityDayGroup[] = [];
 	selectedActivityDay: TripActivityDayGroup = new TripActivityDayGroup();
 	offers: ProductOffer[] = [];
-	messageTemplates: TripMessage[] = [];
+	messageTemplates: MessageTemplate[] = [];
 
 
 	constructor(private route: ActivatedRoute,
 							private datePipe: DatePipe,
 							private tripService: TripService,
+							private messageService: MessageService,
 							private notificationService: NotificationService,
 							private appService: AppService,
 							private dialog: MdDialog,
@@ -65,7 +68,6 @@ export class ManageTripComponent implements OnInit {
 		let tripId = this.route.snapshot.params['id'];
 		this.tripService.get(tripId, 'admin,guide').subscribe(res => {
 
-
 			this.trip = res;
 			this.productOfferService.getOffers(this.trip.business_id).subscribe(offers => this.offers = offers, err => {
 					console.log(err);
@@ -82,6 +84,7 @@ export class ManageTripComponent implements OnInit {
 			}
 
 
+			this.getMessageTemplates();
 			console.log("trip", this.trip);
 		}, err => {
 
@@ -116,6 +119,16 @@ export class ManageTripComponent implements OnInit {
 			console.log(err);
 		});
 
+	}
+
+	getMessageTemplates() {
+
+		this.messageService.getMessageTemplates(this.trip.business_id).subscribe(res => {
+			console.log(res);
+			this.messageTemplates = res;
+		}, err => {
+			console.log(err);
+		});
 	}
 
 	formatActivities(reselect?: boolean) {
@@ -319,6 +332,7 @@ export class ManageTripComponent implements OnInit {
 		let buttonClass = "btn-danger";
 
 		let dialogRef = this.dialogService.openConfirmationDialog(title, msg, buttonTitle, buttonClass);
+		let that = this;
 
 		dialogRef.afterClosed().subscribe(action => {
 
@@ -329,8 +343,8 @@ export class ManageTripComponent implements OnInit {
 
 					let activityIndex = this.findActivityIndex(activity);
 					if (activityIndex !== null) {
-						this.activities.splice(activityIndex, 1);
-						this.formatActivities();
+						that.activities.splice(activityIndex, 1);
+						that.formatActivities();
 					}
 				}, err => {
 

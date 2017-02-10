@@ -53,86 +53,100 @@ import {NotifyComponent} from './elements/notify/notify.component';
 import {NotificationService} from "./services/notification.service";
 import {TripService} from "./services/trip.service";
 import {BusinessService} from "./services/business.service";
-import { AutocompleteComponent } from './elements/autocomplete/autocomplete.component';
+import {AutocompleteComponent} from './elements/autocomplete/autocomplete.component';
 import {LocationService} from "./services/location.service";
 import {ProductOfferService} from "./services/product-offer.service";
 import {TimepickerModule} from "ng2-bootstrap";
+import {MessageService} from "./services/message.service";
 const DROPZONE_CONFIG: DropzoneConfigInterface = {
-  // Change this to your upload POST address:
-  server: 'https://httpbin.org/post',
-  maxFilesize: 50,
-  acceptedFiles: 'image/*'
+	// Change this to your upload POST address:
+	server: 'https://httpbin.org/post',
+	maxFilesize: 50,
+	acceptedFiles: 'image/*'
 };
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PageNotFoundComponent,
-    HomeComponent,
-    NavigationComponent,
-    SidebarProgressComponent,
-    BusinessAccountComponent,
-    BusinessPlanComponent,
-    CounterComponent,
-    ProgressComponent,
-    BusinessUsersComponent,
-    TripsComponent,
-    ManageTripComponent,
-    TripTokenDialogComponent,
-    ProfileComponent,
-    GalleryComponent,
-    ProductOffersComponent,
-    UploadImageDialogComponent,
-    AddStaffUserDialogComponent,
-    AddProductOfferDialogComponent,
-    ConfirmationDialogComponent,
-    PlanDialogComponent,
-    EditTripDialogComponent,
-    AddDayToTripDialogComponent,
-    AddActivityToDayDialogComponent,
-    OffersDialogComponent,
-    AddPassengerDialogComponent,
-    LoginComponent,
-    SignupComponent,
-    TermsDialogComponent,
-    PrivacyDialogComponent,
-    ForgotPasswordComponent,
-    MessageDialogComponent,
-    NotifyComponent,
-    AutocompleteComponent
-  ],
-  entryComponents: [
-    TripTokenDialogComponent,
-    UploadImageDialogComponent,
-    AddStaffUserDialogComponent,
-    AddProductOfferDialogComponent,
-    ConfirmationDialogComponent,
-    PlanDialogComponent,
-    EditTripDialogComponent,
-    AddDayToTripDialogComponent,
-    AddActivityToDayDialogComponent,
-    OffersDialogComponent,
-    AddPassengerDialogComponent,
-    TermsDialogComponent,
-    PrivacyDialogComponent,
-    MessageDialogComponent,
-    NotifyComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    AppRoutingModule,
-    MaterialModule.forRoot(),
-    DropzoneModule.forRoot(DROPZONE_CONFIG),
-    TimepickerModule.forRoot(),
-    DxSelectBoxModule,
-    DxChartModule,
-    MyDatePickerModule
-  ],
-  providers: [AppService, UserService, DialogService, AuthService, CookieService, NotificationService, TripService,LocationService, BusinessService,ProductOfferService,DemoService],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		PageNotFoundComponent,
+		HomeComponent,
+		NavigationComponent,
+		SidebarProgressComponent,
+		BusinessAccountComponent,
+		BusinessPlanComponent,
+		CounterComponent,
+		ProgressComponent,
+		BusinessUsersComponent,
+		TripsComponent,
+		ManageTripComponent,
+		TripTokenDialogComponent,
+		ProfileComponent,
+		GalleryComponent,
+		ProductOffersComponent,
+		UploadImageDialogComponent,
+		AddStaffUserDialogComponent,
+		AddProductOfferDialogComponent,
+		ConfirmationDialogComponent,
+		PlanDialogComponent,
+		EditTripDialogComponent,
+		AddDayToTripDialogComponent,
+		AddActivityToDayDialogComponent,
+		OffersDialogComponent,
+		AddPassengerDialogComponent,
+		LoginComponent,
+		SignupComponent,
+		TermsDialogComponent,
+		PrivacyDialogComponent,
+		ForgotPasswordComponent,
+		MessageDialogComponent,
+		NotifyComponent,
+		AutocompleteComponent
+	],
+	entryComponents: [
+		TripTokenDialogComponent,
+		UploadImageDialogComponent,
+		AddStaffUserDialogComponent,
+		AddProductOfferDialogComponent,
+		ConfirmationDialogComponent,
+		PlanDialogComponent,
+		EditTripDialogComponent,
+		AddDayToTripDialogComponent,
+		AddActivityToDayDialogComponent,
+		OffersDialogComponent,
+		AddPassengerDialogComponent,
+		TermsDialogComponent,
+		PrivacyDialogComponent,
+		MessageDialogComponent,
+		NotifyComponent
+	],
+	imports: [
+		BrowserModule,
+		FormsModule,
+		HttpModule,
+		AppRoutingModule,
+		MaterialModule.forRoot(),
+		DropzoneModule.forRoot(DROPZONE_CONFIG),
+		TimepickerModule.forRoot(),
+		DxSelectBoxModule,
+		DxChartModule,
+		MyDatePickerModule
+	],
+	providers: [
+		AppService,
+		UserService,
+		DialogService,
+		AuthService,
+		CookieService,
+		NotificationService,
+		TripService,
+		LocationService,
+		BusinessService,
+		ProductOfferService,
+		MessageService,
+		DemoService
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule {
 }

@@ -4,6 +4,9 @@ import {Trip} from "../../../models/trip.model";
 import {MdDialogRef} from "@angular/material";
 import {AutocompleteData} from "../../../models/autocompleteData.model";
 import {LocationService} from "../../../services/location.service";
+import {BusinessService} from "../../../services/business.service";
+import {BusinessUser} from "../../../models/business-user.model";
+import {BusinessAccount} from "../../../models/business-account.model";
 
 @Component({
 	selector: 'app-edit-trip-dialog',
@@ -17,8 +20,12 @@ export class EditTripDialogComponent implements OnInit {
 	trip: Trip = new Trip();
 
 	locations: AutocompleteData[] = [];
+	accounts: BusinessAccount[] = [];
+	admins: BusinessUser[] = [];
+	guides: BusinessUser[] = [];
 
 	constructor(private appService: AppService,
+							private businessService: BusinessService,
 							private locationService: LocationService,
 							public dialogRef: MdDialogRef<EditTripDialogComponent>) {
 
@@ -27,10 +34,26 @@ export class EditTripDialogComponent implements OnInit {
 
 	ngOnInit() {
 
-		this.trip = this.appService.selectedTrip;
+		let selectedTrip = this.appService.selectedTrip;
+		if (selectedTrip) {
+			this.trip = selectedTrip;
+		} else {
+			this.trip = new Trip();
+		}
 		if (this.trip.id) {
 			this.title = "Edit Trip";
 		}
+
+		this.businessService.getBusinessesOwner().subscribe(res => {
+			this.accounts = res;
+			if (this.accounts.length) {
+				if (!this.trip.id) {
+					this.trip.business_id = this.accounts[0].id;
+				}
+				this.getAdminUsers();
+				this.getGuidesUsers();
+			}
+		});
 
 	}
 
@@ -97,5 +120,29 @@ export class EditTripDialogComponent implements OnInit {
 
 	group_chat_enabled(event) {
 		this.trip.group_chat_enabled = event.checked;
+	}
+
+	onBusinessAccountChange(event) {
+		if (this.trip.business_id) {
+			this.getAdminUsers();
+			this.getGuidesUsers();
+		}
+	}
+
+	getAdminUsers() {
+		this.businessService.getAdministrators(this.trip.business_id).subscribe(res => {
+
+			this.admins = res;
+		}, err => {
+			console.log(err);
+		});
+	}
+
+	getGuidesUsers() {
+		this.businessService.getGuides(this.trip.business_id).subscribe(res => {
+			this.guides = res;
+		}, err => {
+			console.log(err);
+		});
 	}
 }
