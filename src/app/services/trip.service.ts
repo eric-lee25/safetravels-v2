@@ -49,6 +49,10 @@ export class TripService {
 		return this.appService.get(endpoint).map(res => res.json().data).catch(err => Observable.throw(err));
 	}
 
+	removeTripPassenger(tripId: number, id: number): Observable<any> {
+		return this.appService.delete('/trips/' + tripId + '/users/' + id).map(res => res).catch(err => Observable.throw(err));
+	}
+
 
 	getTripGroupDocuments(id: number): Observable<TripDocument[]> {
 
@@ -110,8 +114,20 @@ export class TripService {
 		return this.appService.delete('/activities/' + activityId + '/offers', data).map(res => res).catch(err => Observable.throw(err));
 	}
 
-	getTripInvites(tripId: number):Observable<TripInvite[]>{
+	getTripInvites(tripId: number): Observable<TripInvite[]> {
 		return this.appService.get('/trips/' + tripId + '/invites').map(res => res.json().data).catch(err => Observable.throw(err));
 
+	}
+
+	invitePassenger(tripId: number, invite: TripInvite): Observable<TripInvite> {
+		return this.appService.post('/trips/' + tripId + '/invites', invite).map(res => res).catch(err => Observable.throw(err));
+	}
+
+	reSentInvite(invite: TripInvite): Observable<any> {
+		return this.appService.get('/invites/' + invite.id).map(res => res).catch(err => Observable.throw(err));
+	}
+
+	deleteInvite(invite: TripInvite): Observable<any> {
+		return this.appService.delete('/invites/' + invite.id).map(res => res).catch(err => Observable.throw(err));
 	}
 }

@@ -5,4 +5,5 @@ export class TripInvite {
 	public last_name?: string;
 	public email?: string;
 	public sent?: boolean;
+	public send_invite_now?: boolean;
 }

@@ -65,20 +65,9 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-lg-3 col-md-12">
-									<div class="select-business-account">
-										<md-select placeholder="Select Business Account" [(ngModel)]="selectedAccount"
-															 name="business-account">
-											<md-option *ngFor="let account of accounts" [value]="account">
-												{{account.name}}
-											</md-option>
-										</md-select>
-									</div>
 
 
-								</div>
-
-								<div class="col-lg-3 col-md-12">
+								<div class="col-lg-4 col-md-12">
 									<div class="select-trip-location">
 										<app-autocomplete (onKeyup)="onLocationKeyUp($event)" (onSelect)="onNewTripLocationSelect($event)"
 																			[placeholder]="'Create a Trip to:'"
@@ -98,7 +87,7 @@
 
 								</div>
 
-								<div class="col-lg-3 col-md-6 col-sm-12">
+								<div class="col-lg-4 col-md-6 col-sm-12">
 
 									<div class="date-picker-control-group">
 										<md-input-container>
@@ -111,7 +100,7 @@
 
 
 								</div>
-								<div class="col-lg-3 col-md-6 col-sm-12">
+								<div class="col-lg-4 col-md-6 col-sm-12">
 									<div class="date-picker-control-group">
 										<md-input-container>
 											<input name="toDate" md-input placeholder="To Date" type="text" name="end_date"
@@ -122,6 +111,46 @@
 									</div>
 
 								</div>
+							</div>
+
+							<div class="row trip-block-row">
+								<div class="col-lg-4 col-md-12">
+									<div class="select-business-account">
+										<md-select class="input-full-width" placeholder="Select Business Account" [(ngModel)]="selectedAccount"
+															 name="business-account" [required]="true">
+											<md-option *ngFor="let account of accounts" [value]="account"
+																 (onSelect)="onBusinessAccountChange($event)">
+												{{account.name}}
+											</md-option>
+										</md-select>
+									</div>
+
+
+								</div>
+
+								<div class="col-lg-4 col-md-12">
+									<div class="select-admin-account">
+										<md-select class="input-full-width" placeholder="Select Trip Admin" [(ngModel)]="newTrip.admin_id"
+															 name="business-admin" [required]="true">
+											<md-option *ngFor="let admin of admins" [value]="admin.id">
+												{{admin.first_name + ' ' + admin.last_name}}
+											</md-option>
+										</md-select>
+									</div>
+								</div>
+
+								<div class="col-lg-4 col-md-12">
+									<div class="select-admin-account">
+										<md-select class="input-full-width" placeholder="Select Trip Guide" [(ngModel)]="newTrip.guide_id"
+															 name="business-guide" [required]="true">
+											<md-option *ngFor="let user of guides" [value]="user.id">
+												{{user.first_name + ' ' + user.last_name}}
+											</md-option>
+										</md-select>
+									</div>
+								</div>
+
+
 							</div>
 						</div>
 

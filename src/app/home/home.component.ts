@@ -10,6 +10,7 @@ import {BusinessService} from "../services/business.service";
 import {AutocompleteData} from "../models/autocompleteData.model";
 import {LocationService} from "../services/location.service";
 import {NotificationService} from "../services/notification.service";
+import {BusinessUser} from "../models/business-user.model";
 
 
 @Component({
@@ -42,7 +43,8 @@ export class HomeComponent implements OnInit {
 
 	newTriplocations: AutocompleteData[] = [];
 	newTripLocationSelected: AutocompleteData = new AutocompleteData();
-
+	admins: BusinessUser[] = [];
+	guides: BusinessUser[] = [];
 
 	constructor(private appService: AppService,
 							private router: Router,
@@ -61,6 +63,23 @@ export class HomeComponent implements OnInit {
 		this.appService.userEvent.subscribe(user => this.user = user);
 	}
 
+
+	getAdminUsers() {
+		this.businessService.getAdministrators(this.selectedAccount.id).subscribe(res => {
+
+			this.admins = res;
+		}, err => {
+			console.log(err);
+		});
+	}
+
+	getGuidesUsers() {
+		this.businessService.getGuides(this.selectedAccount.id).subscribe(res => {
+			this.guides = res;
+		}, err => {
+			console.log(err);
+		});
+	}
 
 	onLocationKeyUp(text: string) {
 		this.newTriplocations = [];
@@ -119,9 +138,18 @@ export class HomeComponent implements OnInit {
 			this.accounts = res;
 			if (this.accounts.length) {
 				this.selectedAccount = this.accounts[0];
+
+				this.getAdminUsers();
+				this.getGuidesUsers();
 			}
 		});
 
+	}
+
+	onBusinessAccountChange(event) {
+
+		this.getGuidesUsers();
+		this.getAdminUsers();
 	}
 
 	tripLayout(style: string) {
@@ -150,7 +178,7 @@ export class HomeComponent implements OnInit {
 			let tripId = res.id;
 			this.router.navigate(['/trips/manage', tripId]);
 		}, err => {
-			this.notification.show(err.json().message, 'error');
+			this.notification.show("An error creating the trip. Please fill correct trip information", 'error');
 
 		});
 

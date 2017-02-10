@@ -15,7 +15,7 @@ export class AddPassengerDialogComponent implements OnInit {
 	trip: Trip = new Trip();
 	invites: TripInvite[] = [];
 	newInvite: TripInvite = new TripInvite();
-
+	errorMessage: string = null;
 
 	constructor(private appService: AppService,
 							private tripService: TripService,
@@ -42,6 +42,54 @@ export class AddPassengerDialogComponent implements OnInit {
 
 	reSentInvite(invite: TripInvite) {
 		// do resent here..
+		this.tripService.reSentInvite(invite).subscribe(res => {
+			console.log(res);
+			invite.sent = true;
+		}, err => {
+			console.log(err);
+		});
 	}
 
+	onInviteSubmit() {
+		this.tripService.invitePassenger(this.trip.id, this.newInvite).subscribe(res => {
+			console.log(res);
+
+			this.dialogRef.close(res);
+		}, err => {
+			console.log(err);
+			this.errorMessage = "An error sending invite to passenger";
+		});
+	}
+
+	inviteToggleSent(event) {
+		this.newInvite.send_invite_now = event.checked;
+	}
+
+	deleteInvite(invite: TripInvite) {
+		this.tripService.deleteInvite(invite).subscribe(res => {
+			console.log(res);
+
+			let indexInvite = this.findInviteIndex(invite, this.invites);
+			if(indexInvite !== null){
+				this.invites.splice(indexInvite, 1);
+			}
+
+		}, err => {
+			console.log(err);
+			this.errorMessage = "An error sending invite to passenger";
+		});
+	}
+
+	findInviteIndex(invite: TripInvite, invites: TripInvite[]): number {
+
+		if (invites.length) {
+			for (let i = 0; i < invites.length; i++) {
+				if (invites[i].id == invite.id) {
+					return i;
+				}
+			}
+		}
+		return null;
+
+	}
 }

@@ -1,45 +1,70 @@
-<h2 md-dialog-title>Add Trip Members to Multi Language activity debug</h2>
+<h2 md-dialog-title>Invite Passenger to {{trip.title}}</h2>
 <md-dialog-content>
-	<div class="add-user-dialog-content">
-		<div class="form-group">
-			<md-input-container>
-				<input md-input placeholder="First Name" name="first_name" [(ngModel)]="newInvite.first_name">
-			</md-input-container>
-		</div>
+	<md-tab-group>
+		<md-tab label="Invite Passenger">
+			<div class="error" *ngIf="errorMessage">
+				<div class="alert alert-danger" role="alert">{{errorMessage}}</div>
+			</div>
+			<div class="add-user-dialog-content">
+				<div class="form-group">
+					<md-input-container>
+						<input md-input placeholder="First Name" name="first_name" [(ngModel)]="newInvite.first_name">
+					</md-input-container>
+				</div>
 
-		<div class="form-group">
-			<md-input-container>
-				<input md-input placeholder="Last Name" name="last_name" [(ngModel)]="newInvite.last_name">
-			</md-input-container>
-		</div>
+				<div class="form-group">
+					<md-input-container>
+						<input md-input placeholder="Last Name" name="last_name" [(ngModel)]="newInvite.last_name">
+					</md-input-container>
+				</div>
 
-		<div class="form-group">
-			<md-input-container>
-				<input md-input placeholder="Last Name" name="email" [(ngModel)]="newInvite.email" [required]="true"
-							 [type]="'email'">
-			</md-input-container>
-		</div>
+				<div class="form-group">
+					<md-input-container>
+						<input md-input placeholder="Email" name="email" [(ngModel)]="newInvite.email" [required]="true"
+									 [type]="'email'">
+					</md-input-container>
+				</div>
+				<div class="form-group">
+					<md-slide-toggle [color]="'primary'" (change)="inviteToggleSent($event)">Send invite now</md-slide-toggle>
+				</div>
 
-	</div>
+				<div class="dialog-actions">
+					<button class="btn btn-sm" md-dialog-close>Close</button>
+					<button class="btn btn-sm btn-success" (click)="onInviteSubmit()">Save</button>
+				</div>
+			</div>
 
-	<div class="list-invites">
+		</md-tab>
+		<md-tab label="Invites">
+			<div class="list-invites">
+				<md-list>
+					<md-list-item *ngFor="let invite of invites">
+						<md-icon *ngIf="invite.sent" md-list-avatar>check</md-icon>
+						<md-icon *ngIf="!invite.sent" md-list-avatar>schedule</md-icon>
 
-		<md-list>
-			<h3 md-subheader>Invites</h3>
-			<md-list-item *ngFor="let invite of invites">
-				<md-icon *ngIf="invite.sent" md-list-avatar>check</md-icon>
-				<button *ngIf="!invite.sent" md-button (click)="reSentInvite(invite)">Send</button>
-				<h4 md-line>{{invite.first_name + ' ' + invite.last_name}}</h4>
-				<p md-line> {{invite.email}} </p>
-			</md-list-item>
-		</md-list>
+						<button md-icon-button [mdMenuTriggerFor]="menu">
+							<md-icon>more_vert</md-icon>
+						</button>
+						<md-menu #menu="mdMenu">
+							<button *ngIf="!invite.sent" md-menu-item (click)="reSentInvite(invite)">
+								<md-icon>send</md-icon>
+								<span>Send</span>
+							</button>
+							<button md-menu-item (click)="deleteInvite(invite)">
+								<md-icon>delete</md-icon>
+								<span>Delete</span>
+							</button>
+						</md-menu>
 
+						<h4 md-line>{{invite.first_name + ' ' + invite.last_name}}</h4>
+						<p md-line> {{invite.email}} </p>
+					</md-list-item>
+				</md-list>
+			</div>
 
-	</div>
+		</md-tab>
+	</md-tab-group>
 
 
 </md-dialog-content>
-<md-dialog-actions>
-	<button class="btn btn-sm" md-dialog-close>Close</button>
-	<button class="btn btn-sm btn-success" (click)="dialogRef.close('save')">Save</button>
-</md-dialog-actions>
+

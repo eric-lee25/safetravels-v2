@@ -531,4 +531,30 @@ export class ManageTripComponent implements OnInit {
 
 	}
 
+	findPassengerIndex(user: TripPassenger, users: TripPassenger[]): number {
+		if (users.length) {
+			for (let i = 0; i < users.length; i++) {
+				if (users[i].id == user.id) {
+					return i;
+				}
+			}
+		}
+		return null;
+	}
+
+	removeTripUser(user: TripPassenger) {
+
+		this.tripService.removeTripPassenger(this.trip.id, user.id).subscribe(res => {
+			let userIndex = this.findPassengerIndex(user, this.passengers);
+			if (userIndex !== null) {
+				this.passengers.splice(userIndex, 1);
+			}
+
+		}, err => {
+
+			console.log(err);
+			this.notificationService.show("An error to remove trip passsenger", 'error');
+		})
+	}
+
 }
