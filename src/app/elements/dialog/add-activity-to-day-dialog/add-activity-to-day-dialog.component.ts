@@ -71,7 +71,6 @@ export class AddActivityToDayDialogComponent implements OnInit {
 			}
 
 
-
 		}
 
 
@@ -209,9 +208,10 @@ export class AddActivityToDayDialogComponent implements OnInit {
 		} else {
 			// create new
 			this.activity.extras = '{}';
-			this.activity.start = (new Date(this.startDate + ' ' + this.getTime(this.startTime)).getTime() / 1000);
-			this.activity.end = (new Date(this.endDate + ' ' + this.getTime(this.endTime)).getTime() / 1000);
+			this.activity.start = this.datePipe.transform(this.startDate, 'y-MM-dd') + ' ' + this.datePipe.transform(this.startTime, 'HH:mm:ss');//(new Date(this.startDate + ' ' + this.getTime(this.startTime)).getTime() / 1000);
+			this.activity.end = this.datePipe.transform(this.endDate, 'y-MM-dd') + ' ' + this.datePipe.transform(this.endTime, 'HH:mm:ss'); //(new Date(this.endDate + ' ' + this.getTime(this.endTime)).getTime() / 1000);
 
+			console.log("Activity Submitted:", this.activity);
 			this.tripService.createActivity(this.trip.id, this.activity).subscribe(res => {
 
 				console.log(res);

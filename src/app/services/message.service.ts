@@ -11,7 +11,7 @@ export class MessageService {
 
 	getMessageTemplates(businessId: number): Observable<MessageTemplate[]> {
 
-		return this.appService.get('/trips/businesses/' + businessId + '/templates').map(res => res.json().data).catch(err => Observable.throw(err));
+		return this.appService.get('/businesses/' + businessId + '/templates').map(res => res.json().data).catch(err => Observable.throw(err));
 	}
 
 }
