@@ -9,6 +9,7 @@ import {UploadImageDialogComponent} from "../../elements/dialog/upload-image-dia
 import {AppService} from "../../services/app.service";
 import {MdDialog} from "@angular/material";
 import {Country} from "../../models/country.model";
+import {CountryState} from "../../models/state.model";
 
 @Component({
 	selector: 'app-business-account',
@@ -21,6 +22,7 @@ export class BusinessAccountComponent implements OnInit {
 
 	selectedAccount: BusinessAccount = new BusinessAccount();
 	countries: Country[] = [];
+	states: CountryState[] = [];
 
 
 	constructor(private dialog: MdDialog,
@@ -38,23 +40,60 @@ export class BusinessAccountComponent implements OnInit {
 			this.businessService.getCountries().subscribe(countries => {
 				this.countries = countries;
 				this.appService.countriesEvent.next(countries);
+				this.getBusinessAccount();
 			}, err => {
 				console.log(err);
 			});
+		} else {
+			this.getBusinessAccount();
 		}
 
+	}
+
+	getBusinessAccount() {
 		this.businessService.getBusinessesOwner().subscribe(res => {
 			this.accounts = res;
 			if (this.accounts.length) {
 				this.selectedAccount = this.accounts[0];
+
+				if (this.selectedAccount.country_code) {
+					this.getCountryStates(this.selectedAccount.country_code);
+				}
 			}
 		}, err => {
 			console.log(err);
 		});
+	}
+
+	onCountryChange(event) {
+
+		let countryCode = this.selectedAccount.country_code;
+		this.states = [];
+
+		if (countryCode) {
+
+			let arrSplit = countryCode.split('-');
+			if (arrSplit.length) {
+				let code2 = arrSplit[0];
+				this.getCountryStates(code2);
+			}
+		}
 
 
 	}
 
+
+	getCountryStates(code: string) {
+
+		this.businessService.getStates(code).subscribe(res => {
+
+			this.states = res;
+
+		}, err => {
+
+			console.log(err);
+		});
+	}
 
 	openImageDialog() {
 

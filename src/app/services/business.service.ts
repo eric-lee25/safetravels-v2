@@ -5,6 +5,7 @@ import {AppService} from "./app.service";
 import {BusinessUser} from "../models/business-user.model";
 import {GalleryImage} from "../models/gallery-image.model";
 import {Country} from "../models/country.model";
+import {CountryState} from "../models/state.model";
 
 @Injectable()
 export class BusinessService {
@@ -54,6 +55,10 @@ export class BusinessService {
 
 	getCountries(): Observable<Country[]> {
 		return this.appService.get('/countries').map(res => res.json()).catch(err => Observable.throw(err));
+	}
+
+	getStates(countryCode: string): Observable<CountryState[]> {
+		return this.appService.get('/states?country_code=' + countryCode).map(res => res.json()).catch(err => Observable.throw(err));
 	}
 
 }
