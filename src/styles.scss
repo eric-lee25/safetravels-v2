@@ -503,3 +503,18 @@ timepicker .btn {
 .form-group-control {
   margin-bottom: 15px;
 }
+
+.page-loader-wrapper {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+  background: #2c2e2f;
+  z-index: 10000;
+}
+.page-loader-wrapper {
+  background-image: url('/assets/images/loading.jpg');
+  background-size: cover;
+}
