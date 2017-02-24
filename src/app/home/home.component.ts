@@ -133,23 +133,19 @@ export class HomeComponent implements OnInit {
 			this.router.navigate(['/login']);
 		}
 
+		let currentBusinessAccount = this.appService.currentBusinessAccount;
 
-		this.businessService.getBusinessesOwner().subscribe(res => {
-			this.accounts = res;
-			if (this.accounts.length) {
-				this.selectedAccount = this.accounts[0];
+		if (currentBusinessAccount) {
+			this.selectedAccount = currentBusinessAccount;
+			this.newTrip.business_id = this.selectedAccount.id;
+		}
 
-				this.getAdminUsers();
-				this.getGuidesUsers();
+		this.appService.currentBusinessAccount$.subscribe(acc => {
+			if (acc) {
+				this.selectedAccount = acc;
 			}
 		});
 
-	}
-
-	onBusinessAccountChange(event) {
-
-		this.getGuidesUsers();
-		this.getAdminUsers();
 	}
 
 	tripLayout(style: string) {

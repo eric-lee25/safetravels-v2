@@ -3,6 +3,8 @@ import {AppService} from "./services/app.service";
 import {User} from "./models/user.model";
 import {AuthService} from "./services/auth.service";
 import {Router} from "@angular/router";
+import {BusinessService} from "./services/business.service";
+import {BusinessAccount} from "./models/business-account.model";
 
 @Component({
 	selector: 'app-root',
@@ -17,8 +19,10 @@ export class AppComponent implements OnInit {
 	showLandingPage: boolean = this.appService.showLandingPage;
 
 	user: User = null;
+	businessAccounts: BusinessAccount[] = [];
+	currentBusinessAccount: BusinessAccount = new BusinessAccount();
 
-	constructor(public appService: AppService, private auth: AuthService, private router: Router) {
+	constructor(public appService: AppService, private auth: AuthService, private router: Router, private businessService: BusinessService) {
 
 		this.appService.sidebarToggle.subscribe(collapsed => this.sidebarCollapsed = collapsed);
 		this.sidebarCollapsed = this.appService.configStorage.sidebarCollapsed;
@@ -38,8 +42,11 @@ export class AppComponent implements OnInit {
 		});
 
 
+	}
 
-
+	onChangeBusinessAccount(account: BusinessAccount) {
+		this.currentBusinessAccount = account;
+		this.appService.currentBusinessAccount$.next(account);
 	}
 
 	/**
@@ -55,6 +62,30 @@ export class AppComponent implements OnInit {
 		if (this.user == null) {
 			this.showLogin();
 		}
+
+		let currentBusinessAccount = this.appService.currentBusinessAccount;
+
+		this.businessService.getBusinessesOwner().subscribe(res => {
+
+			this.businessAccounts = res;
+			if (this.businessAccounts.length) {
+				if (!currentBusinessAccount) {
+					this.currentBusinessAccount = this.businessAccounts[0];
+					this.appService.currentBusinessAccount$.next(this.currentBusinessAccount);
+				}
+
+			}
+		}, err => {
+			console.log(err);
+		});
+
+		this.appService.currentBusinessAccount$.subscribe(account => {
+			if (account) {
+				this.currentBusinessAccount = account;
+			}
+		});
+
+
 	}
 
 	showLogin() {

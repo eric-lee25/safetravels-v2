@@ -1,6 +1,6 @@
 import { browser, element, by } from 'protractor';
 
-export class ToanPage {
+export class SafetravelsPage {
   navigateTo() {
     return browser.get('/');
   }

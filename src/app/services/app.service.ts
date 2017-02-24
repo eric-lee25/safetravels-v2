@@ -8,6 +8,7 @@ import {ProductOffer} from "../models/product-offer.model";
 import {TripActivity} from "../models/trip-activity.model";
 import {ActivityType} from "../models/activity-type.model";
 import {Country} from "../models/country.model";
+import {BusinessAccount} from "../models/business-account.model";
 
 @Injectable()
 export class AppService {
@@ -86,6 +87,9 @@ export class AppService {
 	activityTypesEvent: Subject<ActivityType[]> = new Subject<ActivityType[]>();
 	countries: Country[] = [];
 	countriesEvent: Subject<Country[]> = new Subject<Country[]>();
+
+	currentBusinessAccount: BusinessAccount;
+	currentBusinessAccount$: Subject<BusinessAccount> = new Subject<BusinessAccount>();
 
 
 	constructor(private http: Http) {
@@ -169,6 +173,7 @@ export class AppService {
 		this.countriesEvent.subscribe(countries => this.countries = countries);
 
 		this.offersEvent.subscribe(offers => this.offers = offers);
+		this.currentBusinessAccount$.subscribe(account => this.currentBusinessAccount = account);
 
 	}
 

@@ -514,7 +514,20 @@ timepicker .btn {
   background: #2c2e2f;
   z-index: 10000;
 }
+
 .page-loader-wrapper {
   background-image: url('/assets/images/loading.jpg');
   background-size: cover;
 }
+
+.user-info-navbar .user-info-menu > li .dropdown-menu.user-profile-menu li a, .navbar.horizontal-menu .navbar-inner > .nav > li .dropdown-menu.user-profile-menu li a {
+  &.active {
+    color: $green-color;
+  }
+}
+
+.user-info-navbar .user-info-menu > li.user-profile .userpic-32, .navbar.horizontal-menu .navbar-inner > .nav > li.user-profile .userpic-32 {
+  width: 32px;
+  height: 32px;
+}
+

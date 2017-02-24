@@ -90,5 +90,8 @@ export class AuthService {
 
 		return token;
 	}
+	signOut(){
+		this.appService.currentBusinessAccount = null;
+	}
 
 }

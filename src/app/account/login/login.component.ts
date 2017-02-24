@@ -6,61 +6,62 @@ import {DialogService} from "../../services/dialog.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+	selector: 'app-login',
+	templateUrl: './login.component.html',
+	styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
 
-  user: User = new User();
+	user: User = new User();
 
 
-  constructor(private appService: AppService,
-              private dialogService: DialogService,
-              private router: Router,
-              private auth: AuthService) {
+	constructor(private appService: AppService,
+							private dialogService: DialogService,
+							private router: Router,
+							private auth: AuthService) {
 
 
-    let data = {token: "", user: null};
+		let data = {token: "", user: null};
 
-    this.auth.setCurrentLoginData(data);
+		this.auth.setCurrentLoginData(data);
+		this.auth.signOut();
 
-  }
+	}
 
-  ngOnInit() {
-    this.appService.showLandingPageEvent.next(true);
-  }
+	ngOnInit() {
+		this.appService.showLandingPageEvent.next(true);
+	}
 
-  ngOnDestroy() {
-    this.appService.showLandingPageEvent.next(false);
-  }
-
-
-  onSubmit() {
+	ngOnDestroy() {
+		this.appService.showLandingPageEvent.next(false);
+	}
 
 
-    console.log("Login data", this.user);
+	onSubmit() {
 
-    if (this.user.email == "" || this.user.password == "" || !this.user.email || !this.user.password) {
-      let title = "Login Error";
-      let msg = "The email and password must required";
 
-      this.dialogService.showMessageDialog(title, msg);
+		console.log("Login data", this.user);
 
-      return;
-    }
+		if (this.user.email == "" || this.user.password == "" || !this.user.email || !this.user.password) {
+			let title = "Login Error";
+			let msg = "The email and password must required";
 
-    this.auth.login(this.user).subscribe(res => {
+			this.dialogService.showMessageDialog(title, msg);
 
-      this.auth.setCurrentLoginData(res);
-      this.router.navigate(['/home']);
+			return;
+		}
 
-    }, err => {
-      console.log("login error: ", err);
-      this.dialogService.showMessageDialog("Login Error", err.json().message);
+		this.auth.login(this.user).subscribe(res => {
 
-    });
+			this.auth.setCurrentLoginData(res);
+			this.router.navigate(['/home']);
 
-  }
+		}, err => {
+			console.log("login error: ", err);
+			this.dialogService.showMessageDialog("Login Error", err.json().message);
+
+		});
+
+	}
 }
