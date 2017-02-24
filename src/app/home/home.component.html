@@ -59,7 +59,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<md-input-container>
-										<input md-input placeholder="Trip Name" name="title" [(ngModel)]="newTrip.title" value=""
+										<input mdInput placeholder="Trip Name" name="title" [(ngModel)]="newTrip.title" value=""
 													 [required]="true">
 									</md-input-container>
 								</div>
@@ -91,7 +91,7 @@
 
 									<div class="date-picker-control-group">
 										<md-input-container>
-											<input name="fromDate" md-input placeholder="From Date" type="text" name="start_date"
+											<input name="fromDate" mdInput placeholder="From Date" type="text" name="start_date"
 														 [(ngModel)]="newTrip.start_date" [required]="true">
 										</md-input-container>
 										<my-date-picker class="date-select-picker" [options]="datePickerOptions"
@@ -103,7 +103,7 @@
 								<div class="col-lg-4 col-md-6 col-sm-12">
 									<div class="date-picker-control-group">
 										<md-input-container>
-											<input name="toDate" md-input placeholder="To Date" type="text" name="end_date"
+											<input name="toDate" mdInput placeholder="To Date" type="text" name="end_date"
 														 [(ngModel)]="newTrip.end_date" [required]="true">
 										</md-input-container>
 										<my-date-picker class="date-select-picker" [options]="datePickerOptions"

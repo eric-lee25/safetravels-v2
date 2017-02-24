@@ -14,8 +14,7 @@
         <form #f="ngForm" method="post" (ngSubmit)="onSubmit()">
           <div class="form-group">
             <md-input-container class="w100">
-              <input name="business_name" [(ngModel)]="user.business_name" type="text" md-input
-                     placeholder="Travel Company Name" [type]="'text'">
+              <input mdInput name="business_name" [(ngModel)]="user.business_name" type="text" placeholder="Travel Company Name" [type]="'text'">
             </md-input-container>
           </div>
 
@@ -23,28 +22,28 @@
 
           <div class="form-group">
             <md-input-container class="w100">
-              <input name="first_name" [(ngModel)]="user.first_name" type="text" md-input placeholder="First Name"
+              <input mdInput name="first_name" [(ngModel)]="user.first_name" type="text" placeholder="First Name"
                      [type]="'text'" [required]="true">
             </md-input-container>
           </div>
 
           <div class="form-group">
             <md-input-container class="w100">
-              <input name="last_name" [(ngModel)]="user.last_name" type="text" md-input placeholder="Last Name"
+              <input mdInput name="last_name" [(ngModel)]="user.last_name" type="text" placeholder="Last Name"
                      [type]="'text'" [required]="true">
             </md-input-container>
           </div>
 
           <div class="form-group">
             <md-input-container class="w100">
-              <input name="email" [(ngModel)]="user.email" type="email" md-input placeholder="Email address"
+              <input name="email" [(ngModel)]="user.email" type="email" mdInput placeholder="Email address"
                      [type]="'email'" [required]="true">
             </md-input-container>
           </div>
 
           <div class="form-group">
             <md-input-container class="w100">
-              <input name="password" [(ngModel)]="user.password" type="password" md-input placeholder="Password" [type]="'password'" [required]="true">
+              <input name="password" [(ngModel)]="user.password" type="password" mdInput placeholder="Password" [type]="'password'" [required]="true">
             </md-input-container>
           </div>
 

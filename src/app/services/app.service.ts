@@ -54,7 +54,7 @@ export class AppService {
 	public showLandingPage: boolean = false;
 	showLandingPageEvent: Subject<boolean> = new Subject<boolean>();
 
-	public serverURL: string = "http://newapi.safetravels.com"; // change to your api server like http://domain.com/api
+	public serverURL: string = "https://newapi.safetravels.com"; // change to your api server like http://domain.com/api
 
 
 	private headers: Headers = new Headers(
