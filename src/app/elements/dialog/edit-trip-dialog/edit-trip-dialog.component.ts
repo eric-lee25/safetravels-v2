@@ -47,9 +47,11 @@ export class EditTripDialogComponent implements OnInit {
 			let currentBusinessAccount = this.appService.currentBusinessAccount;
 			if (currentBusinessAccount) {
 				this.trip.business_id = currentBusinessAccount.id;
-				this.onBusinessAccountChange();
 			}
 		}
+
+		this.getAdminUsers();
+		this.getGuidesUsers();
 
 		this.appService.currentBusinessAccount$.subscribe(account => {
 			if (account) {
