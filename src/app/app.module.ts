@@ -48,7 +48,7 @@ import {PrivacyDialogComponent} from './elements/dialog/privacy-dialog/privacy-d
 import {ForgotPasswordComponent} from './account/forgot-password/forgot-password.component';
 import {AuthService} from "./services/auth.service";
 import {MessageDialogComponent} from './elements/dialog/message-dialog/message-dialog.component';
-import {CookieService} from "angular2-cookie/services/cookies.service";
+import {CookieService} from "angular2-cookie/core";
 import {NotifyComponent} from './elements/notify/notify.component';
 import {NotificationService} from "./services/notification.service";
 import {TripService} from "./services/trip.service";
@@ -138,6 +138,7 @@ const DROPZONE_CONFIG: DropzoneConfigInterface = {
 		DialogService,
 		AuthService,
 		CookieService,
+		{provide: CookieService, useFactory: cookieServiceFactory},
 		NotificationService,
 		TripService,
 		LocationService,
@@ -149,4 +150,9 @@ const DROPZONE_CONFIG: DropzoneConfigInterface = {
 	bootstrap: [AppComponent]
 })
 export class AppModule {
+
+}
+
+export function cookieServiceFactory() {
+	return new CookieService();
 }

@@ -41,6 +41,10 @@ export class EditTripDialogComponent implements OnInit {
 		}
 		if (this.trip.id) {
 			this.title = "Edit Trip";
+
+			this.getAdminUsers();
+			this.getGuidesUsers();
+
 		}
 		if (!this.trip.id) {
 			let currentBusinessAccount = this.appService.currentBusinessAccount;
