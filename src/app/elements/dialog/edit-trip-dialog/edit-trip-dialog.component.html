@@ -39,21 +39,8 @@
 				</div>
 			</div>
 			<div class="row trip-block-row">
-				<div class="col-lg-4 col-md-12">
-					<div class="select-business-account">
-						<md-select class="input-full-width" placeholder="Business Account" [(ngModel)]="trip.business_id"
-											 name="business-account" [required]="true">
-							<md-option *ngFor="let account of accounts" [value]="account.id"
-												 (onSelect)="onBusinessAccountChange($event)">
-								{{account.name}}
-							</md-option>
-						</md-select>
-					</div>
 
-
-				</div>
-
-				<div class="col-lg-4 col-md-12">
+				<div class="col-lg-6 col-md-12">
 					<div class="select-admin-account">
 						<md-select class="input-full-width" placeholder="Trip Admin" [(ngModel)]="trip.admin_id"
 											 name="business-admin" [required]="true">
@@ -64,7 +51,7 @@
 					</div>
 				</div>
 
-				<div class="col-lg-4 col-md-12">
+				<div class="col-lg-6 col-md-12">
 					<div class="select-admin-account">
 						<md-select class="input-full-width" placeholder="Trip Guide" [(ngModel)]="trip.guide_id"
 											 name="business-guide" [required]="true">

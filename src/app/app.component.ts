@@ -34,7 +34,6 @@ export class AppComponent implements OnInit {
 
 		this.appService.userEvent.subscribe(user => {
 			this.user = user;
-			this.getBusinessAccounts();
 		});
 
 		this.appService.onAuthChange$.subscribe(data => {
@@ -45,6 +44,8 @@ export class AppComponent implements OnInit {
 
 		});
 
+		this.businessAccounts = this.appService.businessAccounts;
+		this.appService.businessAccounts$.subscribe(accounts => this.businessAccounts = accounts);
 
 	}
 
@@ -75,24 +76,6 @@ export class AppComponent implements OnInit {
 		});
 
 
-	}
-
-	getBusinessAccounts() {
-
-		let currentBusinessAccount = this.appService.currentBusinessAccount;
-		this.businessService.getBusinessesOwner().subscribe(res => {
-
-			this.businessAccounts = res;
-			if (this.businessAccounts.length) {
-				if (!currentBusinessAccount) {
-					this.currentBusinessAccount = this.businessAccounts[0];
-					this.appService.currentBusinessAccount$.next(this.currentBusinessAccount);
-				}
-
-			}
-		}, err => {
-			console.log(err);
-		});
 	}
 
 	showLogin() {

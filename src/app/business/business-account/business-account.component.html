@@ -28,15 +28,6 @@
 	<div class="panel-heading">
 		<h3 class="panel-title">Account Details: <br/>
 			<p>Enter your company account information.</p></h3>
-
-
-		<div class="panel-options">
-			<md-select placeholder="Select Business Account" [(ngModel)]="selectedAccount" name="business-account">
-				<md-option *ngFor="let account of accounts" [value]="account">
-					{{account.name}}
-				</md-option>
-			</md-select>
-		</div>
 	</div>
 
 	<div class="panel-body">

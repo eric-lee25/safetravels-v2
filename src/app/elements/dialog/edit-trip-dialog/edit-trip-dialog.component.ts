@@ -43,15 +43,18 @@ export class EditTripDialogComponent implements OnInit {
 		if (this.trip.id) {
 			this.title = "Edit Trip";
 		}
+		if (!this.trip.id) {
+			let currentBusinessAccount = this.appService.currentBusinessAccount;
+			if (currentBusinessAccount) {
+				this.trip.business_id = currentBusinessAccount.id;
+				this.onBusinessAccountChange();
+			}
+		}
 
-		this.businessService.getBusinessesOwner().subscribe(res => {
-			this.accounts = res;
-			if (this.accounts.length) {
-				if (!this.trip.id) {
-					this.trip.business_id = this.accounts[0].id;
-				}
-				this.getAdminUsers();
-				this.getGuidesUsers();
+		this.appService.currentBusinessAccount$.subscribe(account => {
+			if (account) {
+				this.trip.business_id = account.id;
+				this.onBusinessAccountChange();
 			}
 		});
 
@@ -122,7 +125,7 @@ export class EditTripDialogComponent implements OnInit {
 		this.trip.group_chat_enabled = event.checked;
 	}
 
-	onBusinessAccountChange(event) {
+	onBusinessAccountChange(event?: any) {
 		if (this.trip.business_id) {
 			this.getAdminUsers();
 			this.getGuidesUsers();

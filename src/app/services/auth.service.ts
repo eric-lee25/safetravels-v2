@@ -19,6 +19,7 @@ export class AuthService {
 
 		this.appService.currentUser = this.getCurrentUser();
 		this.appService.token = this.getToken();
+		this.appService.userEvent.next(this.appService.currentUser);
 
 
 		this.appService.userEvent.subscribe(user => {
@@ -90,8 +91,11 @@ export class AuthService {
 
 		return token;
 	}
-	signOut(){
+
+	signOut() {
 		this.appService.currentBusinessAccount = null;
+		this.appService.businessAccounts = null;
+		this.appService.businessAccounts$.next([]);
 	}
 
 }

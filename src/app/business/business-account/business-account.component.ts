@@ -48,6 +48,17 @@ export class BusinessAccountComponent implements OnInit {
 			this.getBusinessAccount();
 		}
 
+		let currentBusinessAccount = this.appService.currentBusinessAccount;
+		if (currentBusinessAccount) {
+			this.selectedAccount = currentBusinessAccount;
+		}
+		this.appService.currentBusinessAccount$.subscribe(account => {
+
+			if (account) {
+				this.selectedAccount = account;
+			}
+		});
+
 	}
 
 	getBusinessAccount() {

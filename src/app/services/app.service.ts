@@ -90,9 +90,12 @@ export class AppService {
 
 	currentBusinessAccount: BusinessAccount;
 	currentBusinessAccount$: Subject<BusinessAccount> = new Subject<BusinessAccount>();
+	businessAccounts: BusinessAccount[] = [];
+	businessAccounts$: Subject<BusinessAccount[]> = new Subject<BusinessAccount[]>();
 
 
 	constructor(private http: Http) {
+
 
 		let config = localStorage.getItem("configStorage");
 		if (config) {
@@ -156,11 +159,6 @@ export class AppService {
 		});
 
 
-		this.userEvent.subscribe(user => {
-
-			this.currentUser = user;
-		});
-
 		this.notificationEvent.subscribe(notification => this.notification = Object.assign(this.notification, notification));
 
 		// select trip event
@@ -175,8 +173,42 @@ export class AppService {
 		this.offersEvent.subscribe(offers => this.offers = offers);
 		this.currentBusinessAccount$.subscribe(account => this.currentBusinessAccount = account);
 
+		this.userEvent.subscribe(user => {
+
+			this.currentUser = user;
+
+			if (user) {
+				this.getBusinessAccounts();
+			}
+		});
+
 	}
 
+
+	getBusinessAccounts() {
+
+		this.getBusinessAccountsData().subscribe(accounts => {
+
+			console.log(accounts);
+
+			this.businessAccounts = accounts;
+			this.businessAccounts$.next(accounts);
+			if (this.businessAccounts.length && !this.currentBusinessAccount) {
+				this.currentBusinessAccount = this.businessAccounts[0];
+				this.currentBusinessAccount$.next(this.currentBusinessAccount);
+			}
+
+
+		}, err => {
+			console.log(err);
+		});
+
+
+	}
+
+	getBusinessAccountsData(): Observable<BusinessAccount[]> {
+		return this.get('/businesses?role=owner').map(res => res.json().data).catch(err => Observable.throw(err));
+	}
 
 	getUrl(url: string): string {
 
