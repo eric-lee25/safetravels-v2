@@ -20,7 +20,6 @@ export class EditTripDialogComponent implements OnInit {
 	trip: Trip = new Trip();
 
 	locations: AutocompleteData[] = [];
-	accounts: BusinessAccount[] = [];
 	admins: BusinessUser[] = [];
 	guides: BusinessUser[] = [];
 
@@ -47,11 +46,12 @@ export class EditTripDialogComponent implements OnInit {
 			let currentBusinessAccount = this.appService.currentBusinessAccount;
 			if (currentBusinessAccount) {
 				this.trip.business_id = currentBusinessAccount.id;
+				this.getAdminUsers();
+				this.getGuidesUsers();
 			}
 		}
 
-		this.getAdminUsers();
-		this.getGuidesUsers();
+
 
 		this.appService.currentBusinessAccount$.subscribe(account => {
 			if (account) {
