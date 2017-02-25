@@ -17,7 +17,8 @@ export class GalleryComponent implements OnInit {
 
 	selectedAccount: BusinessAccount = new BusinessAccount();
 	businessAccounts: BusinessAccount[] = [];
-	loading: boolean = true;
+
+	loading: boolean = false;
 
 	uploadEvent: any;
 	uploadConfig: DropzoneConfigInterface = {
@@ -36,25 +37,26 @@ export class GalleryComponent implements OnInit {
 							private auth: AuthService,
 							private notification: NotificationService,
 							private businessService: BusinessService) {
-	}
 
-	ngOnInit() {
 
-		this.businessService.getBusinessesOwner().subscribe(res => {
+		let currentBusinessAccount = this.appService.currentBusinessAccount;
+		if (currentBusinessAccount) {
+			this.selectedAccount = currentBusinessAccount;
+			this.changeUploadConfig();
+			this.getGallery();
+		}
 
-			this.businessAccounts = res;
-
-			if (this.businessAccounts.length) {
-				this.loading = false;
-
-				this.selectedAccount = this.businessAccounts[0];
-
+		this.appService.currentBusinessAccount$.subscribe(account => {
+			if (account) {
+				this.selectedAccount = account;
 				this.changeUploadConfig();
 
 				this.getGallery();
 			}
-
 		});
+	}
+
+	ngOnInit() {
 
 
 	}
@@ -75,14 +77,6 @@ export class GalleryComponent implements OnInit {
 			console.log(err);
 		})
 
-	}
-
-
-	onBusinessAccountChange(account: BusinessAccount) {
-
-		this.selectedAccount = account;
-		this.changeUploadConfig();
-		this.getGallery();
 	}
 
 	onUploadSuccess(event) {

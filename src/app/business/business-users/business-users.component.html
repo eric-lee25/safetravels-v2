@@ -27,12 +27,6 @@
 	<div class="panel-heading">
 		<h3 class="panel-title">Users</h3>
 		<div class="panel-options">
-			<md-select placeholder="Select Business Account" [(ngModel)]="selectedAccount" name="business-account">
-				<md-option *ngFor="let account of businessAccounts" [value]="account"
-									 (click)="onBusinessAccountChange(account)">
-					{{account.name}}
-				</md-option>
-			</md-select>
 
 			<md-select placeholder="Select Account Type" [(ngModel)]="selectedAccountType" name="business-account-type">
 				<md-option *ngFor="let type of businessAccountTypes" [value]="type" (click)="onBusinessAccountTypeChange(type)">

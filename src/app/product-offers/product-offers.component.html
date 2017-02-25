@@ -189,13 +189,6 @@
 
 
 <md-card>
-	<md-card-header>
-		<md-select placeholder="Select Business Account" [(ngModel)]="selectedAccount" name="business-account">
-			<md-option *ngFor="let account of accounts" [value]="account" (click)="onAccountChange(account)">
-				{{account.name}}
-			</md-option>
-		</md-select>
-	</md-card-header>
 	<md-card-content>
 
 		<blockquote class="blockquote blockquote-purple">

@@ -189,8 +189,6 @@ export class AppService {
 
 		this.getBusinessAccountsData().subscribe(accounts => {
 
-			console.log(accounts);
-
 			this.businessAccounts = accounts;
 			this.businessAccounts$.next(accounts);
 			if (this.businessAccounts.length && !this.currentBusinessAccount) {

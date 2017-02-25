@@ -4,6 +4,7 @@ import {BusinessAccount} from "../../models/business-account.model";
 import {BusinessService} from "../../services/business.service";
 import {BusinessUser} from "../../models/business-user.model";
 import {NotificationService} from "../../services/notification.service";
+import {AppService} from "../../services/app.service";
 
 @Component({
 	selector: 'app-business-users',
@@ -23,7 +24,7 @@ export class BusinessUsersComponent implements OnInit {
 	loading: boolean = true;
 
 
-	constructor(private dialogService: DialogService,
+	constructor(private appService: AppService, private dialogService: DialogService,
 							private notification: NotificationService,
 							private businessService: BusinessService) {
 
@@ -32,25 +33,20 @@ export class BusinessUsersComponent implements OnInit {
 	ngOnInit() {
 
 
-		this.businessService.getBusinessesOwner().subscribe(res => {
+		let currentBusinessAccount = this.appService.currentBusinessAccount;
+		if (currentBusinessAccount) {
+			this.selectedAccount = currentBusinessAccount;
+			this.getUsers(this.selectedAccountType);
+		}
 
-			this.businessAccounts = res;
 
-			if (this.businessAccounts.length) {
-				this.loading = false;
+		this.appService.currentBusinessAccount$.subscribe(account => {
 
-				this.selectedAccount = this.businessAccounts[0];
+			if (account) {
+				this.selectedAccount = account;
 				this.getUsers(this.selectedAccountType);
 			}
-
 		});
-
-
-		this.getData();
-
-	}
-
-	onBusinessAccountChange(account: BusinessAccount) {
 
 		this.getData();
 

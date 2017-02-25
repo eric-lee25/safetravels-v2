@@ -41,29 +41,26 @@ export class ProductOffersComponent implements OnInit {
 
 		this.OffersInfo = this.offerService.getOffersInfo();
 
-	}
 
-	ngOnInit() {
+		let currentBusinessAccount = this.appService.currentBusinessAccount;
+		if (currentBusinessAccount) {
+			this.selectedAccount = currentBusinessAccount;
+			this.getOffer();
 
+		}
 
-		this.businessService.getBusinessesOwner().subscribe(res => {
-			this.accounts = res;
-			if (this.accounts.length) {
-				this.selectedAccount = this.accounts[0];
-
+		this.appService.currentBusinessAccount$.subscribe(account => {
+			if (account) {
+				this.selectedAccount = account;
 				this.getOffer();
 			}
-		}, err => {
-			console.log(err);
 		});
 
 
 	}
 
+	ngOnInit() {
 
-	onAccountChange(account: BusinessAccount) {
-
-		this.getOffer();
 	}
 
 	getOffer() {
