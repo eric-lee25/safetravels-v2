@@ -58,6 +58,8 @@ import {LocationService} from "./services/location.service";
 import {ProductOfferService} from "./services/product-offer.service";
 import {TimepickerModule} from "ng2-bootstrap";
 import {MessageService} from "./services/message.service";
+import { CarouselModule } from 'ng2-bootstrap/carousel';
+import { SafeUrlPipe } from './pipes/safe-url.pipe';
 const DROPZONE_CONFIG: DropzoneConfigInterface = {
 	// Change this to your upload POST address:
 	server: 'https://httpbin.org/post',
@@ -101,7 +103,8 @@ const DROPZONE_CONFIG: DropzoneConfigInterface = {
 		ForgotPasswordComponent,
 		MessageDialogComponent,
 		NotifyComponent,
-		AutocompleteComponent
+		AutocompleteComponent,
+		SafeUrlPipe
 	],
 	entryComponents: [
 		TripTokenDialogComponent,
@@ -125,7 +128,8 @@ const DROPZONE_CONFIG: DropzoneConfigInterface = {
 		FormsModule,
 		HttpModule,
 		AppRoutingModule,
-		MaterialModule.forRoot(),
+		MaterialModule,
+		CarouselModule.forRoot(),
 		DropzoneModule.forRoot(DROPZONE_CONFIG),
 		TimepickerModule.forRoot(),
 		DxSelectBoxModule,

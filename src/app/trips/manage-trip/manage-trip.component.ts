@@ -20,6 +20,7 @@ import {TripMessage} from "../../models/trip-message.model";
 import {MessageTemplate} from "../../services/message-template.model";
 import {MessageService} from "../../services/message.service";
 
+
 @Component({
 	selector: 'app-manage-trip',
 	templateUrl: './manage-trip.component.html',

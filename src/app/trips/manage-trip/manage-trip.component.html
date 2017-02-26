@@ -1,311 +1,335 @@
-<div *ngIf="trip" class="t-header" [style.background-image]="getBackground(trip.cover_image)">
-	<div class="btn-edittrip">
-		<button (click)="showAddCoverDialog()" class="btn btn-success btn-single btn-sm">Add Cover
-			Image
-		</button>
-		<button (click)="showEditTripDialog()" class="btn btn-purple btn-single btn-sm">Edit Trip</button>
-		<button (click)="deleteTripConfirmation()" class="btn btn-icon btn-red">x</button>
-	</div>
-	<div class="t-header-bottom row">
-		<div class="col-md-4">
-			<div class="t-header-thumb">
-				<div class="t-ht-month ng-binding">{{trip.start_date| date: 'd'}}</div>
-				<div class="t-ht-day ng-binding">{{trip.start_date| date: 'MMM'}}</div>
-			</div>
-			<div class="t-header-details">
-				<div class="t-hd-title"><span [mdTooltipPosition]="'above'" mdTooltip="{{trip.title}}">{{trip.title}}</span>
-				</div>
-				<div class="t-hd-dates">{{trip.start_date| date: 'EEE, d MMM y'}} - {{trip.end_date | date: 'EEE, d MMM y'}}
-				</div>
-			</div>
-		</div>
+<div *ngIf="trip" class="t-header">
+    <carousel class="trip-cover-slider" *ngIf="trip.coverImages && trip.coverImages.data">
+        <slide *ngFor="let image of trip.coverImages.data">
+            <div class="slide-item" [style.background-image]="getBackground(image.url)"></div>
+        </slide>
+    </carousel>
 
-		<div class="col-md-8">
-			<div class="row">
-				<div class="col-md-4 col-md-push-8">
-					<div class="t-header-guide">
-						<div class="t-hg-who">Trip Token:</div>
-						<div class="t-hg-name" style="text-transform: uppercase;">{{trip.code}}
-							<a (click)="openTripTokenDialog()" class="alink">
-								<span class="fa fa-question-circle-o"></span>
-							</a>
-						</div>
-					</div>
-				</div>
+    <div class="btn-edittrip">
+        <button (click)="showAddCoverDialog()" class="btn btn-success btn-single btn-sm">Add Cover
+            Image
+        </button>
+        <button (click)="showEditTripDialog()" class="btn btn-purple btn-single btn-sm">Edit Trip</button>
+        <button (click)="deleteTripConfirmation()" class="btn btn-icon btn-red">x</button>
+    </div>
+    <div class="t-header-bottom row">
+        <div class="col-md-4">
+            <div class="t-header-thumb">
+                <div class="t-ht-month ng-binding">{{trip.start_date| date: 'd'}}</div>
+                <div class="t-ht-day ng-binding">{{trip.start_date| date: 'MMM'}}</div>
+            </div>
+            <div class="t-header-details">
+                <div class="t-hd-title"><span [mdTooltipPosition]="'above'"
+                                              mdTooltip="{{trip.title}}">{{trip.title}}</span>
+                </div>
+                <div class="t-hd-dates">{{trip.start_date| date: 'EEE, d MMM y'}} - {{trip.end_date | date: 'EEE, d MMM
+                    y'}}
+                </div>
+            </div>
+        </div>
 
-				<div class="col-md-4">
-					<div class="t-header-guide">
-						<div *ngIf="trip.guide" class="t-hg-photo"
-								 [style.background-image]="getBackground(trip.guide.avatar)"></div>
-						<div *ngIf="!trip.guide" class="t-hg-photo"
-								 [style.background-image]="getBackground('/assets/images/user-4.png')"></div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-4 col-md-push-8">
+                    <div class="t-header-guide">
+                        <div class="t-hg-who">Trip Token:</div>
+                        <div class="t-hg-name" style="text-transform: uppercase;">{{trip.code}}
+                            <a (click)="openTripTokenDialog()" class="alink">
+                                <span class="fa fa-question-circle-o"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-						<div class="t-hg-who">Trip Guide:</div>
-						<div class="t-hg-name"><span
-								*ngIf="trip.guide">{{trip.admin.first_name + ' ' + trip.admin.last_name}}</span></div>
-					</div>
-				</div>
-				<div class="col-md-4 col-md-pull-8">
-					<div class="t-header-guide">
-						<div *ngIf="trip.admin" class="t-hg-photo"
-								 [style.background-image]="getBackground(trip.admin.avatar)"></div>
-						<div *ngIf="!trip.admin" class="t-hg-photo"
-								 [style.background-image]="getBackground('/assets/images/user-4.png')"></div>
-						<div class="t-hg-who">Trip Manager:</div>
-						<div class="t-hg-name"><span
-								*ngIf="trip.admin">{{trip.admin.first_name + ' ' + trip.admin.last_name}}</span></div>
-					</div>
-				</div>
+                <div class="col-md-4">
+                    <div class="t-header-guide" *ngIf="trip.guide">
+                        <div *ngIf="trip.guide" class="t-hg-photo"
+                             [style.background-image]="getBackground(trip.guide.avatar)"></div>
+                        <div *ngIf="!trip.guide" class="t-hg-photo"
+                             [style.background-image]="getBackground('/assets/images/user-4.png')"></div>
 
-			</div>
+                        <div class="t-hg-who" *ngIf="trip.guide">Trip Guide:</div>
+                        <div class="t-hg-name"><span
+                                *ngIf="trip.guide">{{trip.guide.first_name + ' ' + trip.guide.last_name}}</span></div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-md-pull-8">
+                    <div class="t-header-guide">
+                        <div *ngIf="trip.admin" class="t-hg-photo"
+                             [style.background-image]="getBackground(trip.admin.avatar)"></div>
+                        <div *ngIf="!trip.admin" class="t-hg-photo"
+                             [style.background-image]="getBackground('/assets/images/user-4.png')"></div>
+                        <div class="t-hg-who">Trip Manager:</div>
+                        <div class="t-hg-name"><span
+                                *ngIf="trip.admin">{{trip.admin.first_name + ' ' + trip.admin.last_name}}</span></div>
+                    </div>
+                </div>
+
+            </div>
 
 
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
 
 
 <md-card>
 
-	<md-tab-group>
-		<md-tab>
-			<template md-tab-label>
-				<i class="fa fa-plane"></i>
-				Trip Itinerary
-			</template>
+    <md-tab-group>
+        <md-tab>
+            <template md-tab-label>
+                <i class="fa fa-plane"></i>
+                Trip Itinerary
+            </template>
 
-			<div class="col-md-3 c-mt-list">
+            <div class="col-md-3 c-mt-list">
 
-				<ul class="list-group" *ngIf="activityDays.length">
-					<li *ngFor="let day of activityDays; let i = index" class="alink list-group-item c-trip-itinerary"
-							(click)="onSelectActivityDayGroup(day, i)" [class.active]="day.title == selectedActivityDay.title">
-						<div class="c-ti-date pull-left">
-							<div class="c-tid-dow ng-binding">{{day.date | date: 'EEE'}}</div>
-							<div class="c-tid-day ng-binding">{{day.date | date: 'dd'}}</div>
-							<div class="c-tid-month ng-binding">{{day.date | date: 'MMM'}}</div>
-						</div>
-						<div class="c-ti-details pull-right">
-							<div class="c-ti-destination ng-binding">
-								{{day.title}}
-							</div>
-							<div class="c-ti-data ng-binding">
-								{{day.activities.length}} Activities
-							</div>
-						</div>
-					</li>
-				</ul>
+                <ul class="list-group" *ngIf="activityDays.length">
+                    <li *ngFor="let day of activityDays; let i = index" class="alink list-group-item c-trip-itinerary"
+                        (click)="onSelectActivityDayGroup(day, i)"
+                        [class.active]="day.title == selectedActivityDay.title">
+                        <div class="c-ti-date pull-left">
+                            <div class="c-tid-dow ng-binding">{{day.date | date: 'EEE'}}</div>
+                            <div class="c-tid-day ng-binding">{{day.date | date: 'dd'}}</div>
+                            <div class="c-tid-month ng-binding">{{day.date | date: 'MMM'}}</div>
+                        </div>
+                        <div class="c-ti-details pull-right">
+                            <div class="c-ti-destination ng-binding">
+                                {{day.title}}
+                            </div>
+                            <div class="c-ti-data ng-binding">
+                                {{day.activities.length}} Activities
+                            </div>
+                        </div>
+                    </li>
+                </ul>
 
-				<div class="row havemagin text-center">
-					<!--<button (click)="openAddDayToTripDialog()" class="btn btn-info">Add Day to Trip</button> -->
-				</div>
+                <div class="row havemagin text-center">
+                    <!--<button (click)="openAddDayToTripDialog()" class="btn btn-info">Add Day to Trip</button> -->
+                </div>
 
-			</div>
-
-
-			<div class="col-md-9 c-mt-contents">
-				<div class="itineraryMainBox" *ngIf="selectedActivityDay.title">
-					<div class="panel">
-						<div class="panel-body">
-							<h3 class="c-header"><strong class="pull-left">{{selectedActivityDay.title}}
-								<small>: {{selectedActivityDay.date | date: 'yMMMMd'}}</small>
-							</strong>
-								<!--	<button (click)="openAddDayToTripDialog()" type="button" class="btnIcon btn-text-blue"><i
-											class="linecons-pencil"></i>
-									</button> -->
-								<!--<button (click)="openDeleteDayConfirmation()" type="button" class="btnIcon btn-text-red"><i
-										class="linecons-trash"></i></button> -->
-
-								<button (click)="openAddActivityToDayDialog()" class="pull-right btn btn-success">
-									<i class="fa fa-plus"></i> Add Activity
-								</button>
-							</h3>
+            </div>
 
 
-							<table class="table table-hover members-table middle-align">
-								<tbody>
-								<tr class="Activity ng-scope" *ngFor="let activity of selectedActivityDay.activities">
-									<td class="user-image">
-										<div class="activity-icon type-{{activity.type}}">
-											<!-- Hotel  --> <span class="icon-Tourism-Icons_hotel-building"
-																						*ngIf="activity.type == 1"></span>
+            <div class="col-md-9 c-mt-contents">
+                <div class="itineraryMainBox" *ngIf="selectedActivityDay.title">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <h3 class="c-header"><strong class="pull-left">{{selectedActivityDay.title}}
+                                <small>: {{selectedActivityDay.date | date: 'yMMMMd'}}</small>
+                            </strong>
+                                <!--	<button (click)="openAddDayToTripDialog()" type="button" class="btnIcon btn-text-blue"><i
+                                            class="linecons-pencil"></i>
+                                    </button> -->
+                                <!--<button (click)="openDeleteDayConfirmation()" type="button" class="btnIcon btn-text-red"><i
+                                        class="linecons-trash"></i></button> -->
 
-											<!-- Flight  --> <span class="icon-Tourism-Icons_plane" *ngIf="activity.type == 2"></span>
-
-											<!-- Transfer  --><span class="icon-Tourism-Icons_car" *ngIf="activity.type == 3"></span>
-
-											<!-- Activity  --><span class="icon-Tourism-Icons_direction" *ngIf="activity.type == 4"></span>
-
-											<!-- Day Trip  --> <span class="icon-Tourism-Icons_compass" *ngIf="activity.type == 5"></span>
-
-											<!-- Optional Extra  --> <span class="icon-Tourism-Icons_check-in"
-																										 *ngIf="activity.type == 6"></span>
-
-											<!-- Sporting Event  --> <span class="fa  fa-soccer-ball-o activity-item-icon"
-																										 *ngIf="activity.type == 7 "></span>
-
-											<!-- Meal  --><span class="icon-Tourism-Icons_dinner" *ngIf="activity.type == 8"></span>
-
-											<!-- Concert / Theatre  --> <span class="fa fa-music activity-item-icon"
-																												*ngIf="activity.type == 9"></span>
-
-											<!-- Sightseeing  --> <span class="icon-Tourism-Icons_monument"
-																									*ngIf="activity.type == 10"></span>
-
-											<!-- Transit  --> <span class="icon-Tourism-Icons_bus" *ngIf="activity.type == 11"></span>
+                                <button (click)="openAddActivityToDayDialog()" class="pull-right btn btn-success">
+                                    <i class="fa fa-plus"></i> Add Activity
+                                </button>
+                            </h3>
 
 
-											<!-- Childrens Activity  --> <span class="icon-Tourism-Icons_sandcastle-01"
-																												 *ngIf="activity.type == 12"></span>
+                            <table class="table table-hover members-table middle-align">
+                                <tbody>
+                                <tr class="Activity ng-scope" *ngFor="let activity of selectedActivityDay.activities">
+                                    <td class="user-image">
+                                        <div class="activity-icon type-{{activity.type}}">
+                                            <!-- Hotel  --> <span class="icon-Tourism-Icons_hotel-building"
+                                                                  *ngIf="activity.type == 1"></span>
+
+                                            <!-- Flight  --> <span class="icon-Tourism-Icons_plane"
+                                                                   *ngIf="activity.type == 2"></span>
+
+                                            <!-- Transfer  --><span class="icon-Tourism-Icons_car"
+                                                                    *ngIf="activity.type == 3"></span>
+
+                                            <!-- Activity  --><span class="icon-Tourism-Icons_direction"
+                                                                    *ngIf="activity.type == 4"></span>
+
+                                            <!-- Day Trip  --> <span class="icon-Tourism-Icons_compass"
+                                                                     *ngIf="activity.type == 5"></span>
+
+                                            <!-- Optional Extra  --> <span class="icon-Tourism-Icons_check-in"
+                                                                           *ngIf="activity.type == 6"></span>
+
+                                            <!-- Sporting Event  --> <span
+                                                class="fa  fa-soccer-ball-o activity-item-icon"
+                                                *ngIf="activity.type == 7 "></span>
+
+                                            <!-- Meal  --><span class="icon-Tourism-Icons_dinner"
+                                                                *ngIf="activity.type == 8"></span>
+
+                                            <!-- Concert / Theatre  --> <span class="fa fa-music activity-item-icon"
+                                                                              *ngIf="activity.type == 9"></span>
+
+                                            <!-- Sightseeing  --> <span class="icon-Tourism-Icons_monument"
+                                                                        *ngIf="activity.type == 10"></span>
+
+                                            <!-- Transit  --> <span class="icon-Tourism-Icons_bus"
+                                                                    *ngIf="activity.type == 11"></span>
 
 
-											<!-- Free Time  --> <span class=" icon-Tourism-Icons_camera" *ngIf="activity.type == 13"></span>
+                                            <!-- Childrens Activity  --> <span class="icon-Tourism-Icons_sandcastle-01"
+                                                                               *ngIf="activity.type == 12"></span>
 
-											<!-- walking Tour  --> <span class="icon-Tourism-Icons_flip-flops"
-																									 *ngIf="activity.type == 14"></span>
 
-											<!-- Meet and Greet  --> <span class="icon-Tourism-Icons_id" *ngIf="activity.type == 15"></span>
+                                            <!-- Free Time  --> <span class=" icon-Tourism-Icons_camera"
+                                                                      *ngIf="activity.type == 13"></span>
 
-											<!-- Conference  --> <span class="icon-Tourism-Icons_id" *ngIf="activity.type == 16"></span>
+                                            <!-- walking Tour  --> <span class="icon-Tourism-Icons_flip-flops"
+                                                                         *ngIf="activity.type == 14"></span>
 
-											<!-- Drinks  --> <span class="icon-Tourism-Icons_coctail" *ngIf="activity.type == 17"></span>
-										</div>
-									</td>
-									<td class="hidden-xs hidden-sm" width="70%">
-										<h4 class="ng-binding"><strong>{{activity.start| date: 'hh:mm a'}}</strong> {{activity.en.title}}
-										</h4>
-										<p class="ng-binding"><em>{{activity.to}}</em></p>
-										<div class="c-offer-container">
-											<div class="active-offers" *ngIf="activity.offers">
-												<div class="c-offers" *ngFor="let offer of activity.offers.data">
+                                            <!-- Meet and Greet  --> <span class="icon-Tourism-Icons_id"
+                                                                           *ngIf="activity.type == 15"></span>
+
+                                            <!-- Conference  --> <span class="icon-Tourism-Icons_id"
+                                                                       *ngIf="activity.type == 16"></span>
+
+                                            <!-- Drinks  --> <span class="icon-Tourism-Icons_coctail"
+                                                                   *ngIf="activity.type == 17"></span>
+                                        </div>
+                                    </td>
+                                    <td class="hidden-xs hidden-sm" width="70%">
+                                        <h4 class="ng-binding"><strong>{{activity.start| date: 'hh:mm a'}}</strong>
+                                            {{activity.en.title}}
+                                        </h4>
+                                        <p class="ng-binding"><em>{{activity.to}}</em></p>
+                                        <div class="c-offer-container">
+                                            <div class="active-offers" *ngIf="activity.offers">
+                                                <div class="c-offers" *ngFor="let offer of activity.offers.data">
                         <span class="c-offer-pill">{{offer.title}}  &nbsp; <button class="btn-link"
-																																									 (click)="removeOfferFromActivity(activity, offer)"><i
-														class="fa fa-times"></i></button></span>
-												</div>
-											</div>
+                                                                                   (click)="removeOfferFromActivity(activity, offer)"><i
+                                class="fa fa-times"></i></button></span>
+                                                </div>
+                                            </div>
 
-											<a (click)="openOffersDialog(activity)" class="alink c-offer-pill c-offer-btn"><i
-													class="fa fa-plus"></i>
-												Add Offer
-											</a>
-										</div>
-									</td>
-									<td class="action-links">
-										<div class="c-actionbtn-container">
-											<button md-icon-button [mdMenuTriggerFor]="menu">
-												<md-icon>more_vert</md-icon>
-											</button>
-											<md-menu #menu="mdMenu">
-												<button md-menu-item (click)="showEditActivityDialog(activity)">
-													<md-icon>mode_edit</md-icon>
-													<span>Edit</span>
-												</button>
-												<button md-menu-item (click)="openDeleteActivityConfirmation(activity)">
-													<md-icon>delete</md-icon>
-													<span>Delete</span>
-												</button>
-											</md-menu>
-										</div>
-									</td>
-								</tr>
-								</tbody>
-							</table>
-							<!-- image -->
-							<div>
+                                            <a (click)="openOffersDialog(activity)"
+                                               class="alink c-offer-pill c-offer-btn"><i
+                                                    class="fa fa-plus"></i>
+                                                Add Offer
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td class="action-links">
+                                        <div class="c-actionbtn-container">
+                                            <button md-icon-button [mdMenuTriggerFor]="menu">
+                                                <md-icon>more_vert</md-icon>
+                                            </button>
+                                            <md-menu #menu="mdMenu">
+                                                <button md-menu-item (click)="showEditActivityDialog(activity)">
+                                                    <md-icon>mode_edit</md-icon>
+                                                    <span>Edit</span>
+                                                </button>
+                                                <button md-menu-item (click)="openDeleteActivityConfirmation(activity)">
+                                                    <md-icon>delete</md-icon>
+                                                    <span>Delete</span>
+                                                </button>
+                                            </md-menu>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <!-- image -->
+                            <div>
 
-							</div>
-						</div>
+                            </div>
+                        </div>
 
-					</div>
-				</div>
-			</div>
-
-
-		</md-tab>
-
-		<md-tab>
-			<template md-tab-label>
-				<i class="fa fa-users"></i>
-				Trip Passengers
-			</template>
-			<div class="row c-manage-trip">
-				<div class="col-md-3 c-mt-list">
-					<div class="c-tripmembers">
-						<h5 class="pull-left">{{passengers.length}} Members</h5>
-						<button (click)="openAddPassengerDialog()" type="button" class="btn btn-sm btn-success pull-right">
-							<i class="fa fa-plus"></i> &nbsp; Add
-						</button>
-					</div>
-
-					<ul class="list-group">
-						<li class="list-group-item c-trip-itinerary alink" (click)="onSelectTripPassenger()"
-								[class.active]="!selectedPassenger">
-							<div class="c-ti-allmembers pull-left"></div>
-							<div class="c-ti-details pull-right">
-								<div class="c-ti-destination">
-									Trip Group
-								</div>
-								<div class="c-ti-data">
-									Add Documents to Trip
-								</div>
-							</div>
-						</li>
-						<li *ngFor="let passenger of passengers" (click)="onSelectTripPassenger(passenger)"
-								class="alink list-group-item c-trip-itinerary"
-								[class.active]="selectedPassenger && selectedPassenger.id == passenger.id">
-							<div class="c-ti-date pull-left">
-								<img *ngIf="!passenger.avatar" [src]="'/assets/images/user-4.png'" class="img-circle" alt="user-pic"/>
-								<img *ngIf="passenger.avatar" [src]="passenger.avatar" class="img-circle"
-										 alt="user-pic"/>
-							</div>
-							<div class="c-ti-details pull-right">
-								<div class="c-ti-destination ng-binding">
-									{{passenger.first_name + ' ' + passenger.last_name}}
-								</div>
-								<div class="c-ti-data ng-binding">
-									Documents
-								</div>
-							</div>
-						</li>
+                    </div>
+                </div>
+            </div>
 
 
-					</ul>
+        </md-tab>
 
-				</div>
-				<div class="col-md-9">
+        <md-tab>
+            <template md-tab-label>
+                <i class="fa fa-users"></i>
+                Trip Passengers
+            </template>
+            <div class="row c-manage-trip">
+                <div class="col-md-3 c-mt-list">
+                    <div class="c-tripmembers">
+                        <h5 class="pull-left">{{passengers.length}} Members</h5>
+                        <button (click)="openAddPassengerDialog()" type="button"
+                                class="btn btn-sm btn-success pull-right">
+                            <i class="fa fa-plus"></i> &nbsp; Add
+                        </button>
+                    </div>
 
-					<div class="selected-trip-group" *ngIf="!selectedPassenger">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title"> Trip Group</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item c-trip-itinerary alink" (click)="onSelectTripPassenger()"
+                            [class.active]="!selectedPassenger">
+                            <div class="c-ti-allmembers pull-left"></div>
+                            <div class="c-ti-details pull-right">
+                                <div class="c-ti-destination">
+                                    Trip Group
+                                </div>
+                                <div class="c-ti-data">
+                                    Add Documents to Trip
+                                </div>
+                            </div>
+                        </li>
+                        <li *ngFor="let passenger of passengers" (click)="onSelectTripPassenger(passenger)"
+                            class="alink list-group-item c-trip-itinerary"
+                            [class.active]="selectedPassenger && selectedPassenger.id == passenger.id">
+                            <div class="c-ti-date pull-left">
+                                <img *ngIf="!passenger.avatar" [src]="'/assets/images/user-4.png'" class="img-circle"
+                                     alt="user-pic"/>
+                                <img *ngIf="passenger.avatar" [src]="passenger.avatar" class="img-circle"
+                                     alt="user-pic"/>
+                            </div>
+                            <div class="c-ti-details pull-right">
+                                <div class="c-ti-destination ng-binding">
+                                    {{passenger.first_name + ' ' + passenger.last_name}}
+                                </div>
+                                <div class="c-ti-data ng-binding">
+                                    Documents
+                                </div>
+                            </div>
+                        </li>
 
-								<div class="panel-options">
-									<button class="btn btn-small btn-success">Activate All Members</button>
-								</div>
-							</div>
 
-							<div class="panel-body">
+                    </ul>
 
-								<p>Content for trip group here...</p>
-							</div>
-						</div>
-						<!-- // Trip group -->
+                </div>
+                <div class="col-md-9">
+
+                    <div class="selected-trip-group" *ngIf="!selectedPassenger">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"> Trip Group</h3>
+
+                                <div class="panel-options">
+                                    <button class="btn btn-small btn-success">Activate All Members</button>
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+
+                                <p>Content for trip group here...</p>
+                            </div>
+                        </div>
+                        <!-- // Trip group -->
 
 
-						<!-- Begin travel document -->
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title"> Travel Documents</h3>
+                        <!-- Begin travel document -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"> Travel Documents</h3>
 
-								<div class="panel-options">
-									<button class="btn btn-small btn-info">Upload</button>
-								</div>
-							</div>
+                                <div class="panel-options">
+                                    <button class="btn btn-small btn-info">Upload</button>
+                                </div>
+                            </div>
 
-							<div class="panel-body">
+                            <div class="panel-body">
 
-								<ul class="trip-docs">
-									<li *ngFor="let doc of groupDocuments">
-										<a href="{{doc.url}}" target="_blank">
+                                <ul class="trip-docs">
+                                    <li *ngFor="let doc of groupDocuments">
+                                        <a href="{{doc.url}}" target="_blank">
 											<span class="document-type" [ngSwitch]="doc.type">
 												<i *ngSwitchCase="'pdf'" class="fa fa-file-pdf-o"></i>
 												<i *ngSwitchCase="'txt'" class="fa fa-file-o"></i>
@@ -313,92 +337,96 @@
 												<i *ngSwitchCase="'xls'" class="fa fa-file-text-o"></i>
 												<i *ngSwitchDefault class="fa fa-file-o"></i>
 											</span>
-											<span class="document-name">{{doc.title}} ({{doc.doc_name}})</span>
-										</a>
+                                            <span class="document-name">{{doc.title}} ({{doc.doc_name}})</span>
+                                        </a>
 
-										<a class="alink doc-delete">&nbsp;
-											<i class="fa fa-times"></i>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<!-- // travel document  -->
-					</div>
+                                        <a class="alink doc-delete">&nbsp;
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- // travel document  -->
+                    </div>
 
-					<div class="selected-trip-passener" *ngIf="selectedPassenger">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title"> Trip Member</h3>
+                    <div class="selected-trip-passener" *ngIf="selectedPassenger">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"> Trip Member</h3>
 
-								<div class="panel-options">
-									<button class="btn btn-small btn-success">Edit</button>
-									<button class="btn btn-small btn-danger" (click)="removeTripUser(selectedPassenger)">Remove</button>
-								</div>
-							</div>
+                                <div class="panel-options">
+                                    <button class="btn btn-small btn-success">Edit</button>
+                                    <button class="btn btn-small btn-danger"
+                                            (click)="removeTripUser(selectedPassenger)">Remove
+                                    </button>
+                                </div>
+                            </div>
 
-							<div class="panel-body">
+                            <div class="panel-body">
 
-								<div class="c-member-details">
+                                <div class="c-member-details">
 
-									<div class="media">
-										<div class="media-left">
-											<img *ngIf="!selectedPassenger.avatar" [src]="'/assets/images/user-4.png'"
-													 class="img-circle ng-scope"
-													 alt="user-pic">
-											<img *ngIf="selectedPassenger.avatar" [src]="selectedPassenger.avatar"
-													 class="img-circle ng-scope" alt="user-pic">
-										</div>
-										<div class="media-body">
-											<div class="row">
-												<div class="col-sm-12">
-													<div class="pull-left">
-														<div class="c-md-main ng-binding">{{selectedPassenger.first_name + ' '+
-															selectedPassenger.last_name}}
-														</div>
-													</div>
-													<div class="pull-left">
-														<md-slide-toggle
-																class="passenger-activate"
-																[color]="'primary'"
-																[checked]="selectedPassenger.emergency_activated"
-																[disabled]="true">
-															<span *ngIf="selectedPassenger.emergency_activated">Active</span>
-															<span *ngIf="!selectedPassenger.emergency_activated">Inactive</span>
-														</md-slide-toggle>
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <img *ngIf="!selectedPassenger.avatar" [src]="'/assets/images/user-4.png'"
+                                                 class="img-circle ng-scope"
+                                                 alt="user-pic">
+                                            <img *ngIf="selectedPassenger.avatar" [src]="selectedPassenger.avatar"
+                                                 class="img-circle ng-scope" alt="user-pic">
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="pull-left">
+                                                        <div class="c-md-main ng-binding">{{selectedPassenger.first_name
+                                                            + ' '+
+                                                            selectedPassenger.last_name}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="pull-left">
+                                                        <md-slide-toggle
+                                                                class="passenger-activate"
+                                                                [color]="'primary'"
+                                                                [checked]="selectedPassenger.emergency_activated"
+                                                                [disabled]="true">
+                                                            <span *ngIf="selectedPassenger.emergency_activated">Active</span>
+                                                            <span *ngIf="!selectedPassenger.emergency_activated">Inactive</span>
+                                                        </md-slide-toggle>
 
-													</div>
-												</div>
-											</div>
-											<div class="c-md-secondary ng-binding">{{selectedPassenger.email}}</div>
-										</div>
-									</div>
-
-
-								</div>
-
-
-							</div>
-						</div>
-						<!-- // Trip group -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="c-md-secondary ng-binding">{{selectedPassenger.email}}</div>
+                                        </div>
+                                    </div>
 
 
-						<!-- Begin travel document -->
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title"> Travel Documents</h3>
+                                </div>
 
-								<div class="panel-options">
-									<button class="btn btn-small btn-info" (click)="showUploadDocumentDialog(selectedPassenger)">Upload
-									</button>
-								</div>
-							</div>
 
-							<div class="panel-body">
+                            </div>
+                        </div>
+                        <!-- // Trip group -->
 
-								<ul class="trip-docs">
-									<li *ngFor="let doc of selectedUserDocuments">
-										<a href="{{doc.url}}" target="_blank">
+
+                        <!-- Begin travel document -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"> Travel Documents</h3>
+
+                                <div class="panel-options">
+                                    <button class="btn btn-small btn-info"
+                                            (click)="showUploadDocumentDialog(selectedPassenger)">Upload
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+
+                                <ul class="trip-docs">
+                                    <li *ngFor="let doc of selectedUserDocuments">
+                                        <a href="{{doc.url}}" target="_blank">
 											<span class="document-type" [ngSwitch]="doc.type">
 												<i *ngSwitchCase="'pdf'" class="fa fa-file-pdf-o"></i>
 												<i *ngSwitchCase="'txt'" class="fa fa-file-o"></i>
@@ -406,287 +434,299 @@
 												<i *ngSwitchCase="'xls'" class="fa fa-file-text-o"></i>
 												<i *ngSwitchDefault class="fa fa-file-o"></i>
 											</span>
-											<span class="document-name">{{doc.title}} ({{doc.doc_name}})</span>
-										</a>
+                                            <span class="document-name">{{doc.title}} ({{doc.doc_name}})</span>
+                                        </a>
 
-										<a class="alink doc-delete">&nbsp;
-											<i class="fa fa-times"></i>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<!-- // travel document  -->
-					</div>
+                                        <a class="alink doc-delete">&nbsp;
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- // travel document  -->
+                    </div>
 
-				</div>
+                </div>
 
-			</div>
-
-
-		</md-tab>
-
-		<md-tab>
-			<template md-tab-label>
-				<i class="fa fa-comments"></i>
-				Trip Messages
-			</template>
-
-			<div class="row c-manage-trip">
-				<div class="col-md-3 c-mt-list">
-					<div class="c-tripmembers">
-						<h5 class="pull-left">Trip Group</h5>
-						<button (click)="openAddPassengerDialog()" type="button" class="btn btn-sm btn-success pull-right">
-							<i class="fa fa-plus"></i> &nbsp; Add Passenger
-						</button>
-					</div>
-
-					<ul class="list-group">
-						<li class="list-group-item c-trip-itinerary alink" (click)="onSelectTripPassenger()"
-								[class.active]="!selectedPassenger">
-							<div class="c-ti-allmembers pull-left"></div>
-							<div class="c-ti-details pull-right">
-								<div class="c-ti-destination">
-									Trip Group
-								</div>
-								<div class="c-ti-data">
-									Send Messages to All
-								</div>
-							</div>
-						</li>
-
-						<li *ngFor="let passenger of passengers" (click)="onSelectTripPassenger(passenger)"
-								class="alink list-group-item c-trip-itinerary"
-								[class.active]="selectedPassenger && selectedPassenger.id == passenger.id">
-							<div class="c-ti-date pull-left">
-								<img *ngIf="!passenger.avatar" [src]="'/assets/images/user-4.png'" class="img-circle" alt="user-pic"/>
-								<img *ngIf="passenger.avatar" [src]="passenger.avatar" class="img-circle"
-										 alt="user-pic"/>
-							</div>
-							<div class="c-ti-details pull-right">
-								<div class="c-ti-destination ng-binding">
-									{{passenger.first_name + ' ' + passenger.last_name}}
-								</div>
-								<div class="c-ti-data ng-binding">
-									0 Messages
-								</div>
-							</div>
-						</li>
+            </div>
 
 
-					</ul>
+        </md-tab>
 
-				</div>
-				<div class="col-md-9">
+        <md-tab>
+            <template md-tab-label>
+                <i class="fa fa-comments"></i>
+                Trip Messages
+            </template>
 
-					<!-- Begin trip group -->
+            <div class="row c-manage-trip">
+                <div class="col-md-3 c-mt-list">
+                    <div class="c-tripmembers">
+                        <h5 class="pull-left">Trip Group</h5>
+                        <button (click)="openAddPassengerDialog()" type="button"
+                                class="btn btn-sm btn-success pull-right">
+                            <i class="fa fa-plus"></i> &nbsp; Add Passenger
+                        </button>
+                    </div>
 
-					<div class="panel panel-default">
-						<div class="panel-body">
-							<div class="row">
-								<div class="col-md-12">
-									<div id="allMessages" class="chat-messages">
-										<ul class="nav nav-tabs">
-											<li [class.active]="tabConversationHistoryOpen">
-												<a class="alink" (click)="showTabConverationHistory()"><span>Conversation</span></a>
-											</li>
-											<li [class.active]="tabConversationScheduleOpen">
-												<a class="alink" (click)="showTabConverationSchedule()"><span>Scheduled Messages</span></a>
-											</li>
-										</ul>
-										<div class="tab-content">
-											<div class="tab-pane" [class.active]="tabConversationHistoryOpen">
-												<div class="space-top chat-conversation">
-													<div class="ps-scrollbar ps-scroll-down ps-container ps-active-y">
-														<div class="comment-entry clearfix">
-															<div class="comment-icon"
-																	 [style.background-image]="'url(https://safetravels01.s3.eu-central-1.amazonaws.com/a497ae3571a0076f380357e0704a6dcfa8f4779c-50)'"></div>
+                    <ul class="list-group">
+                        <li class="list-group-item c-trip-itinerary alink" (click)="onSelectTripPassenger()"
+                            [class.active]="!selectedPassenger">
+                            <div class="c-ti-allmembers pull-left"></div>
+                            <div class="c-ti-details pull-right">
+                                <div class="c-ti-destination">
+                                    Trip Group
+                                </div>
+                                <div class="c-ti-data">
+                                    Send Messages to All
+                                </div>
+                            </div>
+                        </li>
 
-															<div class="comment-message">
-																<div class="message-from">Sally Grasperet <span class="sent">2017-01-02 22:45:06</span>
-																</div>
-																<div class="message-subject">jlk</div>
-																<div class="message ng-binding">nn,m,m</div>
-															</div>
-														</div>
-
-														<div class="comment-entry clearfix">
-															<div class="comment-icon"
-																	 [style.background-image]="'url(https://safetravels01.s3.eu-central-1.amazonaws.com/a497ae3571a0076f380357e0704a6dcfa8f4779c-50)'"></div>
-
-															<div class="comment-message">
-																<div class="message-from">Sally Grasperet <span class="sent">2017-01-02 22:45:06</span>
-																</div>
-																<div class="message-subject">jlk</div>
-																<div class="message ng-binding">nn,m,m</div>
-															</div>
-														</div>
-
-
-													</div>
-
-												</div>
-											</div>
-
-											<div class="tab-pane" [class.active]="tabConversationScheduleOpen">
-												<div class="space-top chat-conversation">
-													<div class="ps-scrollbar ps-scroll-down ps-container ps-active-y">
-														<div class="comment-entry clearfix">
-															<div class="comment-icon"
-																	 [style.background-image]="'url(https://safetravels01.s3.eu-central-1.amazonaws.com/a497ae3571a0076f380357e0704a6dcfa8f4779c-50)'"></div>
-
-															<div class="comment-message">
-																<div class="message-from">Tom Nguyen <span class="sent">2017-01-02 22:45:06</span>
-																</div>
-																<div class="message-subject">Test subject</div>
-																<div class="message">nn,m,m</div>
-															</div>
-														</div>
-
-														<div class="comment-entry clearfix">
-															<div class="comment-icon"
-																	 [style.background-image]="'url(https://safetravels01.s3.eu-central-1.amazonaws.com/a497ae3571a0076f380357e0704a6dcfa8f4779c-50)'"></div>
-
-															<div class="comment-message">
-																<div class="message-from">Michael Cruise <span class="sent">2017-01-02 22:45:06</span>
-																</div>
-																<div class="message-subject">Sample subject</div>
-																<div class="message ng-binding">nn,m,m</div>
-															</div>
-														</div>
+                        <li *ngFor="let passenger of passengers" (click)="onSelectTripPassenger(passenger)"
+                            class="alink list-group-item c-trip-itinerary"
+                            [class.active]="selectedPassenger && selectedPassenger.id == passenger.id">
+                            <div class="c-ti-date pull-left">
+                                <img *ngIf="!passenger.avatar" [src]="'/assets/images/user-4.png'" class="img-circle"
+                                     alt="user-pic"/>
+                                <img *ngIf="passenger.avatar" [src]="passenger.avatar" class="img-circle"
+                                     alt="user-pic"/>
+                            </div>
+                            <div class="c-ti-details pull-right">
+                                <div class="c-ti-destination ng-binding">
+                                    {{passenger.first_name + ' ' + passenger.last_name}}
+                                </div>
+                                <div class="c-ti-data ng-binding">
+                                    0 Messages
+                                </div>
+                            </div>
+                        </li>
 
 
-													</div>
+                    </ul>
 
-												</div>
-											</div>
+                </div>
+                <div class="col-md-9">
 
+                    <!-- Begin trip group -->
 
-										</div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="allMessages" class="chat-messages">
+                                        <ul class="nav nav-tabs">
+                                            <li [class.active]="tabConversationHistoryOpen">
+                                                <a class="alink" (click)="showTabConverationHistory()"><span>Conversation</span></a>
+                                            </li>
+                                            <li [class.active]="tabConversationScheduleOpen">
+                                                <a class="alink" (click)="showTabConverationSchedule()"><span>Scheduled Messages</span></a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane" [class.active]="tabConversationHistoryOpen">
+                                                <div class="space-top chat-conversation">
+                                                    <div class="ps-scrollbar ps-scroll-down ps-container ps-active-y">
+                                                        <div class="comment-entry clearfix">
+                                                            <div class="comment-icon"
+                                                                 [style.background-image]="'url(https://safetravels01.s3.eu-central-1.amazonaws.com/a497ae3571a0076f380357e0704a6dcfa8f4779c-50)'"></div>
 
+                                                            <div class="comment-message">
+                                                                <div class="message-from">Sally Grasperet <span
+                                                                        class="sent">2017-01-02 22:45:06</span>
+                                                                </div>
+                                                                <div class="message-subject">jlk</div>
+                                                                <div class="message ng-binding">nn,m,m</div>
+                                                            </div>
+                                                        </div>
 
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+                                                        <div class="comment-entry clearfix">
+                                                            <div class="comment-icon"
+                                                                 [style.background-image]="'url(https://safetravels01.s3.eu-central-1.amazonaws.com/a497ae3571a0076f380357e0704a6dcfa8f4779c-50)'"></div>
 
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">New Group Message</h3>
-
-							<div class="panel-options">
-								<md-slide-toggle (change)="onMessageOptionChange($event)" [color]="'primary'">Advanced</md-slide-toggle>
-							</div>
-						</div>
-
-						<div class="panel-body">
-							<!-- message -->
-							<div class="newMessage">
-								<form #f="ngForm">
-
-									<div class="languages-toogle-button" *ngIf="messageAdvanced">
-										<div class="form-group">
-											<md-button-toggle-group #language="mdButtonToggleGroup">
-												<md-button-toggle value="en" [checked]="true">
-													En
-												</md-button-toggle>
-												<md-button-toggle value="fr">
-													FR
-												</md-button-toggle>
-												<md-button-toggle value="de">
-													DE
-												</md-button-toggle>
-												<md-button-toggle value="es">
-													ES
-												</md-button-toggle>
-												<md-button-toggle value="it">
-													IT
-												</md-button-toggle>
-												<md-button-toggle value="zh">
-													ZH
-												</md-button-toggle>
-												<md-button-toggle value="ja">
-													JA
-												</md-button-toggle>
-											</md-button-toggle-group>
-										</div>
-									</div>
-
-									<div class="row">
-
-										<div [class.col-md-9]="messageAdvanced" [class.col-md-12]="!messageAdvanced">
-											<div class="form-group">
-												<md-input-container class="input-full-width">
-													<input mdInput name="subject" placeholder="Subject" [required]="true">
-												</md-input-container>
-											</div>
-
-											<div class="form-group">
-												<md-input-container class="input-full-width">
-													<textarea mdInput name="message" placeholder="Message" [required]="true"></textarea>
-												</md-input-container>
-											</div>
-
-											<div class="form-group">
-												<button *ngIf="messageAdvanced" type="button" class="btn btn-gray btn-single"><i
-														class="fa fa-arrow-circle-o-down"></i>
-													&nbsp;Save
-													as template
-												</button>
-												<button type="button" class="btn btn-success btn-single pull-right">Send</button>
-											</div>
-										</div>
-
-										<div class="col-md-3" *ngIf="messageAdvanced">
-
-											<div class="form-group">
-												<md-select placeholder="Templates">
-													<md-option *ngFor="let messageTemplete of messageTemplates" [value]="messageTemplete.id">
-														{{ messageTemplete.title }}
-													</md-option>
-												</md-select>
-											</div>
-											<div class="form-group">
-												<label>Placeholders for Group Message</label>
-												<ul class="placeholders-container">
-													<li class="clearfix">
-														<div class="offer-left pull-left"> %%Trip_Name%%</div>
-													</li>
-													<li class="clearfix">
-														<div class="offer-left pull-left"> %%Guide_Name%%</div>
-													</li>
-													<li class="clearfix">
-														<div class="offer-left pull-left"> %%Admin_Name%%</div>
-													</li>
-													<li class="clearfix">
-														<div class="offer-left pull-left"> %%Trip_Start%%</div>
-													</li>
-												</ul>
-											</div>
-
-										</div>
-									</div>
-
-								</form>
-							</div>
-							<!-- // Message -->
+                                                            <div class="comment-message">
+                                                                <div class="message-from">Sally Grasperet <span
+                                                                        class="sent">2017-01-02 22:45:06</span>
+                                                                </div>
+                                                                <div class="message-subject">jlk</div>
+                                                                <div class="message ng-binding">nn,m,m</div>
+                                                            </div>
+                                                        </div>
 
 
-						</div>
-					</div>
-					<!-- // Trip group -->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-pane" [class.active]="tabConversationScheduleOpen">
+                                                <div class="space-top chat-conversation">
+                                                    <div class="ps-scrollbar ps-scroll-down ps-container ps-active-y">
+                                                        <div class="comment-entry clearfix">
+                                                            <div class="comment-icon"
+                                                                 [style.background-image]="'url(https://safetravels01.s3.eu-central-1.amazonaws.com/a497ae3571a0076f380357e0704a6dcfa8f4779c-50)'"></div>
+
+                                                            <div class="comment-message">
+                                                                <div class="message-from">Tom Nguyen <span class="sent">2017-01-02 22:45:06</span>
+                                                                </div>
+                                                                <div class="message-subject">Test subject</div>
+                                                                <div class="message">nn,m,m</div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="comment-entry clearfix">
+                                                            <div class="comment-icon"
+                                                                 [style.background-image]="'url(https://safetravels01.s3.eu-central-1.amazonaws.com/a497ae3571a0076f380357e0704a6dcfa8f4779c-50)'"></div>
+
+                                                            <div class="comment-message">
+                                                                <div class="message-from">Michael Cruise <span
+                                                                        class="sent">2017-01-02 22:45:06</span>
+                                                                </div>
+                                                                <div class="message-subject">Sample subject</div>
+                                                                <div class="message ng-binding">nn,m,m</div>
+                                                            </div>
+                                                        </div>
 
 
-				</div>
+                                                    </div>
 
-			</div>
-
-
-		</md-tab>
+                                                </div>
+                                            </div>
 
 
-	</md-tab-group>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">New Group Message</h3>
+
+                            <div class="panel-options">
+                                <md-slide-toggle (change)="onMessageOptionChange($event)" [color]="'primary'">Advanced
+                                </md-slide-toggle>
+                            </div>
+                        </div>
+
+                        <div class="panel-body">
+                            <!-- message -->
+                            <div class="newMessage">
+                                <form #f="ngForm">
+
+                                    <div class="languages-toogle-button" *ngIf="messageAdvanced">
+                                        <div class="form-group">
+                                            <md-button-toggle-group #language="mdButtonToggleGroup">
+                                                <md-button-toggle value="en" [checked]="true">
+                                                    En
+                                                </md-button-toggle>
+                                                <md-button-toggle value="fr">
+                                                    FR
+                                                </md-button-toggle>
+                                                <md-button-toggle value="de">
+                                                    DE
+                                                </md-button-toggle>
+                                                <md-button-toggle value="es">
+                                                    ES
+                                                </md-button-toggle>
+                                                <md-button-toggle value="it">
+                                                    IT
+                                                </md-button-toggle>
+                                                <md-button-toggle value="zh">
+                                                    ZH
+                                                </md-button-toggle>
+                                                <md-button-toggle value="ja">
+                                                    JA
+                                                </md-button-toggle>
+                                            </md-button-toggle-group>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div [class.col-md-9]="messageAdvanced" [class.col-md-12]="!messageAdvanced">
+                                            <div class="form-group">
+                                                <md-input-container class="input-full-width">
+                                                    <input mdInput name="subject" placeholder="Subject"
+                                                           [required]="true">
+                                                </md-input-container>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <md-input-container class="input-full-width">
+                                                    <textarea mdInput name="message" placeholder="Message"
+                                                              [required]="true"></textarea>
+                                                </md-input-container>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <button *ngIf="messageAdvanced" type="button"
+                                                        class="btn btn-gray btn-single"><i
+                                                        class="fa fa-arrow-circle-o-down"></i>
+                                                    &nbsp;Save
+                                                    as template
+                                                </button>
+                                                <button type="button" class="btn btn-success btn-single pull-right">
+                                                    Send
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3" *ngIf="messageAdvanced">
+
+                                            <div class="form-group">
+                                                <md-select placeholder="Templates">
+                                                    <md-option *ngFor="let messageTemplete of messageTemplates"
+                                                               [value]="messageTemplete.id">
+                                                        {{ messageTemplete.title }}
+                                                    </md-option>
+                                                </md-select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Placeholders for Group Message</label>
+                                                <ul class="placeholders-container">
+                                                    <li class="clearfix">
+                                                        <div class="offer-left pull-left"> %%Trip_Name%%</div>
+                                                    </li>
+                                                    <li class="clearfix">
+                                                        <div class="offer-left pull-left"> %%Guide_Name%%</div>
+                                                    </li>
+                                                    <li class="clearfix">
+                                                        <div class="offer-left pull-left"> %%Admin_Name%%</div>
+                                                    </li>
+                                                    <li class="clearfix">
+                                                        <div class="offer-left pull-left"> %%Trip_Start%%</div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <!-- // Message -->
+
+
+                        </div>
+                    </div>
+                    <!-- // Trip group -->
+
+
+                </div>
+
+            </div>
+
+
+        </md-tab>
+
+
+    </md-tab-group>
 
 
 </md-card>
