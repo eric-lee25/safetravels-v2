@@ -19,12 +19,12 @@ export class AddStaffUserDialogComponent implements OnInit {
 
 	userTypes = [
 		{
-			value: 'administrators',
-			title: 'Super User'
+			value: 'admin',
+			title: 'Admin'
 		},
 		{
 			title: 'Tour Guide',
-			value: 'guides'
+			value: 'guide'
 		},
 	];
 

@@ -27,80 +27,111 @@
 	<div class="panel-heading">
 		<h3 class="panel-title">Users</h3>
 		<div class="panel-options">
-
-			<md-select placeholder="Select Account Type" [(ngModel)]="selectedAccountType" name="business-account-type">
-				<md-option *ngFor="let type of businessAccountTypes" [value]="type" (click)="onBusinessAccountTypeChange(type)">
-					{{type}}
-				</md-option>
-			</md-select>
-
-
+			<div class="btn-toolbar">
+				<div class="btn-group focus-btn-group">
+					<button (click)="showAddStaffUserDialog()" class="btn btn-default"><span class="fa-plus"></span> Invite
+						new Staff
+						User
+					</button>
+				</div>
+			</div>
 		</div>
 	</div>
 
 	<div class="panel-body">
 
-		<div class="btn-toolbar">
-			<div class="btn-group focus-btn-group">
-				<button (click)="showAddStaffUserDialog()" class="btn btn-default"><span class="fa-plus"></span> Add new Staff
-					User
-				</button>
-			</div>
-		</div>
+		<md-tab-group>
+			<md-tab label="Users">
 
-		<div class="table-responsive">
+				<div class="margin-30">
+					<md-select placeholder="Select Account Type" [(ngModel)]="selectedAccountType" name="business-account-type">
+						<md-option *ngFor="let type of businessAccountTypes" [value]="type"
+											 (click)="onBusinessAccountTypeChange(type)">
+							{{type}}
+						</md-option>
+					</md-select>
+				</div>
 
-			<md-progress-bar mode="indeterminate" *ngIf="loading"></md-progress-bar>
-			<table class="table table-hover members-table middle-align">
-				<thead>
-				<tr>
 
-					<th class="hidden-xs hidden-sm"></th>
-					<th>Name</th>
-					<th class="hidden-xs hidden-sm">Role</th>
-					<th>Email</th>
-					<th>Settings</th>
-				</tr>
-				</thead>
-				<tbody>
-				<tr *ngFor="let user of users">
+				<div class="table-responsive">
 
-					<td class="user-image">
-						<a href="javascript://">
-							<img *ngIf="!user.avatar" [src]="'assets/images/user-2.png'"
-									 class="img-circle img-inline userpic-32 ng-scope" alt="user-pic"
-									 width="28">
-							<img *ngIf="user.avatar" [src]="user.avatar"
-									 class="img-circle img-inline userpic-32 ng-scope" alt="user-pic"
-									 width="28">
-						</a>
-					</td>
-					<td class="user-name hidden-xs hidden-sm">
-						<p>{{user.first_name + ' ' + user.last_name}}</p>
-					</td>
-					<td class="hidden-xs hidden-sm">
-						<span class="email ng-binding" *ngIf="selectedAccountType == 'administrators'">Super User</span>
-						<span class="email ng-binding" *ngIf="selectedAccountType == 'guides'">Tour Guide</span>
-					</td>
-					<td class="user-id">
-						<p class="ng-binding">{{user.email}}</p>
-					</td>
-					<td class="action-links">
-						<a href="javascript://" class="edit">
-							<i class="linecons-pencil"></i>
-							Edit Profile
-						</a>
+					<md-progress-bar mode="indeterminate" *ngIf="loading"></md-progress-bar>
+					<table class="table table-hover members-table middle-align">
+						<thead>
+						<tr>
 
-						<a href="javascript://" class="delete">
-							<i class="linecons-trash"></i>
-							Delete
-						</a>
-					</td>
+							<th class="hidden-xs hidden-sm"></th>
+							<th>Name</th>
+							<th class="hidden-xs hidden-sm">Role</th>
+							<th>Email</th>
+							<th>Settings</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr *ngFor="let user of users">
 
-				</tr>
-				</tbody>
-			</table>
-		</div>
+							<td class="user-image">
+								<a href="javascript://">
+									<img *ngIf="!user.avatar" [src]="'assets/images/user-2.png'"
+											 class="img-circle img-inline userpic-32 ng-scope" alt="user-pic"
+											 width="28">
+									<img *ngIf="user.avatar" [src]="user.avatar"
+											 class="img-circle img-inline userpic-32 ng-scope" alt="user-pic"
+											 width="28">
+								</a>
+							</td>
+							<td class="user-name hidden-xs hidden-sm">
+								<p>{{user.first_name + ' ' + user.last_name}}</p>
+							</td>
+							<td class="hidden-xs hidden-sm">
+								<span class="email ng-binding" *ngIf="selectedAccountType == 'administrators'">Super User</span>
+								<span class="email ng-binding" *ngIf="selectedAccountType == 'guides'">Tour Guide</span>
+							</td>
+							<td class="user-id">
+								<p class="ng-binding">{{user.email}}</p>
+							</td>
+							<td class="action-links">
+								<a href="javascript://" class="edit">
+									<i class="linecons-pencil"></i>
+									Edit Profile
+								</a>
+
+								<a href="javascript://" class="delete">
+									<i class="linecons-trash"></i>
+									Delete
+								</a>
+							</td>
+
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</md-tab>
+			<md-tab label="Invites">
+
+				<table class="table table-hover">
+					<thead>
+					<tr>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Email</th>
+						<th>Role</th>
+						<th></th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr *ngFor="let invite of invites">
+						<td>{{invite.first_name}}</td>
+						<td>{{invite.last_name}}</td>
+						<td>{{invite.email}}</td>
+						<td>{{invite.role}}</td>
+						<td><button (click)="reSendInvite(invite.id)" class="btn btn-success" type="button">Re-send Invite</button></td>
+					</tr>
+					</tbody>
+				</table>
+
+			</md-tab>
+		</md-tab-group>
 
 
 	</div>

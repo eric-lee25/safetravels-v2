@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DialogService} from "../../services/dialog.service";
 import {BusinessAccount} from "../../models/business-account.model";
 import {BusinessService} from "../../services/business.service";
-import {BusinessUser} from "../../models/business-user.model";
+import {BusinessUser, InviteBusinessUser} from "../../models/business-user.model";
 import {NotificationService} from "../../services/notification.service";
 import {AppService} from "../../services/app.service";
 
@@ -21,6 +21,8 @@ export class BusinessUsersComponent implements OnInit {
 	selectedAccountType: string = 'administrators';
 
 	users: BusinessUser[] = [];
+	invites: InviteBusinessUser[] = [];
+
 	loading: boolean = true;
 
 
@@ -49,6 +51,7 @@ export class BusinessUsersComponent implements OnInit {
 		});
 
 		this.getData();
+
 
 	}
 
@@ -89,8 +92,30 @@ export class BusinessUsersComponent implements OnInit {
 			});
 
 		}
+
+
+		this.getInvites();
 	}
 
+	getInvites(){
+		this.businessService.getInvites(this.selectedAccount.id).subscribe(res => {
+
+			this.invites = res;
+		}, err => {
+			console.log(err);
+		});
+	}
+
+	reSendInvite(id: number){
+		this.businessService.reSendInvite(id).subscribe(res => {
+
+			this.notification.show("Invite has been sent");
+
+		}, err => {
+			console.log(err);
+		});
+
+	}
 	showAddStaffUserDialog() {
 		let ref = this.dialogService.openAddStaffUserDialog();
 
@@ -99,12 +124,13 @@ export class BusinessUsersComponent implements OnInit {
 			if (user) {
 
 
-				this.businessService.createUser(this.selectedAccount.id, user).subscribe(res => {
+				this.businessService.sendInviteStaffUser(this.selectedAccount.id, user).subscribe(res => {
 
-					this.users.push(res);
+					this.getInvites();
 
 				}, err => {
-					this.notification.show("An error delete the file.", 'error');
+					console.log(err);
+					this.notification.show(err.json().message, 'error');
 				});
 			}
 

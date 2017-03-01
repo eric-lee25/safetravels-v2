@@ -1,4 +1,4 @@
-<h2 md-dialog-title>Add New Staff User</h2>
+<h2 md-dialog-title>Invite Staff User</h2>
 
 <md-dialog-content>
 	<form #f="ngForm" (ngSubmit)="onSave()">
@@ -23,17 +23,21 @@
 			</div>
 
 			<div class="form-group">
-				<md-select placeholder="User type" [(ngModel)]="newUser.user_type" name="user_type" [required]="true">
+				<md-select placeholder="User type" [(ngModel)]="newUser.role" name="user_type" [required]="true">
 					<md-option *ngFor="let userType of userTypes" [value]="userType.value">
 						{{ userType.title }}
 					</md-option>
 				</md-select>
 			</div>
 
+			<div class="form-group">
+				<md-checkbox name="send_invite_now" [(ngModel)]="newUser.send_invite_now">Send invite now</md-checkbox>
+			</div>
+
 		</div>
 		<md-dialog-actions>
 			<button type="button" class="btn btn-sm" md-dialog-close>Close</button>
-			<button type="submit" class="btn btn-sm btn-success">Save</button>
+			<button type="submit" class="btn btn-sm btn-success">Send</button>
 
 		</md-dialog-actions>
 	</form>

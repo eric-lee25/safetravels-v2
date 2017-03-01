@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {BusinessAccount} from "../models/business-account.model";
 import {AppService} from "./app.service";
-import {BusinessUser} from "../models/business-user.model";
+import {BusinessUser, InviteBusinessUser} from "../models/business-user.model";
 import {GalleryImage} from "../models/gallery-image.model";
 import {Country} from "../models/country.model";
 import {CountryState} from "../models/state.model";
@@ -45,6 +45,18 @@ export class BusinessService {
 		}
 	}
 
+	sendInviteStaffUser(businessId: number, user: BusinessUser): Observable<any> {
+
+		return this.appService.post('/businesses/' + businessId + '/invites', user).map(res => res.json().data).catch(err => Observable.throw(err));
+	}
+
+	reSendInvite(id: number): Observable<any> {
+		return this.appService.get('/businesses/invites/' + id).map(res => res).catch(err => Observable.throw(err));
+	}
+
+	getInvites(businessId: number): Observable<InviteBusinessUser[]> {
+		return this.appService.get('/businesses/' + businessId + '/invites').map(res => res.json().data).catch(err => Observable.throw(err));
+	}
 
 	getGallery(businessId: number): Observable<GalleryImage[]> {
 		return this.appService.get('/businesses/' + businessId + '/gallery-images').map(res => res.json().data).catch(err => Observable.throw(err));
@@ -62,7 +74,7 @@ export class BusinessService {
 		return this.appService.get('/states?country_code=' + countryCode).map(res => res.json()).catch(err => Observable.throw(err));
 	}
 
-	getStats(businessId: number):Observable<any>{
+	getStats(businessId: number): Observable<any> {
 		return this.appService.get('/businesses/' + businessId + '/stats').map(res => res.json()).catch(err => Observable.throw(err));
 	}
 }

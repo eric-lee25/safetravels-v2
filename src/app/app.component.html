@@ -14,14 +14,14 @@
 
 					<div class="user-image">
 						<a routerLink="/account/profile">
-							<img [src]="'/assets/data/images/companylogo.png'" class="img-responsive"/>
+							<img [src]="currentBusinessAccount.logo" class="img-responsive"/>
 						</a>
 					</div>
 
 					<div class="user-details">
 
 						<h3>
-							<a *ngIf="user" routerLink="/home">{{user.first_name + " " + user.last_name}}</a>
+							<a *ngIf="user" routerLink="/home">{{currentBusinessAccount.name}}</a>
 
 							<!-- Available statuses: is-online, is-idle, is-busy and is-offline -->
 							<span class="user-status is-online"></span>
