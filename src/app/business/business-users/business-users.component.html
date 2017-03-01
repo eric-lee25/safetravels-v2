@@ -125,7 +125,20 @@
 						<td>{{invite.last_name}}</td>
 						<td>{{invite.email}}</td>
 						<td>{{invite.role}}</td>
-						<td><button (click)="reSendInvite(invite.id)" class="btn btn-success" type="button">Re-send Invite</button></td>
+						<td>
+							<button md-icon-button [mdMenuTriggerFor]="menu">
+								<md-icon>more_vert</md-icon>
+							</button>
+							<md-menu #menu="mdMenu">
+								<button md-menu-item (click)="reSendInvite(invite)">
+									<span>Re-send Invite</span>
+								</button>
+								<button md-menu-item (click)="deleteInvite(invite)">
+									<md-icon>delete</md-icon>
+									<span>Delete</span>
+								</button>
+							</md-menu>
+
 					</tr>
 					</tbody>
 				</table>

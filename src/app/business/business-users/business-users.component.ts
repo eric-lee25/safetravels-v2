@@ -97,7 +97,7 @@ export class BusinessUsersComponent implements OnInit {
 		this.getInvites();
 	}
 
-	getInvites(){
+	getInvites() {
 		this.businessService.getInvites(this.selectedAccount.id).subscribe(res => {
 
 			this.invites = res;
@@ -106,9 +106,13 @@ export class BusinessUsersComponent implements OnInit {
 		});
 	}
 
-	reSendInvite(id: number){
-		this.businessService.reSendInvite(id).subscribe(res => {
+	reSendInvite(invite: InviteBusinessUser) {
+		this.businessService.reSendInvite(invite.id).subscribe(res => {
 
+			let inviteIndex = this.findIndexbyId(this.invites, invite);
+			if (inviteIndex) {
+				this.invites.splice(inviteIndex, 1);
+			}
 			this.notification.show("Invite has been sent");
 
 		}, err => {
@@ -116,6 +120,30 @@ export class BusinessUsersComponent implements OnInit {
 		});
 
 	}
+
+	findIndexbyId(items: any[], item: any) {
+		if (item.length) {
+			for (let i = 0; i < items.length; i++) {
+				if (items[i].id == item.id) {
+					return i;
+				}
+			}
+		}
+
+		return null;
+	}
+
+
+	deleteInvite(invite: InviteBusinessUser) {
+		this.businessService.deleteInvite(invite.id).subscribe(res => {
+
+			this.notification.show("Invite has been deleted.");
+
+		}, err => {
+			console.log(err);
+		});
+	}
+
 	showAddStaffUserDialog() {
 		let ref = this.dialogService.openAddStaffUserDialog();
 

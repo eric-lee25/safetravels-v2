@@ -53,6 +53,9 @@ export class BusinessService {
 	reSendInvite(id: number): Observable<any> {
 		return this.appService.get('/businesses/invites/' + id).map(res => res).catch(err => Observable.throw(err));
 	}
+	deleteInvite(id: number):Observable<any>{
+		return this.appService.delete('/businesses/invites/' + id).map(res => res).catch(err => Observable.throw(err));
+	}
 
 	getInvites(businessId: number): Observable<InviteBusinessUser[]> {
 		return this.appService.get('/businesses/' + businessId + '/invites').map(res => res.json().data).catch(err => Observable.throw(err));
