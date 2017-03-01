@@ -62,4 +62,7 @@ export class BusinessService {
 		return this.appService.get('/states?country_code=' + countryCode).map(res => res.json()).catch(err => Observable.throw(err));
 	}
 
+	getStats(businessId: number):Observable<any>{
+		return this.appService.get('/businesses/' + businessId + '/stats').map(res => res.json()).catch(err => Observable.throw(err));
+	}
 }

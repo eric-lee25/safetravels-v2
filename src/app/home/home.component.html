@@ -10,7 +10,7 @@
 					<div class="xe-icon"><i class="fa fa-compass" aria-hidden="true"></i>
 					</div>
 					<div class="xe-label"><strong class="num">
-						<app-counter [prefix]="" [suffix]="" [step]="30" [countTo]="100" [countFrom]="0"
+						<app-counter [prefix]="" [suffix]="" [step]="30" [countTo]="stats.ongoing" [countFrom]="0"
 												 [duration]="2"></app-counter>
 					</strong><span>Trips in progress</span>
 					</div>
@@ -23,7 +23,7 @@
 					<div class="xe-label">
 
 						<strong class="num ng-binding">
-							<app-counter [prefix]="" [suffix]="" [step]="30" [countTo]="100" [countFrom]="0"
+							<app-counter [prefix]="" [suffix]="" [step]="30" [countTo]="stats.starting_tomorrow" [countFrom]="0"
 													 [duration]="2"></app-counter>
 						</strong><span>Trips starting tomorrow</span>
 					</div>
@@ -34,7 +34,7 @@
 					<div class="xe-icon"><i class="fa fa-calendar" aria-hidden="true"></i>
 					</div>
 					<div class="xe-label"><strong class="num">
-						<app-counter [prefix]="" [suffix]="" [step]="30" [countTo]="100" [countFrom]="0"
+						<app-counter [prefix]="" [suffix]="" [step]="30" [countTo]="stats.starting_within_nextWeek" [countFrom]="0"
 												 [duration]="2"></app-counter>
 					</strong><span>Trips in next 7 days</span>
 					</div>

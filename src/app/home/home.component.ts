@@ -11,6 +11,7 @@ import {AutocompleteData} from "../models/autocompleteData.model";
 import {LocationService} from "../services/location.service";
 import {NotificationService} from "../services/notification.service";
 import {BusinessUser} from "../models/business-user.model";
+import {businessStats} from "../models/home-stats.model";
 
 
 @Component({
@@ -19,6 +20,8 @@ import {BusinessUser} from "../models/business-user.model";
 	styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
+	stats:businessStats = new businessStats();
 
 	user: User = this.appService.currentUser;
 
@@ -62,25 +65,6 @@ export class HomeComponent implements OnInit {
 
 		this.appService.userEvent.subscribe(user => this.user = user);
 	}
-
-
-	getAdminUsers() {
-		this.businessService.getAdministrators(this.selectedAccount.id).subscribe(res => {
-
-			this.admins = res;
-		}, err => {
-			console.log(err);
-		});
-	}
-
-	getGuidesUsers() {
-		this.businessService.getGuides(this.selectedAccount.id).subscribe(res => {
-			this.guides = res;
-		}, err => {
-			console.log(err);
-		});
-	}
-
 	onLocationKeyUp(text: string) {
 		this.newTriplocations = [];
 		if (text) {
@@ -138,13 +122,28 @@ export class HomeComponent implements OnInit {
 		if (currentBusinessAccount) {
 			this.selectedAccount = currentBusinessAccount;
 			this.newTrip.business_id = this.selectedAccount.id;
+			this.getStats();
 		}
 
 		this.appService.currentBusinessAccount$.subscribe(acc => {
 			if (acc) {
 				this.selectedAccount = acc;
+				this.getStats();
 			}
 		});
+
+	}
+
+	getStats(){
+
+		if(this.selectedAccount){
+			this.businessService.getStats(this.selectedAccount.id).subscribe(res => {
+				this.stats = res;
+
+			}, err => {
+				console.log(err);
+			})
+		}
 
 	}
 
