@@ -16,6 +16,8 @@ export class AddPassengerDialogComponent implements OnInit {
 	invites: TripInvite[] = [];
 	newInvite: TripInvite = new TripInvite();
 	errorMessage: string = null;
+	deletedMembers: any[] = [];
+
 
 	constructor(private appService: AppService,
 							private tripService: TripService,
@@ -38,6 +40,35 @@ export class AddPassengerDialogComponent implements OnInit {
 				console.log(err);
 			})
 		}
+
+		this.getDeletedMembers();
+	}
+
+
+	getDeletedMembers() {
+
+
+		this.tripService.getTripDeletedMembers(this.trip.id).subscribe(res => {
+			this.deletedMembers = res;
+			console.log(res);
+		}, err => {
+
+			console.log(err);
+		});
+
+	}
+
+	undeleteMember(member: any) {
+		this.tripService.tripUndeleteMember(this.trip.id, member).subscribe(res => {
+			console.log(res);
+
+			let indexById = this.findIndexById(this.deletedMembers, member);
+			if (indexById) {
+				this.deletedMembers.splice(indexById, 1);
+			}
+		}, err => {
+			console.log(err);
+		});
 	}
 
 	reSentInvite(invite: TripInvite) {
@@ -53,6 +84,7 @@ export class AddPassengerDialogComponent implements OnInit {
 	onInviteSubmit() {
 		this.tripService.invitePassenger(this.trip.id, this.newInvite).subscribe(res => {
 			console.log(res);
+
 
 			this.dialogRef.close(res);
 		}, err => {
@@ -70,7 +102,7 @@ export class AddPassengerDialogComponent implements OnInit {
 			console.log(res);
 
 			let indexInvite = this.findInviteIndex(invite, this.invites);
-			if(indexInvite !== null){
+			if (indexInvite !== null) {
 				this.invites.splice(indexInvite, 1);
 			}
 
@@ -85,6 +117,19 @@ export class AddPassengerDialogComponent implements OnInit {
 		if (invites.length) {
 			for (let i = 0; i < invites.length; i++) {
 				if (invites[i].id == invite.id) {
+					return i;
+				}
+			}
+		}
+		return null;
+
+	}
+
+	findIndexById(items: any[], item: any): number {
+
+		if (items.length) {
+			for (let i = 0; i < items.length; i++) {
+				if (items[i].id == item.id) {
 					return i;
 				}
 			}

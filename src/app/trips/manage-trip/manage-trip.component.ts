@@ -559,17 +559,35 @@ export class ManageTripComponent implements OnInit {
 
 	removeTripUser(user: TripPassenger) {
 
-		this.tripService.removeTripPassenger(this.trip.id, user.id).subscribe(res => {
-			let userIndex = this.findPassengerIndex(user, this.passengers);
-			if (userIndex !== null) {
-				this.passengers.splice(userIndex, 1);
+
+		let title = "Delete Trip Member Confirmation";
+		let msg = "Are you sure you want to delete this user?";
+		let buttonTitle = "Delete Trip Member";
+		let buttonClass = "btn-danger";
+
+		let dialogRef = this.dialogService.openConfirmationDialog(title, msg, buttonTitle, buttonClass);
+		let that = this;
+
+		dialogRef.afterClosed().subscribe(action => {
+
+			if (action == "ok") {
+				this.tripService.removeTripPassenger(this.trip.id, user.id).subscribe(res => {
+					let userIndex = this.findPassengerIndex(user, this.passengers);
+					if (userIndex !== null) {
+						that.passengers.splice(userIndex, 1);
+						this.notificationService.show("User: " + user.first_name + " " + user.last_name + " has been delete from the trip.")
+					}
+
+				}, err => {
+					console.log(err);
+					this.notificationService.show("An error to remove trip passsenger", 'error');
+				});
+
+
 			}
+		});
 
-		}, err => {
 
-			console.log(err);
-			this.notificationService.show("An error to remove trip passsenger", 'error');
-		})
 	}
 
 }

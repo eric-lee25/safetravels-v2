@@ -63,6 +63,29 @@
 			</div>
 
 		</md-tab>
+		<md-tab label="Deleted Members">
+
+			<div class="padding-20">
+				<table class="table table-hover">
+					<thead>
+					<tr>
+						<th>First name</th>
+						<th>Last name</th>
+						<th>Email</th>
+						<th></th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr *ngFor="let member of deletedMembers">
+						<td>{{member.first_name}}</td>
+						<td>{{member.last_name}}</td>
+						<td>{{member.email}}</td>
+						<td><button (click)="undeleteMember(member)" type="button" class="btn btn-info">Re-Add</button></td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</md-tab>
 	</md-tab-group>
 
 

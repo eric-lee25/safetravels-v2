@@ -49,6 +49,15 @@ export class TripService {
 		return this.appService.get(endpoint).map(res => res.json().data).catch(err => Observable.throw(err));
 	}
 
+	getTripDeletedMembers(id: number): Observable<any> {
+		return this.appService.delete('/trips/' + id + '/users/deleted').map(res => res).catch(err => Observable.throw(err));
+
+	}
+
+	tripUndeleteMember(tripId: number, member: any): Observable<any> {
+		return this.appService.post('/trips/' + tripId + '/users/' + member.id + '/undelete', member).map(res => res).catch(err => Observable.throw(err));
+	}
+
 	removeTripPassenger(tripId: number, id: number): Observable<any> {
 		return this.appService.delete('/trips/' + tripId + '/users/' + id).map(res => res).catch(err => Observable.throw(err));
 	}
